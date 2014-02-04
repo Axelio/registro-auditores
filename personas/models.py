@@ -28,10 +28,10 @@ class Persona(models.Model):
     direccion = models.TextField(verbose_name=u'dirección',blank=True)
     fecha_nacimiento = models.DateField()
     email = models.EmailField()
-    tlf_fijo = models.CharField(max_length=15, verbose_name=u'teléfono fijo')
+    tlf_reside = models.CharField(max_length=15, verbose_name=u'teléfono de residencia')
     tlf_movil = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono móvil')
     tlf_oficina = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono de oficina')
-    tlf_publico = models.CharField(choices=TELEFONO_PUBLICO, max_length=10, help_text=u'Seleccione el teléfono que establecerá como público', default='fijo', verbose_name=u'teléfono público')
+    tlf_contacto = models.CharField(choices=TELEFONO_PUBLICO, max_length=10, help_text=u'Seleccione el teléfono que establecerá el cual será contactado', default='fijo', verbose_name=u'teléfono de contacto')
     reside = models.ForeignKey(Estado, help_text=u'Estado de residencia')
     estado_civil = models.CharField(choices=ESTADO_CIVIL, max_length=15)
     class Meta:
@@ -39,3 +39,36 @@ class Persona(models.Model):
         verbose_name = "persona"
     def __unicode__(self):
         return u'%s %s %s' %(self.cedula, self.primer_apellido, self.primer_nombre)
+
+class Auditor(models.Model):
+    persona = models.ForeignKey('Persona')
+    acreditado = models.BooleanField(max_length=15)
+    fecha_acreditacion = models.DateField()
+    fecha_desacreditacion = models.DateField()
+    observacion = models.TextField(help_text='Razones por la cual se desacredita al auditor')
+    class Meta:
+        db_table = u'auditor'
+        verbose_name = 'auditor'
+        verbose_name_plural = 'auditores'
+    def __unicode__(self):
+        return u'%s' %(self.persona)
+
+class CertificadoElectronico(models.Model):
+    from auth.models import UserProfile
+    usuario = models.ForeignKey(UserProfile)
+    certificado = models.CharField(max_length=5000)
+    class Meta:
+        db_table = u'certificado_electonico'
+        verbose_name = u'certificado electrónico'
+        verbose_name_plural = u'certificados electrónicos'
+    def __unicode__(self):
+        return u'%s' %(self.usuario)
+
+class Cita(models.Model):
+    persona = models.ForeignKey('Persona')
+    fecha = models.DateTimeField()
+    class Meta:
+        db_table = u'cita'
+    def __unicode__(self):
+        return u'%s' %(self.persona)
+
