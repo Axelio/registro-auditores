@@ -20,10 +20,10 @@ class Persona(models.Model):
     Tabla de registro de personas
     '''
     cedula = models.CharField(max_length=50,unique=True,verbose_name=u'Cédula')
-    primer_apellido = models.CharField(max_length=50)
-    segundo_apellido = models.CharField(max_length=50,blank=True)
     primer_nombre = models.CharField(max_length=50)
     segundo_nombre = models.CharField(max_length=50,blank=True)
+    primer_apellido = models.CharField(max_length=50)
+    segundo_apellido = models.CharField(max_length=50,blank=True)
     genero = models.IntegerField(choices=((0,'Masculino'),(1,'Femenino')),default=0,verbose_name=u'género')
     direccion = models.TextField(verbose_name=u'dirección',blank=True)
     fecha_nacimiento = models.DateField()
