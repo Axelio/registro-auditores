@@ -64,11 +64,3 @@ class CertificadoElectronico(models.Model):
     def __unicode__(self):
         return u'%s' %(self.usuario)
 
-class Cita(models.Model):
-    persona = models.ForeignKey('Persona')
-    fecha = models.DateTimeField()
-    class Meta:
-        db_table = u'cita'
-    def __unicode__(self):
-        return u'%s' %(self.persona)
-

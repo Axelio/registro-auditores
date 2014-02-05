@@ -10,5 +10,3 @@ class PersonaAdmin(admin.ModelAdmin):
 admin.site.register(Persona, PersonaAdmin)
 admin.site.register(Auditor)
 admin.site.register(CertificadoElectronico)
-admin.site.register(Cita)
-
