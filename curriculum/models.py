@@ -97,3 +97,47 @@ class Competencia(models.Model):
         db_table = 'competencia'
     def __unicode__(self):
         return u'%s' %(self.competencia)
+
+class Curso(models.Model):
+    usuario = models.ForeignKey(UserProfile)
+    titulo = models.CharField(max_length=150, verbose_name=u'título')
+    institucion = models.ForeignKey(Institucion, verbose_name=u'institución')
+    estado = models.ForeignKey(Estado)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    horas = models.PositiveIntegerField()
+    class Meta:
+        db_table = 'curso'
+    def __unicode__(self):
+        return u'%s: %s' %(self.usuario, self.titulo)
+
+class Laboral(models.Model):
+    usuario = models.ForeignKey(UserProfile)
+    empresa = models.CharField(max_length=100)
+    sector = models.CharField(max_length=60)
+    estado = models.ForeignKey(Estado)
+    telefono = models.CharField(max_length=15, verbose_name=u'teléfono')
+    cargo = models.CharField(max_length=60)
+    funcion = models.TextField(verbose_name=u'función', help_text=u'indique la función o funciones que desempeñaba')
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField(null=True)
+    trabajo_actual = models.BooleanField()
+    retiro = models.CharField(max_length=60, verbose_name=u'razón de retiro')
+    direccion_empresa = models.TextField(verbose_name=u'dirección de empresa')
+    class Meta:
+        db_table = 'laboral'
+    def __unicode__(self):
+        return u'%s: %s' %(self.usuario, self.empresa)
+
+class Educacion(models.Model):
+    persona = models.ForeignKey(Persona)
+    titulo = models.CharField(max_length=50)
+    institucion = models.ForeignKey(Institucion)
+    carrera = models.CharField(max_length=50)
+    fecha_incio = models.DateField()
+    fecha_fin = models.DateField()
+    class Meta:
+        db_table = 'educacion'
+    def __unicode__(self):
+        return u'%s: %s (%s)' %(self.persona, self.institucion, self.carrera)
+
