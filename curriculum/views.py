@@ -1,6 +1,7 @@
 # -*- coding: UTF8 -*-
 from django.shortcuts import render
 from django.views.generic.base import View
+from django.core.context_processors import csrf
 from curriculum.models import *
 from curriculum.forms import *
 from personas.models import *
@@ -18,7 +19,14 @@ class CurriculumView(View):
     diccionario.update({'persona_form':persona_form})
 
     def get(self, request, *args, **kwargs):
-        # persona = self.formulario
+        self.diccionario.update(csrf(request))
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,

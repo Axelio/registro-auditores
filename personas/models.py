@@ -4,10 +4,10 @@ from lugares.models import *
 
 # Modelo de Persona
         
-ESTADO_CIVIL = (('s','Soltero'),
-                ('c','Casado'),
-                ('d','Divorciado'),
-                ('v','Viudo')
+ESTADO_CIVIL = (('s','Soltero/a'),
+                ('c','Casado/a'),
+                ('d','Divorciado/a'),
+                ('v','Viudo/a')
                )
 
 TELEFONO_PUBLICO = (('movil',u'Teléfono móvil'),
@@ -19,21 +19,21 @@ class Persona(models.Model):
     '''
     Tabla de registro de personas
     '''
-    cedula = models.CharField(max_length=50,unique=True,verbose_name=u'Cédula')
-    primer_nombre = models.CharField(max_length=50)
-    segundo_nombre = models.CharField(max_length=50,blank=True)
-    primer_apellido = models.CharField(max_length=50)
-    segundo_apellido = models.CharField(max_length=50,blank=True)
-    genero = models.IntegerField(choices=((0,'Masculino'),(1,'Femenino')),default=0,verbose_name=u'género')
-    direccion = models.TextField(verbose_name=u'dirección',blank=True)
-    fecha_nacimiento = models.DateField()
-    email = models.EmailField()
-    tlf_reside = models.CharField(max_length=15, verbose_name=u'teléfono de residencia')
-    tlf_movil = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono móvil')
-    tlf_oficina = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono de oficina')
-    tlf_contacto = models.CharField(choices=TELEFONO_PUBLICO, max_length=10, help_text=u'Seleccione el teléfono que establecerá el cual será contactado', default='fijo', verbose_name=u'teléfono de contacto')
+    cedula = models.CharField(max_length=50,unique=True,verbose_name=u'Cédula', help_text=u'Los datos deben ser únicamente números')
+    primer_nombre = models.CharField(max_length=50, help_text='Indique su primer nombre')
+    segundo_nombre = models.CharField(max_length=50,blank=True, help_text='Indique su segundo nombre, si posee')
+    primer_apellido = models.CharField(max_length=50, help_text='Indique su primer apellido')
+    segundo_apellido = models.CharField(max_length=50,blank=True, help_text='Indique su segundo apellido')
+    genero = models.IntegerField(choices=((0,'Masculino'),(1,'Femenino')),default=0,verbose_name=u'género', help_text='Indique su género')
     reside = models.ForeignKey(Estado, help_text=u'Estado de residencia')
-    estado_civil = models.CharField(choices=ESTADO_CIVIL, max_length=15)
+    direccion = models.TextField(verbose_name=u'dirección',blank=True, help_text=u'Indique dirección donde reside')
+    fecha_nacimiento = models.DateField(help_text='Indique su fecha de nacimiento')
+    email = models.EmailField(help_text='Indique un correo electrónico válido')
+    tlf_reside = models.CharField(max_length=15, verbose_name=u'teléfono de residencia', help_text=u'Número telefónico de residencia')
+    tlf_movil = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono móvil', help_text=u'Número telefónico celular')
+    tlf_oficina = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono de oficina', help_text=u'Número telefónico de oficina')
+    tlf_contacto = models.CharField(choices=TELEFONO_PUBLICO, max_length=10, help_text=u'Seleccione el teléfono que establecerá el cual será contactado', default='fijo', verbose_name=u'teléfono de contacto')
+    estado_civil = models.CharField(choices=ESTADO_CIVIL, max_length=15, help_text='Señale su estado civil')
     class Meta:
         db_table = u'personas'
         verbose_name = "persona"

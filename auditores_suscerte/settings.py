@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'auth',
     'personas',
     'debug_toolbar',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,6 +103,17 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-os.path.join(os.getcwd(), 'main/static/public'), 
+    os.path.join(os.getcwd(), 'main/static/public'), 
 )
 
+STATICFILES_FINDERS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    'compressor.finders.CompressorFinder',
+)
+#compresor
+
+COMPRESS_ENABLED = True
+
+COMPRESS_OFFLINE = True
