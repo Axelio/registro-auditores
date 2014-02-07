@@ -1,14 +1,142 @@
-<html>
-    <head>
-    </head>
-    <body>
-        Publicar currículum
-        {% for form in persona_form %}
-            {{ form.label }}
-            {{ form }}
+{% extends "base.html" %}
+{% block slider %}{% endblock %}
+{% block curriculum %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+
+<script src="{{ directorio }}chosen/chosen.jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="{{ directorio }}chosen/chosen.css"/>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('select').chosen();
+    });
+</script>
+<link type="text/css" href="{{ directorio }}css/jquery.datepick.css" rel="stylesheet">
+<link type="text/css" href="{{ directorio }}css/form_sus.css" rel="stylesheet">
+<script type="text/javascript" src="{{ directorio }}js/jquery.datepick.js"></script>
+<script type="text/javascript" src="{{ directorio }}js/jquery.datepick-es.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#popupDatepicker').datepick();
+	$('#inlineDatepicker').datepick({onSelect: showDate});
+});
+
+function showDate(date) {
+	alert('The date chosen is ' + date);
+}
+</script>
+<style>
+#id_captcha_1:focus {
+border-color: rgb(102, 175, 233);
+outline: 0px none;
+box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+}
+#id_captcha_1{
+display: inline;
+height: 34px;
+padding: 6px 12px;
+font-size: 10px;
+line-height: 1.42857;
+color: rgb(85, 85, 85);
+vertical-align: middle;
+background-color: rgb(255, 255, 255);
+background-image: none;
+border: 1px solid rgb(204, 204, 204);
+border-radius: 4px;
+box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+width:200px;
+}
+a.tooltips {
+  position: relative;
+  display: inline;
+}
+a.tooltips span {
+  position: absolute;
+  width:260px;
+  color: #FFFFFF;
+  background: #000000;
+  border: 2px solid #B0AEAE;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+  visibility: hidden;
+  border-radius: 7px;
+}
+a.tooltips span:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -12px;
+  width: 0; height: 0;
+  border-right: 12px solid #B0AEAE;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+a.tooltips span:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -8px;
+  width: 0; height: 0;
+  border-right: 8px solid #000000;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+a:hover.tooltips span {
+  visibility: visible;
+  opacity: 0.6;
+  left: 100%;
+  top: 50%;
+  margin-top: -16.5px;
+  margin-left: 15px;
+  z-index: 999;
+}
+
+    </style>
+	
+    <br /><br /><br />
+
+<div id="interna">
+    <div class="informativa">
+        <div id="contenedorInformacion">
+            <br>
+            <div class="front-signup js-front-signup">
+                <h4>
+                    <h2>Envíanos tu información curricular</h2> 
+                </h4>
+                <br />
+                
+                <center>
+                    {% if form.is_multipart %}
+                        <form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
+                    {% else %}
+                    <form method="post" action="">{% csrf_token %}
+                    {% endif %}
+
+                    {% if persona_form.errors %}
+                        <span class="label label-danger">{{ form.errors }}</span>
+                    {% endif %}
+
+                    {% for form in persona_form %}
+                        <div>
+                            {{ form }}
+                            {% if form.help_text %}
+                                <a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>{{ form.help_text }}</span></a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="field">
+                        <button  class="btn btn-success" type="submit">Enviar currículum</button>
+                    </div>
+                </form>
+            </center>
             <br />
-        {% endfor %}
-    </body>
-    <footer>
-    </footer>
-</html>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

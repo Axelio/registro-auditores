@@ -1,0 +1,69 @@
+<nav id="menu-wrap2">
+	<ul id="menu">
+		<li> <a href="/">INICIO</a> </li>
+		<li> <a href="#">INSTITUCION</a>
+		<ul>
+			<li><a href="/quienes-somos/">QUIENES SOMOS</a></li>
+			<li><a href="/mision-valores/">MISION / VISION / VALORES</a></li>
+			<li><a href="/organigrama/">ORGANIGRAMA</a></li>
+			<li><a href="/directorio/">DIRECTORIO</a></li>
+			<li><a href="/responsabilidad-social/">RESPONSABILIDAD SOCIAL</a></li>
+		</ul>
+	</li>
+	<li> <a href="#">SERVICIOS</a>
+		<ul>
+			<li><a href="/acreditacion/">ACREDITACION DE PROVEEDORES</a></li>
+			<li><a href="/registro/">REGISTRO DE AUDITORES</a></li>
+			<li><a href="/estampado/">ESTAMPADO DE TIEMPO</a></li>
+			<li> <a href="http://www.vencert.gob.ve">SEGURIDAD DE LA INFORMACION</a></li>
+			<li><a href="/cenif/">INFORMATICA FORENSE</a></li>
+			<li><a href="/aplicaciones/">APLICACIONES</a></li>
+		</ul>
+	</li>
+	<li> <a href="#">BIBLIOTECA</a>
+		<ul>
+			<li><a href="/normativas/">NORMATIVAS</a></li>
+			<li><a href="/leyes/">LEYES</a></li>
+			<li><a href="/documentacion/">DOCUMENTACION</a></li>
+                        <li><a href="http://acraiz.suscerte.gob.ve">AC Raíz</a>
+                </ul>
+	</li>
+	<li> <a href="/proyectos/">PROYECTOS</a>
+		<ul>
+			<li><a href="/ejecucion/">EJECUCION</a></li>
+			<li><a href="/estadisticas/">ESTADISTICAS</a></li>
+		</ul>
+	</li>
+	<li> <a href="#">EVENTOS</a>
+		<ul>
+			<li><a href="/formacion/">FORMACION</a></li>
+			<li><a href="/eventos/">JORNADAS EDUCATIVAS</a></li>
+		</ul>
+	</li>
+	<li> <a href="/noticias/">NOTICIAS</a> </li>
+	<li> <a href="/contactanos/">CONTACTO</a> </li>
+	<li> <a href="/empleo/">EMPLEO</a> </li>
+	</ul>
+</nav>
+<script type="text/javascript">
+	$(function() {
+		if ($.browser.msie && $.browser.version.substr(0,1)<7)
+		{
+			$('li').has('ul').mouseover(function(){
+				$(this).children('ul').css('visibility','visible');
+			}).mouseout(function(){
+				$(this).children('ul').css('visibility','hidden');
+			})
+		}
+
+		/* Mobile */
+		$('#menu-wrap').prepend('<div id="menu-trigger">Menu</div>');		
+		$("#menu-trigger").on("click", function(){
+			$("#menu").slideToggle();
+		});
+		// iPad
+		var isiPad = navigator.userAgent.match(/iPad/i) != null;
+		if (isiPad) $('#menu ul').addClass('no-transition');      
+	});         
+</script> 
+

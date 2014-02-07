@@ -1,0 +1,185 @@
+{% extends "base2.html" %}
+{% load cms_tags %}
+{% block slider %}
+{% endblock %}
+{% block empleo %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+
+<script src="{{ directorio }}chosen/chosen.jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="{{ directorio }}chosen/chosen.css"/>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('select').chosen();
+    });
+</script>
+<link type="text/css" href="{{ directorio }}css/jquery.datepick.css" rel="stylesheet">
+<link type="text/css" href="{{ directorio }}css/form_sus.css" rel="stylesheet">
+<script type="text/javascript" src="{{ directorio }}js/jquery.datepick.js"></script>
+<script type="text/javascript" src="{{ directorio }}js/jquery.datepick-es.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#popupDatepicker').datepick();
+	$('#inlineDatepicker').datepick({onSelect: showDate});
+});
+
+function showDate(date) {
+	alert('The date chosen is ' + date);
+}
+</script>
+<style>
+#id_captcha_1:focus {
+border-color: rgb(102, 175, 233);
+outline: 0px none;
+box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+}
+#id_captcha_1{
+display: inline;
+height: 34px;
+padding: 6px 12px;
+font-size: 10px;
+line-height: 1.42857;
+color: rgb(85, 85, 85);
+vertical-align: middle;
+background-color: rgb(255, 255, 255);
+background-image: none;
+border: 1px solid rgb(204, 204, 204);
+border-radius: 4px;
+box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+width:200px;
+}
+a.tooltips {
+  position: relative;
+  display: inline;
+}
+a.tooltips span {
+  position: absolute;
+  width:260px;
+  color: #FFFFFF;
+  background: #000000;
+  border: 2px solid #B0AEAE;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+  visibility: hidden;
+  border-radius: 7px;
+}
+a.tooltips span:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -12px;
+  width: 0; height: 0;
+  border-right: 12px solid #B0AEAE;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+a.tooltips span:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -8px;
+  width: 0; height: 0;
+  border-right: 8px solid #000000;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+a:hover.tooltips span {
+  visibility: visible;
+  opacity: 0.6;
+  left: 100%;
+  top: 50%;
+  margin-top: -16.5px;
+  margin-left: 15px;
+  z-index: 999;
+}
+
+    </style>
+<br><br><br>
+<div id="interna">
+    <div class="informativa">
+        <div id="contenedorInformacion">
+            <br>
+            <div class="front-signup js-front-signup">
+                <h4>
+                    <strong>Envianos tu información curricular</strong> 
+                </h4>
+                <center>
+					{% if form.errors %}
+						<span class="label label-danger">Debes llenar todos los campos. {{ error_cvg }}</span>
+					{% endif %}
+                    {{ form.errors }}
+				</center>
+				<br>
+              <form class="signup" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="field">
+                        {{ form.cedula }}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Los datos deben ser unicamente numeros</span></a></label>
+                    </div><br>
+                    <div class="field">
+                        {{ form.nombres }}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Ejemplo: Ana</span></a></label>
+                    </div><br>
+                    <div class="field">
+                        {{ form.apellidos }}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Ejemplo: Pérez</span></a></label>
+                    </div><br>
+                    <div class="field">
+                        {{ form.fecha_nacimiento }}
+                    </div>
+                    <div class="field">
+                        {{ form.urbanizacion }}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Campo alfanumerico. Ejemplo: "Los Naranjos"</span></a></label>
+                    </div>
+                    <div class="field">
+                        {{ form.avenida}}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Campo alfanumerico. Ejemplo: "Calle 23 de enero"</span></a></label>
+                    </div>
+                    <div class="field">
+                        {{ form.num_piso }}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Solo numeros</span></a></label>
+                    </div>
+                    <div class="field">
+                        {{ form.num_casa }}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Solo numeros</span></a></label>
+                    </div><br>
+                    <div class="field">
+                        Ciudad: {{ form.ciudad }}
+                    </div>
+                    <br>
+                    <div class="field">
+                        Estado: {{ form.estado }}
+                    </div>
+                    <br>
+                    <div class="field">
+                        {{ form.profesion }}
+                        <label><a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>Campo alfanumerico. Ejemplo: "Diseñador Grafico"</span></a></label>
+                    </div><br>
+                    <div class="field">
+                        {{ form.cvg }}
+                    </div>
+                    <div class="field">                    
+                        {{ form.captcha }}
+                    </div>
+                    <div class="field">
+                        <br><p style="color:red;background-color: #f2dede;font-size: 8pt; "><b>El captcha distingue entre mayuscula y miniscula</b></p>
+                    </div><br>
+                    <div class="field">
+                        <button  class="btn btn-success" type="submit">
+                            Enviar Petición
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
