@@ -41,6 +41,8 @@ class ListaIdiomas(models.Model):
     nombre = models.CharField(max_length=20)
     class Meta:
         db_table = u'lista_idiomas'
+        verbose_name = 'lista de idiomas'
+        verbose_name_plural = 'lista de idiomas'
     def __unicode__(self):
         return u'%s' %(self.nombre)
 
