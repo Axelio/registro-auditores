@@ -1,0 +1,202 @@
+[
+{
+    "pk": 1, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Amazonas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Anzo\u00e1tegui", 
+        "pais": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Apure", 
+        "pais": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Aragua", 
+        "pais": 1
+    }
+},
+{
+    "pk": 5, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Barinas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 6, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Bol\u00edvar", 
+        "pais": 1
+    }
+},
+{
+    "pk": 7, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Carabobo", 
+        "pais": 1
+    }
+},
+{
+    "pk": 8, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Cojedes", 
+        "pais": 1
+    }
+},
+{
+    "pk": 9, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Delta Amacuro", 
+        "pais": 1
+    }
+},
+{
+    "pk": 10, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Dependencias Federales", 
+        "pais": 1
+    }
+},
+{
+    "pk": 11, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Distrito Capital", 
+        "pais": 1
+    }
+},
+{
+    "pk": 12, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Falc\u00f3n", 
+        "pais": 1
+    }
+},
+{
+    "pk": 13, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Gu\u00e1rico", 
+        "pais": 1
+    }
+},
+{
+    "pk": 14, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Lara", 
+        "pais": 1
+    }
+},
+{
+    "pk": 15, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "M\u00e9rida", 
+        "pais": 1
+    }
+},
+{
+    "pk": 16, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Miranda", 
+        "pais": 1
+    }
+},
+{
+    "pk": 17, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Monagas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 18, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Nueva Esparta", 
+        "pais": 1
+    }
+},
+{
+    "pk": 19, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Portuguesa", 
+        "pais": 1
+    }
+},
+{
+    "pk": 20, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Sucre", 
+        "pais": 1
+    }
+},
+{
+    "pk": 21, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "T\u00e1chira", 
+        "pais": 1
+    }
+},
+{
+    "pk": 22, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Trujillo", 
+        "pais": 1
+    }
+},
+{
+    "pk": 23, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Vargas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 24, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Yaracuy", 
+        "pais": 1
+    }
+},
+{
+    "pk": 25, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Zulia", 
+        "pais": 1
+    }
+}
+]
