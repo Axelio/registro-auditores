@@ -1,0 +1,158 @@
+ .btn, .btn-group {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+    color: rgb(255, 255, 255);
+    background-color: rgb(71, 164, 71);
+    border-color: rgb(57, 132, 57);
+}
+.btn:hover, .btn:focus {
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+}
+.btn:focus {
+    outline: thin dotted rgb(51, 51, 51);
+    outline-offset: -2px;
+}
+.btn-success {
+    color: rgb(255, 255, 255);
+    background-color: rgb(92, 184, 92);
+    border-color: rgb(76, 174, 76);
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -moz-user-select: none;
+}
+
+.form-control {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: rgb(85, 85, 85);
+    vertical-align: middle;
+    background-color: rgb(255, 255, 255);
+    background-image: none;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.form-control:focus {
+    border-color: rgb(102, 175, 233);
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+}
+input{
+    width: 300px;
+}
+select{
+    width: 100px;
+}
+
+<!-- Formulario -->
+
+
+.mobile-callout .front-signup {
+    border: 1px solid #6FA3C4;
+}
+
+.mobile-callout .front-signup {
+    background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: none;
+}
+
+.front-signin, .front-signup {
+    background: -moz-linear-gradient(center top , #FFFFFF 0px, #DDDDDD 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #CCCCCC;
+    border-left: 1px solid #EEEEEE;
+    border-right: 1px solid #EEEEEE;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.front-welcome, .front-signin, .front-signup {
+    border-radius: 4px;
+}
+
+.front-signup {
+    height: auto;
+    left: 156px;
+    position:relative;
+    width: 600px;
+}
+
+.front-signup h4, .front-signin h4 {
+    border-bottom: 1px solid #E2E2E2;
+    box-shadow: 0 1px 0 #FFFFFF;
+    color: #777777;
+    display: block;
+    font-size: 40px;
+    font-weight: 300;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.signup, .resend-password, .mobile-complete {
+    border-radius: 5px;
+    padding: 10px 0;
+}
+form {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+.front-signup .field {
+    display: block;
+    height: 30px;
+    margin: 6px auto;
+    width: 330px;
+}
+
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.label-danger {
+    background-color: #d9534f;
+}
+
+textarea.form-control {
+    height: auto;
+    width:300px;
+}
+
+
+textarea {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+}
+
+textarea {
+overflow: auto;
+vertical-align: top;
+}
+
+
