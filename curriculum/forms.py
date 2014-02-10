@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia
+from django.shortcuts import render_to_response
+from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion
+from django.shortcuts import render_to_response
+from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura
 import datetime
 
@@ -33,14 +36,16 @@ class ConocimientoForm(forms.ModelForm):
     '''
     Formulario general para el ingreso de Conocimientos
     '''
-    model = Conocimiento
+    class Meta:
+        # Se determina cuál es el modelo al que va a referirse el formulario 
+        model = Conocimiento
 
 class CertificacionForm(forms.ModelForm):
     '''
     Formulario general para el ingreso de personas
     '''
     class Meta:
-        # Se determina cuál es el modelo al que va a 
+        # Se determina cuál es el modelo al que va a referirse el formulario 
         model = Certificacion
     def clean(self):
         '''
@@ -66,3 +71,23 @@ class CertificacionForm(forms.ModelForm):
         if fecha_futura(self.cleaned_data['fecha_inicio']):
             raise forms.ValidationError(u'La fecha de inicio no puede ser mayor ni igual al día de hoy')
         return self.cleaned_data['fecha_inicio']
+
+class EducacionForm(forms.ModelForm):
+    '''
+    Formulario general para el ingreso de Conocimientos
+    '''
+    class Meta:
+        # Se determina cuál es el modelo al que va a referirse el formulario 
+        model = Educacion
+
+class CurriculumWizard(SessionWizardView):
+    def get_template_names(self):
+        '''
+        Definiendo cuál va a ser el formulario que se utilizará
+        '''
+        return 'curriculum/postulacion.html'
+
+    def done(self, form_list, **kwargs):
+        return render_to_response('done.html', {
+                'form': [form.cleaned_data for form in form_list],
+            })
