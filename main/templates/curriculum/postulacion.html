@@ -238,7 +238,8 @@ a:hover.tooltips span {
 	    //~ $node += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ varCount +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search">
                     
 	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="'+ varCount +'-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"></p>'
-	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ varCount +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p>'
+	    $node +='<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ varCount +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p>'
+	    $node +='<span class="removeVar">Remove Variable</span></p>'
 	    $(this).parent().before($node);
 	});
 	
