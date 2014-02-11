@@ -30,11 +30,39 @@ $(function() {
 	$('#popupDatepicker').datepick();
 	$('#inlineDatepicker').datepick({onSelect: showDate});
 });
+$(function() {
+	$('#popupDatepicker2').datepick();
+	$('#inlineDatepicker2').datepick({onSelect: showDate2});
+});
 
 function showDate(date) {
 	alert('The date chosen is ' + date);
 }
+function showDate2(date) {
+	alert('The date chosen is ' + date);
+}
 </script>
+
+<script>
+var current = 1;
+
+function addPerson() {
+    console.log('running addPerson')
+    //current keeps track of how many people we have.
+    current++;
+    var strToAdd = '<hr><h1>Formación educativa</h1><p><input class="form-control" id="id_1-titulo" maxlength="50" name="1-titulo" placeholder="Título obtenido" required="required" type="text"><p>'
+    strToAdd += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_1_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div><p>'
+    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="1-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"><p>'
+    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="1-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"><p>'
+    console.log(strToAdd)
+    $('#mainField').append(strToAdd)
+}
+
+$(document).ready(function(){
+    $('#addPerson').click(addPerson)
+});
+25</script>
+
 <style>
 #id_captcha_1:focus {
 border-color: rgb(102, 175, 233);
@@ -117,12 +145,14 @@ a:hover.tooltips span {
                 {{ wizard.form.media }}
             {% endblock %}
             <div class="front-signup js-front-signup">
-                
+
                 <center>
                     <h2>Envíanos tu información curricular</h2> 
                     <br />
 
-                    <h1>Información personal</h1>
+                    {% ifequal wizard.step.current "0" %}
+                        <h1>Información personal</h1>
+                    {% endifequal %}
                     <form action="" method="post">{% csrf_token %}
                         {{ wizard.management_form }}
                         {% if persona_form.errors %}
@@ -142,13 +172,29 @@ a:hover.tooltips span {
                         {% else %}
                             {% for form in wizard.form %}
                                 <div>
-                                    {{ form }}
-                                    {% if form.help_text %}
-                                        <a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>{{ form.help_text }}</span></a>
-                                    {% endif %}
+                                    {% ifnotequal wizard.steps.current "1" %}
+                                        {{ form }}
+                                        {% if form.help_text %}
+                                            <a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>{{ form.help_text }}</span></a>
+                                        {% endif %}
+                                    {% endifnotequal %}
                                 </div>
                             {% endfor %}
                         {% endif %}
+                        {% ifequal wizard.steps.current "1" %}
+                            <fieldset id="mainField" align="center">
+                                {% ifequal wizard.steps.current "1" %}
+                                    <h1>Formación educativa</h1>
+                                {% endifequal %}
+                                <p><input class="form-control" id="id_1-titulo" maxlength="50" name="1-titulo" placeholder="Título obtenido" required="required" type="text"></p>
+                                <p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_1_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div></p>
+                                <p><input class="form-control hasDatepick" id="popupDatepicker" name="1-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"></p>
+                                <p><input class="form-control hasDatepick" id="popupDatepicker2" name="1-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p>
+                                </p>
+                            </fieldset>
+                                <p><input type="button" class="btn btn-success" id="addPerson" value="Añadir otra formación"></p>
+                        {% endifequal %}
+    
 
                         {% if wizard.steps.prev %}
                             <button name="wizard_goto_step" class="btn btn-success" type="submit" value="{{ wizard.steps.prev }}">Paso anterior</button>
@@ -156,10 +202,11 @@ a:hover.tooltips span {
                         {% if wizard.steps.next %}
                             <button name="wizard_goto_step" class="btn btn-success" type="submit" value="{{ wizard.steps.next }}">Sigueinte paso</button>
                         {% endif %}
-                        {% if not wizard.steps.prev and not wizard.steps.next %}
-                            <input type="submit" class="btn btn-success" value="Enviar currículum"/>
-                        {% endif %}
+                        {% ifequal wizard.steps.current wizard.steps.last %}
+                            <button name="wizard_goto_step" class="btn btn-success" type="submit" value="Enviar currículum">Enviar currículum</button>
+                        {% endifequal %}
                     </form>
+		    
                 </center>
                 <br />
             </div>

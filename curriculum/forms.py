@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.shortcuts import render_to_response
-from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion
+from django.forms import ModelForm, TextInput
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura
+from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion
 import datetime
 
 NIVELES_COMPTETENCIA = (
@@ -79,6 +80,13 @@ class EducacionForm(forms.ModelForm):
     class Meta:
         # Se determina cuál es el modelo al que va a referirse el formulario 
         model = Educacion
+        exclude = ('persona',)
+        widgets = {
+            'titulo': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Título obtenido'}),
+            'carrera': TextInput(attrs={'type':'text','class':'form-control','placeholder':'Carrera estudiada'}),
+            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Fecha de inicio','id':'popupDatepicker'}),
+            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
+        }
 
 class CurriculumWizard(SessionWizardView):
     def get_template_names(self):

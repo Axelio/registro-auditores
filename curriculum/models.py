@@ -133,13 +133,15 @@ class Laboral(models.Model):
 
 class Educacion(models.Model):
     persona = models.ForeignKey(Persona)
-    titulo = models.CharField(max_length=50)
-    institucion = models.ForeignKey(Institucion)
-    carrera = models.CharField(max_length=50)
-    fecha_incio = models.DateField()
-    fecha_fin = models.DateField()
+    titulo = models.CharField(max_length=50, help_text=u'título universitario que obtuvo')
+    institucion = models.ForeignKey(Institucion, help_text=u'indique la institución en la cual participó')
+    carrera = models.CharField(max_length=50, help_text=u'carrera que estudió')
+    fecha_inicio = models.DateField(help_text=u'fecha en la que inició')
+    fecha_fin = models.DateField(help_text=u'fecha en la que terminó')
     class Meta:
         db_table = 'educacion'
+        verbose_name=u'educación'
+        verbose_name_plural=u'educaciones'
     def __unicode__(self):
         return u'%s: %s (%s)' %(self.persona, self.institucion, self.carrera)
 
