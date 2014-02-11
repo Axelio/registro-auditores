@@ -3,7 +3,11 @@
 {% block curriculum %}
 
 {% block jquery %}
+<!--
     <script src="{{ directorio }}js/jquery-1.9.1.min.js"></script>
+-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>!window.jQuery && document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
 {% endblock%}
 <script src="{{ directorio }}chosen/chosen.jquery.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="{{ directorio }}chosen/chosen.css"/>
@@ -30,10 +34,6 @@ $(function() {
 	$('#popupDatepicker').datepick();
 	$('#inlineDatepicker').datepick({onSelect: showDate});
 });
-$(function() {
-	$('#popupDatepicker2').datepick();
-	$('#inlineDatepicker2').datepick({onSelect: showDate2});
-});
 
 function showDate(date) {
 	alert('The date chosen is ' + date);
@@ -43,23 +43,26 @@ function showDate2(date) {
 }
 </script>
 
+
+
+
 <script>
 var current = 1;
 
-function addPerson() {
+function addEducacion() {
     console.log('running addPerson')
     //current keeps track of how many people we have.
     current++;
-    var strToAdd = '<hr><h1>Formación educativa</h1><p><input class="form-control" id="id_1-titulo" maxlength="50" name="1-titulo" placeholder="Título obtenido" required="required" type="text"><p>'
-    strToAdd += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_1_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div><p>'
-    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="1-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"><p>'
-    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="1-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"><p>'
+    var strToAdd = '<hr><h1>Formación educativa</h1><p><input class="form-control" id="id_'+ current +'-titulo" maxlength="50" name="'+ current +'-titulo" placeholder="Título obtenido" required="required" type="text"><p>'
+    strToAdd += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ current +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div><p>'
+    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="'+ current +'-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"><p>'
+    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ current +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"><p>'
     console.log(strToAdd)
     $('#mainField').append(strToAdd)
 }
 
 $(document).ready(function(){
-    $('#addPerson').click(addPerson)
+    $('#addEducacion').click(addEducacion)
 });
 25</script>
 
@@ -175,7 +178,6 @@ a:hover.tooltips span {
                                     {% ifnotequal wizard.steps.current "1" %}
                                         {{ form }}
                                         {% if form.help_text %}
-                                            <a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>{{ form.help_text }}</span></a>
                                         {% endif %}
                                     {% endifnotequal %}
                                 </div>
@@ -183,19 +185,14 @@ a:hover.tooltips span {
                         {% endif %}
                         {% ifequal wizard.steps.current "1" %}
                             <fieldset id="mainField" align="center">
-                                {% ifequal wizard.steps.current "1" %}
-                                    <h1>Formación educativa</h1>
-                                {% endifequal %}
-                                <p><input class="form-control" id="id_1-titulo" maxlength="50" name="1-titulo" placeholder="Título obtenido" required="required" type="text"></p>
-                                <p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_1_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div></p>
-                                <p><input class="form-control hasDatepick" id="popupDatepicker" name="1-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"></p>
-                                <p><input class="form-control hasDatepick" id="popupDatepicker2" name="1-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p>
-                                </p>
-                            </fieldset>
-                                <p><input type="button" class="btn btn-success" id="addPerson" value="Añadir otra formación"></p>
-                        {% endifequal %}
-    
 
+
+		<form method="post">
+		    <p><input type="button" class="btn btn-success" id="addVar" value="Añadir otra formación"></p>
+		</form>
+                        {% endifequal %}
+                        {{ instituciones }}
+    
                         {% if wizard.steps.prev %}
                             <button name="wizard_goto_step" class="btn btn-success" type="submit" value="{{ wizard.steps.prev }}">Paso anterior</button>
                         {% endif %}
@@ -213,4 +210,38 @@ a:hover.tooltips span {
         </div>
     </div>
 </div>
+<script>
+	//initialize with 3
+	var startingNo = 0;
+	var $node = "";
+	for(varCount=0;varCount<=startingNo;varCount++){
+	    var displayCount = varCount+1;
+	    $node += '<div class="align=center"><hr><h1>Formación educativa</h1><p><input class="form-control" id="id_'+ displayCount +'-titulo" maxlength="50" name="'+ displayCount +'-titulo" placeholder="Título obtenido" required="required" type="text"></p>'
+	    //~ $node += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ displayCount +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div></p>'
+	    //~ $node += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ varCount +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search">
+
+	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="'+ displayCount +'-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"></p>'
+	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ displayCount +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p></div>'
+		
+	}
+	$('form').prepend($node);
+	
+	$('form').on('click', '.removeVar', function(){
+		$(this).parent().remove();
+		//varCount--;
+	});
+
+	$('#addVar').on('click', function(){
+	    //new node
+	    varCount++;
+	    $node = '<hr><h1>Formación educativa</h1><p><input class="form-control" id="id_'+ varCount +'-titulo" maxlength="50" name="'+ varCount +'-titulo" placeholder="Título obtenido" required="required" type="text"></p>'
+	    //~ $node += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ varCount +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search">
+                    
+	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="'+ varCount +'-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"></p>'
+	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ varCount +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p>'
+	    $(this).parent().before($node);
+	});
+	
+	
+	</script>
 {% endblock %}
