@@ -89,23 +89,3 @@ class EducacionForm(forms.ModelForm):
             'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
         }
 
-class CurriculumWizard(SessionWizardView):
-    def get_context_data(self, form, **kwargs):
-        context = super(CurriculumWizard, self).get_context_data(form=form, **kwargs)
-        if self.steps.current == '1':
-            instituciones = Institucion.objects.all()
-            context.update({'instituciones': instituciones})
-        if self.steps.current == '1':
-            context.update({'instituciones': instituciones})
-        return context
-
-    def get_template_names(self):
-        '''
-        Definiendo cuál va a ser el formulario que se utilizará
-        '''
-        return 'curriculum/postulacion.html'
-
-    def done(self, form_list, **kwargs):
-        return render_to_response('done.html', {
-                'form': [form.cleaned_data for form in form_list],
-            })

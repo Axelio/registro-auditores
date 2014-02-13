@@ -43,29 +43,6 @@ function showDate2(date) {
 }
 </script>
 
-
-
-
-<script>
-var current = 1;
-
-function addEducacion() {
-    console.log('running addPerson')
-    //current keeps track of how many people we have.
-    current++;
-    var strToAdd = '<hr><h1>Formación educativa</h1><p><input class="form-control" id="id_'+ current +'-titulo" maxlength="50" name="'+ current +'-titulo" placeholder="Título obtenido" required="required" type="text"><p>'
-    strToAdd += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ current +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div><p>'
-    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="'+ current +'-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"><p>'
-    strToAdd += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ current +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"><p>'
-    console.log(strToAdd)
-    $('#mainField').append(strToAdd)
-}
-
-$(document).ready(function(){
-    $('#addEducacion').click(addEducacion)
-});
-25</script>
-
 <style>
 #id_captcha_1:focus {
 border-color: rgb(102, 175, 233);
@@ -145,63 +122,42 @@ a:hover.tooltips span {
         <div id="contenedorInformacion">
             <br>
             {% block head %}
-                {{ wizard.form.media }}
             {% endblock %}
             <div class="front-signup js-front-signup">
 
                 <center>
-                    <h2>Envíanos tu información curricular</h2> 
-                    <br />
-
-                    {% ifequal wizard.step.current "0" %}
-                        <h1>Información personal</h1>
-                    {% endifequal %}
+                    <h1>Información personal</h1>
                     <form action="" method="post">{% csrf_token %}
-                        {{ wizard.management_form }}
-                        {% if persona_form.errors %}
-                            <span class="label label-danger">{{ form.errors }}</span>
-                        {% endif %}
-                        {% if wizard.form.forms %}
+                        <b>{{ error_general }}</b>
+                        {% for form in persona_form %}
+                            <div>
+                                {% if form.errors %}
+                                    <hr>
+                                    <b>{{ form.errors }}</b>
+                                {% endif %}
+                                {{ form }}
+                                {% if form.errors %}
+                                    <hr>
+                                {% endif %}
+                                {% comment %}  
+                                {% if form.help_text %}
+                                    <a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>{{ form.help_text }}</span></a>
+                                {% endif %}
+                                {% endcomment %}
+                            </div>
+                        {% endfor %}
+                        <div>
+                            {% if email2_error %}
+                                <hr>
+                                <b>{{ error_email2 }}</b>
+                            {% endif %}
+                                <input class="form-control" id="id_email_2" maxlength="75" name="email_2" placeholder="Repita el email" required="required" type="email" value={{ valor_email2 }}>
+                            {% if email2_error %}
+                                <hr>
+                            {% endif %}
+                        </div>
 
-                            {{ wizard.form.management_form }}
-                            {% for form in wizard.form.forms %}
-                                <div>
-                                    {{ form }}
-                                    {% if form.help_text %}
-                                        <a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>{{ form.help_text }}</span></a>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            {% for form in wizard.form %}
-                                <div>
-                                    {% ifnotequal wizard.steps.current "1" %}
-                                        {{ form }}
-                                        {% if form.help_text %}
-                                        {% endif %}
-                                    {% endifnotequal %}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        {% ifequal wizard.steps.current "1" %}
-                            <fieldset id="mainField" align="center">
-
-
-		<form method="post">
-		    <p><input type="button" class="btn btn-success" id="addVar" value="Añadir otra formación"></p>
-		</form>
-                        {% endifequal %}
-                        {{ instituciones }}
-    
-                        {% if wizard.steps.prev %}
-                            <button name="wizard_goto_step" class="btn btn-success" type="submit" value="{{ wizard.steps.prev }}">Paso anterior</button>
-                        {% endif %}
-                        {% if wizard.steps.next %}
-                            <button name="wizard_goto_step" class="btn btn-success" type="submit" value="{{ wizard.steps.next }}">Sigueinte paso</button>
-                        {% endif %}
-                        {% ifequal wizard.steps.current wizard.steps.last %}
-                            <button name="wizard_goto_step" class="btn btn-success" type="submit" value="Enviar currículum">Enviar currículum</button>
-                        {% endifequal %}
+                        <button name="wizard_goto_step" class="btn btn-success" type="submit" value="Enviar currículum">Guardar</button>
                     </form>
 		    
                 </center>
@@ -210,39 +166,4 @@ a:hover.tooltips span {
         </div>
     </div>
 </div>
-<script>
-	//initialize with 3
-	var startingNo = 0;
-	var $node = "";
-	for(varCount=0;varCount<=startingNo;varCount++){
-	    var displayCount = varCount+1;
-	    $node += '<div class="align=center"><hr><h1>Formación educativa</h1><p><input class="form-control" id="id_'+ displayCount +'-titulo" maxlength="50" name="'+ displayCount +'-titulo" placeholder="Título obtenido" required="required" type="text"></p>'
-	    //~ $node += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ displayCount +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off"></div></div></div></p>'
-	    //~ $node += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ varCount +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search">
-
-	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="'+ displayCount +'-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"></p>'
-	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ displayCount +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p></div>'
-		
-	}
-	$('form').prepend($node);
-	
-	$('form').on('click', '.removeVar', function(){
-		$(this).parent().remove();
-		//varCount--;
-	});
-
-	$('#addVar').on('click', function(){
-	    //new node
-	    varCount++;
-	    $node = '<hr><h1>Formación educativa</h1><p><input class="form-control" id="id_'+ varCount +'-titulo" maxlength="50" name="'+ varCount +'-titulo" placeholder="Título obtenido" required="required" type="text"></p>'
-	    //~ $node += '<p><div class="chosen-container chosen-container-single" style="width: 100px;" title="" id="id_'+ varCount +'_institucion_chosen"><a class="chosen-single" tabindex="-1"><span>---------</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search">
-                    
-	    $node += '<p><input class="form-control hasDatepick" id="popupDatepicker" name="'+ varCount +'-fecha_inicio" placeholder="Fecha de inicio" required="required" type="text"></p>'
-	    $node +='<p><input class="form-control hasDatepick" id="popupDatepicker2" name="'+ varCount +'-fecha_fin" placeholder="Fecha de culminación" required="required" type="text"></p>'
-	    $node +='<span class="removeVar">Remove Variable</span></p>'
-	    $(this).parent().before($node);
-	});
-	
-	
-	</script>
 {% endblock %}

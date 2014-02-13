@@ -28,12 +28,12 @@ class Persona(models.Model):
     reside = models.ForeignKey(Estado, help_text=u'Estado de residencia')
     direccion = models.TextField(verbose_name=u'dirección',blank=True, help_text=u'Indique dirección donde reside')
     fecha_nacimiento = models.DateField(help_text='Indique su fecha de nacimiento')
-    email = models.EmailField(help_text='Indique un correo electrónico válido')
     tlf_reside = models.CharField(max_length=15, verbose_name=u'teléfono de residencia', help_text=u'Número telefónico de residencia')
     tlf_movil = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono móvil', help_text=u'Número telefónico celular')
     tlf_oficina = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono de oficina', help_text=u'Número telefónico de oficina')
     tlf_contacto = models.CharField(choices=TELEFONO_PUBLICO, max_length=10, help_text=u'Seleccione el teléfono que establecerá el cual será contactado', default='fijo', verbose_name=u'teléfono de contacto')
-    estado_civil = models.CharField(choices=ESTADO_CIVIL, max_length=15, help_text='Señale su estado civil')
+    estado_civil = models.CharField(choices=ESTADO_CIVIL, max_length=15, help_text='Señale su estado civil', default='s')
+    email = models.EmailField(help_text='Indique un correo electrónico válido')
     class Meta:
         db_table = u'personas'
         verbose_name = "persona"
