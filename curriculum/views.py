@@ -3,10 +3,12 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from curriculum.models import *
 from curriculum.forms import *
 from personas.models import *
 from personas.forms import *
+from auth.models import *
 import datetime
 
 class CurriculumView(View):
@@ -94,6 +96,29 @@ class CurriculumView(View):
                                               password = clave, 
                                              )
 
+            usuario.is_active = True
+            usuario.first_name = request.POST['primer_nombre']
+            usuario.last_name = request.POST['primer_apellido']
+            usuario.save()
+
+            # Se asocia la persona con el usuario
+            if not UserProfile.objects.filter(user=usuario, persona=persona).exists():
+               usuario_perfil = UserProfile.objects.create(user=usuario, persona=persona)
+
+            # Envío de mail
+            asunto = u'[SUSCERTE] Creación de cuenta exitosa'
+            mensaje = Mensaje.objects.get(caso='Creación de usuario (email)')
+            emisor = settings.EMAIL_HOST_USER
+            destinatarios = (request.POST['email'],)
+
+            # Sustitución de variables clave y usuario
+            mensaje = mensaje.mensaje.replace('<clave>','%s'%(clave)).replace('<usuario>','%s'%(request.POST['email']))
+            send_mail(subject=asunto, message=mensaje, from_email=emisor, recipient_list=destinatarios)
+
+        self.template = 'curriculum/aprobados.html'
+        mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')
+        mensaje = mensaje.mensaje
+        self.diccionario.update({'mensaje':mensaje})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
