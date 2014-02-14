@@ -23,3 +23,12 @@ def funcion(u):
         u._cached_profile = UserProfile.objects.get_or_create(user=u)[0]
     return u._cached_profile 
 User.profile = property(funcion)
+
+class Mensaje(models.Model):
+    caso = models.CharField(max_length=100)
+    mensaje = models.TextField()
+    class Meta:
+        db_table ='mensaje'
+    def __unicode__(self):
+        return u'%s' %(self.caso)
+

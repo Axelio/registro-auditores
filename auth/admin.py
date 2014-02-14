@@ -1,6 +1,6 @@
 # -*- coding: UTF8 -*-
 from django.contrib import admin
-from auth.models import UserProfile
+from auth.models import UserProfile, Mensaje
 from django.contrib.auth.admin import UserAdmin, User
 from django.utils.translation import ugettext_lazy as _
 
@@ -90,3 +90,4 @@ class UserProfileAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User,UserProfileAdmin)
+admin.site.register(Mensaje)
