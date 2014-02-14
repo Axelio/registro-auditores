@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+import glob
+conffiles = glob.glob(os.path.join(os.path.dirname(__file__), 'local_conf', '*.conf'))
+conffiles.sort()
+for f in conffiles:
+        execfile(os.path.abspath(f))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
