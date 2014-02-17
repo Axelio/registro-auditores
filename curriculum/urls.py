@@ -11,6 +11,4 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^postulacion$', CurriculumView.as_view(), name='curriculum'),
-    #url(r'^postulacion$', CurriculumWizard.as_view([PersonaForm, EducacionForm,])),
-
 )

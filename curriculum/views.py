@@ -4,6 +4,7 @@ from django.views.generic.base import View
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.http import Http404
 from curriculum.models import *
 from curriculum.forms import *
 from personas.models import *
@@ -119,6 +120,34 @@ class CurriculumView(View):
         mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')
         mensaje = mensaje.mensaje
         self.diccionario.update({'mensaje':mensaje})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+class PerfilView(View):
+    '''
+    Clase para la renderización del Perfil
+    '''
+    template='perfil/perfil.html'
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
+        except:
+            raise Http404
+        else:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
+
+        educaciones = Educacion.objects.filter(persona=persona)
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'educaciones':educaciones})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,

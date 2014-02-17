@@ -49,12 +49,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'debug_toolbar',
+    'compressor',
     'curriculum',
     'lugares',
     'auth',
     'personas',
-    'debug_toolbar',
-    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (

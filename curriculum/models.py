@@ -133,9 +133,10 @@ class Laboral(models.Model):
 
 class Educacion(models.Model):
     persona = models.ForeignKey(Persona)
-    titulo = models.CharField(max_length=50, help_text=u'título universitario que obtuvo')
-    institucion = models.ForeignKey(Institucion, help_text=u'indique la institución en la cual participó')
+    titulo = models.CharField(max_length=50, help_text=u'título universitario que obtuvo', verbose_name=u'título')
+    institucion = models.ForeignKey(Institucion, help_text=u'indique la institución en la cual participó', verbose_name=u'institución')
     carrera = models.CharField(max_length=50, help_text=u'carrera que estudió')
+    tipo = models.ForeignKey('TipoEducacion')
     fecha_inicio = models.DateField(help_text=u'fecha en la que inició')
     fecha_fin = models.DateField(help_text=u'fecha en la que terminó')
     class Meta:
@@ -145,3 +146,11 @@ class Educacion(models.Model):
     def __unicode__(self):
         return u'%s: %s (%s)' %(self.persona, self.institucion, self.carrera)
 
+class TipoEducacion(models.Model):
+    tipo= models.CharField(max_length=20, help_text=u'Ej: Pregrado, Doctorado, Maestría, entre otros.')
+    class Meta:
+        db_table = u'tipo_educacion'
+        verbose_name = u'tipos de educación'
+        verbose_name_plural = 'tipos de educaciones'
+    def __unicode__(self):
+        return u'%s'%(self.tipo)
