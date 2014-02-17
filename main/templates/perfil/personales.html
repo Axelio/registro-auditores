@@ -1,0 +1,166 @@
+{% extends "base_foundation.html" %}
+{% block personales %}
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <body>
+
+{% load static %}
+ 
+  <!-- Main Page Content and Sidebar -->
+ 
+<div class="row">
+    <div class="large-12">
+        <div id="cintillo"></div>
+    </div>
+
+    {% include 'menu_perfil.html' %}
+ 
+    <!-- Contact Details -->
+    <div class="large-9 columns">
+ 
+      <div class="section-container tabs" data-section>
+        <section class="section">
+          <h5 class="title"><a href="#panel1">Contact Our Company</a></h5>
+          <div class="content" data-slug="panel1">
+            <form>
+              <div class="row collapse">
+                <div class="large-2 columns">
+                  <label class="inline">Your Name</label>
+                </div>
+                <div class="large-10 columns">
+                  <input type="text" id="yourName" placeholder="Jane Smith">
+                </div>
+              </div>
+              <div class="row collapse">
+                <div class="large-2 columns">
+                  <label class="inline"> Your Email</label>
+                </div>
+                <div class="large-10 columns">
+                  <input type="text" id="yourEmail" placeholder="jane@smithco.com">
+                </div>
+              </div>
+              <label>What's up?</label>
+              <textarea rows="4"></textarea>
+              <button type="submit" class="radius button">Submit</button>
+            </form>
+          </div>
+        </section>
+        <section class="section">
+          <h5 class="title"><a href="#panel2">Specific Person</a></h5>
+          <div class="content" data-slug="panel2">
+            <ul class="large-block-grid-5">
+              <li><a href="mailto:mal@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">Mal Reynolds</a></li>
+              <li><a href="mailto:zoe@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">Zoe Washburne</a></li>
+              <li><a href="mailto:jayne@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">Jayne Cobb</a></li>
+              <li><a href="mailto:doc@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">Simon Tam</a></li>
+              <li><a href="mailto:killyouwithmymind@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">River Tam</a></li>
+              <li><a href="mailto:leafonthewind@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">Hoban Washburne</a></li>
+              <li><a href="mailto:book@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">Shepherd Book</a></li>
+              <li><a href="mailto:klee@serenity.bc.reb"><img src="http://placehold.it/200x200&amp;text=[person]">Kaywinnet Lee Fry</a></li>
+              <li><a href="mailto:inara@guild.comp.all"><img src="http://placehold.it/200x200&amp;text=[person]">Inarra Serra</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+ 
+    <!-- End Contact Details -->
+ 
+ 
+    <!-- Sidebar -->
+ 
+
+    <div class="large-3 columns">
+      <h3>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
+ 
+      <p>
+        Género: 
+            {% ifequal persona.genero 0 %}
+                Masculino
+            {% else %}
+                Femenino
+            {% endifequal %}
+        <br/ >
+        Dirección: {{ persona.direccion }}
+        <br/ >
+        Tlf. de contacto:
+            {% ifequal persona.tlf_contacto 'fijo' %}
+                {{ persona.tlf_reside }}
+            {% endifequal %}
+            {% ifequal persona.tlf_contacto 'oficina' %}
+                {{ persona.oficina }}
+            {% endifequal %}
+            {% ifequal persona.tlf_contacto 'movil' %}
+                {{ persona.movil }}
+            {% endifequal %}
+        <br />
+        Estado civil:
+            {% ifequal persona.estado_civil 's' %}
+                Solter{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+            {% endifequal %}
+            {% ifequal persona.estado_civil 'c' %}
+                Casad{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+            {% endifequal %}
+            {% ifequal persona.estado_civil 'd' %}
+                Divorciad{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+            {% endifequal %}
+            {% ifequal persona.estado_civil 'v' %}
+                Viud{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+            {% endifequal %}
+        <br />
+        Correo electrónico:
+            <a href="mailto:{{ persona.email }}">{{ persona.email }}</a>
+      </p>
+    </div>
+    <!-- End Sidebar -->
+  </div>
+ 
+  <!-- End Main Content and Sidebar -->
+ 
+ 
+  <!-- Footer -->
+ 
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>&copy; Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+ 
+  <!-- End Footer -->
+ 
+ 
+ 
+  <!-- Map Modal -->
+ 
+  <div class="reveal-modal" id="mapModal">
+    <h4>Where We Are</h4>
+    <p><img src="http://placehold.it/800x600" /></p>
+ 
+    <!-- Any anchor with this class will close the modal. This also inherits certain styles, which can be overriden. -->
+    <a href="#" class="close-reveal-modal">&times;</a>
+  </div>
+    <script type="text/javascript" src="{{ directorio }}foundation/js/foundation.js"></script>
+    <script>
+      $(document).foundation();
+
+      var doc = document.documentElement;
+      doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>
+  </body>
+</html>
+{% endblock %}

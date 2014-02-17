@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+	<head>
+        {% load i18n %}
+        {% load static %}
+        {% load compress %}
+		{% get_static_prefix as directorio %}
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="robots" content="index, follow" />
+		<meta name="keywords" content="Suscerte,seguridad,vencert,cenif,superintendencia,seguridad web,certificacion" />
+		<meta name="description" content="Suscerte" />
+        <link href="{{ directorio }}images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<title>{% block title %}.::SUSCERTE::.{% endblock %}</title>
+
+        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "css/extra_foundation.css" %}">
+
+        {# Base Foundation CSS #}
+        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "foundation/css/foundation.css" %}">
+        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "foundation/css/foundation.min.css" %}">
+        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "foundation/css/normalize.css" %}">
+
+        {# Override if you need another version of modernizr #}
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.abide.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.accordion.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.alert.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.clearing.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.dropdown.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.equalizer.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.interchange.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.joyride.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.magellan.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.offcanvas.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.orbit.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.reveal.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.tab.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.tooltip.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.topbar.js"></script>
+
+
+        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/fastclick.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/jquery.cookie.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/jquery.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/modernizr.js"></script>
+        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/placeholder.js"></script>
+	</head>
+    <body>
+        {% block personales %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,173 @@
+{% extends "base_foundation.html" %}
+{% block personales %}
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <body>
+
+{% load static %}
+{% load humanize %} 
+ 
+  <!-- Main Page Content and Sidebar -->
+ 
+<div class="row">
+    <div class="large-12">
+        <div id="cintillo"></div>
+    </div>
+
+    {% include 'menu_perfil.html' %}
+ 
+    <!-- Contact Details -->
+    <div class="large-8 columns">
+ 
+      <div class="section-container tabs" data-section>
+        {% if educaciones %}
+            {% for educacion in educaciones %}
+                <section class="section center">
+                <h5 class="title"><a href="#panel2"><i class="foundicon-folder"></i>Educación</a></h5>
+                  <div class="content" data-slug="panel2">
+                    <ul class="large-block-grid-5">
+                      <div class="row collapse">
+                        <div class="large-3 columns">
+                          <label class="inline"><b>Título</b></label>
+                        </div>
+                        <div class="large-7 columns">
+                            {{ educacion.titulo }}
+                        </div>
+                      </div>
+                      <div class="row collapse">
+                        <div class="large-3 columns">
+                          <label class="inline"><b>Institución</b></label>
+                        </div>
+                        <div class="large-7 columns">
+                            {{ educacion.institucion }}
+                        </div>
+                      </div>
+                      <div class="row collapse">
+                        <div class="large-3 columns">
+                          <label class="inline"><b>Nivel</b></label>
+                        </div>
+                        <div class="large-7 columns">
+                            {{ educacion.tipo }}
+                        </div>
+                      </div>
+                      <div class="row collapse">
+                        <div class="large-3 columns">
+                          <label class="inline"><b>Carrera</b></label>
+                        </div>
+                        <div class="large-7 columns">
+                            {{ educacion.carrera }}
+                        </div>
+                      </div>
+                      <div class="row collapse">
+                        <div class="large-4 columns">
+                          <label class="inline"><b>Fecha de inicio</b></label>
+                        </div>
+                        <div class="large-7 columns">
+                            {{ educacion.fecha_inicio }}
+                        </div>
+                      </div>
+                      <div class="row collapse">
+                        <div class="large-3 columns">
+                          <label class="inline"><b>Fecha de culminación</b></label>
+                        </div>
+                        <div class="large-7 columns">
+                            {{ educacion.fecha_fin }}
+                        </div>
+                      </div>
+                    </ul>
+                  </div>
+                </section>
+            {% endfor %}
+        {% else %}
+                <section class="section">
+                  <h5 class="title"><a href="#panel2">Educación</a></h5>
+                  <div class="content" data-slug="panel2">
+                    <ul class="large-block-grid-5">
+                      <div class="row collapse">
+                        <div class="large-12 columns">
+                            <div data-alert class="alert-box info">
+                                Aún no tiene ninguna información educativa. <a href=#>Haga click aquí</a> para agregar una
+                                <a href="#" class="close">&times;</a>
+                            </div>
+                        </div>
+                      </div>
+                    </ul>
+                  </div>
+                </section>
+        {% endif %}
+      </div>
+    </div>
+ 
+    <!-- End Contact Details -->
+ 
+ 
+    <!-- Sidebar -->
+ 
+
+    <div class="large-4 columns">
+        <ul class="vcard">
+            <li class="fn"><h3>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3></li>
+            <li>C.I.: {{ persona.cedula|intcomma }}</li>
+            <li>Género: 
+                {% ifequal persona.genero 0 %}
+                    Masculino
+                {% else %}
+                    Femenino
+                {% endifequal %}
+            </li>
+            <li>Dirección: {{ persona.direccion }}</li>
+            <li>Teléfono:
+                    {% ifequal persona.tlf_contacto 'fijo' %}
+                        {{ persona.tlf_reside }}
+                    {% endifequal %}
+                    {% ifequal persona.tlf_contacto 'oficina' %}
+                        {{ persona.oficina }}
+                    {% endifequal %}
+                    {% ifequal persona.tlf_contacto 'movil' %}
+                        {{ persona.movil }}
+                    {% endifequal %}
+            </li>
+            <li>Estado civil:
+                    {% ifequal persona.estado_civil 's' %}
+                        Solter{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+                    {% endifequal %}
+                    {% ifequal persona.estado_civil 'c' %}
+                        Casad{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+                    {% endifequal %}
+                    {% ifequal persona.estado_civil 'd' %}
+                        Divorciad{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+                    {% endifequal %}
+                    {% ifequal persona.estado_civil 'v' %}
+                        Viud{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+                    {% endifequal %}
+            </li>
+            <li>Email:<a href="mailto:{{ persona.email }}">{{ persona.email }}</a></li>
+        </ul>
+    </div>
+  <!-- End Main Content and Sidebar -->
+ 
+ 
+  {% include 'footer.html' %} 
+ 
+ 
+  <!-- Map Modal -->
+ 
+  <div class="reveal-modal" id="mapModal">
+    <h4>Where We Are</h4>
+    <p><img src="http://placehold.it/800x600" /></p>
+ 
+    <!-- Any anchor with this class will close the modal. This also inherits certain styles, which can be overriden. -->
+    <a href="#" class="close-reveal-modal">&times;</a>
+  </div>
+    <script type="text/javascript" src="{{ directorio }}foundation/js/foundation.js"></script>
+    <script>
+      $(document).foundation();
+
+      var doc = document.documentElement;
+      doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>
+  </body>
+</html>
+{% endblock %}
