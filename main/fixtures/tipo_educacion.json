@@ -1,0 +1,37 @@
+[
+{
+    "pk": 1, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Profesional Universitario"
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Maestr\u00eda"
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "TSU"
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Especialidad"
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Doctorado"
+    }
+}
+]
