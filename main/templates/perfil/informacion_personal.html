@@ -1,0 +1,41 @@
+{% load humanize %} 
+
+{% load static %}
+<div class="left-space box">
+    <h3>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
+    C.I.: {{ persona.cedula|intcomma }} <br />
+    Género: 
+	{% ifequal persona.genero 0 %}
+	    Masculino
+	{% else %}
+	    Femenino
+	{% endifequal %}
+    <br />
+    Dirección: {{ persona.direccion }}<br />
+    Teléfono:
+	    {% ifequal persona.tlf_contacto 'fijo' %}
+		{{ persona.tlf_reside }}
+	    {% endifequal %}
+	    {% ifequal persona.tlf_contacto 'oficina' %}
+		{{ persona.oficina }}
+	    {% endifequal %}
+	    {% ifequal persona.tlf_contacto 'movil' %}
+		{{ persona.movil }}
+	    {% endifequal %}
+    <br />
+    Estado civil:
+	    {% ifequal persona.estado_civil 's' %}
+		Solter{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+	    {% endifequal %}
+	    {% ifequal persona.estado_civil 'c' %}
+		Casad{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+	    {% endifequal %}
+	    {% ifequal persona.estado_civil 'd' %}
+		Divorciad{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+	    {% endifequal %}
+	    {% ifequal persona.estado_civil 'v' %}
+		Viud{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+	    {% endifequal %}
+    <br />
+    Email: <a href="mailto:{{ persona.email }}">{{ persona.email }}</a>
+</div>
