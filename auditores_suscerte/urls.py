@@ -13,6 +13,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^curriculum/', include('curriculum.urls')),
     url(r'^perfil/personales$', PersonalesView.as_view(), name='personales'),
-    url(r'^perfil/educacion/editar$', EducacionView.as_view(), name='personales'),
+    url(r'^perfil/educacion/(?P<palabra>\w+)/(?P<user_id>[\d]+)*$', EducacionView.as_view(), name='educacion'),
     url(r'^perfil$', PerfilView.as_view(), name='perfil'),
 )

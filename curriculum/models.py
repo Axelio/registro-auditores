@@ -148,7 +148,7 @@ class Educacion(models.Model):
         return u'%s: %s (%s)' %(self.persona, self.institucion, self.carrera)
 
 class TipoEducacion(models.Model):
-    tipo= models.CharField(max_length=20, help_text=u'Ej: Pregrado, Doctorado, Maestría, entre otros.')
+    tipo= models.CharField(max_length=30, help_text=u'Ej: Pregrado, Doctorado, Maestría, entre otros.')
     class Meta:
         db_table = u'tipo_educacion'
         verbose_name = u'tipos de educación'

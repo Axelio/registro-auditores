@@ -85,7 +85,7 @@ class EducacionForm(forms.ModelForm):
         widgets = {
             'titulo': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Título obtenido'}),
             'carrera': TextInput(attrs={'type':'text','class':'form-control','placeholder':'Carrera estudiada'}),
-            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Fecha de inicio','id':'popupDatepicker'}),
-            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
+            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio','id':'popupDatepicker'}),
+            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
         }
 

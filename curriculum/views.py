@@ -17,6 +17,7 @@ class EducacionView(View):
     Clase para la renderización de los datos educativos
     '''
     template='perfil/editar_educacion.html'
+    educacion_form = EducacionForm
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -35,6 +36,21 @@ class EducacionView(View):
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'educaciones':educaciones})
+        self.diccionario.update({'educacion_form':self.educacion_form})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        educaciones = Educacion.objects.filter(persona=persona)
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'educaciones':educaciones})
+        self.diccionario.update({'educacion_form':self.educacion_form})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -116,6 +132,7 @@ class CurriculumView(View):
                                              estado_civil = request.POST['estado_civil'],
                                              email = request.POST['email'],
                                              )
+
             # Se crea el usuario con el correo electrónico por defecto y se crea una contraseña aleatoria para el usuario
             clave = User.objects.make_random_password()
             usuario = User.objects.create_user(username = request.POST['email'],
@@ -163,6 +180,8 @@ class PerfilView(View):
     diccionario = {}
 
     def get(self, request, *args, **kwargs):
+        mensaje = ''
+        tipo = ''
         self.diccionario.update(csrf(request))
         usuario = request.user
         try:
@@ -173,9 +192,13 @@ class PerfilView(View):
             persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
 
         educaciones = Educacion.objects.filter(persona=persona)
+        laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'educaciones':educaciones})
+        self.diccionario.update({'laborales':laborales})
+        self.diccionario.update({'mensaje':mensaje})
+        self.diccionario.update({'tipo':tipo})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
