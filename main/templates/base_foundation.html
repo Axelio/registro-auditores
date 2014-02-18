@@ -11,40 +11,27 @@
 		<meta name="description" content="Suscerte" />
         <link href="{{ directorio }}images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<title>{% block title %}.::SUSCERTE::.{% endblock %}</title>
+        {% load admin_static %}{% load url from future %}
 
-        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "css/extra_foundation.css" %}">
-
-        {# Base Foundation CSS #}
-        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "foundation/css/foundation.css" %}">
-        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "foundation/css/foundation.min.css" %}">
-        <link rel="stylesheet" type="text/css" media="screen"  href="{% static "foundation/css/normalize.css" %}">
-
-        {# Override if you need another version of modernizr #}
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation.min.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.abide.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.accordion.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.alert.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.clearing.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.dropdown.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.equalizer.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.interchange.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.joyride.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.magellan.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.offcanvas.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.orbit.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.reveal.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.tab.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.tooltip.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/foundation/foundation.topbar.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <!-- STYLESHEETS -->
+        {% block stylesheets %}
 
 
-        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/fastclick.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/jquery.cookie.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/jquery.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/modernizr.js"></script>
-        <script type="text/javascript" src="{{ directorio }}foundation/js/vendor/placeholder.js"></script>
+        {% block extra_css %}{% endblock extra_css %}
+        <script src="{% static "ink/js/ink.min.js" %} "></script>
+        <script src="{% static "ink/js/prettify.js" %} "></script>
+        <link href="{% static "ink/css/ink.css" %}" rel="stylesheet">
+	
+        <link href="http://cdn.ink.sapo.pt/2.2.1/css/docs.css" rel="stylesheet">
+	
+
+        <script src="{% static "ink/js/ink-ui.min.js" %} "></script>
+        <script src="{% static "ink/js/autoload.js" %} "></script>
+        <script src="{% static "js/jquery.min.js" %} "></script>
+        {% endblock %}
+
 	</head>
     <body>
         {% block personales %}{% endblock %}

@@ -23,6 +23,7 @@ admin.site.register(Conocimiento, ConocimientoAdmin)
 class IdiomaAdmin(admin.ModelAdmin):
     search_fields = ('idioma',)
 admin.site.register(Idioma, IdiomaAdmin)
+
 class CompetenciaAdmin(admin.ModelAdmin):
     list_display = ('competencia', 'tipo', 'puntaje')
     list_filter = ('tipo',)
@@ -32,3 +33,4 @@ admin.site.register(ListaIdiomas)
 admin.site.register(ListaCompetencia)
 admin.site.register(Educacion)
 admin.site.register(TipoEducacion)
+admin.site.register(Laboral)

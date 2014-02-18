@@ -128,6 +128,7 @@ class Laboral(models.Model):
     direccion_empresa = models.TextField(verbose_name=u'dirección de empresa')
     class Meta:
         db_table = 'laboral'
+        verbose_name_plural = 'laborales'
     def __unicode__(self):
         return u'%s: %s' %(self.usuario, self.empresa)
 

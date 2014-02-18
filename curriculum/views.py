@@ -12,6 +12,34 @@ from personas.forms import *
 from auth.models import *
 import datetime
 
+class EducacionView(View):
+    '''
+    Clase para la renderización de los datos educativos
+    '''
+    template='perfil/editar_educacion.html'
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
+        except:
+            raise Http404
+        else:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
+
+        educaciones = Educacion.objects.filter(persona=persona)
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'educaciones':educaciones})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
 class CurriculumView(View):
     '''
     Clase para postulación de currículum
