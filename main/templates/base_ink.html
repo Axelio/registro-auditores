@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+        {% load i18n %}
+        {% load static %}
+        {% load compress %}
+		{% get_static_prefix as directorio %}
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="robots" content="index, follow" />
+		<meta name="keywords" content="Suscerte,seguridad,vencert,cenif,superintendencia,seguridad web,certificacion" />
+		<meta name="description" content="Suscerte" />
+        <link href="{{ directorio }}images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<title>{% block title %}.::SUSCERTE::.{% endblock %}</title>
+        {% load admin_static %}{% load url from future %}
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <!-- STYLESHEETS -->
+        {% block stylesheets %}
+
+
+        {% block extra_css %}{% endblock extra_css %}
+        <script src="{% static "ink/js/ink.min.js" %} "></script>
+        <script src="{% static "ink/js/prettify.js" %} "></script>
+        <link href="{% static "ink/css/ink.css" %}" rel="stylesheet">
+	
+        <link href="http://cdn.ink.sapo.pt/2.2.1/css/docs.css" rel="stylesheet">
+	
+
+        <script src="{% static "ink/js/ink-ui.min.js" %} "></script>
+        <script src="{% static "ink/js/autoload.js" %} "></script>
+        <script src="{% static "js/jquery.min.js" %} "></script>
+        {% endblock %}
+
+	</head>
+    <body>
+        {% block personales %}{% endblock %}
+    </body>
+</html>
