@@ -78,6 +78,42 @@
                             <a class="ink-button blue">FALTA</a>
                         </div>
                     </div>
+                    <div class="box">
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><a href=#><i class="icon-tasks"></i> Conocimiento</div></a></h2>
+                        {% if conocimientos %}
+                            {% for conocimiento in conocimientos %}
+                                <h4>TITULO</h4>
+                            <hr>
+                            {% endfor %}
+                                <div class="content-right large-100">
+                                    <a class="ink-button blue">FALTA Editar</a>
+                                    <a class="ink-button red">FALTA Eliminar</a>
+                                </div>
+                        {% else %}
+                            Usted no posee ninguna información laboral. Por favor, registre una.
+                        {% endif %}
+                        <div class="content-center large-100">
+                            <a class="ink-button blue">FALTA</a>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><a href=#><i class="icon-tasks"></i> Idiomas</div></a></h2>
+                        {% if idiomas %}
+                            {% for idioma in idiomas %}
+                                <h4>TITULO</h4>
+                            <hr>
+                            {% endfor %}
+                                <div class="content-right large-100">
+                                    <a class="ink-button blue">FALTA Editar</a>
+                                    <a class="ink-button red">FALTA Eliminar</a>
+                                </div>
+                        {% else %}
+                            Usted no posee ninguna información laboral. Por favor, registre una.
+                        {% endif %}
+                        <div class="content-center large-100">
+                            <a class="ink-button blue">FALTA</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="large-30 medium-50 small-100">
                     {% include "perfil/informacion_personal.html" %}
