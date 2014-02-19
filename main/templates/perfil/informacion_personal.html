@@ -1,8 +1,12 @@
 {% load humanize %} 
 
 {% load static %}
+{% get_static_prefix as directorio %}
 <div class="left-space box">
-    <h3>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
+    <div class="content-center">
+        <img src='{{ directorio }}images/avatar.png'>
+        <h3>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
+    </div>
     C.I.: {{ persona.cedula|intcomma }} <br />
     Género: 
 	{% ifequal persona.genero 0 %}

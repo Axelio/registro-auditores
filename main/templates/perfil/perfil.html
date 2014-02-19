@@ -30,45 +30,59 @@
     <div class="column-group">
         <div class="space">
             <div class="space">
-                <div class="large-70">
+                <div class="large-70 medium-50 small-100">
                     <div class="box">
-                        <h2 id="curriculum"><a href=#><i class="icon-file-text"></i> Educación </h2></a>
-                        {% for educacion in educaciones %}
-                        <h4>{{ educacion.institucion }}</h4>
-                    <div>
-                        <b>{{ educacion.titulo }}</b><br /> <i class="icon-calendar"></i> {{ educacion.fecha_inicio }} - {{ educacion.fecha_fin }}<br />
-                        Nivel: {{ educacion.tipo }}
-                    </div>
-                    <div class="content-center large-100">
-                        <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue">Editar</a>
-                        <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red">Eliminar</a>
-                    </div>
-                    {% endfor %}
-                    <hr>
-                    <div class="content-center large-100">
-                        <a href="{% url 'educacion' 'nueva' %}" class="ink-button blue">Añadir otra</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="large-30">
-                {% include "perfil/informacion_personal.html" %}
-            </div>
-            
-            <div class="large-70">
-                <div class="box">
-                    <h2 id="curriculum"><a href=#><i class="icon-briefcase"></i> Experiencia Laboral </h2></a>
-                    {% for laboral in laborales %}
-                        <h4>{{ laboral.empresa }}</h4>
-                        Trabajando como <b>{{ laboral.cargo }}</b> en el sector de {{ laboral.sector }}
-                        <div>
-                            <i class="icon-calendar"></i> {{ laboral.fecha_inicio }} - {{ laboral.fecha_fin }}<br />
-                            Función: {{ laboral.funcion }}
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><a><i class="icon-file-text"></i> Educación</a></div></h2>
+                        {% if educaciones %}
+                            {% for educacion in educaciones %}
+                                <div class="bottom-space">
+                                    <div class="ink-label titulo">{{ educacion.institucion }}</div>
+                                </div>
+                                <div>
+                                    <b>{{ educacion.titulo }}</b><br /> <i class="icon-calendar"></i> {{ educacion.fecha_inicio }} - {{ educacion.fecha_fin }}<br />
+                                    Nivel: {{ educacion.tipo }}
+                                </div>
+                                <div class="content-right large-100">
+                                    <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue">Editar</a>
+                                    <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red">Eliminar</a>
+                                </div>
+                                <hr>
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ninguna información educativa. Por favor, registre una.
+                        {% endif %}
+                        <div class="content-center large-100">
+                            <a href="{% url 'educacion' 'nueva' %}" class="ink-button blue">Añadir educación</a>
                         </div>
-                    {% endfor %}
+                    </div>
+                    <div class="box">
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><a href=#><i class="icon-briefcase"></i> Experiencia Laboral </div></a></h2>
+                        {% if laborales %}
+                            {% for laboral in laborales %}
+                                <h4>{{ laboral.empresa }}</h4>
+                                Trabajando como <b>{{ laboral.cargo }}</b> en el sector de {{ laboral.sector }}
+                                <div>
+                                    <i class="icon-calendar"></i> {{ laboral.fecha_inicio }} - {{ laboral.fecha_fin }}<br />
+                                    Función: {{ laboral.funcion }}
+                                </div>
+                            <hr>
+                            {% endfor %}
+                                <div class="content-right large-100">
+                                    <a class="ink-button blue">FALTA Editar</a>
+                                    <a class="ink-button red">FALTA Eliminar</a>
+                                </div>
+                        {% else %}
+                            Usted no posee ninguna información laboral. Por favor, registre una.
+                        {% endif %}
+                        <div class="content-center large-100">
+                            <a class="ink-button blue">FALTA</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="large-30 medium-50 small-100">
+                    {% include "perfil/informacion_personal.html" %}
                 </div>
             </div>
-		
 	    </div>
     </div>
 </div>

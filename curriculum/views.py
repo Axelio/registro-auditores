@@ -87,6 +87,9 @@ class EducacionView(View):
                 self.mensaje = u'Información educacional ha sido guardado exitosamente'
                 self.tipo_mensaje = u'success'
 
+            import pdb
+            pdb.set_trace()
+
             # Si se elimina una Educación
             if kwargs['palabra'] == 'eliminar':
                 educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
