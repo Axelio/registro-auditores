@@ -2380,8 +2380,17 @@ hr {
   color: white;
   white-space: nowrap;
   font-weight: bold;
-  border-radius: 2px;
+  border-radius: 8px;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.ink-label.titulo{
+  background-color: #00468e;
+}
+.ink-label.titulo.invert {
+  color: white;
+  background-color: transparent;
+  text-shadow: none;
+  padding: 0;
 }
 .ink-label.success {
   background-color: #4a9b17;
