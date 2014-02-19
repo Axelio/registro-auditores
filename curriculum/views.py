@@ -4,7 +4,9 @@ from django.views.generic.base import View
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
+
 from curriculum.models import *
 from curriculum.forms import *
 from personas.models import *
@@ -18,6 +20,9 @@ class EducacionView(View):
     '''
     template='perfil/editar_educacion.html'
     educacion_form = EducacionForm
+    educaciones = ''
+    mensaje = ''
+    tipo_mensaje = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -25,17 +30,31 @@ class EducacionView(View):
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
         usuario = request.user
+        nueva = True
+
         try:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
         except:
             raise Http404
-        else:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
 
-        educaciones = Educacion.objects.filter(persona=persona)
+        self.diccionario.update({'educacion_form':self.educacion_form()})
+        if kwargs.has_key('educacion_id') and not kwargs['educacion_id'] == None:
+            nueva = False
+            try:
+                educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
+            except:
+                raise Http404
+
+            if educacion.persona == usuario.userprofile_set.get_query_set()[0].persona:
+                self.educacion_form = self.educacion_form(instance=educacion)
+            else:
+                raise PermissionDenied
+        else:
+            self.educaciones = Educacion.objects.filter(persona=persona)
 
         self.diccionario.update({'persona':persona})
-        self.diccionario.update({'educaciones':educaciones})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'educaciones':self.educaciones})
         self.diccionario.update({'educacion_form':self.educacion_form})
         return render(request, 
                        template_name=self.template,
@@ -45,11 +64,45 @@ class EducacionView(View):
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
         usuario = request.user
+        guardado = False
 
-        educaciones = Educacion.objects.filter(persona=persona)
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            # Si se edita una Educación
+            if kwargs['palabra'] == 'editar':
+                # Búsqueda de variables con los IDs enviados por POST
+                institucion = Institucion.objects.get(id=request.POST['institucion'])
+                tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
+                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
 
-        self.diccionario.update({'persona':persona})
-        self.diccionario.update({'educaciones':educaciones})
+                educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
+                educacion.institucion = institucion
+                educacion.carrera = request.POST['carrera']
+                educacion.tipo = tipo
+                educacion.fecha_inicio = fecha_inicio
+                educacion.fecha_fin = fecha_fin
+
+                educacion.save()
+
+                self.mensaje = u'Información educacional ha sido guardado exitosamente'
+                self.tipo_mensaje = u'success'
+
+            # Si se elimina una Educación
+            if kwargs['palabra'] == 'eliminar':
+                educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
+                educacion.delete()
+
+                self.mensaje = u'Información educacional ha sido eliminada exitosamente'
+                self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        persona = request.user.userprofile_set.get_query_set()[0].persona
+        self.educaciones = Educacion.objects.filter(persona=persona)
+
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'educaciones':self.educaciones})
         self.diccionario.update({'educacion_form':self.educacion_form})
         return render(request, 
                        template_name=self.template,
@@ -165,6 +218,7 @@ class CurriculumView(View):
         mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')
         mensaje = mensaje.mensaje
         self.diccionario.update({'mensaje':mensaje})
+        return HttpResponseRedirect('preguntas_secretas/')
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
