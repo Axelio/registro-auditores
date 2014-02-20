@@ -54,7 +54,7 @@ NIVEL_IDIOMA = (
                 )
 
 class Idioma(models.Model):
-    conocimiento = models.ForeignKey('Conocimiento')
+    persona = models.ForeignKey(Persona)
     idioma = models.ForeignKey('ListaIdiomas')
     nivel_leido = models.CharField(max_length=10, choices=NIVEL_IDIOMA)
     nivel_escrito = models.CharField(max_length=10, choices=NIVEL_IDIOMA)

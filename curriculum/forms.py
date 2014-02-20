@@ -41,6 +41,15 @@ class ConocimientoForm(forms.ModelForm):
     class Meta:
         # Se determina cuál es el modelo al que va a referirse el formulario 
         model = Conocimiento
+        exclude = ('usuario',)
+
+class ConocimientoAdminForm(forms.ModelForm):
+    '''
+    Formulario general para el ingreso de Conocimientos en el admin
+    '''
+    class Meta:
+        # Se determina cuál es el modelo al que va a referirse el formulario 
+        model = Conocimiento
 
 class CertificacionForm(forms.ModelForm):
     '''

@@ -18,14 +18,16 @@ class EducacionView(View):
     '''
     Clase para la renderización de los datos educativos
     '''
-    template='perfil/editar_educacion.html'
+    template='perfil/editar_formulario.html'
     educacion_form = EducacionForm
     educaciones = ''
     mensaje = ''
     tipo_mensaje = ''
+    titulo = 'Información Laboral'
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
+    diccionario.update({'titulo':titulo})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -37,7 +39,7 @@ class EducacionView(View):
         except:
             raise Http404
 
-        self.diccionario.update({'educacion_form':self.educacion_form()})
+        self.diccionario.update({'formulario':self.educacion_form()})
         if kwargs.has_key('educacion_id') and not kwargs['educacion_id'] == None:
             nueva = False
             try:
@@ -67,7 +69,7 @@ class EducacionView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'educaciones':self.educaciones})
-        self.diccionario.update({'educacion_form':self.educacion_form})
+        self.diccionario.update({'formulario':self.educacion_form})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -115,7 +117,7 @@ class EducacionView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'educaciones':self.educaciones})
-        self.diccionario.update({'educacion_form':self.educacion_form})
+        self.diccionario.update({'formulario':self.educacion_form})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -271,8 +273,151 @@ class LaboralView(View):
     '''
     Clase para la renderización de los datos laborales
     '''
-    template='perfil/editar_laboral.html'
+    template='perfil/editar_formulario.html'
     laboral_form = LaboralForm 
+    laborales = ''
+    mensaje = ''
+    tipo_mensaje = ''
+    titulo = 'Información Laboral'
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = True
+
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+        except:
+            raise Http404
+
+        self.diccionario.update({'formulario':self.laboral_form()})
+
+        # Si se elimina una Educación
+        if kwargs['palabra'] == 'eliminar':
+            educacion = Laboral.objects.get(id=int(kwargs['laboral_id']))
+            educacion.delete()
+
+            self.mensaje = u'Información laboral ha sido eliminada exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        if kwargs.has_key('laboral_id') and not kwargs['laboral_id'] == None:
+            nueva = False
+            try:
+                laboral = Laboral.objects.get(id=int(kwargs['laboral_id']))
+            except:
+                raise Http404
+
+            # Si el usuario de laboral no es el mismo al loggeado, retornar permisos denegados
+            if laboral.usuario == usuario.userprofile_set.get_query_set()[0]:
+                self.laboral_form = self.laboral_form(instance=laboral)
+            else:
+                raise PermissionDenied
+        else:
+            self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
+
+
+        self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
+        self.educaciones = Educacion.objects.filter(persona=persona)
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'educaciones':self.educaciones})
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'laborales':self.laborales})
+        self.diccionario.update({'formulario':self.laboral_form})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        self.laboral_form = self.laboral_form(request.POST)
+        usuario = request.user
+        guardado = False
+        usuario = request.user
+
+        usuario = usuario.userprofile_set.get_query_set()[0]
+        empresa = request.POST['empresa']
+        sector = request.POST['sector']
+        estado = Estado.objects.get(id=request.POST['estado'])
+        telefono = request.POST['telefono']
+        cargo = request.POST['cargo']
+        funcion = request.POST['funcion']
+        fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+        fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+        retiro = request.POST['retiro']
+        direccion_empresa = request.POST['direccion_empresa']
+        trabajo_actual = False
+
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            if kwargs['palabra'] == 'editar':
+                laboral = Laboral.objects.get(id=kwargs['laboral_id'])
+                laboral.save()
+
+                self.mensaje = u'Información laboral ha sido guardado exitosamente'
+                self.tipo_mensaje = u'success'
+            if kwargs['palabra'] == 'editar':
+                # Si se edita información laboral 
+                # Búsqueda de variables con los IDs enviados por POST
+                
+                laboral = Laboral.objects.get(id=kwargs['laboral_id'])
+                laboral.empresa = empresa
+                laboral.sector = sector
+                laboral.estado = estado
+                laboral.telefono = telefono
+                laboral.cargo = cargo
+                laboral.funcion = funcion
+                laboral.fecha_inicio = fecha_inicio
+                laboral.fecha_fin = fecha_fin
+                laboral.retiro = retiro
+                laboral.direccion_empresa = direccion_empresa
+                laboral.trabajo_actual = trabajo_actual
+
+                laboral.save()
+
+                self.mensaje = u'Información laboral ha sido guardado exitosamente'
+                self.tipo_mensaje = u'success'
+
+            else:
+                # Si se crea información laboral 
+                laboral = Laboral.objects.create(usuario = usuario, empresa=empresa, sector=sector, estado=estado, telefono=telefono, cargo=cargo, funcion=funcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, retiro=retiro, direccion_empresa=direccion_empresa, trabajo_actual=trabajo_actual)
+                self.mensaje = u'Información laboral ha sido creada exitosamente'
+                self.tipo_mensaje = u'success'
+
+
+
+            self.template = 'perfil/perfil.html'
+
+        persona = request.user.userprofile_set.get_query_set()[0].persona
+
+        self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
+        self.educaciones = Educacion.objects.filter(persona=persona)
+
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'educaciones':self.educaciones})
+        self.diccionario.update({'laborales':self.laborales})
+        self.diccionario.update({'formulario':self.laboral_form})
+        self.diccionario.update({'titulo':self.titulo})
+
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+class ConocimientoView(View):
+    '''
+    Clase para la renderización de los datos laborales
+    '''
+    template='perfil/editar_formulario.html'
+    conocimiento_form = ConocimientoForm
     laborales = ''
     mensaje = ''
     tipo_mensaje = ''

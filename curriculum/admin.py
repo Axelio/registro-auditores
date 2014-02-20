@@ -1,6 +1,6 @@
 from django.contrib import admin
 from curriculum.models import *
-from curriculum.forms import CertificacionForm, ConocimientoForm, CompetenciaForm, Educacion
+from curriculum.forms import CertificacionForm, ConocimientoForm, CompetenciaForm, Educacion, ConocimientoAdminForm
 
 class CertificacionAdmin(admin.ModelAdmin):
     form = CertificacionForm
@@ -11,13 +11,9 @@ class CompetenciaInline(admin.TabularInline):
     form = CompetenciaForm
     extra=1
 
-class IdiomaInline(admin.TabularInline):
-    model=Idioma
-    extra=1
-
 class ConocimientoAdmin(admin.ModelAdmin):
-    inlines = (CompetenciaInline, IdiomaInline, )
-    form = ConocimientoForm
+    inlines = (CompetenciaInline,)
+    form = ConocimientoAdminForm
 admin.site.register(Conocimiento, ConocimientoAdmin)
 
 class IdiomaAdmin(admin.ModelAdmin):
