@@ -37,10 +37,10 @@
                         {% if educaciones %}
                             {% for educacion in educaciones %}
                                 <div class="bottom-space">
-                                    <div class="ink-label titulo">{{ educacion.institucion }}</div>
+                                    <div class="ink-label titulo">{{ educacion.titulo }}</div>
                                 </div>
                                 <div>
-                                    <b>{{ educacion.titulo }}</b><br /> <i class="icon-calendar"></i> {{ educacion.fecha_inicio }} - {{ educacion.fecha_fin }}<br />
+                                    <b>{{ educacion.institucion }}</b><br /> <i class="icon-calendar"></i> {{ educacion.fecha_inicio }} - {{ educacion.fecha_fin }}<br />
                                     Nivel: {{ educacion.tipo }}
                                 </div>
                                 <input type="hidden" name="edu_id" value={{ educacion.id }}>
@@ -59,21 +59,26 @@
                         </div>
                     </div>
                     <div class="box" id="laboral">
-                        <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-briefcase"></i> Experiencia Laboral </div></h2>
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-briefcase"></i> Experiencia Laboral</div></h2>
                         {% if laborales %}
                             {% for laboral in laborales %}
-                                <h4>{{ laboral.empresa }}</h4>
-                                Trabajando como <b>{{ laboral.cargo }}</b> en el sector de {{ laboral.sector }}
+                                <div class="bottom-space">
+                                    <div class="ink-label titulo">{{ laboral.empresa}}</div>
+                                </div>
+                                <div>
+                                    Trabajando como <b>{{ laboral.cargo }}</b> en el sector de {{ laboral.sector }}
+                                    Nivel: {{ educacion.tipo }}
+                                </div>
                                 <div>
                                     <i class="icon-calendar"></i> {{ laboral.fecha_inicio }} - {{ laboral.fecha_fin }}<br />
                                     Función: {{ laboral.funcion }}
                                 </div>
-                            <hr>
-                            {% endfor %}
                                 <div class="content-right large-100">
-                                    <a class="ink-button blue">FALTA Editar</a>
-                                    <a class="ink-button red">FALTA Eliminar</a>
+                                    <a href="{% url 'laboral' 'editar' laboral.id %}" class="ink-button blue">Editar</a>
+                                    <a href="{% url 'laboral' 'eliminar' laboral.id %}" class="ink-button red">Eliminar</a>
                                 </div>
+                                <hr>
+                            {% endfor %}
                         {% else %}
                             Usted no posee ninguna información laboral. Por favor, registre una.
                         {% endif %}
