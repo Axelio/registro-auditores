@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.shortcuts import render_to_response
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura
@@ -89,3 +89,22 @@ class EducacionForm(forms.ModelForm):
             'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
         }
 
+class LaboralForm(forms.ModelForm):
+    '''
+    Formulario general para el ingreso de Conocimientos
+    '''
+    class Meta:
+        # Se determina cuál es el modelo al que va a referirse el formulario 
+        model = Educacion
+        exclude = ('usuario',)
+        widgets = {
+            'empresa': TextInput(attrs={'type':'text','required':'required','placeholder':'Empresa en la que laboró'}),
+            'sector': TextInput(attrs={'type':'text','placeholder':'Sector desempeñado'}),
+            'telefono': TextInput(attrs={'type':'text','placeholder':'Número telefónico de trabajo'}),
+            'cargo': TextInput(attrs={'type':'text','placeholder':'Cargo trabajado'}),
+            'funcion': Textarea(attrs={'type':'text','placeholder':'Funciones desempeñadas'}),
+            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio','id':'popupDatepicker'}),
+            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
+            'retiro': TextInput(attrs={'type':'text','placeholder':'Razón de retiro'}),
+            'direccion_empresa': Textarea(attrs={'type':'text','placeholder':'Dirección de la empresa'}),
+        }

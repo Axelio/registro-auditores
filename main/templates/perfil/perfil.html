@@ -32,7 +32,7 @@
             <div class="space">
                 <div class="large-70 medium-50 small-100">
                     <div class="box">
-                        <h2 id="curriculum"><div class="ink-titulo_superior"><a><i class="icon-file-text"></i> Educación</a></div></h2>
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-file-text"></i> Educación</div></h2>
                         {% if educaciones %}
                             {% for educacion in educaciones %}
                                 <div class="bottom-space">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="box">
-                        <h2 id="curriculum"><div class="ink-titulo_superior"><a href=#><i class="icon-briefcase"></i> Experiencia Laboral </div></a></h2>
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-briefcase"></i> Experiencia Laboral </div></h2>
                         {% if laborales %}
                             {% for laboral in laborales %}
                                 <h4>{{ laboral.empresa }}</h4>
@@ -75,11 +75,11 @@
                             Usted no posee ninguna información laboral. Por favor, registre una.
                         {% endif %}
                         <div class="content-center large-100">
-                            <a class="ink-button blue">FALTA</a>
+                            <a href="{% url 'laboral' 'nueva' %}" class="ink-button blue">Añadir información laboral</a>
                         </div>
                     </div>
                     <div class="box">
-                        <h2 id="curriculum"><div class="ink-titulo_superior"><a href=#><i class="icon-tasks"></i> Conocimiento</div></a></h2>
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-tasks"></i> Conocimiento</div></h2>
                         {% if conocimientos %}
                             {% for conocimiento in conocimientos %}
                                 <h4>TITULO</h4>
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="box">
-                        <h2 id="curriculum"><div class="ink-titulo_superior"><a href=#><i class="icon-tasks"></i> Idiomas</div></a></h2>
+                        <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-tasks"></i> Idiomas</div></h2>
                         {% if idiomas %}
                             {% for idioma in idiomas %}
                                 <h4>TITULO</h4>

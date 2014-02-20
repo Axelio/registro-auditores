@@ -245,8 +245,6 @@ class PerfilView(View):
             persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
         except:
             raise Http404
-        else:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set)
 
         educaciones = Educacion.objects.filter(persona=persona)
         laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
@@ -260,3 +258,53 @@ class PerfilView(View):
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
+
+class LaboralView(View):
+    '''
+    Clase para la renderización de los datos laborales
+    '''
+    template='perfil/editar_laboral.html'
+    laboral_form = LaboralForm 
+    laborales = ''
+    mensaje = ''
+    tipo_mensaje = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = True
+
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+        except:
+            raise Http404
+
+        self.diccionario.update({'laboral_form':self.laboral_form()})
+        if kwargs.has_key('laboral_id') and not kwargs['laboral_id'] == None:
+            nueva = False
+            try:
+                laboral = Laboral.objects.get(id=int(kwargs['laboral_id']))
+            except:
+                raise Http404
+
+            # Si el usuario de laboral no es el mismo al loggeado, retornar permisos denegados
+            if laboral.usuario == usuario.userprofile_set.get_query_set()[0]:
+                self.laboral_form = self.laboral_form(instance=laboral)
+            else:
+                raise PermissionDenied
+        else:
+            self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'laborales':self.laborales})
+        self.diccionario.update({'laboral_form':self.laboral_form})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        pass
