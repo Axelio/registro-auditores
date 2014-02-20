@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura
-from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion
+from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion, Laboral
 from lugares.models import Institucion
 import datetime
 
@@ -95,8 +95,8 @@ class LaboralForm(forms.ModelForm):
     '''
     class Meta:
         # Se determina cuál es el modelo al que va a referirse el formulario 
-        model = Educacion
-        exclude = ('usuario',)
+        model = Laboral
+        exclude = ('usuario','trabajo_actual')
         widgets = {
             'empresa': TextInput(attrs={'type':'text','required':'required','placeholder':'Empresa en la que laboró'}),
             'sector': TextInput(attrs={'type':'text','placeholder':'Sector desempeñado'}),
