@@ -31,7 +31,7 @@
         <div class="space">
             <div class="space">
                 <div class="large-70 medium-50 small-100">
-                    <div class="box">
+                    <div class="box" id="educacion">
                         <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-file-text"></i> Educación</div></h2>
                         {% if educaciones %}
                             {% for educacion in educaciones %}
@@ -55,7 +55,7 @@
                             <a href="{% url 'educacion' 'nueva' %}" class="ink-button blue">Añadir educación</a>
                         </div>
                     </div>
-                    <div class="box">
+                    <div class="box" id="laboral">
                         <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-briefcase"></i> Experiencia Laboral </div></h2>
                         {% if laborales %}
                             {% for laboral in laborales %}
@@ -78,7 +78,7 @@
                             <a href="{% url 'laboral' 'nueva' %}" class="ink-button blue">Añadir información laboral</a>
                         </div>
                     </div>
-                    <div class="box">
+                    <div class="box" id="conocimiento">
                         <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-tasks"></i> Conocimiento</div></h2>
                         {% if conocimientos %}
                             {% for conocimiento in conocimientos %}
@@ -96,7 +96,7 @@
                             <a class="ink-button blue">FALTA</a>
                         </div>
                     </div>
-                    <div class="box">
+                    <div class="box" id="idioma">
                         <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-tasks"></i> Idiomas</div></h2>
                         {% if idiomas %}
                             {% for idioma in idiomas %}
