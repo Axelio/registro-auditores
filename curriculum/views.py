@@ -49,11 +49,23 @@ class EducacionView(View):
                 self.educacion_form = self.educacion_form(instance=educacion)
             else:
                 raise PermissionDenied
-        else:
-            self.educaciones = Educacion.objects.filter(persona=persona)
+
+        # Si se elimina una Educación
+        if kwargs['palabra'] == 'eliminar':
+            educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
+            educacion.delete()
+
+            self.mensaje = u'Información educacional ha sido eliminada exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.educaciones = Educacion.objects.filter(persona=persona)
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'educaciones':self.educaciones})
         self.diccionario.update({'educacion_form':self.educacion_form})
         return render(request, 
@@ -85,17 +97,6 @@ class EducacionView(View):
                 educacion.save()
 
                 self.mensaje = u'Información educacional ha sido guardado exitosamente'
-                self.tipo_mensaje = u'success'
-
-            import pdb
-            pdb.set_trace()
-
-            # Si se elimina una Educación
-            if kwargs['palabra'] == 'eliminar':
-                educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
-                educacion.delete()
-
-                self.mensaje = u'Información educacional ha sido eliminada exitosamente'
                 self.tipo_mensaje = u'success'
 
             self.template = 'perfil/perfil.html'
