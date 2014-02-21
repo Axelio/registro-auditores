@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura
-from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion, Laboral
+from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion, Laboral, Competencia
 from lugares.models import Institucion
 import datetime
 
@@ -117,3 +117,11 @@ class LaboralForm(forms.ModelForm):
             'retiro': TextInput(attrs={'type':'text','placeholder':'Razón de retiro'}),
             'direccion_empresa': Textarea(attrs={'type':'text','placeholder':'Dirección de la empresa'}),
         }
+
+class CompetenciaForm(forms.ModelForm):
+    '''
+    Formulario general para el ingreso de Conocimientos
+    '''
+    class Meta:
+        # Se determina cuál es el modelo al que va a referirse el formulario 
+        model = Competencia

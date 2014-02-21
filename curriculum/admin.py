@@ -21,12 +21,14 @@ class IdiomaAdmin(admin.ModelAdmin):
 admin.site.register(Idioma, IdiomaAdmin)
 
 class CompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('competencia', 'tipo', 'puntaje')
-    list_filter = ('tipo',)
-    ordering = ('tipo',)
+    list_display = ('competencia', 'puntaje')
 admin.site.register(Competencia, CompetenciaAdmin)
-admin.site.register(ListaIdiomas)
-admin.site.register(ListaCompetencia)
+class ListaCompetenciaAdmin(admin.ModelAdmin):
+    list_display = ('nombre','tipo',)
+    list_filter = ('tipo',)
+    ordering = ('tipo','id')
+admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
 admin.site.register(Educacion)
 admin.site.register(TipoEducacion)
 admin.site.register(Laboral)
+admin.site.register(ListaIdiomas)

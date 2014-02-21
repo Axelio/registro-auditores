@@ -82,6 +82,7 @@ TIPO_CONOCIMIENTO = (
 
 class ListaCompetencia(models.Model):
     nombre = models.CharField(max_length=200)
+    tipo = models.CharField(max_length=20, choices=TIPO_CONOCIMIENTO)
     class Meta:
         db_table = 'lista_competencia'
         verbose_name = 'lista de competancia'
@@ -91,8 +92,7 @@ class ListaCompetencia(models.Model):
 
 
 class Competencia(models.Model):
-    conocimiento = models.ForeignKey('Conocimiento', blank=True, null=True)
-    tipo = models.CharField(max_length=20, choices=TIPO_CONOCIMIENTO)
+    usuario = models.ForeignKey(UserProfile)
     competencia = models.ForeignKey('ListaCompetencia', unique=True)
     puntaje = models.DecimalField(decimal_places=1, max_digits=2)
     class Meta:

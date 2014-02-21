@@ -20,10 +20,10 @@ class EducacionView(View):
     '''
     template='perfil/editar_formulario.html'
     educacion_form = EducacionForm
-    educaciones = ''
     mensaje = ''
     tipo_mensaje = ''
     titulo = 'Información Laboral'
+    lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -63,13 +63,15 @@ class EducacionView(View):
             self.template = 'perfil/perfil.html'
 
         self.educaciones = Educacion.objects.filter(persona=persona)
+        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'educaciones':self.educaciones})
         self.diccionario.update({'formulario':self.educacion_form})
+        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -113,11 +115,13 @@ class EducacionView(View):
             self.template = 'perfil/perfil.html'
 
         self.educaciones = Educacion.objects.filter(persona=persona)
+        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'educaciones':self.educaciones})
         self.diccionario.update({'formulario':self.educacion_form})
+        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -241,7 +245,8 @@ class PerfilView(View):
     '''
     Clase para la renderización del Perfil
     '''
-    template='perfil/perfil.html'
+    template = 'perfil/perfil.html'
+    lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -258,12 +263,14 @@ class PerfilView(View):
 
         educaciones = Educacion.objects.filter(persona=persona)
         laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
+        conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
 
         self.diccionario.update({'persona':persona})
-        self.diccionario.update({'educaciones':educaciones})
-        self.diccionario.update({'laborales':laborales})
         self.diccionario.update({'mensaje':mensaje})
         self.diccionario.update({'tipo':tipo})
+
+        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -275,10 +282,9 @@ class LaboralView(View):
     '''
     template='perfil/editar_formulario.html'
     laboral_form = LaboralForm 
-    laborales = ''
+    titulo = 'Información Laboral'
     mensaje = ''
     tipo_mensaje = ''
-    titulo = 'Información Laboral'
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -323,13 +329,14 @@ class LaboralView(View):
 
         self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
         self.educaciones = Educacion.objects.filter(persona=persona)
+        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'educaciones':self.educaciones})
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
-        self.diccionario.update({'laborales':self.laborales})
         self.diccionario.update({'formulario':self.laboral_form})
+        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -398,83 +405,87 @@ class LaboralView(View):
 
         self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
         self.educaciones = Educacion.objects.filter(persona=persona)
+        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
-        self.diccionario.update({'educaciones':self.educaciones})
-        self.diccionario.update({'laborales':self.laborales})
         self.diccionario.update({'formulario':self.laboral_form})
-        self.diccionario.update({'titulo':self.titulo})
+        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.diccionario.update(self.lista_filtros)
 
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
 
-class ConocimientoView(View):
+class CompetenciaView(View):
     '''
-    Clase para la renderización de los datos laborales
+    Clase para la renderización de los datos de conocimientos generales
     '''
-    template='perfil/editar_formulario.html'
-    conocimiento_form = ConocimientoForm
-    laborales = ''
-    mensaje = ''
-    tipo_mensaje = ''
+    template='perfil/editar_formulario.html' # Plantilla que utilizará por defecto para renderizar
+    competencia_form = CompetenciaForm# Formulario de Conocimientos en curriculum.forms
+    mensaje = '' # Mensaje que se le mostrará al usuario
+    tipo_mensaje = '' # Si el mensaje es de éxito o de error
+    titulo = 'Competencia' # Título a ser renderizado en la plantilla
+    lista_filtros = '' # Listado filtrado de objetos que llegarán a la plantilla
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
+    diccionario.update({'titulo':titulo})
+
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
         usuario = request.user
         nueva = True
 
+        # Obtener la persona para renderizarla en la plantilla
         try:
             persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
         except:
             raise Http404
 
-        self.diccionario.update({'laboral_form':self.laboral_form()})
+        # Actualización del diccionario con el formulario
+        self.diccionario.update({'formulario':self.competencia_form()})
 
         # Si se elimina una Educación
         if kwargs['palabra'] == 'eliminar':
-            educacion = Laboral.objects.get(id=int(kwargs['laboral_id']))
-            educacion.delete()
+            competencia = Competencia.objects.get(id=int(kwargs['laboral_id']))
+            competencia.delete()
 
-            self.mensaje = u'Información laboral ha sido eliminada exitosamente'
+            self.mensaje = u'Competencia ha sido eliminada exitosamente'
             self.tipo_mensaje = u'success'
 
             self.template = 'perfil/perfil.html'
 
-
-            self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
-            self.educaciones = Educacion.objects.filter(persona=persona)
-            self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-            self.diccionario.update({'mensaje':self.mensaje})
-            self.diccionario.update({'educaciones':self.educaciones})
-            self.diccionario.update({'persona':persona})
-            self.diccionario.update({'nueva':nueva})
-            self.diccionario.update({'laborales':self.laborales})
-            self.diccionario.update({'laboral_form':self.laboral_form})
-            return render(request, 
-                           template_name=self.template,
-                           dictionary=self.diccionario,
-                         )
-
-        if kwargs.has_key('laboral_id') and not kwargs['laboral_id'] == None:
+        if kwargs.has_key('competencia_id') and not kwargs['competencia_id'] == None:
             nueva = False
             try:
-                laboral = Laboral.objects.get(id=int(kwargs['laboral_id']))
+                competencia = Competencia.objects.get(id=int(kwargs['laboral_id']))
             except:
                 raise Http404
 
             # Si el usuario de laboral no es el mismo al loggeado, retornar permisos denegados
-            if laboral.usuario == usuario.userprofile_set.get_query_set()[0]:
-                self.laboral_form = self.laboral_form(instance=laboral)
+            if competencia.usuario == usuario.userprofile_set.get_query_set()[0]:
+                self.competencia_form = self.competencia_form(instance=conocimiento)
             else:
                 raise PermissionDenied
-        else:
-            self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
+
+        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
+        self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
+        self.educaciones = Educacion.objects.filter(persona=persona)
+        self.competencias = Competencia.objects.filter(usuario=usuario)
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'formulario':self.conocimiento_form})
+        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
 
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -537,17 +548,35 @@ class ConocimientoView(View):
 
         persona = request.user.userprofile_set.get_query_set()[0].persona
 
-        self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
-        self.educaciones = Educacion.objects.filter(persona=persona)
-
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
-        self.diccionario.update({'educaciones':self.educaciones})
-        self.diccionario.update({'laborales':self.laborales})
-        self.diccionario.update({'laboral_form':self.laboral_form})
+
+        self.diccionario.update({'formulario':self.laboral_form})
+        self.diccionario.update({'titulo':self.titulo})
+
+        lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.diccionario.update(lista_filtros)
 
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
+
+def lista_filtros(persona, usuario):
+    diccionario = {}
+
+    laborales = Laboral.objects.filter(usuario=usuario)
+    educaciones = Educacion.objects.filter(persona=persona)
+    conocimientos = Conocimiento.objects.filter(usuario=usuario)
+    competencias = Competencia.objects.filter(usuario=usuario)
+
+
+    listado = { 'conocimientos':conocimientos,
+                'competencias':competencias,
+                'educaciones':educaciones,
+                'laborales':laborales,
+                }
+
+    return listado
+
