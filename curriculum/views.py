@@ -474,6 +474,7 @@ class CompetenciaView(View):
         self.diccionario.update(csrf(request))
         self.competencia_form = self.competencia_form(request.POST)
         respuestas = request.POST.getlist('nivel')
+        lista_filtros = ''
 
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
             if kwargs['palabra'] == 'editar':
@@ -513,7 +514,7 @@ class CompetenciaView(View):
         self.diccionario.update({'formulario':self.competencia_form})
         self.diccionario.update({'titulo':self.titulo})
 
-        lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set()[0])
         self.diccionario.update(lista_filtros)
 
         return render(request, 

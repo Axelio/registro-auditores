@@ -90,19 +90,38 @@
                             <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-tasks"></i> Competencia</div></h2>
                             {% if competencias %}
                                 <h4>TITULO</h4>
-                                {% for competencia in competencias %}
-                                <hr>
-                                {% endfor %}
+                                <table class="ink-table">
+                                    <tr>
+                                        <b>
+                                            <td>
+                                                Competencia
+                                            </td>
+                                            <td>
+                                                Nivel
+                                            </td>
+                                        </b>
+                                    </tr>
+                                    {% for competencia in competencias %}
+                                        <tr>
+                                            <td>
+                                                {{ competencia.competencia }}
+                                            </td>
+                                            <td>
+                                                {{ competencia.nivel }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
                                     <div class="content-right large-100">
                                         <a href="{% url 'competencia' 'editar' laboral.id %}" class="ink-button blue">Editar</a>
                                         <a href="{% url 'competencia' 'eliminar' laboral.id %}" class="ink-button red">Eliminar</a>
                                     </div>
                             {% else %}
                                 Usted no posee ninguna competencia. Por favor, registre una.
-                            {% endif %}
                             <div class="content-center large-100">
                                 <a href="{% url 'competencia' 'nueva' %}" class="ink-button blue">Añadir competencia</a>
                             </div>
+                            {% endif %}
                         </div>
                         <div class="box">
                             <h2 id="curriculum"><div class="ink-titulo_superior"><i class="icon-tasks"></i> Conocimiento</div></h2>
