@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http import Http404, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
 from curriculum.models import *
 from curriculum.forms import *
@@ -62,9 +63,6 @@ class EducacionView(View):
 
             self.template = 'perfil/perfil.html'
 
-        self.educaciones = Educacion.objects.filter(persona=persona)
-        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
-
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -113,9 +111,6 @@ class EducacionView(View):
                 self.tipo_mensaje = u'success'
 
             self.template = 'perfil/perfil.html'
-
-        self.educaciones = Educacion.objects.filter(persona=persona)
-        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -261,10 +256,6 @@ class PerfilView(View):
         except:
             raise Http404
 
-        educaciones = Educacion.objects.filter(persona=persona)
-        laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
-        conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
-
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'mensaje':mensaje})
         self.diccionario.update({'tipo':tipo})
@@ -327,9 +318,6 @@ class LaboralView(View):
             self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
 
 
-        self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
-        self.educaciones = Educacion.objects.filter(persona=persona)
-        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
@@ -403,10 +391,6 @@ class LaboralView(View):
 
         persona = request.user.userprofile_set.get_query_set()[0].persona
 
-        self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
-        self.educaciones = Educacion.objects.filter(persona=persona)
-        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
-
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
@@ -424,15 +408,18 @@ class CompetenciaView(View):
     Clase para la renderización de los datos de conocimientos generales
     '''
     template='perfil/editar_formulario.html' # Plantilla que utilizará por defecto para renderizar
-    competencia_form = CompetenciaForm# Formulario de Conocimientos en curriculum.forms
     mensaje = '' # Mensaje que se le mostrará al usuario
     tipo_mensaje = '' # Si el mensaje es de éxito o de error
     titulo = 'Competencia' # Título a ser renderizado en la plantilla
     lista_filtros = '' # Listado filtrado de objetos que llegarán a la plantilla
+    competencia_form = CompetenciaForm
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
     diccionario.update({'titulo':titulo})
+    lista = ListaCompetencia.objects.exclude(tipo='academico')
+    lista = lista.exclude(tipo='requerido')
+    diccionario.update({'lista_competencia':lista})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -471,15 +458,11 @@ class CompetenciaView(View):
             else:
                 raise PermissionDenied
 
-        self.conocimientos = Conocimiento.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
-        self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set)
-        self.educaciones = Educacion.objects.filter(persona=persona)
-        self.competencias = Competencia.objects.filter(usuario=usuario)
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
-        self.diccionario.update({'formulario':self.conocimiento_form})
+        self.diccionario.update({'formulario':self.competencia_form})
         self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -489,59 +472,34 @@ class CompetenciaView(View):
 
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        self.laboral_form = self.laboral_form(request.POST)
-        usuario = request.user
-        guardado = False
-        usuario = request.user
-
-        usuario = usuario.userprofile_set.get_query_set()[0]
-        empresa = request.POST['empresa']
-        sector = request.POST['sector']
-        estado = Estado.objects.get(id=request.POST['estado'])
-        telefono = request.POST['telefono']
-        cargo = request.POST['cargo']
-        funcion = request.POST['funcion']
-        fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-        fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-        retiro = request.POST['retiro']
-        direccion_empresa = request.POST['direccion_empresa']
-        trabajo_actual = False
+        self.competencia_form = self.competencia_form(request.POST)
+        respuestas = request.POST.getlist('nivel')
 
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
             if kwargs['palabra'] == 'editar':
-                laboral = Laboral.objects.get(id=kwargs['laboral_id'])
-                laboral.save()
+                for respuesta in respuestas:
+                    nivel = respuesta.split('_')[0] # Optebnemos el nivel elegido
+                    l_competencia = respuesta.split('_')[1] # Optenemos el ID de la competencia
+                    l_competencia = ListaCompetencia.objects.get(id=l_competencia)
 
-                self.mensaje = u'Información laboral ha sido guardado exitosamente'
-                self.tipo_mensaje = u'success'
-            if kwargs['palabra'] == 'editar':
-                # Si se edita información laboral 
-                # Búsqueda de variables con los IDs enviados por POST
-                
-                laboral = Laboral.objects.get(id=kwargs['laboral_id'])
-                laboral.empresa = empresa
-                laboral.sector = sector
-                laboral.estado = estado
-                laboral.telefono = telefono
-                laboral.cargo = cargo
-                laboral.funcion = funcion
-                laboral.fecha_inicio = fecha_inicio
-                laboral.fecha_fin = fecha_fin
-                laboral.retiro = retiro
-                laboral.direccion_empresa = direccion_empresa
-                laboral.trabajo_actual = trabajo_actual
+                    competencia = Competencia.objects.get(usuario=request.user.userprofile_set.get_query_set()[0], competencia = l_competencia)
+                    competencia.nivel = nivel
+                    competencia.save()
 
-                laboral.save()
-
-                self.mensaje = u'Información laboral ha sido guardado exitosamente'
+                self.mensaje = u'Los conocimientos han sido guardados exitosamente'
                 self.tipo_mensaje = u'success'
 
             else:
                 # Si se crea información laboral 
-                laboral = Laboral.objects.create(usuario = usuario, empresa=empresa, sector=sector, estado=estado, telefono=telefono, cargo=cargo, funcion=funcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, retiro=retiro, direccion_empresa=direccion_empresa, trabajo_actual=trabajo_actual)
-                self.mensaje = u'Información laboral ha sido creada exitosamente'
-                self.tipo_mensaje = u'success'
+                for respuesta in respuestas:
+                    nivel = respuesta.split('_')[0] # Optebnemos el nivel elegido
+                    l_competencia = respuesta.split('_')[1] # Optenemos el ID de la competencia
+                    l_competencia = ListaCompetencia.objects.get(id=l_competencia)
 
+                    competencia = Competencia.objects.create(usuario=request.user.userprofile_set.get_query_set()[0], nivel=nivel, competencia=l_competencia)
+
+                self.mensaje = u'Los conocimientos han sido creados exitosamente'
+                self.tipo_mensaje = u'success'
 
 
             self.template = 'perfil/perfil.html'
@@ -552,7 +510,7 @@ class CompetenciaView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
 
-        self.diccionario.update({'formulario':self.laboral_form})
+        self.diccionario.update({'formulario':self.competencia_form})
         self.diccionario.update({'titulo':self.titulo})
 
         lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)

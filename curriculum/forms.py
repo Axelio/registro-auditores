@@ -21,18 +21,9 @@ class CompetenciaForm(forms.ModelForm):
     '''
     Formulario para el ingreso de Competencias en el panel administrativo
     '''
-    competencia = forms.ModelChoiceField(queryset=ListaCompetencia.objects.all(), label='competencia')
-    nivel = forms.CharField(max_length=10, label='nivel')
     class Meta:
         model = Competencia
-        exclude = ['puntaje', 'competencia', 'tipo']
-
-    def __init__(self, *args, **kwargs):
-        '''
-        Se establece por defecto que el campo nivel vendrá cargado con la información de NIVELES_COMPTETENCI
-        '''
-        super(CompetenciaForm, self).__init__(*args, **kwargs)
-        self.fields["nivel"] = forms.ChoiceField(choices=NIVELES_COMPTETENCIA)
+        exclude = ('usuario',)
 
 class ConocimientoForm(forms.ModelForm):
     '''
@@ -117,11 +108,3 @@ class LaboralForm(forms.ModelForm):
             'retiro': TextInput(attrs={'type':'text','placeholder':'Razón de retiro'}),
             'direccion_empresa': Textarea(attrs={'type':'text','placeholder':'Dirección de la empresa'}),
         }
-
-class CompetenciaForm(forms.ModelForm):
-    '''
-    Formulario general para el ingreso de Conocimientos
-    '''
-    class Meta:
-        # Se determina cuál es el modelo al que va a referirse el formulario 
-        model = Competencia

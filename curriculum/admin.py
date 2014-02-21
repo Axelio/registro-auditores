@@ -6,13 +6,7 @@ class CertificacionAdmin(admin.ModelAdmin):
     form = CertificacionForm
 admin.site.register(Certificacion, CertificacionAdmin)
 
-class CompetenciaInline(admin.TabularInline):
-    model=Competencia
-    form = CompetenciaForm
-    extra=1
-
 class ConocimientoAdmin(admin.ModelAdmin):
-    inlines = (CompetenciaInline,)
     form = ConocimientoAdminForm
 admin.site.register(Conocimiento, ConocimientoAdmin)
 
@@ -21,8 +15,10 @@ class IdiomaAdmin(admin.ModelAdmin):
 admin.site.register(Idioma, IdiomaAdmin)
 
 class CompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('competencia', 'puntaje')
+    list_display = ('competencia', 'nivel')
+    list_filter = ('nivel',)
 admin.site.register(Competencia, CompetenciaAdmin)
+
 class ListaCompetenciaAdmin(admin.ModelAdmin):
     list_display = ('nombre','tipo',)
     list_filter = ('tipo',)
