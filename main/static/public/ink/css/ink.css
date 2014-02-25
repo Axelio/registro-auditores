@@ -2384,14 +2384,13 @@ hr {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .ink-titulo_superior{
-  background-color: #232323;
+  background-color: #393939;
   padding: 0.2em 0.5em;
   color: white;
   white-space: nowrap;
-  margin: -0.5em -0.5em 1em;
+  margin: -0.7em -0.7em 1em;
   font-weight: bold;
   border-radius: 4px 4px 0px 0px;
-  opacity: 0.9;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .ink-label.titulo_superior.invert {

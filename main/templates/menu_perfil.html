@@ -1,16 +1,12 @@
-<nav class="ink-navigation">
+<nav class="ink-navigation sticky" style="z-index:-1000">
     <ul class="menu horizontal shadowed grey">
 	<li class=><a href="#"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
 	<div class="push-right">
-	<li><a href="#">Currículum <i class="icon-caret-down"></i></a>
-	    <ul class="submenu">
                 <li><a href="{% url 'personales' %}">Personales</a></li>
                 <li><a href="{% url 'perfil' %}#educacion">Educativos</a></li>
                 <li><a href="{% url 'perfil' %}#laboral">Laboral</a></li>
                 <li><a href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
                 <li><a href="{% url 'perfil' %}#idioma">Idiomas</a></li>
-	    </ul>
-	</li>
 	<li><a href="#">Configuración <i class="icon-caret-down"></i></a>
 	    <ul class="submenu">
 		<li><a href="#">Cambiar contraseña</a></li>
