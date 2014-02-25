@@ -31,55 +31,50 @@
         <div class="column-group">
             <div class="space">
                 <div class="space">
-                    <div class="large-70">
-                        <div class="box">
-                            <form class="ink-form" method="POST">{% csrf_token %}
-                                <fieldset class="column-group">
-                                    {% ifequal titulo 'Competencia' %}
-                                    <h3>Indique su nivel de conocimiento en:</h3>
-                                        {% for l_competencia in lista_competencia %}
-                                            <table class="ink-table">
-                                                <div>
-                                                    <tr>
-                                                        <td>
-                                                            <label>{{ l_competencia }}</label>
-                                                        </td>
-                                                        <td class="content-right">
-                                                            <label for="id_nivel">Nivel:</label><br/>
-                                                            <select id="id_nivel" name="nivel">
-                                                                <option value="experto_{{ l_competencia.id }}">Experto</option>
-                                                                <option value="alto_{{ l_competencia.id }}">Alto</option>
-                                                                <option value="medio_{{ l_competencia.id }}">Medio</option>
-                                                                <option value="basico_{{ l_competencia.id }}">Básico</option>
-                                                                <option value="nada_{{ l_competencia.id }}" selected="selected">Nada</option>
-                                                            </select>
-                                                            </div>
-                                                        </td>
+                    <div class="box">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                            <fieldset class="column-group">
+                                {% ifequal titulo 'Competencia' %}
+                                <h3>Indique su nivel de conocimiento en:</h3>
+                                    {% for l_competencia in lista_competencia %}
+                                        <table class="ink-table">
+                                            <div>
+                                                <tr>
+                                                    <td>
+                                                        <label>{{ l_competencia }}</label>
                                                     </td>
-                                                </div>
-                                            </table>
-                                        {% endfor %}
-                                    {% else %}
-                                        {% for form in formulario %}
-                                            <div class="control-group required validation">
-                                                {{ form.label }}
-                                            <div class="control">
-                                                {{ form }}
+                                                    <td class="content-right">
+                                                        <label for="id_nivel">Nivel:</label><br/>
+                                                        <select id="id_nivel" name="nivel">
+                                                            <option value="experto_{{ l_competencia.id }}">Experto</option>
+                                                            <option value="alto_{{ l_competencia.id }}">Alto</option>
+                                                            <option value="medio_{{ l_competencia.id }}">Medio</option>
+                                                            <option value="basico_{{ l_competencia.id }}">Básico</option>
+                                                            <option value="nada_{{ l_competencia.id }}" selected="selected">Nada</option>
+                                                        </select>
+                                                        </div>
+                                                    </td>
+                                                </td>
                                             </div>
-                                                <p class="tip">{{ form.help_text }}</p>
-                                            </div>
-                                        {% endfor %}
-                                    {% endifequal %}
-                                </fieldset>
-                                <div>
-                                    <input type="submit" value="Guardar" class="ink-button blue">
-                                </div>
-                            </form>
-                        </div>
+                                        </table>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for form in formulario %}
+                                        <div class="control-group required validation">
+                                            {{ form.label }}
+                                        <div class="control">
+                                            {{ form }}
+                                        </div>
+                                            <p class="tip">{{ form.help_text }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% endifequal %}
+                            </fieldset>
+                            <div>
+                                <input type="submit" value="Guardar" class="ink-button blue">
+                            </div>
+                        </form>
                     </div>
-                
-                <div class="large-30">
-                    {% include "perfil/informacion_personal.html" %}
                 </div>
             </div>
         </div>
