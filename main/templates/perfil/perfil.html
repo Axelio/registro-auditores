@@ -132,6 +132,33 @@
                         {% endif %}
                         </form>
                     </section>
+                    <section id="habilidades">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Habilidades</b><br />
+                        {% if habilidades %}
+                            {% for habilidad in habilidades %}
+                                <div class="column-group">
+                                    <div class="large-50">
+                                        {{ habilidad }}
+                                    </div>
+                                    <div class="large-50">
+                                        <div class="button-group push-right">
+                                            <a href="{% url 'habilidad' 'nueva' %}" class="ink-button">Añadir</a>
+                                            <a href="{% url 'habilidad' 'editar' habilidad.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
+                                            <a href="{% url 'habilidad' 'eliminar' habilidad.id %}" class="ink-button red"><span class="icon-trash"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ninguna habilidad. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'habilidad' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
                     <br /><br />
                     <form class="ink-form" method="POST">{% csrf_token %}
                     <b>Otros conocimientos</b><br />

@@ -73,12 +73,20 @@ class Idioma(models.Model):
 
 class Conocimiento(models.Model):
     usuario = models.ForeignKey(UserProfile)
-    habilidades = models.TextField()
     otros_conocimientos = models.TextField(help_text=u'Escriba aquí los conocimientos que no se contemplan en las competencias profesionales')
     class Meta:
         db_table = 'conocimiento'
     def __unicode__(self):
-        return u'%s' %(usuario)
+        return u'%s' %(self.otros_conocimientos)
+
+class Habilidad(models.Model):
+    usuario = models.ForeignKey(UserProfile)
+    habilidad = models.CharField(max_length=50)
+    class Meta:
+        db_table = 'habilidad'
+        verbose_name_plural = 'habilidades'
+    def __unicode__(self):
+        return u'%s' %(self.habilidad)
 
 TIPO_CONOCIMIENTO = (
             ('academico',u'Nivel Académico'),

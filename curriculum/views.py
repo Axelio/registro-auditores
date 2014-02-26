@@ -15,6 +15,24 @@ from personas.forms import *
 from auth.models import *
 import datetime
 
+def lista_filtros(persona):
+    diccionario = {}
+
+    laborales = Laboral.objects.filter(usuario=persona.userprofile)
+    educaciones = Educacion.objects.filter(persona=persona)
+    conocimientos = Conocimiento.objects.filter(usuario=persona.userprofile)
+    competencias = Competencia.objects.filter(usuario=persona.userprofile)
+    habilidades = Habilidad.objects.filter(usuario=persona.userprofile)
+
+    listado = { 'conocimientos':conocimientos,
+                'competencias':competencias,
+                'educaciones':educaciones,
+                'laborales':laborales,
+                'habilidades':habilidades,
+                }
+
+    return listado
+
 class EducacionView(View):
     '''
     Clase para la renderización de los datos educativos
@@ -521,20 +539,99 @@ class CompetenciaView(View):
                        dictionary=self.diccionario,
                      )
 
-def lista_filtros(persona):
+class HabilidadView(View):
+    '''
+    Clase para la renderización de los datos de habilidad
+    '''
+    template='perfil/editar_formulario.html'
+    habilidad_form = HabilidadForm
+    mensaje = ''
+    tipo_mensaje = ''
+    titulo = 'habilidad'
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
+    diccionario.update({'titulo':titulo})
 
-    laborales = Laboral.objects.filter(usuario=persona.userprofile)
-    educaciones = Educacion.objects.filter(persona=persona)
-    conocimientos = Conocimiento.objects.filter(usuario=persona.userprofile)
-    competencias = Competencia.objects.filter(usuario=persona.userprofile)
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = True
 
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+        except:
+            raise Http404
 
-    listado = { 'conocimientos':conocimientos,
-                'competencias':competencias,
-                'educaciones':educaciones,
-                'laborales':laborales,
-                }
+        self.diccionario.update({'formulario':self.habilidad_form()})
+        if kwargs.has_key('habilidad_id') and not kwargs['habilidad_id'] == None:
+            nueva = False
+            try:
+                habilidad = Habilidad.objects.get(id=int(kwargs['habilidad_id']))
+            except:
+                raise Http404
 
-    return listado
+            if habilidad.usuario == persona.userprofile:
+                self.habilidad_form = self.habilidad_form(instance=habilidad)
+            else:
+                raise PermissionDenied
+
+        # Si se elimina una Habilidad
+        if kwargs['palabra'] == 'eliminar':
+            educacion = Habilidad.objects.get(id=int(kwargs['habilidad_id']))
+            educacion.delete()
+
+            self.mensaje = u'Habilidad eliminada exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'formulario':self.habilidad_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        persona = request.user.userprofile_set.get_query_set()[0].persona
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            habilidad = request.POST['habilidad']
+
+            if kwargs['palabra'] == 'editar':
+                # Si se edita una Educación
+                # Búsqueda de variables con los IDs enviados por POST
+                habilidad_obj = Habilidad.objects.get(id=int(kwargs['habilidad_id']))
+                habilidad_obj.habilidad = campo_habilidad
+
+                habilidad_obj.save()
+
+                self.mensaje = u'Habilidad editada exitosamente'
+                self.tipo_mensaje = u'success'
+            else:
+                # Si se crea una Educación
+                habilidad_obj = Habilidad.objects.create(usuario=persona.userprofile, habilidad=habilidad)
+                self.mensaje = u'Habilidad creada exitosamente'
+                self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'formulario':self.habilidad_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
 
