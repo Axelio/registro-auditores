@@ -2,8 +2,7 @@
 
 {% load static %}
 {% get_static_prefix as directorio %}
-<nav class="ink-navigation sticky" data-offset-top="65px" data-offset-bottom="350px" id="forms_menu">
-
+<nav class="ink-navigation sticky" data-offset-top="65px" data-offset-bottom="200px" id="forms_menu">
 <div class="left-space box">
     <div class="content-center">
         <img src='{{ directorio }}images/avatar.png'>
@@ -44,5 +43,4 @@
 	    {% endifequal %}
     <br />
     Email: <a href="mailto:{{ persona.email }}">{{ persona.email }}</a>
-</div>
 </div>
