@@ -6,7 +6,7 @@ from auth.models import UserProfile
 
 # Modelos para construir el Curriculum
 
-NIVELES_COMPTETENCIA = (
+NIVELES_COMPETENCIA = (
         ('experto','Experto'),
         ('alto','Alto'),
         ('medio','Medio'),
@@ -100,7 +100,7 @@ class ListaCompetencia(models.Model):
 class Competencia(models.Model):
     usuario = models.ForeignKey(UserProfile)
     competencia = models.ForeignKey('ListaCompetencia', unique=True)
-    nivel = models.CharField(max_length=10, choices=NIVELES_COMPTETENCIA, default='nada')
+    nivel = models.CharField(max_length=10, choices=NIVELES_COMPETENCIA, default='nada')
     class Meta:
         db_table = 'competencia'
     def __unicode__(self):

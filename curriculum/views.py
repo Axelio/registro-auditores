@@ -23,7 +23,7 @@ class EducacionView(View):
     educacion_form = EducacionForm
     mensaje = ''
     tipo_mensaje = ''
-    titulo = 'Información Laboral'
+    titulo = 'educacion'
     lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
@@ -68,7 +68,7 @@ class EducacionView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.educacion_form})
-        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -102,7 +102,7 @@ class EducacionView(View):
 
                 educacion.save()
 
-                self.mensaje = u'Información educacional ha sido guardado exitosamente'
+                self.mensaje = u'Información educacional ha sido editada exitosamente'
                 self.tipo_mensaje = u'success'
             else:
                 # Si se crea una Educación
@@ -115,7 +115,7 @@ class EducacionView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.educacion_form})
-        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -260,7 +260,7 @@ class PerfilView(View):
         self.diccionario.update({'mensaje':mensaje})
         self.diccionario.update({'tipo':tipo})
 
-        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -273,7 +273,7 @@ class LaboralView(View):
     '''
     template='perfil/editar_formulario.html'
     laboral_form = LaboralForm 
-    titulo = 'Información Laboral'
+    titulo = 'laboral'
     mensaje = ''
     tipo_mensaje = ''
 
@@ -323,7 +323,7 @@ class LaboralView(View):
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'formulario':self.laboral_form})
-        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -355,7 +355,7 @@ class LaboralView(View):
                 laboral = Laboral.objects.get(id=kwargs['laboral_id'])
                 laboral.save()
 
-                self.mensaje = u'Información laboral ha sido guardado exitosamente'
+                self.mensaje = u'Información laboral ha sido editada exitosamente'
                 self.tipo_mensaje = u'success'
             if kwargs['palabra'] == 'editar':
                 # Si se edita información laboral 
@@ -376,7 +376,7 @@ class LaboralView(View):
 
                 laboral.save()
 
-                self.mensaje = u'Información laboral ha sido guardado exitosamente'
+                self.mensaje = u'Información laboral ha sido editada exitosamente'
                 self.tipo_mensaje = u'success'
 
             else:
@@ -395,7 +395,7 @@ class LaboralView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'formulario':self.laboral_form})
-        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
 
         return render(request, 
@@ -410,7 +410,7 @@ class CompetenciaView(View):
     template='perfil/editar_formulario.html' # Plantilla que utilizará por defecto para renderizar
     mensaje = '' # Mensaje que se le mostrará al usuario
     tipo_mensaje = '' # Si el mensaje es de éxito o de error
-    titulo = 'Competencia' # Título a ser renderizado en la plantilla
+    titulo = 'competencias' # Título a ser renderizado en la plantilla
     lista_filtros = '' # Listado filtrado de objetos que llegarán a la plantilla
     competencia_form = CompetenciaForm
 
@@ -463,7 +463,7 @@ class CompetenciaView(View):
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'formulario':self.competencia_form})
-        self.lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set)
+        self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -474,7 +474,6 @@ class CompetenciaView(View):
         self.diccionario.update(csrf(request))
         self.competencia_form = self.competencia_form(request.POST)
         respuestas = request.POST.getlist('nivel')
-        lista_filtros = ''
 
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
             if kwargs['palabra'] == 'editar':
@@ -487,7 +486,7 @@ class CompetenciaView(View):
                     competencia.nivel = nivel
                     competencia.save()
 
-                self.mensaje = u'Los conocimientos han sido guardados exitosamente'
+                self.mensaje = u'Las competencias han sido editadas exitosamente'
                 self.tipo_mensaje = u'success'
 
             else:
@@ -499,7 +498,7 @@ class CompetenciaView(View):
 
                     competencia = Competencia.objects.create(usuario=request.user.userprofile_set.get_query_set()[0], nivel=nivel, competencia=l_competencia)
 
-                self.mensaje = u'Los conocimientos han sido creados exitosamente'
+                self.mensaje = u'Las competencias han sido creadas exitosamente'
                 self.tipo_mensaje = u'success'
 
 
@@ -514,21 +513,21 @@ class CompetenciaView(View):
         self.diccionario.update({'formulario':self.competencia_form})
         self.diccionario.update({'titulo':self.titulo})
 
-        lista_filtros = lista_filtros(persona, request.user.userprofile_set.get_query_set()[0])
-        self.diccionario.update(lista_filtros)
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
 
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
 
-def lista_filtros(persona, usuario):
+def lista_filtros(persona):
     diccionario = {}
 
-    laborales = Laboral.objects.filter(usuario=usuario)
+    laborales = Laboral.objects.filter(usuario=persona.userprofile)
     educaciones = Educacion.objects.filter(persona=persona)
-    conocimientos = Conocimiento.objects.filter(usuario=usuario)
-    competencias = Competencia.objects.filter(usuario=usuario)
+    conocimientos = Conocimiento.objects.filter(usuario=persona.userprofile)
+    competencias = Competencia.objects.filter(usuario=persona.userprofile)
 
 
     listado = { 'conocimientos':conocimientos,

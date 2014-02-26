@@ -17,7 +17,7 @@
         <ul class="breadcrumbs">
             <li><a href="/">Inicio</a></li>
             <li><a href="{% url 'perfil' %}">Perfil</a></li>
-            <li><a href="{% url 'perfil' %}">{{ titulo }}</a></li>
+            <li><a href="{% url 'perfil' %}#{{ titulo }}">{{ titulo|title }}</a></li>
             {% if nueva%}
                 <li class="active"><a href="#">Nueva</a></li>
             {% else %}
@@ -33,7 +33,8 @@
                     <div class="box">
                         <form class="ink-form" method="POST">{% csrf_token %}
                             <fieldset class="column-group">
-                                {% ifequal titulo 'Competencia' %}
+                                {% ifequal titulo 'competencias' %}
+                                {% load perfil %}
                                 <h3>Indique su nivel de conocimiento en:</h3>
                                     {% for l_competencia in lista_competencia %}
                                         <table class="ink-table">
@@ -44,12 +45,7 @@
                                                     </td>
                                                     <td class="content-right">
                                                         <label for="id_nivel">Nivel:</label><br/>
-                                                        <select id="id_nivel" name="nivel">
-                                                            <option value="experto_{{ l_competencia.id }}">Experto</option>
-                                                            <option value="alto_{{ l_competencia.id }}">Alto</option>
-                                                            <option value="medio_{{ l_competencia.id }}">Medio</option>
-                                                            <option value="basico_{{ l_competencia.id }}">Básico</option>
-                                                            <option value="nada_{{ l_competencia.id }}" selected="selected">Nada</option>
+                                                        <select id="id_nivel" name="nivel">{{ l_competencia.id|nivel_elegido:persona }} 
                                                         </select>
                                                         </div>
                                                     </td>

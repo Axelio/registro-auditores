@@ -52,7 +52,7 @@
                                 </div>
                                 <input type="hidden" name="edu_id" value={{ educacion.id }}>
                                 <div class="button-group push-right">
-                                    <a href="{% url 'educacion' 'nueva' %}" class="ink-button ">Añadir</a>
+                                    <a href="{% url 'educacion' 'nueva' %}" class="ink-button">Añadir</a>
                                     <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
                                     <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red"><span class="icon-trash"></span></a>
                                 </div>
@@ -60,7 +60,7 @@
                         {% else %}
                             Usted no posee ninguna información educativa. Por favor, registre una.
                             <div class="push-right">
-                                <a href="{% url 'educacion' 'nueva' %}" class="ink-button ">Añadir</a>
+                                <a href="{% url 'educacion' 'nueva' %}" class="ink-button blue">Añadir</a>
                             </div>
                         {% endif %}
                         </form>
@@ -81,7 +81,7 @@
                                     Función: {{ laboral.funcion }}
                                 </div>
                                 <div class="button-group push-right">
-                                    <a href="{% url 'laboral' 'nueva' %}" class="ink-button ">Añadir</a>
+                                    <a href="{% url 'laboral' 'nueva' %}" class="ink-button">Añadir</a>
                                     <a href="{% url 'laboral' 'editar' laboral.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
                                     <a href="{% url 'laboral' 'eliminar' laboral.id %}" class="ink-button red"><span class="icon-trash"></span></a>
                                 </div>
@@ -89,7 +89,7 @@
                         {% else %}
                             Usted no posee ninguna información laboral. Por favor, registre una.
                             <div class="push-right">
-                                <a href="{% url 'laboral' 'nueva' %}" class="ink-button ">Añadir</a>
+                                <a href="{% url 'laboral' 'nueva' %}" class="ink-button blue">Añadir</a>
                             </div>
                         {% endif %}
                         </form>
@@ -115,7 +115,7 @@
                                             {{ competencia.competencia }}
                                         </td>
                                         <td>
-                                            {{ competencia.nivel }}
+                                            {{ competencia.get_nivel_display }}
                                         </td>
                                     </tr>
                                 {% endfor %}
