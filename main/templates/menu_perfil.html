@@ -1,12 +1,5 @@
-<!-- Javascript -->
-<script type="text/javascript" src="http://cdn.ink.sapo.pt/2.2.1/js/ink.min.js"></script>
-<script type="text/javascript" src="http://cdn.ink.sapo.pt/2.2.1/js/ink-ui.min.js"></script>
-<script type="text/javascript" src="http://cdn.ink.sapo.pt/2.2.1/js/autoload.js"></script>
-<script type="text/javascript" src="http://cdn.ink.sapo.pt/2.2.1/js/prettify.js"></script>
-<!-- End of javascript -->
-
-<nav class="ink-navigation sticky responsive">
-    <ul class="menu horizontal shadowed grey toggle">
+    <nav class="ink-navigation ink-grid hide-small hide-medium ie7">
+        <ul class="menu horizontal shadowed grey">
         <li class=><a href="#"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
         <div class="push-right">
             <li><a href="{% url 'personales' %}">Personales</a></li>
@@ -21,31 +14,34 @@
                     <li><a href="{% url 'perfil' %}">Ver perfil</a></li>
                 </ul>
             </li>
-        </div>
-    </ul>
-</nav>
+        </ul>
+    </nav>
+    
 
-<nav class="ink-navigation hide-small">
-<ul class="menu horizontal black rounded shadowed">
-<li class="active">
-<a href="javascript:void(0);"><i class="icon-home"></i></a>
-<button class="ink-for-s ink-for-m ink-button" style="display: none;"><i class="icon-reorder" style="height:auto"></i></button>
-</li>
-<li><a href="javascript:void(0);">About Us</a></li>
-<li><a href="javascript:void(0);">Our Services</a></li>
-<li><a href="javascript:void(0);">Contact</a></li>
-</ul>
-</nav>
-<nav class="ink-navigation hide-all show-small">
-<div class="ink-dropdown">
-<ul class="menu horizontal black rounded shadowed">
-<li><a href="" class="toggle" data-target="#dropdown">Menu <i class="icon-caret-down"></i></a></li>
-</ul>
-<ul class="dropdown-menu vertical black rounded shadowed" id="dropdown">
-<li class="active"><a href="javascript:void(0);"><i class="icon-home"></i> Home</a></li>
-<li><a href="javascript:void(0);">About Us</a></li>
-<li><a href="javascript:void(0);">Our Services</a></li>
-<li><a href="javascript:void(0);">Contact</a></li>
-</ul>
-</div>
-</nav>
+    <nav class="ink-navigation ink-grid hide-all show-medium show-small">
+        <ul class="menu horizontal shadowed grey">
+            <li class="title">
+            
+                <a href="/"><img height="30" src="/main/static/images/logo_suscerte.png"></a> 
+            </li>           
+            <li class="push-right">           
+                <a class="toggle push-right" data-target="#topbar_menu"><span class="icon-reorder icon-large"></span></a>
+            </li>           
+        </ul>
+
+        <ul class="menu vertical flat gray hide-all" id="topbar_menu">
+        <div class="push-right">
+            <li><a href="{% url 'personales' %}">Personales</a></li>
+            <li><a href="{% url 'perfil' %}#educacion">Educativos</a></li>
+            <li><a href="{% url 'perfil' %}#laboral">Laboral</a></li>
+            <li><a href="{% url 'perfil' %}#competencias">Competencias</a></li>
+            <li><a href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
+            <li><a href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+            <li><a href="#">Configuración <i class="icon-caret-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="#">Cambiar contraseña</a></li>
+                    <li><a href="{% url 'perfil' %}">Ver perfil</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
