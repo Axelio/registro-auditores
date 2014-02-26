@@ -73,7 +73,7 @@ class Idioma(models.Model):
 
 class Conocimiento(models.Model):
     usuario = models.ForeignKey(UserProfile)
-    otros_conocimientos = models.TextField(help_text=u'Escriba aquí los conocimientos que no se contemplan en las competencias profesionales')
+    otros_conocimientos = models.TextField(help_text=u'Escriba aquí los conocimientos que no se contemplan en las competencias profesionales ni en las habilidades')
     class Meta:
         db_table = 'conocimiento'
     def __unicode__(self):

@@ -579,8 +579,8 @@ class HabilidadView(View):
 
         # Si se elimina una Habilidad
         if kwargs['palabra'] == 'eliminar':
-            educacion = Habilidad.objects.get(id=int(kwargs['habilidad_id']))
-            educacion.delete()
+            habilidad = Habilidad.objects.get(id=int(kwargs['habilidad_id']))
+            habilidad.delete()
 
             self.mensaje = u'Habilidad eliminada exitosamente'
             self.tipo_mensaje = u'success'
@@ -628,6 +628,109 @@ class HabilidadView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.habilidad_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+class ConocimientoView(View):
+    '''
+    Clase para la renderización de los datos de habilidad
+    '''
+    template='perfil/editar_formulario.html'
+    conocimiento_form = ConocimientoForm 
+    titulo = 'conocimiento'
+    mensaje = ''
+    tipo_mensaje = ''
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = False
+
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+        except:
+            raise Http404
+
+        self.diccionario.update({'formulario':self.conocimiento_form()})
+        if kwargs.has_key('conocimiento_id') and not kwargs['conocimiento_id'] == None:
+            try:
+                conocimiento = Conocimiento.objects.get(id=int(kwargs['conocimiento_id']))
+            except:
+                raise Http404
+
+            if conocimiento.usuario == persona.userprofile:
+                self.conocimiento_form = self.conocimiento_form(instance=conocimiento)
+            else:
+                raise PermissionDenied
+
+        # Si se elimina una Habilidad
+        if kwargs['palabra'] == 'nueva':
+            nueva = True
+            if Conocimiento.objects.filter(usuario=persona.userprofile).exists():
+                self.mensaje = u'Usted ya tiene conocimiento en base de datos, por favor edítela si es necesario'
+                self.tipo_mensaje = u'error'
+                self.template = 'perfil/perfil.html'
+
+        # Si se elimina una Habilidad
+        if kwargs['palabra'] == 'eliminar':
+            conocimiento = Conocimiento.objects.get(id=int(kwargs['conocimiento_id']))
+            conocimiento.delete()
+
+            self.mensaje = u'Conocimiento eliminado exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'formulario':self.conocimiento_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        persona = request.user.userprofile_set.get_query_set()[0].persona
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            conocimiento = request.POST['otros_conocimientos']
+
+            if kwargs['palabra'] == 'editar':
+                conocimiento = Conocimiento.objects.get(id=kwargs['conocimiento_id'])
+                conocimiento.otros_conocimientos = request.POST['otros_conocimientos']
+                conocimiento.save()
+
+                self.mensaje = u'Conocimientos editados exitosamente'
+                self.tipo_mensaje = u'success'
+            else:
+                if Conocimiento.objects.filter(usuario=persona.userprofile).exists():
+                    self.mensaje = u'Usted ya tiene conocimientos guardados, por favor edítela si es necesario'
+                    self.tipo_mensaje = u'error'
+                else:
+                    conocimiento = Conocimiento.objects.create(usuario=persona.userprofile, otros_conocimientos=conocimiento)
+                    self.mensaje = u'Otros conocimientos creados exitosamente'
+                    self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'formulario':self.conocimiento_form})
         self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
