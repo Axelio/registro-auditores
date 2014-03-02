@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 from personas.views import PersonalesView
-from curriculum.views import PerfilView, EducacionView, LaboralView, CompetenciaView, HabilidadView, ConocimientoView
+from curriculum.views import PerfilView, EducacionView, LaboralView, CompetenciaView, HabilidadView, ConocimientoView, IdiomaView
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^perfil/conocimiento/(?P<palabra>\w+)/(?P<conocimiento_id>[\d]+)*$', ConocimientoView.as_view(), name='conocimiento'),
     url(r'^perfil/competencia/(?P<palabra>\w+)/(?P<competencia_id>[\d]+)*$', CompetenciaView.as_view(), name='competencia'),
     url(r'^perfil/habilidad/(?P<palabra>\w+)/(?P<habilidad_id>[\d]+)*$', HabilidadView.as_view(), name='habilidad'),
+    url(r'^perfil/idioma/(?P<palabra>\w+)/(?P<idioma_id>[\d]+)*$', IdiomaView.as_view(), name='idioma'),
     url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
 )

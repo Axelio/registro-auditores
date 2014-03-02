@@ -12,6 +12,8 @@ admin.site.register(Conocimiento, ConocimientoAdmin)
 
 class IdiomaAdmin(admin.ModelAdmin):
     search_fields = ('idioma',)
+    list_display = ('persona','idioma','nivel_leido','nivel_escrito','nivel_hablado')
+    list_filter = ('idioma',)
 admin.site.register(Idioma, IdiomaAdmin)
 
 class CompetenciaAdmin(admin.ModelAdmin):

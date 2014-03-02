@@ -68,8 +68,9 @@ class Idioma(models.Model):
     nivel_hablado = models.CharField(max_length=10, choices=NIVEL_IDIOMA)
     class Meta:
         db_table = u'idioma'
+        ordering = ('-idioma',)
     def __unicode__(self):
-        return u'%s' %(sel.idioma)
+        return u'%s' %(self.idioma)
 
 class Conocimiento(models.Model):
     usuario = models.ForeignKey(UserProfile)

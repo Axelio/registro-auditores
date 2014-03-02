@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura
-from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion, Laboral, Competencia, Habilidad
+from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion, Laboral, Competencia, Habilidad, Idioma
 from lugares.models import Institucion
 import datetime
 
@@ -42,6 +42,15 @@ class ConocimientoForm(forms.ModelForm):
         # Se determina cuál es el modelo al que va a referirse el formulario 
         model = Conocimiento
         exclude = ('usuario',)
+
+class IdiomaForm(forms.ModelForm):
+    '''
+    Formulario para el ingreso de Idiomas
+    '''
+    class Meta:
+        # Se dsetermina cuál es el modelo al que va a referirse el formulario 
+        model = Idioma
+        exclude = ('persona',)
 
 class ConocimientoAdminForm(forms.ModelForm):
     '''

@@ -29,6 +29,12 @@
     </div>
 
     <div class="space">
+        {% if mensaje %}
+            <div class="ink-alert basic {{ tipo_mensaje }}">
+                <button class="ink-dismiss">&times;</button>
+                <p>{{ mensaje }}</p>
+            </div>
+        {% endif %}
         <div class="column-group">
             <div class="space">
                 <div class="space">

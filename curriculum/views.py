@@ -23,12 +23,14 @@ def lista_filtros(persona):
     conocimientos = Conocimiento.objects.filter(usuario=persona.userprofile)
     competencias = Competencia.objects.filter(usuario=persona.userprofile)
     habilidades = Habilidad.objects.filter(usuario=persona.userprofile)
+    idiomas = Idioma.objects.filter(persona=persona)
 
     listado = { 'conocimientos':conocimientos,
                 'competencias':competencias,
                 'educaciones':educaciones,
                 'laborales':laborales,
                 'habilidades':habilidades,
+                'idiomas':idiomas,
                 }
 
     return listado
@@ -731,6 +733,115 @@ class ConocimientoView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.conocimiento_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+class IdiomaView(View):
+    '''
+    Clase para la renderización de los datos de habilidad
+    '''
+    template='perfil/editar_formulario.html'
+    idioma_form = IdiomaForm 
+    titulo = 'idioma'
+    mensaje = ''
+    tipo_mensaje = ''
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = True
+
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+        except:
+            raise Http404
+
+        self.diccionario.update({'formulario':self.idioma_form()})
+        if kwargs.has_key('idioma_id') and not kwargs['idioma_id'] == None:
+            try:
+                idioma = Idioma.objects.get(id=int(kwargs['idioma_id']))
+            except:
+                raise Http404
+
+            if idioma.persona == persona:
+                self.idioma_form = self.idioma_form(instance=idioma)
+            else:
+                raise PermissionDenied
+
+        if kwargs['palabra'] == 'nueva':
+            nueva = True
+        else:
+            idioma = Idioma.objects.get(id=int(kwargs['idioma_id']))
+
+        # Si se elimina una Habilidad
+        if kwargs['palabra'] == 'eliminar':
+            idioma.delete()
+
+            self.mensaje = u'Idioma eliminado exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'formulario':self.idioma_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        persona = request.user.userprofile_set.get_query_set()[0].persona
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            l_idioma = ListaIdiomas.objects.get(id=request.POST['idioma'])
+            nivel_escrito = request.POST['nivel_escrito']
+            nivel_leido = request.POST['nivel_leido']
+            nivel_hablado = request.POST['nivel_hablado']
+
+            # Buscamos que no se dupliquen idiomas
+            idioma = Idioma.objects.filter(persona=persona, idioma=request.POST['idioma'])
+            if idioma.exists() and idioma.count() > 1:
+                self.mensaje = u'Usted ya tiene %s cargado en base de datos, por favor edítela si es necesario' %(request.POST['idioma'])
+                self.tipo_mensaje = u'error'
+                self.template = 'perfil/editar_formulario.html'
+                self.idioma_form=idioma_form(request)
+            else:
+                if kwargs['palabra'] == 'editar':
+                    idioma = Idioma.objects.get(id=kwargs['idioma_id'])
+                    idioma.idioma = l_idioma
+                    idioma.nivel_escrito = nivel_escrito
+                    idioma.nivel_leido = nivel_leido
+                    idioma.nivel_hablado = nivel_hablado
+                    idioma.save()
+
+                    self.mensaje = u'Idioma editado exitosamente'
+                    self.tipo_mensaje = u'success'
+                else:
+                    idioma = Idioma.objects.create(persona=persona, idioma=l_idioma, nivel_escrito=nivel_escrito, nivel_leido=nivel_leido, nivel_hablado=nivel_hablado)
+                    self.mensaje = u'Idioma creado exitosamente'
+                    self.tipo_mensaje = u'success'
+
+                self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'formulario':self.idioma_form})
         self.lista_filtros = lista_filtros(persona)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
