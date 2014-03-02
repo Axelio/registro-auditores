@@ -455,20 +455,26 @@ class CompetenciaView(View):
         # Actualización del diccionario con el formulario
         self.diccionario.update({'formulario':self.competencia_form()})
 
-        # Si se elimina una Educación
+        # Si se elimina una Competencia 
         if kwargs['palabra'] == 'eliminar':
-            competencia = Competencia.objects.get(id=int(kwargs['laboral_id']))
-            competencia.delete()
-
-            self.mensaje = u'Competencia ha sido eliminada exitosamente'
-            self.tipo_mensaje = u'success'
+            competencia = Competencia.objects.filter(usuario=persona.userprofile)
+            if competencia.exists():
+                for comp in competencia:
+                    comp.delete()
+                self.mensaje = u'Competencia ha sido eliminada exitosamente'
+                self.tipo_mensaje = u'success'
+            else:
+                self.mensaje = u'Usted no tiene ninguna competencia que eliminar.'
+                self.tipo_mensaje = u'warning'
 
             self.template = 'perfil/perfil.html'
 
         if kwargs.has_key('competencia_id') and not kwargs['competencia_id'] == None:
-            nueva = False
+            if kwargs['palabra'] == 'editar':
+                nueva = False
+
             try:
-                competencia = Competencia.objects.get(id=int(kwargs['laboral_id']))
+                competencia = Competencia.objects.get(id=int(kwargs['competencia_id']))
             except:
                 raise Http404
 
