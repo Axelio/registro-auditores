@@ -1,0 +1,72 @@
+[
+{
+    "pk": 1, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Alem\u00e1n"
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "\u00c1rabe"
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Chino"
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Espa\u00f1ol"
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Franc\u00e9s"
+    }
+},
+{
+    "pk": 6, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Ingl\u00e9s"
+    }
+},
+{
+    "pk": 7, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Italiano"
+    }
+},
+{
+    "pk": 8, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Japon\u00e9s"
+    }
+},
+{
+    "pk": 9, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Portugu\u00e9s"
+    }
+},
+{
+    "pk": 10, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Ruso"
+    }
+}
+]
