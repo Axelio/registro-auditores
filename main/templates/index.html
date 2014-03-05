@@ -1,0 +1,84 @@
+{% include "base_ink.html" %}
+
+
+
+{% block personales %}
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <body>
+
+{% load static %}
+{% load humanize %} 
+ 
+  <!-- Main Page Content and Sidebar -->
+  
+<div class="ink-grid">
+    <nav class="ink-navigation ink-grid hide-small hide-medium ie7 sticky">
+        <ul class="menu horizontal shadowed grey">
+        <li class=><a href="#"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
+        <div class="push-right">
+            <form class="ink-form">
+                <input class="input-block-level" id="id_username" maxlength="200" name="username" required="required" placeholder="Correo" type="text">
+                <div class="control">
+                    <input id="text-input" type="text" placeholder="Please input some text">
+                </div>
+                <input class="input-block-level" id="id_password" maxlength="200" name="password" required="required" placeholder="Contraseña" type="password">
+            </form>
+        </ul>
+    </nav>
+
+
+    <nav class="ink-navigation ink-grid hide-all show-medium show-small">
+        <ul class="menu horizontal shadowed grey">
+            <li class="title">
+            
+                <a href="/"><img height="30" src="/main/static/images/logo_suscerte.png"></a> 
+            </li>           
+            <li class="push-right">           
+                <a class="toggle push-right" data-target="#topbar_menu"><span class="icon-reorder icon-large"></span></a>
+            </li>           
+        </ul>
+
+        <ul class="menu vertical flat gray hide-all" id="topbar_menu">
+        <div class="push-right">
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+            <li><a class="scrollableLink" href="#"><i class="icon-caret-down"></i> Configuración</a>
+                <ul class="submenu">
+                    <li><a href="#">Cambiar contraseña</a></li>
+                    <li><a href="{% url 'perfil' %}">Ver perfil</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="ink-grid">
+        <nav class="ink-navigation" id="educacion">
+            <ul class="breadcrumbs">
+                <li><a href="/">Inicio</a></li>
+                <li class="active"><a href="#">Perfil</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="space">
+        {% if mensaje %}
+            <div class="ink-alert basic {{ tipo_mensaje }}">
+                <button class="ink-dismiss" id="cerrar">&times;</button>
+                <p>{{ mensaje }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% include 'footer.html' %} 
+
+  </body>
+</html>
+{% endblock %}
