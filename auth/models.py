@@ -15,9 +15,6 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return u'%s %s' %(self.persona.primer_nombre, self.persona.primer_apellido)
 
-    def natural_key(self):
-        return u'%s (%s)' %(self.persona.natural_key(),self.user.__unicode__() )
-
 def funcion(u):
     if not hasattr(u, '_cached_profile'):
         u._cached_profile = UserProfile.objects.get_or_create(user=u)[0]
