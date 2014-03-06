@@ -16,36 +16,12 @@ class AuthenticationForm(forms.Form):
         'invalid_login': _(u"Usuario y/o contraseña inválido. "
                            u"Note que ambos campos pueden ser sensibles a mayúsculas."),
         'inactive': _("This account is inactive."),
-        'user_not_exists': _("Este usuario no existe."),
     }
-    
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-
-        if username:
-            usuarios = UserProfile.objects.filter(user__username__iexact=username)
-            if not usuarios.exists():
-                raise forms.ValidationError(
-                    self.error_messages['user_not_exists'],
-                    code='user_not_exists',
-                    params={'username': get_user_model()._meta.get_field(get_user_model().USERNAME_FIELD)},
-                )
-            else:
-                usuario = usuarios[0]
-                if not usuario.user.is_active:
-                    raise forms.ValidationError(
-                        self.error_messages['inactive'],
-                        code='user_not_exists',
-                        params={'username': get_user_model()._meta.get_field(get_user_model().USERNAME_FIELD)},
-                    )
-        return self.cleaned_data
-
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
 
         if username and password:
-            usuarios = UserProfile
             self.user_cache = authenticate(username=username,
                                            password=password)
             if self.user_cache is None:
