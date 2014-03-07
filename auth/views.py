@@ -2,8 +2,10 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
-from auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.utils.decorators import method_decorator
+from axes.decorators import watch_login
+from auth.forms import AuthenticationForm
 
 # Create your views here.
 class Auth(View):
@@ -28,6 +30,7 @@ class Auth(View):
                        dictionary=self.diccionario,
                      )
 
+    @method_decorator(watch_login)
     def post(self, request, *args, **kwargs):
         form = self.form(request.POST)
         self.diccionario.update({'user':request.user})

@@ -5,6 +5,7 @@ from django.contrib import admin
 from personas.views import PersonalesView
 from curriculum.views import PerfilView, EducacionView, LaboralView, CompetenciaView, HabilidadView, ConocimientoView, IdiomaView
 from auth.views import *
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
