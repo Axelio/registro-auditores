@@ -8,6 +8,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+LOGIN_URL='/'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -51,6 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'debug_toolbar',
+    'axes',
     'compressor',
     'curriculum',
     'lugares',
@@ -65,6 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.FailedLoginMiddleware'
 )
 
 ROOT_URLCONF = 'auditores_suscerte.urls'
@@ -125,3 +129,8 @@ STATICFILES_FINDERS = (
 COMPRESS_ENABLED = True
 
 COMPRESS_OFFLINE = True
+
+# Customizing Axes
+AXES_LOGIN_FAILURE_LIMIT = 6
+AXES_LOCK_OUT_AT_FAILURE = True
+AXES_USE_USER_AGENT = True

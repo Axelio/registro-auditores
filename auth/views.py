@@ -2,6 +2,9 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
+from django.contrib.auth import login, authenticate
+from django.utils.decorators import method_decorator
+from axes.decorators import watch_login
 from auth.forms import AuthenticationForm
 
 # Create your views here.
@@ -27,6 +30,7 @@ class Auth(View):
                        dictionary=self.diccionario,
                      )
 
+    @method_decorator(watch_login)
     def post(self, request, *args, **kwargs):
         form = self.form(request.POST)
         self.diccionario.update({'user':request.user})
@@ -34,71 +38,20 @@ class Auth(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':form})
         if form.is_valid():
-            print "BIEN"
-            return HttpResponseRedirect('/')
+            usuario = request.user
+            login(request, form.get_user())
+            if request.POST['next'] == '':
+                return HttpResponseRedirect('/')
+            else:
+                return HttpResponseRedirect(request.POST['next'])
         else:
-            seccion = ''
             error = ''
-            if form.errors.has_key('username'):
-                seccion = 'username'
-                error = form.errors['username']
-            elif form.errors.has_key('__all__'):
-                seccion = '__all__'
-                error = form.errors['__all__']
+            error = form.errors[form.errors.keys()[0]]
 
             self.diccionario.update({'tipo_mensaje':'error'})
-            self.diccionario.update({'seccion':seccion})
             self.diccionario.update({'error':error[0]})
 
             return render(request, 
                            template_name=self.template,
                            dictionary=self.diccionario,
                          )
-        '''
-        self.diccionario.update({'form':self.form})
-        usuario = User.objects.filter(Q(username=request.POST['username'])|Q(email=request.POST['username']))
-        self.diccionario.update({'request':request})
-        if usuario.exists(): 
-            usuario = usuario[0]
-            user = authenticate(username=usuario, password=request.POST['password'])
-
-            if user is not None:
-                login(request, usuario)
-                #"User is not valid, active and authenticated"
-                if not user.is_active:
-                    self.mensaje = u"La contraseña es válida pero la cuenta ha sido desactivada"
-                    (self.tipo_mensaje, self.expresion) = msj_expresion('error')
-                    return renderizar_plantilla(request, 
-                                        plantilla = self.template, 
-                                        tipo_mensaje = self.tipo_mensaje, 
-                                        expresion = self.expresion, 
-                                        mensaje = self.mensaje, 
-                                        form = form
-                                    )
-                else:
-                    # El usuario se loggea correctamente
-                    return HttpResponseRedirect('/preguntas_secretas/')
-            else:
-                # El usuario o contraseña eran incorrectos
-                self.mensaje = u"Contraseña incorrecta. Por favor, inténtelo nuevamente"
-                (self.tipo_mensaje, self.expresion) = msj_expresion('error')
-                return renderizar_plantilla(request, 
-                                    plantilla = self.template, 
-                                    tipo_mensaje = self.tipo_mensaje, 
-                                    expresion = self.expresion, 
-                                    mensaje = self.mensaje, 
-                                    form = form
-                                )
-        else:
-            # El usuario no existe
-            self.mensaje = u"No existe el usuario %s. Por favor, confirme sus datos" %(request.POST['username'])
-            (self.tipo_mensaje, self.expresion) = msj_expresion('error')
-            form = self.form(request.POST)
-            return renderizar_plantilla(request, 
-                                plantilla = self.template, 
-                                tipo_mensaje = self.tipo_mensaje, 
-                                expresion = self.expresion, 
-                                mensaje = self.mensaje, 
-                                form = form
-                            )
-        '''

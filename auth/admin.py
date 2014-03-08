@@ -9,6 +9,7 @@ class UserProfileInline(admin.StackedInline):
     model=UserProfile
     can_delete=False 
     extra=1
+    max_num = 1
 
 
 class UserProfileAdmin(UserAdmin):
