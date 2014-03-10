@@ -4,17 +4,23 @@ from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.utils.decorators import method_decorator
-from django.contrib.auth.views import password_change
+from django.contrib.auth.views import password_change, login
 from django.core.urlresolvers import reverse
 from axes.decorators import watch_login
 from auth.forms import AuthenticationForm
 
 # Create your views here.
-class Auth(View):
+def auth(request):
+    diccionario = {}
+    diccionario.update({'user':request.user})
+    diccionario.update({'auth':True})
+    return login(request, template_name='auth/formulario.html', extra_context=diccionario)
+
+class Auth2(View):
     tipo_mensaje = ''
     mensaje = ''
     form = AuthenticationForm
-    template = 'index.html'
+    template = 'auth/formulario.html'
     diccionario = {}
     
     def get(self, request, *args, **kwargs):
@@ -26,7 +32,7 @@ class Auth(View):
         self.diccionario.update({'user':request.user})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'formulario':self.form})
+        self.diccionario.update({'form':self.form})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -62,7 +68,7 @@ def cambiar_clave(request):
     diccionario = {}
     titulo = 'cambiar contraseña'
     diccionario.update({'titulo':titulo})
-    return password_change(request, template_name='auth/cambiar_clave.html',
+    return password_change(request, template_name='auth/formulario.html',
                 #email_template_name='',
                 #subject_template_name='reset_subject.txt',
                 post_change_redirect=reverse('inicio'),
