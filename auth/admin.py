@@ -93,7 +93,8 @@ admin.site.unregister(User)
 admin.site.register(User,UserProfileAdmin)
 admin.site.register(Mensaje)
 
-from django.contrib.admin.models import LogEntry, DELETION
+from django.contrib.admin.models import DELETION
+from auth.models import LogEntry 
 from django.utils.html import escape
 from django.core.urlresolvers import reverse
 

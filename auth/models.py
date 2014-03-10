@@ -29,3 +29,12 @@ class Mensaje(models.Model):
     def __unicode__(self):
         return u'%s' %(self.caso)
 
+from django.contrib.admin.models import LogEntry, DELETION
+class LogEntry(LogEntry):
+    ip = models.IPAddressField(blank=True)
+
+'''
+
+@receiver(post_save, sender=LogEntry)
+def send_notification_email(change, **kwargs):
+'''

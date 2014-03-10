@@ -4,6 +4,8 @@ from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.utils.decorators import method_decorator
+from django.contrib.auth.views import password_change
+from django.core.urlresolvers import reverse
 from axes.decorators import watch_login
 from auth.forms import AuthenticationForm
 
@@ -55,3 +57,15 @@ class Auth(View):
                            template_name=self.template,
                            dictionary=self.diccionario,
                          )
+
+def cambiar_clave(request):
+    diccionario = {}
+    titulo = 'cambiar contraseña'
+    diccionario.update({'titulo':titulo})
+    return password_change(request, template_name='auth/cambiar_clave.html',
+                #email_template_name='',
+                #subject_template_name='reset_subject.txt',
+                post_change_redirect=reverse('inicio'),
+                extra_context = diccionario,
+                )
+
