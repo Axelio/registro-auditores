@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import logout
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.contrib import admin
 from personas.views import PersonalesView
@@ -26,4 +28,4 @@ urlpatterns = patterns('',
     url(r'^perfil/idioma/(?P<palabra>\w+)/(?P<idioma_id>[\d]+)*$', IdiomaView.as_view(), name='idioma'),
     url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
     url(r'^$', auth, name='inicio'),
-)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
