@@ -1,6 +1,7 @@
 <nav class="ink-navigation ink-grid hide-small hide-medium ie7 sticky">
     <ul class="menu horizontal shadowed grey">
     <li class=><a href="#"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
+<<<<<<< HEAD
     <div class="push-right">
         <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
         <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
@@ -15,6 +16,24 @@
                 <li class="small"><a href="{% url 'salir' %}">Cerrar sesión</a></li>
             </ul>
         </li>
+=======
+    {% if not user.is_authenticated %}
+        <div class="push-right">
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+            <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
+                <ul class="submenu">
+                    <li><a class="small" href="#">Cambiar contraseña</a></li>
+                    <li><a class="small" href="{% url 'perfil' %}">Ver perfil</a></li>
+                </ul>
+            </li>
+        </div>
+    {% endif %}
+>>>>>>> 73c47debbfc76422293fb91876c939de0999481d
     </ul>
 </nav>
 
