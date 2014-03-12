@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'debug_toolbar',
-    'axes',
+    #'axes',
     'compressor',
     'curriculum',
     'lugares',
@@ -69,7 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'axes.middleware.FailedLoginMiddleware'
+    #'axes.middleware.FailedLoginMiddleware'
 )
 
 ROOT_URLCONF = 'auditores_suscerte.urls'
