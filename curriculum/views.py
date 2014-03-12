@@ -331,32 +331,28 @@ class EditarPersonaView(View):
         usuario = request.user
 
         persona = Persona.objects.get(id=usuario.profile.persona.id)
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-            if kwargs['palabra'] == 'editar':
-                import pdb
-                #pdb.set_trace()
-                estado = Estado.objects.get(id=request.POST['reside'])
-                fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+        estado = Estado.objects.get(id=request.POST['reside'])
+        fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
 
-                persona.primer_nombre = request.POST['primer_nombre']
-                persona.segundo_nombre = request.POST['segundo_nombre']
-                persona.primer_apellido = request.POST['primer_apellido']
-                persona.segundo_apellido = request.POST['segundo_apellido']
-                persona.genero = request.POST['genero']
-                persona.reside = estado
-                persona.direccion = request.POST['direccion']
-                persona.fecha_nacimiento = fecha_nacimiento
-                persona.tlf_reside = request.POST['tlf_reside']
-                persona.tlf_movil = request.POST['tlf_movil']
-                persona.tlf_oficina = request.POST['tlf_oficina']
-                persona.tlf_contacto = request.POST['tlf_contacto']
-                persona.estado_civil = request.POST['estado_civil']
-                persona.save()
+        persona.primer_nombre = request.POST['primer_nombre']
+        persona.segundo_nombre = request.POST['segundo_nombre']
+        persona.primer_apellido = request.POST['primer_apellido']
+        persona.segundo_apellido = request.POST['segundo_apellido']
+        persona.genero = request.POST['genero']
+        persona.reside = estado
+        persona.direccion = request.POST['direccion']
+        persona.fecha_nacimiento = fecha_nacimiento
+        persona.tlf_reside = request.POST['tlf_reside']
+        persona.tlf_movil = request.POST['tlf_movil']
+        persona.tlf_oficina = request.POST['tlf_oficina']
+        persona.tlf_contacto = request.POST['tlf_contacto']
+        persona.estado_civil = request.POST['estado_civil']
+        persona.save()
 
-                self.mensaje = u'Información personal editada exitosamente'
-                self.tipo_mensaje = u'success'
+        self.mensaje = u'Información personal editada exitosamente'
+        self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+        self.template = 'perfil/perfil.html'
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
