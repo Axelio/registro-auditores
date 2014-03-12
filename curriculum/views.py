@@ -287,6 +287,82 @@ class PerfilView(View):
                        dictionary=self.diccionario,
                      )
 
+class EditarPersonaView(View):
+    '''
+    Clase para la renderización de los datos de habilidad
+    '''
+    template='perfil/editar_formulario.html'
+    persona_form = EditarPersonaForm
+    titulo = 'conocimiento'
+    mensaje = ''
+    tipo_mensaje = ''
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = False
+
+        try:
+            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+        except:
+            raise Http404
+        print persona
+
+        self.persona_form = self.persona_form(instance=persona)
+
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'formulario':self.persona_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        persona = request.user.userprofile_set.get_query_set()[0].persona
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            conocimiento = request.POST['otros_conocimientos']
+
+            if kwargs['palabra'] == 'editar':
+                conocimiento = Conocimiento.objects.get(id=kwargs['conocimiento_id'])
+                conocimiento.otros_conocimientos = request.POST['otros_conocimientos']
+                conocimiento.save()
+
+                self.mensaje = u'Conocimientos editados exitosamente'
+                self.tipo_mensaje = u'success'
+            else:
+                if Conocimiento.objects.filter(usuario=persona.userprofile).exists():
+                    self.mensaje = u'Usted ya tiene conocimientos guardados, por favor edítela si es necesario'
+                    self.tipo_mensaje = u'error'
+                else:
+                    conocimiento = Conocimiento.objects.create(usuario=persona.userprofile, otros_conocimientos=conocimiento)
+                    self.mensaje = u'Otros conocimientos creados exitosamente'
+                    self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'formulario':self.conocimiento_form})
+        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
 class LaboralView(View):
     '''
     Clase para la renderización de los datos laborales

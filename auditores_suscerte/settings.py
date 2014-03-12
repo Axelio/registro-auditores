@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 LOGIN_URL='/login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/perfil/'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -28,7 +28,7 @@ for f in conffiles:
 SECRET_KEY = 'a8g#%2&3y2_u5x12!e4r8&pd8&x#hqxj$%9_w)*jq9(c3dvdoy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 

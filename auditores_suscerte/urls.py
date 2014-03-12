@@ -6,7 +6,7 @@ import os
 
 from django.contrib import admin
 from personas.views import PersonalesView
-from curriculum.views import PerfilView, EducacionView, LaboralView, CompetenciaView, HabilidadView, ConocimientoView, IdiomaView
+from curriculum.views import PerfilView, EducacionView, LaboralView, CompetenciaView, HabilidadView, ConocimientoView, IdiomaView, EditarPersonaView
 from auth.views import *
 
 admin.autodiscover()
@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'logout/',logout,{'next_page':'/'}, name='salir'),
     url(r'login/', auth, name='auth'),
     url(r'cambiar_clave/', cambiar_clave, name='cambiar_clave'),
-    url(r'^perfil/personales$', PersonalesView.as_view(), name='personales'),
+    url(r'^perfil/info_personal/(?P<palabra>\w+)/(?P<persona_id>[\d]+)*$', EditarPersonaView.as_view(), name='info_personal'),
     url(r'^perfil/educacion/(?P<palabra>\w+)/(?P<educacion_id>[\d]+)*$', EducacionView.as_view(), name='educacion'),
     url(r'^perfil/laboral/(?P<palabra>\w+)/(?P<laboral_id>[\d]+)*$', LaboralView.as_view(), name='laboral'),
     url(r'^perfil/conocimiento/(?P<palabra>\w+)/(?P<conocimiento_id>[\d]+)*$', ConocimientoView.as_view(), name='conocimiento'),

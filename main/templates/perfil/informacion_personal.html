@@ -6,7 +6,7 @@
 <div class="box">
     <div class="content-center">
         <img src='{{ directorio }}images/avatar.png'>
-        <h3><a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
+        <h3><a href="{% url 'info_personal' 'editar' educacion.id %}" class="ink-button blue" style="padding:0px 12px"><span class="icon-pencil"></span></a>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
     </div>
     C.I.: {{ persona.cedula|intcomma }} <br />
     Género: 
