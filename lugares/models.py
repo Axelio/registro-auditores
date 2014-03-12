@@ -22,7 +22,7 @@ class Estado(models.Model):
     class Meta:
         db_table = u'estado'
     def __unicode__(self):
-        return u'%s'%(self.nombre)
+        return self.nombre
 
 class Institucion(models.Model):
     '''

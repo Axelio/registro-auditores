@@ -289,11 +289,11 @@ class PerfilView(View):
 
 class EditarPersonaView(View):
     '''
-    Clase para la renderización de los datos de habilidad
+    Clase para la edición de datos de información de la persona
     '''
     template='perfil/editar_formulario.html'
     persona_form = EditarPersonaForm
-    titulo = 'conocimiento'
+    titulo = 'información personal'
     mensaje = ''
     tipo_mensaje = ''
     lista_filtros = ''
@@ -311,7 +311,6 @@ class EditarPersonaView(View):
             persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
         except:
             raise Http404
-        print persona
 
         self.persona_form = self.persona_form(instance=persona)
 
@@ -331,33 +330,42 @@ class EditarPersonaView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
-        persona = request.user.userprofile_set.get_query_set()[0].persona
+        persona = Persona.objects.get(id=usuario.profile.persona.id)
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-            conocimiento = request.POST['otros_conocimientos']
-
             if kwargs['palabra'] == 'editar':
-                conocimiento = Conocimiento.objects.get(id=kwargs['conocimiento_id'])
-                conocimiento.otros_conocimientos = request.POST['otros_conocimientos']
-                conocimiento.save()
+                import pdb
+                #pdb.set_trace()
+                estado = Estado.objects.get(id=request.POST['reside'])
+                fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
 
-                self.mensaje = u'Conocimientos editados exitosamente'
+                persona.primer_nombre = request.POST['primer_nombre']
+                persona.segundo_nombre = request.POST['segundo_nombre']
+                persona.primer_apellido = request.POST['primer_apellido']
+                persona.segundo_apellido = request.POST['segundo_apellido']
+                persona.genero = request.POST['genero']
+                persona.reside = estado
+                persona.direccion = request.POST['direccion']
+                persona.fecha_nacimiento = fecha_nacimiento
+                persona.tlf_reside = request.POST['tlf_reside']
+                persona.tlf_movil = request.POST['tlf_movil']
+                persona.tlf_oficina = request.POST['tlf_oficina']
+                persona.tlf_contacto = request.POST['tlf_contacto']
+                persona.estado_civil = request.POST['estado_civil']
+                persona.save()
+
+                self.mensaje = u'Información personal editada exitosamente'
                 self.tipo_mensaje = u'success'
-            else:
-                if Conocimiento.objects.filter(usuario=persona.userprofile).exists():
-                    self.mensaje = u'Usted ya tiene conocimientos guardados, por favor edítela si es necesario'
-                    self.tipo_mensaje = u'error'
-                else:
-                    conocimiento = Conocimiento.objects.create(usuario=persona.userprofile, otros_conocimientos=conocimiento)
-                    self.mensaje = u'Otros conocimientos creados exitosamente'
-                    self.tipo_mensaje = u'success'
 
             self.template = 'perfil/perfil.html'
 
+        self.diccionario.update({'persona':persona})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'formulario':self.conocimiento_form})
-        self.lista_filtros = lista_filtros(persona)
+        self.diccionario.update({'formulario':self.persona_form})
+
+        self.lista_filtros = lista_filtros(request.user.profile.persona)
         self.diccionario.update(self.lista_filtros)
+
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -382,7 +390,7 @@ class LaboralView(View):
         nueva = True
 
         try:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+            persona = Persona.objects.get(userprofile=request.user.profile.persona)
         except:
             raise Http404
 
@@ -406,12 +414,12 @@ class LaboralView(View):
                 raise Http404
 
             # Si el usuario de laboral no es el mismo al loggeado, retornar permisos denegados
-            if laboral.usuario == usuario.userprofile_set.get_query_set()[0]:
+            if laboral.usuario == usuario.profile:
                 self.laboral_form = self.laboral_form(instance=laboral)
             else:
                 raise PermissionDenied
         else:
-            self.laborales = Laboral.objects.filter(usuario=request.user.userprofile_set.get_query_set()[0])
+            self.laborales = Laboral.objects.filter(usuario=request.user.profile)
 
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
@@ -433,7 +441,7 @@ class LaboralView(View):
         guardado = False
         usuario = request.user
 
-        usuario = usuario.userprofile_set.get_query_set()[0]
+        usuario = usuario.profile
         empresa = request.POST['empresa']
         sector = request.POST['sector']
         estado = Estado.objects.get(id=request.POST['estado'])
@@ -485,7 +493,7 @@ class LaboralView(View):
 
             self.template = 'perfil/perfil.html'
 
-        persona = request.user.userprofile_set.get_query_set()[0].persona
+        persona = request.user.profile.persona
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -524,7 +532,7 @@ class CompetenciaView(View):
 
         # Obtener la persona para renderizarla en la plantilla
         try:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+            persona = Persona.objects.get(userprofile=request.user.profile.persona)
         except:
             raise Http404
 
@@ -555,7 +563,7 @@ class CompetenciaView(View):
                 raise Http404
 
             # Si el usuario de laboral no es el mismo al loggeado, retornar permisos denegados
-            if competencia.usuario == usuario.userprofile_set.get_query_set()[0]:
+            if competencia.usuario == usuario.profile:
                 self.competencia_form = self.competencia_form(instance=conocimiento)
             else:
                 raise PermissionDenied
@@ -584,7 +592,7 @@ class CompetenciaView(View):
                     l_competencia = respuesta.split('_')[1] # Optenemos el ID de la competencia
                     l_competencia = ListaCompetencia.objects.get(id=l_competencia)
 
-                    competencia = Competencia.objects.get(usuario=request.user.userprofile_set.get_query_set()[0], competencia = l_competencia)
+                    competencia = Competencia.objects.get(usuario=request.user.profile, competencia = l_competencia)
                     competencia.nivel = nivel
                     competencia.save()
 
@@ -598,7 +606,7 @@ class CompetenciaView(View):
                     l_competencia = respuesta.split('_')[1] # Optenemos el ID de la competencia
                     l_competencia = ListaCompetencia.objects.get(id=l_competencia)
 
-                    competencia = Competencia.objects.create(usuario=request.user.userprofile_set.get_query_set()[0], nivel=nivel, competencia=l_competencia)
+                    competencia = Competencia.objects.create(usuario=request.user.profile, nivel=nivel, competencia=l_competencia)
 
                 self.mensaje = u'Las competencias han sido creadas exitosamente'
                 self.tipo_mensaje = u'success'
@@ -606,7 +614,7 @@ class CompetenciaView(View):
 
             self.template = 'perfil/perfil.html'
 
-        persona = request.user.userprofile_set.get_query_set()[0].persona
+        persona = request.user.profile.persona
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -644,7 +652,7 @@ class HabilidadView(View):
         nueva = True
 
         try:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+            persona = Persona.objects.get(id=usuario.profile.persona.id)
         except:
             raise Http404
 
@@ -687,7 +695,7 @@ class HabilidadView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
-        persona = request.user.userprofile_set.get_query_set()[0].persona
+        persona = request.user.profile.persona
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
             habilidad = request.POST['habilidad']
 
@@ -740,7 +748,7 @@ class ConocimientoView(View):
         nueva = False
 
         try:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+            persona = Persona.objects.get(userprofile=request.user.profile.persona)
         except:
             raise Http404
 
@@ -790,7 +798,7 @@ class ConocimientoView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
-        persona = request.user.userprofile_set.get_query_set()[0].persona
+        persona = request.user.profile.persona
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
             conocimiento = request.POST['otros_conocimientos']
 
@@ -843,7 +851,7 @@ class IdiomaView(View):
         nueva = True
 
         try:
-            persona = Persona.objects.get(userprofile=request.user.userprofile_set.get_query_set()[0].persona)
+            persona = Persona.objects.get(userprofile=request.profile.persona)
         except:
             raise Http404
 
