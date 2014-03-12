@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import logout
 from django.conf import settings
 from django.conf.urls.static import static
+import os
 
 from django.contrib import admin
 from personas.views import PersonalesView
