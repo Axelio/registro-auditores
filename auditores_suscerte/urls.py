@@ -29,3 +29,9 @@ urlpatterns = patterns('',
     url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
     url(r'^$', auth, name='inicio'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+    {'document_root': os.path.join(os.path.dirname(__file__), 'static')} ),
+    )
