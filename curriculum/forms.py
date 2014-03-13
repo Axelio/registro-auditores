@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura
-from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion, Laboral, Competencia, Habilidad, Idioma
+from curriculum.models import Certificacion, Conocimiento, Competencia, ListaCompetencia, Educacion, Laboral, Competencia, Habilidad, Idioma, Cita
 from lugares.models import Institucion
 import datetime
 
@@ -16,6 +16,40 @@ NIVELES_COMPTETENCIA = (
         ('basico',u'Básico'),
         ('nada','Nada'),
         )
+
+class CitasForm(forms.ModelForm):
+    '''
+    Formulario para la selección de fechas tentativas para la cita
+    '''
+    class Meta:
+        model = Cita
+        exclude = ('usuario','cita_fijada')
+        widgets = {
+            'primera_fecha': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio', 'data-position':'bottom'}),
+            'segunda_fecha': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio', 'data-position':'bottom'}),
+            'tercera_fecha': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio', 'data-position':'bottom'}),
+            }
+    def clean(self):
+        '''
+        Función para validaciones generales del modelo Cita
+        '''
+        primera_fecha = self.data['primera_fecha'] 
+        segunda_fecha = self.data['segunda_fecha'] 
+        tercera_fecha = self.data['tercera_fecha'] 
+
+        # La fecha viene dada en string, por lo tanto se transforma a tipo fecha
+        primera_fecha = datetime.datetime.strptime(primera_fecha, '%d/%m/%Y')
+        segunda_fecha = datetime.datetime.strptime(segunda_fecha, '%d/%m/%Y')
+        tercera_fecha = datetime.datetime.strptime(tercera_fecha, '%d/%m/%Y')
+        fecha_actual = datetime.datetime.now()
+        # La fecha elegida no puede ser menor a la actual:
+        if primera_fecha < fecha_actual:
+            raise forms.ValidationError(u'La fecha elegida no puede ser menor a la actual')
+        if segunda_fecha < fecha_actual:
+            raise forms.ValidationError(u'La fecha elegida no puede ser menor a la actual')
+        if tercera_fecha < fecha_actual:
+            raise forms.ValidationError(u'La fecha elegida no puede ser menor a la actual')
+        return self.cleaned_data
 
 class CompetenciaForm(forms.ModelForm):
     '''
@@ -103,8 +137,8 @@ class EducacionForm(forms.ModelForm):
         widgets = {
             'titulo': TextInput(attrs={'type':'text','required':'required','class':'form-control','placeholder':'Título obtenido'}),
             'carrera': TextInput(attrs={'type':'text','class':'form-control','placeholder':'Carrera estudiada'}),
-            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio','id':'popupDatepicker'}),
-            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
+            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio', 'data-position':'bottom'}),
+            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de culminación', 'data-position':'bottom'}),
         }
 
 class LaboralForm(forms.ModelForm):
@@ -121,8 +155,8 @@ class LaboralForm(forms.ModelForm):
             'telefono': TextInput(attrs={'type':'text','placeholder':'Número telefónico de trabajo'}),
             'cargo': TextInput(attrs={'type':'text','placeholder':'Cargo trabajado'}),
             'funcion': Textarea(attrs={'type':'text','placeholder':'Funciones desempeñadas'}),
-            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio','id':'popupDatepicker'}),
-            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de culminación','id':'popupDatepicker2'}),
+            'fecha_inicio': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de inicio','data-position':'bottom'}),
+            'fecha_fin': TextInput(attrs={'type':'text','required':'required','class':'ink-datepicker','data-format':'dd/mm/yyyy','placeholder':'Fecha de culminación','data-position':'bottom'}),
             'retiro': TextInput(attrs={'type':'text','placeholder':'Razón de retiro'}),
             'direccion_empresa': Textarea(attrs={'type':'text','placeholder':'Dirección de la empresa'}),
         }

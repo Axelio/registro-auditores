@@ -17,15 +17,6 @@
 <div class="ink-grid">
     {% include 'menu_perfil.html' %}
 
-    <div class="ink-grid">
-        <nav class="ink-navigation" id="educacion">
-            <ul class="breadcrumbs">
-                <li><a href="/">Inicio</a></li>
-                <li class="active"><a href="#">Perfil</a></li>
-            </ul>
-        </nav>
-    </div>
-
     <div class="space">
         {% if mensaje %}
             <div class="ink-alert basic {{ tipo_mensaje }}">
@@ -36,6 +27,14 @@
         <div class="column-group gutters">
             <div class="large-30 medium-50 small-100">
                 {% include "perfil/informacion_personal.html" %}
+                <div class="box">
+                    {% if not requisitos %}
+                        <br />
+                        <span class="ink-label info">Nota</span> recuerde actualizar toda su información curricular para poder solicitar una cita.
+                    {% endif %}
+                    <br />
+                    <span class="ink-label info">Nota</span> Debe <a href="citas">fijar su cita</a> para notificarle a los administradores la culminación de su carga curricular.
+                </div>
             </div>
             <div class="large-70 medium-50 small-100 push-left">
                 <div class="box">

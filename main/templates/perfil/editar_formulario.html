@@ -29,16 +29,16 @@
     </div>
 
     <div class="space">
-        {% if mensaje %}
-            <div class="ink-alert basic {{ tipo_mensaje }}">
-                <button class="ink-dismiss" id="cerrar">&times;</button>
-                <p>{{ mensaje }}</p>
-            </div>
-        {% endif %}
         <div class="column-group">
             <div class="space">
                 <div class="space">
                     <div class="box">
+                        {% if mensaje %}
+                            <div class="ink-alert basic {{ tipo_mensaje }}">
+                                <button class="ink-dismiss">&times;</button>
+                                <p>{{ mensaje }}</p>
+                            </div>
+                        {% endif %}
                         <form class="ink-form" method="POST">{% csrf_token %}
                             <fieldset class="column-group">
                                 {% ifequal titulo 'competencias' %}
@@ -72,6 +72,12 @@
                                     {% endfor %}
                                 {% else %}
                                     {% for form in formulario %}
+                                        {% if form.errors %}
+                                            <div class="ink-alert basic error">
+                                                <button class="ink-dismiss">&times;</button>
+                                                <p>{{ form.errors }}</p>
+                                            </div>
+                                        {% endif %}
                                         <div class="control-group required validation">
                                             {{ form.label }}
                                         <div class="control">

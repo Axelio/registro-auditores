@@ -33,12 +33,16 @@ class Certificacion(models.Model):
     def __unicode__(self):
         return u'%s - %s' %(self.persona, self.titulo)
 
+OPCIONES_CITAS = (('primera_fecha','Primera fecha'),
+                  ('segunda_fecha','Segunda fecha'),
+                  ('tercera_fecha','Tercera fecha')
+                )
 class Cita(models.Model):
     usuario = models.ForeignKey(Persona)
-    primera_cita = models.DateTimeField()
-    segunda_cita = models.DateTimeField()
-    tercera_cita = models.DateTimeField()
-    cita_fijada = models.DateTimeField()
+    primera_fecha = models.DateField()
+    segunda_fecha = models.DateField()
+    tercera_fecha = models.DateField()
+    cita_fijada = models.CharField(max_length=15, choices=OPCIONES_CITAS, blank=True)
     class Meta:
         db_table = u'cita'
     def __unicode__(self):
