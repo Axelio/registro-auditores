@@ -39,6 +39,7 @@ class CitasForm(forms.ModelForm):
                     'data-format': 'dd/mm/yyyy',
                     'placeholder': 'Fecha de inicio',
                     'data-position': 'bottom'}),
+
             'segunda_fecha': TextInput(
                 attrs={
                     'type': 'text',
@@ -47,6 +48,7 @@ class CitasForm(forms.ModelForm):
                     'data-format': 'dd/mm/yyyy',
                     'placeholder': 'Fecha de inicio',
                     'data-position': 'bottom'}),
+
             'tercera_fecha': TextInput(
                 attrs={
                     'type': 'text',

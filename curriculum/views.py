@@ -106,12 +106,27 @@ class CitasView(View):
         self.citas_form = self.citas_form(request.POST)
         usuario = request.user
         nueva = True
+        fecha_1 = datetime.datetime.strptime(request.POST['primera_fecha'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+        fecha_2 = datetime.datetime.strptime(request.POST['segunda_fecha'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+        fecha_3 = datetime.datetime.strptime(request.POST['tercera_fecha'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+
+
 
         if self.citas_form.is_valid():
-            print "Todo fino"
+            if nueva:
+                cita = Cita.objects.create(
+                        usuario=usuario.profile,
+                        primera_fecha = fecha_1,
+                        segunda_fecha = fecha_2,
+                        tercera_fecha = fecha_3)
+                self.mensaje = "Las fechas para cita ha sido cargada con éxito. "
+                self.mensaje += "Se ha enviado su información a los administradores"
+                self.tipo_mensaje = 'success'
+                self.template = 'perfil/perfil.html'
         else:
-            self.mensaje = self.citas_form.errors['__all__'][0]
-            self.tipo_mensaje = 'error'
+            if self.citas_form.errors:
+                self.mensaje = self.citas_form.errors['__all__'][0]
+                self.tipo_mensaje = 'error'
         self.diccionario.update({'persona':usuario.profile.persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -524,7 +539,6 @@ class LaboralView(View):
         self.laboral_form = self.laboral_form(request.POST)
         usuario = request.user
         guardado = False
-        usuario = request.user
 
         usuario = usuario.profile
         empresa = request.POST['empresa']
@@ -539,18 +553,51 @@ class LaboralView(View):
         direccion_empresa = request.POST['direccion_empresa']
         trabajo_actual = False
 
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-            if kwargs['palabra'] == 'editar':
-                laboral = Laboral.objects.get(id=kwargs['laboral_id'])
-                laboral.save()
+        if self.laboral_form.is_valid():
+            if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+                if kwargs['palabra'] == 'editar':
+                    laboral = Laboral.objects.get(id=kwargs['laboral_id'])
+                    laboral.save()
 
-                self.mensaje = u'Información laboral ha sido editada exitosamente'
-                self.tipo_mensaje = u'success'
-            if kwargs['palabra'] == 'editar':
-                # Si se edita información laboral 
-                # Búsqueda de variables con los IDs enviados por POST
-                
-                laboral = Laboral.objects.get(id=kwargs['laboral_id'])
+                    self.mensaje = u'Información laboral ha sido editada exitosamente'
+                    self.tipo_mensaje = u'success'
+                if kwargs['palabra'] == 'editar':
+                    # Si se edita información laboral 
+                    # Búsqueda de variables con los IDs enviados por POST
+                    
+                    laboral = laboral.objects.get(id=kwargs['laboral_id'])
+                    laboral.empresa = empresa
+                    laboral.sector = sector
+                    laboral.estado = estado
+                    laboral.telefono = telefono
+                    laboral.cargo = cargo
+                    laboral.funcion = funcion
+                    laboral.fecha_inicio = fecha_inicio
+                    laboral.fecha_fin = fecha_fin
+                    laboral.retiro = retiro
+                    laboral.direccion_empresa = direccion_empresa
+                    laboral.trabajo_actual = trabajo_actual
+
+                    laboral.save()
+
+                    self.mensaje = u'Información laboral ha sido editada exitosamente'
+                    self.tipo_mensaje = u'success'
+
+                else:
+                    # Si se crea información laboral 
+                    laboral = Laboral.objects.create(usuario = usuario, empresa=empresa, sector=sector, estado=estado, telefono=telefono, cargo=cargo, funcion=funcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, retiro=retiro, direccion_empresa=direccion_empresa, trabajo_actual=trabajo_actual)
+                    self.mensaje = u'Información laboral ha sido creada exitosamente'
+                    self.tipo_mensaje = u'success'
+
+
+
+            self.template = 'perfil/perfil.html'
+
+        else:
+            if self.laboral_form.errors.has_key('__all__'):
+                self.tipo_mensaje = 'error'
+                self.mensaje = self.laboral_form.errors['__all__'][0]
+                laboral = laboral.objects.get(id=kwargs['laboral_id'])
                 laboral.empresa = empresa
                 laboral.sector = sector
                 laboral.estado = estado
@@ -563,21 +610,8 @@ class LaboralView(View):
                 laboral.direccion_empresa = direccion_empresa
                 laboral.trabajo_actual = trabajo_actual
 
-                laboral.save()
-
-                self.mensaje = u'Información laboral ha sido editada exitosamente'
-                self.tipo_mensaje = u'success'
-
-            else:
-                # Si se crea información laboral 
-                laboral = Laboral.objects.create(usuario = usuario, empresa=empresa, sector=sector, estado=estado, telefono=telefono, cargo=cargo, funcion=funcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, retiro=retiro, direccion_empresa=direccion_empresa, trabajo_actual=trabajo_actual)
-                self.mensaje = u'Información laboral ha sido creada exitosamente'
-                self.tipo_mensaje = u'success'
-
-
-
-            self.template = 'perfil/perfil.html'
-
+                laboral.save(commit=False)
+                self.laboral_form(instance=laboral)
         persona = request.user.profile.persona
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})

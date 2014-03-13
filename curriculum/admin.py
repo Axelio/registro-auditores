@@ -1,6 +1,9 @@
 from django.contrib import admin
 from curriculum.models import *
-from curriculum.forms import CertificacionForm, ConocimientoForm, CompetenciaForm, Educacion, ConocimientoAdminForm
+from curriculum.forms import (
+        CertificacionForm, ConocimientoForm,
+        CompetenciaForm, Educacion, 
+        ConocimientoAdminForm)
 
 class CertificacionAdmin(admin.ModelAdmin):
     form = CertificacionForm
@@ -25,6 +28,15 @@ class ListaCompetenciaAdmin(admin.ModelAdmin):
     list_display = ('nombre','tipo',)
     list_filter = ('tipo',)
     ordering = ('tipo','id')
+
+class CitaAdmin(admin.ModelAdmin):
+    list_display = (
+            'usuario',
+            'primera_fecha',
+            'segunda_fecha',
+            'tercera_fecha',
+            'cita_fijada')
+admin.site.register(Cita, CitaAdmin)
 admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
 admin.site.register(Educacion)
 admin.site.register(TipoEducacion)

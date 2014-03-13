@@ -38,7 +38,7 @@ OPCIONES_CITAS = (('primera_fecha','Primera fecha'),
                   ('tercera_fecha','Tercera fecha')
                 )
 class Cita(models.Model):
-    usuario = models.ForeignKey(Persona)
+    usuario = models.ForeignKey(UserProfile)
     primera_fecha = models.DateField()
     segunda_fecha = models.DateField()
     tercera_fecha = models.DateField()

@@ -73,10 +73,12 @@
                                 {% else %}
                                     {% for form in formulario %}
                                         {% if form.errors %}
-                                            <div class="ink-alert basic error">
-                                                <button class="ink-dismiss">&times;</button>
-                                                <p>{{ form.errors }}</p>
-                                            </div>
+                                            {% for error in form.errors %}
+                                                <div class="ink-alert basic error">
+                                                    <button class="ink-dismiss">&times;</button>
+                                                        <p>{{ error }}</p>
+                                                </div>
+                                            {% endfor %}
                                         {% endif %}
                                         <div class="control-group required validation">
                                             {{ form.label }}
