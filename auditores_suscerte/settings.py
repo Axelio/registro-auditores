@@ -8,6 +8,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+MANAGERS = ('adiaz@suscerte.gob.ve',)
+
+HOST = 'http://localhost:8000'
+
 LOGIN_URL='/login'
 LOGIN_REDIRECT_URL = '/perfil/'
 
