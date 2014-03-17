@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry, ADDITION, DELETION, CHANGE
+from django.contrib import messages
 from django.core.mail import send_mail
 from personas.models import Persona
 from lugares.models import Estado, Institucion
@@ -61,7 +62,7 @@ class Cita(models.Model):
         db_table = u'cita'
 
     def __unicode__(self):
-        return u'%s - %s' % (self.usuario, self.cita_fijada)
+        return u'%s' % (self.usuario)
 
 
 @receiver(post_save, sender=Cita)
@@ -77,18 +78,42 @@ def post_save_cita(sender, **kwargs):
             segunda_fecha=cita.segunda_fecha,
             tercera_fecha=cita.tercera_fecha)
 
-    # Envío de mail
-    asunto = u'[SUSCERTE] Nueva propuesta de cita de %s' % (cita.usuario)
-    emisor = settings.EMAIL_HOST_USER
-    destinatarios = settings.MANAGERS
-    mensaje = 'Ha llegado una nueva solicitud de cita para entrevista'
-    mensaje += ' por lo que este correo ha llegado hasta los managers'
-    mensaje += ' y decidir su fecha. Ahora mismo puede revisar la '
-    mensaje += 'propuesta en: '
-    mensaje += '%s/admin/curriculum/cita/%s/.' % (settings.HOST, cita.id)
+    if cita.cita_fijada == None:
+        # Si no hay una fecha fijada aún,
+        # se envía un mail a los admin
+        asunto = u'[SUSCERTE] Nueva propuesta de cita de %s' % (cita.usuario)
+        emisor = settings.EMAIL_HOST_USER
+        destinatarios = settings.MANAGERS
+        mensaje = 'Ha llegado una nueva solicitud de cita para entrevista'
+        mensaje += ' por lo que este correo ha llegado hasta los managers'
+        mensaje += ' y decidir su fecha. Ahora mismo puede revisar la '
+        mensaje += 'propuesta en: '
+        mensaje += '%s/admin/curriculum/cita/%s/.' % (settings.HOST, cita.id)
+    else:
+        # Si hay una fecha fijada, se envía un mail
+        # al usuario indicándole la fecha definitiva
+        asunto = u'[SUSCERTE] Fijada fecha para cita'
+        emisor = settings.EMAIL_HOST_USER
+        destinatarios = [cita.usuario.user.email]
+
+        # Búsqueda de fecha definitiva:
+        fecha_fijada = ''
+        if cita.cita_fijada == 'primera_fecha':
+            fecha_fijada = cita.primera_fecha
+        elif cita.cita_fijada == 'segunda_fecha':
+            fecha_fijada = cita.segunda_fecha
+        else:
+            fecha_fijada = cita.tercera_fecha
+
+        mensaje = u'Se ha elegido una fecha definitiva para su '
+        mensaje += u'cita según sus propuestas, por lo que '
+        mensaje += u'se ha fijado la cita '
+        mensaje += u'para el día %s/%s/%s' % (fecha_fijada.day,
+                fecha_fijada.month,
+                fecha_fijada.year)
 
     send_mail(subject=asunto, message=mensaje,
-            from_email=emisor, recipient_list=destinatarios)
+                from_email=emisor, recipient_list=destinatarios)
 
 
 class ListaIdiomas(models.Model):
