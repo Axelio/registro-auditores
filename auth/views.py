@@ -38,7 +38,7 @@ class Auth2(View):
                        dictionary=self.diccionario,
                      )
 
-    #@method_decorator(watch_login)
+    @method_decorator(watch_login)
     def post(self, request, *args, **kwargs):
         form = self.form(request.POST)
         self.diccionario.update({'user':request.user})
@@ -66,10 +66,10 @@ def cambiar_clave(request):
     diccionario = {}
     titulo = 'cambiar contraseña'
     diccionario.update({'titulo':titulo})
+    diccionario.update({'palabra_clave':'cambiar'})
+    diccionario.update({'auth':True})
+    diccionario.update({'formulario':True})
     return password_change(request, template_name='auth/formulario.html',
-                #email_template_name='',
-                #subject_template_name='reset_subject.txt',
                 post_change_redirect=reverse('inicio'),
                 extra_context = diccionario,
                 )
-

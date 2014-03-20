@@ -21,8 +21,13 @@
                     <div class="large-50 medium-100 small-100">
                         <div class="space">
                             {% if not form.errors %}
-                                <h1><a>SUSCERTE</a></h1>
-                                Es el organismo encargado de coordinar e implementar el modelo jerárquico de la infraestructura Nacional de Certificación Electrónica, también acredita, supervisa y controla a los Proveedores de Servicios de Certificación (PSC) y es el ente responsable de la Autoridad de Certificación Raíz del Estado Venezolano. Así mismo tiene como alcance proveer estándares y herramientas para implementar una tecnología de información óptima en las empresas del sector público, a fin de obtener un mejor funcionamiento y proporcionar niveles de seguridad confiables.
+                                {% ifnotequal palabra_clave 'resetear' %}
+                                    <h1><a>SUSCERTE</a></h1>
+                                    Es el organismo encargado de coordinar e implementar el modelo jerárquico de la infraestructura Nacional de Certificación Electrónica, también acredita, supervisa y controla a los Proveedores de Servicios de Certificación (PSC) y es el ente responsable de la Autoridad de Certificación Raíz del Estado Venezolano. Así mismo tiene como alcance proveer estándares y herramientas para implementar una tecnología de información óptima en las empresas del sector público, a fin de obtener un mejor funcionamiento y proporcionar niveles de seguridad confiables.
+                                {% else %}
+                                    <h1><a>¿Olvidó su contraseña?</a></h1>
+                                    Para poder recuperar su contraseña debe ingresar su correo electrónico. De esta forma le podremos enviar un enlace de reseteo de contraseña.
+                                {% endifnotequal %}
                             {% else %}
                                 <div class="ink-alert block error">
                                     <h4>Vaya, parece que hay un error</h4>
@@ -54,15 +59,39 @@
                                             </div>
                                         {% endfor %}
                                     </fieldset>
-                                    <div>
-                                        <input type="submit" value="Guardar" class="ink-button blue">
-                                    </div>
+                                    {% ifnotequal palabra_clave 'resetear' %}
+                                        <fieldset class="small">
+                                            <a href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a>
+                                        </fieldset>
+                                        <div>
+                                            <input type="submit" value="Entrar" class="ink-button blue">
+                                        </div>
+                                    {% else %}
+                                        <div>
+                                            <input type="submit" value="Enviar" class="ink-button blue">
+                                        </div>
+                                    {% endifnotequal %}
+                                {% elif formulario %}
+                                    <fieldset class="column-group">
+                                        {% for formulario in form %}
+                                            <div class="control-group required validation">
+                                                {{ formulario.label }}
+                                            <div class="control">
+                                                {{ formulario }}
+                                            </div>
+                                                <p class="tip">{{ formulario.help_text }}</p>
+                                            </div>
+                                        {% endfor %}
+                                    </fieldset>
+                                        <div>
+                                            <input type="submit" value="Enviar" class="ink-button blue">
+                                        </div>
                                 {% else %}
                                     <div class="content-center">
                                         <h3 class="content-center"><a href="{% url 'perfil' %}">Revisa tu perfil</a></h3>
                                         <div class="column-group">
                                             <div class="large-33 content-center">
-                                                <a href="{% url 'perfil' %}#educacion" style="text-decoration: none"><i class="icon-envelope icon-4x"></i><br />Educacion</a>
+                                                <a href="{% url 'perfil' %}#educacion" style="text-decoration: none"><i class="icon-envelope icon-4x"></i><br />Educación</a>
                                             </div>
                                             <div class="large-33 content-center">
                                                 <a href="{% url 'perfil' %}#laboral" style="text-decoration: none"><i class=" icon-briefcase icon-4x"></i><br />Laboral</a>

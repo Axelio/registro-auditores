@@ -12,7 +12,7 @@
                 <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
                 <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
                     <ul class="submenu">
-                        <li><a class="small" href="#">Cambiar contraseña</a></li>
+                        <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
                         <li><a class="small" href="{% url 'perfil' %}">Ver perfil</a></li>
                         <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
                     </ul>
@@ -46,7 +46,7 @@
         <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Perfil <i class="icon-caret-down"></i></a>
             <ul class="submenu">
                 <li class="small"><a href="{% url 'perfil' %}">Ver perfil</a></li>
-                <li class="small"><a href="#">Cambiar contraseña</a></li>
+                <li class="small"><a href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
                 <li class="small"><a href="{% url 'salir' %}">Cerrar sesión</a></li>
             </ul>
         </li>

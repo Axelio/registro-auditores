@@ -1,0 +1,68 @@
+{% extends "base_ink.html" %}
+
+{% block personales %}
+
+{% include "base_ink.html" %}
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <body>
+
+{% load static %}
+{% load humanize %} 
+ 
+  <!-- Main Page Content and Sidebar -->
+  
+<div class="ink-grid">
+    {% include 'menu_perfil.html' %}
+
+    <div class="space">
+        <form class="ink-form" method="POST">{% csrf_token %}
+            <div class="box">
+                <div class="column-group" style="background:white">
+		    <div class="space">
+			{% if validlink %}
+			    <p>Por favor introduzca su contraseña nueva dos veces. Nosotros revisaremos que las haya escrito correctamente.</p>
+			    <form class="ink" action="" method="post">
+				<fieldset class="column-group">
+				    <input type="hidden" value="{{ csrf_token }}" name="csrfmiddlewaretoken">
+				    {% for formulario in form %}
+					{% if formulario.errors %}
+					    <div class="ink-alert block error">
+						<h4>Vaya, parece que hay un error</h4>
+						<p>{{ formulario.errors }}</p>
+					    </div>
+					{% endif %}
+					<div class="control-group required validation">
+					    {{ formulario.label }}
+					<div class="control">
+					    {{ formulario }}
+					</div>
+					    <p class="tip">{{ formulario.help_text }}</p>
+					</div>
+				    {% endfor %}
+				</fieldset>
+				<div class="content-center">
+				    <input type="submit" value="Enviar" class="ink-button blue">
+				</div>
+			    </form>
+			{% else %}
+			    
+			    <h1>La contraseña no se puede configurar</h1>
+			    <p>El enlace para el cambio de contraseña no es válido, <br />
+			    posiblemente sea porque ya ha sido utilizada. <br />
+			    Por favor, <a href="password_reset_done">solicite una nueva contraseña.</a></p>
+			{% endif %}
+		    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include 'footer.html' %} 
+
+  </body>
+</html>
+{% endblock %}
