@@ -140,22 +140,8 @@ a:hover.tooltips span {
                                 {% if form.errors %}
                                     <hr>
                                 {% endif %}
-                                {% comment %}  
-                                {% if form.help_text %}
-                                    <a class="tooltips" href="#"><img src="{{ directorio }}images/help.png" /><span>{{ form.help_text }}</span></a>
-                                {% endif %}
-                                {% endcomment %}
                             </div>
                         {% endfor %}
-                        <div>
-                            {% if email2_error %}
-                                <hr>
-                                <b>{{ error_email2 }}</b>
-                            {% endif %}
-                            {% if email2_error %}
-                                <hr>
-                            {% endif %}
-                        </div>
 
                         <button name="wizard_goto_step" class="btn btn-success" type="submit" value="Enviar currículum">Guardar</button>
                     </form>

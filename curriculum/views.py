@@ -271,34 +271,25 @@ class CurriculumView(View):
         error_general = ''
         error = False
 
-        if not request.POST.has_key('email_2'):
-            email2_error = u'Este campo es obligatorio.'
-            self.persona_form.errors = True
-            error = True
-        else:
-            valor_email2 = request.POST['email_2']
+        if self.persona_form.is_valid():
 
-        if not self.persona_form.errors:
-            if not request.POST['email'] == request.POST['email_2']:
+            # Revisar si ya hay alguna cédula o email guardada para este usuario
+            if Persona.objects.filter(cedula=request.POST['cedula']).exists():
                 error = True
-                error_general = u'Ambas direcciones de correo electrónico deben coincidir. Por favor, revise y vuelva a intentarlo.'
+                error_general = u'Esta persona ya se encuentra registrada con esa cédula.'
+            if Persona.objects.filter(email=request.POST['email']).exists() or User.objects.filter(email=request.POST['email']).exists():
+                error = True
+                error_general = u'Esta persona ya se encuentra registrada con ese email.'
 
-        # Revisar si ya hay alguna cédula o email guardada para este usuario
-        if Persona.objects.filter(cedula=request.POST['cedula']).exists():
-            error = True
-            error_general = u'Esta persona ya se encuentra registrada con esa cédula.'
-        if Persona.objects.filter(email=request.POST['email']).exists() or User.objects.filter(email=request.POST['email']).exists():
-            error = True
-            error_general = u'Esta persona ya se encuentra registrada con ese email.'
-
-        self.diccionario.update(csrf(request))
-        self.diccionario.update({'persona_form':self.persona_form})
-        self.diccionario.update({'valor_email2':valor_email2})
-        self.diccionario.update({'email2_error':email2_error})
-        self.diccionario.update({'error_general':error_general})
+            self.diccionario.update(csrf(request))
+            self.diccionario.update({'persona_form':self.persona_form})
+            self.diccionario.update({'valor_email2':valor_email2})
+            self.diccionario.update({'email2_error':email2_error})
+            self.diccionario.update({'error_general':error_general})
 
         # Si hay algún error, se renderiza de nuevo la plantilla con los errores encontrados
-        if error:
+        if error or not self.persona_form.is_valid():
+            self.diccionario.update({'persona_form':self.persona_form})
             return render(request, 
                            template_name=self.template,
                            dictionary=self.diccionario,

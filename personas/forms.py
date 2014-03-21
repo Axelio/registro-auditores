@@ -145,7 +145,8 @@ class PersonaForm(forms.ModelForm):
                     'type': 'text',
                     'required': 'required',
                     'class': 'form-control',
-                    'placeholder': 'Fecha de nacimiento'}),
+                    'placeholder': 'Fecha de nacimiento',
+                    'id':'popupDatepicker'}),
             'email': TextInput(
                 attrs={
                     'type': 'email',
@@ -169,6 +170,15 @@ class PersonaForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': u'Teléfono de oficina'}),
         }
+
+    def clean_email(self):
+        '''
+        Función para validar correos electrónicos
+        '''
+        if not self.cleaned_data['email'] == self.data['email2']:
+            error = u'Los correos electrónicos deben coincidir'
+            raise forms.ValidationError(error)
+        return self.cleaned_data
 
     def clean_fecha_nacimiento(self):
         '''
