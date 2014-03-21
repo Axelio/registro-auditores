@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from lib.funciones import fecha_futura
 from django.forms import ModelForm, TextInput, Textarea, Select, DateInput
-import datetime
-from captcha.fields import CaptchaField
+from captcha.fields import ReCaptchaField
+from lib.funciones import fecha_futura
 from personas.models import Persona
+import datetime
 
 TELEFONO_PUBLICO = (('movil', u'Teléfono móvil'),
                     ('fijo', u'Teléfono fijo'),
@@ -93,6 +93,14 @@ class PersonaForm(forms.ModelForm):
     '''
     Formulario general para el ingreso de personas
     '''
+
+    email2 = forms.EmailField(widget=TextInput(
+                attrs={
+                    'type': 'email',
+                    'required': 'required',
+                    'class': 'form-control',
+                    'placeholder': 'Confirme su correo'}))
+    captcha = ReCaptchaField()
 
     class Meta:
         # Se determina cuál es el modelo al que va a utilizar

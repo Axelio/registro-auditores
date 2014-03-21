@@ -8,6 +8,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+RECAPTCHA_PUBLIC_KEY = '6Ld-Z_ASAAAAAB948Z2NOCG2VKDVPC80ShdNwp10'
+RECAPTCHA_PRIVATE_KEY = '6Ld-Z_ASAAAAAN38iuzIo2tH3QPZDiGnrZgMV-7a'
+RECAPTCHA_USE_SSL = True
+
 MANAGERS = ('adiaz@suscerte.gob.ve',)
 
 HOST = 'http://localhost:8000'
@@ -61,6 +65,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sites',
     'debug_toolbar',
+    'captcha',
     'axes',
     'compressor',
     'curriculum',
