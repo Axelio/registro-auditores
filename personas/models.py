@@ -5,10 +5,10 @@ from lugares.models import *
 
 # Modelo de Persona
         
-ESTADO_CIVIL = (('s','Soltero/a'),
-                ('c','Casado/a'),
-                ('d','Divorciado/a'),
-                ('v','Viudo/a')
+ESTADO_CIVIL = (('s','Soltero(a)'),
+                ('c','Casado(a)'),
+                ('d','Divorciado(a)'),
+                ('v','Viudo(a)')
                )
 
 TELEFONO_PUBLICO = (('movil',u'Teléfono móvil'),
