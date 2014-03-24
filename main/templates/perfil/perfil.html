@@ -55,6 +55,7 @@
                                     <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
                                     <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red"><span class="icon-trash"></span></a>
                                 </div>
+                                <br />
                             {% endfor %}
                         {% else %}
                             Usted no posee ninguna información educativa. Por favor, registre una.

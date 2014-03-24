@@ -42,12 +42,17 @@
 
     <ul class="menu vertical flat gray hide-all" id="topbar_menu">
     <div class="push-right">
-        <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
-        <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
-        <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
-        <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
-        <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
-        <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+        <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
+        <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Currículum <i class="icon-caret-down"></i></a>
+            <ul class="submenu">
+                <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
+                <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
+                <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
+                <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
+                <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
+                <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+            </ul>
+        </li>
         <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Perfil <i class="icon-caret-down"></i></a>
             <ul class="submenu">
                 <li class="small"><a href="{% url 'perfil' %}">Ver perfil</a></li>
