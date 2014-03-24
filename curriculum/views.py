@@ -497,15 +497,6 @@ class LaboralView(View):
         self.diccionario.update({'formulario':self.laboral_form()})
 
         # Si se elimina una Educación
-        if kwargs['palabra'] == 'eliminar':
-            educacion = Laboral.objects.get(id=int(kwargs['laboral_id']))
-            educacion.delete()
-
-            self.mensaje = u'Información laboral ha sido eliminada exitosamente'
-            self.tipo_mensaje = u'success'
-
-            self.template = 'perfil/perfil.html'
-
         if kwargs.has_key('laboral_id') and not kwargs['laboral_id'] == None:
             nueva = False
             try:
@@ -521,6 +512,14 @@ class LaboralView(View):
         else:
             self.laborales = Laboral.objects.filter(usuario=request.user.profile)
 
+        if kwargs['palabra'] == 'eliminar':
+            educacion = Laboral.objects.get(id=int(kwargs['laboral_id']))
+            educacion.delete()
+
+            self.mensaje = u'Información laboral ha sido eliminada exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -555,12 +554,6 @@ class LaboralView(View):
 
         if self.laboral_form.is_valid():
             if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-                if kwargs['palabra'] == 'editar':
-                    laboral = Laboral.objects.get(id=kwargs['laboral_id'])
-                    laboral.save()
-
-                    self.mensaje = u'Información laboral ha sido editada exitosamente'
-                    self.tipo_mensaje = u'success'
                 if kwargs['palabra'] == 'editar':
                     # Si se edita información laboral 
                     # Búsqueda de variables con los IDs enviados por POST
@@ -612,8 +605,8 @@ class LaboralView(View):
 
                 laboral.save(commit=False)
                 self.laboral_form(instance=laboral)
-        persona = request.user.profile.persona
 
+        persona = request.user.profile.persona
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})

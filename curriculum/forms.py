@@ -277,18 +277,3 @@ class LaboralForm(forms.ModelForm):
                     'type': 'text',
                     'placeholder': 'Dirección de la empresa'}),
         }
-
-    def clean_fecha_inicio(self):
-        '''
-        Función para validaciones generales del modelo Laboral
-        '''
-
-        fecha_inicio = self.cleaned_data['fecha_inicio']
-        fecha_actual = datetime.date.today()
-        error = u'La fecha elegida no puede ser menor a la actual'
-
-        # La fecha elegida no puede ser menor a la actual:
-        if fecha_inicio > fecha_actual:
-            raise forms.ValidationError(error)
-
-        return self.cleaned_data

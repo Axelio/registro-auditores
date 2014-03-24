@@ -257,8 +257,6 @@ class Educacion(models.Model):
     institucion = models.ForeignKey(Institucion,
             help_text=u'indique la institución en la cual participó',
             verbose_name=u'institución')
-    carrera = models.CharField(max_length=50,
-            help_text=u'carrera que estudió')
     tipo = models.ForeignKey('TipoEducacion',
             verbose_name=u'nivel académico')
     fecha_inicio = models.DateField(help_text=u'fecha en la que inició')
