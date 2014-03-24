@@ -52,8 +52,8 @@
                                 <input type="hidden" name="edu_id" value={{ educacion.id }}>
                                 <div class="button-group push-right">
                                     <a href="{% url 'educacion' 'nueva' %}" class="ink-button">Añadir</a>
-                                    <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
-                                    <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red"><span class="icon-trash"></span></a>
+                                    <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                 </div>
                                 <br />
                             {% endfor %}
@@ -82,8 +82,8 @@
                                 </div>
                                 <div class="button-group push-right">
                                     <a href="{% url 'laboral' 'nueva' %}" class="ink-button">Añadir</a>
-                                    <a href="{% url 'laboral' 'editar' laboral.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
-                                    <a href="{% url 'laboral' 'eliminar' laboral.id %}" class="ink-button red"><span class="icon-trash"></span></a>
+                                    <a href="{% url 'laboral' 'editar' laboral.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'laboral' 'eliminar' laboral.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                 </div>
                             {% endfor %}
                         {% else %}
@@ -121,8 +121,8 @@
                                 {% endfor %}
                             </table>
                                 <div class="button-group push-right">
-                                    <a href="{% url 'competencia' 'editar' competencia.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
-                                    <a href="{% url 'competencia' 'eliminar' competencia.id %}" class="ink-button red"><span class="icon-trash"></span></a>
+                                    <a href="{% url 'competencia' 'editar' competencia.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></a></span>
+                                    <a href="{% url 'competencia' 'eliminar' competencia.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></a></span>
                                 </div>
                         {% else %}
                             Usted no posee ninguna competencia. Por favor, registre una.
@@ -144,8 +144,8 @@
                                     <div class="large-50 medium-60 small-100">
                                         <div class="button-group push-right">
                                             <a href="{% url 'habilidad' 'nueva' %}" class="ink-button">Añadir</a>
-                                            <a href="{% url 'habilidad' 'editar' habilidad.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
-                                            <a href="{% url 'habilidad' 'eliminar' habilidad.id %}" class="ink-button red"><span class="icon-trash"></span></a>
+                                            <a href="{% url 'habilidad' 'editar' habilidad.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                            <a href="{% url 'habilidad' 'eliminar' habilidad.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -166,8 +166,8 @@
                             {% for conocimiento in conocimientos %}
                                 <div>{{ conocimiento.otros_conocimientos }}</div>
                                 <div class="button-group push-right">
-                                    <a href="{% url 'conocimiento' 'editar' conocimiento.id %}" class="ink-button blue"><span class="icon-pencil"></span></a>
-                                    <a href="{% url 'conocimiento' 'eliminar' conocimiento.id %}" class="ink-button red"><span class="icon-trash"></span></a>
+                                    <a href="{% url 'conocimiento' 'editar' conocimiento.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'conocimiento' 'eliminar' conocimiento.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                 </div>
                             {% endfor %}
                         {% else %}
@@ -218,8 +218,8 @@
                                     <td>
                                     <div class="button-group push-right">
                                         <a href="{% url 'idioma' 'nueva' %}" class="ink-button" style="padding:1px 12px">Añadir</a>
-                                        <a href="{% url 'idioma' 'editar' idioma.id %}" class="ink-button blue" style="padding:1px 12px"><span class="icon-pencil"></span></a>
-                                        <a href="{% url 'idioma' 'eliminar' idioma.id %}" class="ink-button red" style="padding:1px 12px"><span class="icon-trash"></span></a>
+                                        <a href="{% url 'idioma' 'editar' idioma.id %}" class="ink-button blue" style="padding:1px 12px"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                        <a href="{% url 'idioma' 'eliminar' idioma.id %}" class="ink-button red" style="padding:1px 12px"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                     </td>
                                 </tr>
                             {% endfor %}
