@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http import Http404, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
 from django.db.models import Q
 
 from curriculum.models import *
@@ -258,9 +259,13 @@ class CurriculumView(View):
     diccionario.update({'persona_form':persona_form})
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return redirect('inicio')
         self.diccionario.update(csrf(request))
         self.diccionario.update({'curriculum':True})
         self.diccionario.update({'form':self.persona_form()})
+        mensaje_error = ''
+        self.diccionario.update({'mensaje_error':mensaje_error})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
