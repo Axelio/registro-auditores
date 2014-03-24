@@ -274,9 +274,12 @@ class CurriculumView(View):
         error = False
 
         if not self.persona_form.is_valid():
-
             self.diccionario.update(csrf(request))
             self.diccionario.update({'curriculum':True})
+            mensaje_error = ''
+            if self.persona_form.errors.has_key('__all__'):
+                mensaje_error = self.persona_form.errors['__all__'][0]
+            self.diccionario.update({'mensaje_error':mensaje_error})
             self.diccionario.update({'form':self.persona_form})
             return render(request, 
                            template_name=self.template,
@@ -316,10 +319,6 @@ class CurriculumView(View):
             usuario.first_name = request.POST['primer_nombre']
             usuario.last_name = request.POST['primer_apellido']
             usuario.save()
-
-            # Se asocia la persona con el usuario
-            if not UserProfile.objects.filter(user=usuario, persona=persona).exists():
-               usuario_perfil = UserProfile.objects.create(user=usuario, persona=persona)
 
             # Envío de mail
             asunto = u'[SUSCERTE] Creación de cuenta exitosa'

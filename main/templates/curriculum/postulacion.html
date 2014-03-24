@@ -1,54 +1,60 @@
 {% include "base_ink.html" %}
 {% block personales %}
 
-<!doctype html>
-<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
-<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
-  <body>
+    <!doctype html>
+    <!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+    <html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+      <body>
 
-{% load static %}
-{% load humanize %} 
- 
-  <!-- Main Page Content and Sidebar -->
-  
-<div class="ink-grid">
-    {% include 'menu_perfil.html' %}
+    {% load static %}
+    {% load humanize %} 
+     
+      <!-- Main Page Content and Sidebar -->
+      
+    <div class="ink-grid">
+        {% include 'menu_perfil.html' %}
 
-    <div class="space">
-        <form class="ink-form" method="POST">{% csrf_token %}
-            <div class="box">
-                <div class="column-group" style="background:white">
-                    <div class="space">
-                        {% if not user.is_authenticated %}
-                            <fieldset class="column-group">
-                                {% for formulario in form %}
-                                    {% if formulario.errors%}
-                                        <div class="ink-alert basic error">
-                                            <p>{{ formulario.errors }}</p>
+        <div class="space">
+            <form class="ink-form" method="POST">{% csrf_token %}
+                <div class="box">
+                    <div class="column-group" style="background:white">
+                        <div class="space">
+                            {% if not user.is_authenticated %}
+                                <fieldset class="column-group">
+                                    {% ifnotequal mensaje_error '' %}
+                                        <div class="ink-alert block error">
+                                            <h4>Vaya, parece que hay un error</h4>
+                                            <p>{{ mensaje_error }}</p>
                                         </div>
-                                    {% endif %}
-                                    <div class="control-group required validation">
-                                        {{ formulario.label }}
-                                    <div class="control">
-                                        {{ formulario }}
+                                    {% endifnotequal %}
+                                    {% for formulario in form %}
+                                        {% if formulario.errors%}
+                                            <div class="ink-alert basic error">
+                                                <p>{{ formulario.errors }}</p>
+                                            </div>
+                                        {% endif %}
+                                        <div class="control-group required validation">
+                                            {{ formulario.label }}
+                                        <div class="control">
+                                            {{ formulario }}
+                                        </div>
+                                            <p class="tip">{{ formulario.help_text }}</p>
+                                        </div>
+                                    {% endfor %}
+                                </fieldset>
+                                    <div>
+                                        <input type="submit" value="Enviar" class="ink-button blue">
                                     </div>
-                                        <p class="tip">{{ formulario.help_text }}</p>
-                                    </div>
-                                {% endfor %}
-                            </fieldset>
-                                <div>
-                                    <input type="submit" value="Enviar" class="ink-button blue">
-                                </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
-{% include 'footer.html' %} 
+    {% include 'footer.html' %} 
 
-  </body>
-</html>
+      </body>
+    </html>
 {% endblock %}
