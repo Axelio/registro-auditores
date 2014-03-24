@@ -25,7 +25,7 @@ class Persona(models.Model):
     segundo_nombre = models.CharField(max_length=50,blank=True, help_text='Indique su segundo nombre, si posee')
     primer_apellido = models.CharField(max_length=50, help_text='Indique su primer apellido')
     segundo_apellido = models.CharField(max_length=50,blank=True, help_text='Indique su segundo apellido')
-    genero = models.IntegerField(choices=((0,'Masculino'),(1,'Femenino')),default=0,verbose_name=u'género', help_text='Indique su género')
+    genero = models.IntegerField(choices=((0,'Masculino'),(1,'Femenino')), default=0, verbose_name=u'género', help_text='Seleccione su género')
     reside = models.ForeignKey(Estado, help_text=u'Estado de residencia')
     direccion = models.TextField(verbose_name=u'dirección',blank=True, help_text=u'Indique dirección donde reside')
     fecha_nacimiento = models.DateField(help_text='Indique su fecha de nacimiento')
