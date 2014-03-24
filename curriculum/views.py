@@ -16,18 +16,25 @@ from personas.forms import *
 from auth.models import *
 import datetime
 
+
 def aptitudes(request):
     '''
     Revisión de cada una de las aptitudes de la persona
     '''
     listado = []
 
-    laborales = Laboral.objects.filter(usuario=request.user.profile)
-    educaciones = Educacion.objects.filter(persona=request.user.profile.persona)
-    conocimientos = Conocimiento.objects.filter(usuario=request.user.profile)
-    competencias = Competencia.objects.filter(usuario=request.user.profile)
-    habilidades = Habilidad.objects.filter(usuario=request.user.profile)
-    idiomas = Idioma.objects.filter(persona=request.user.profile.persona)
+    laborales = Laboral.objects.filter(
+            usuario=request.user.profile)
+    educaciones = Educacion.objects.filter(
+            persona=request.user.profile.persona)
+    conocimientos = Conocimiento.objects.filter(
+            usuario=request.user.profile)
+    competencias = Competencia.objects.filter(
+            usuario=request.user.profile)
+    habilidades = Habilidad.objects.filter(
+            usuario=request.user.profile)
+    idiomas = Idioma.objects.filter(
+            persona=request.user.profile.persona)
 
     listado.append(laborales)
     listado.append(educaciones)
@@ -38,6 +45,7 @@ def aptitudes(request):
 
     return listado
 
+
 def lista_filtros(request):
     '''
     Envío de variables con las aptitudes ya filtradas
@@ -45,20 +53,21 @@ def lista_filtros(request):
     listado = aptitudes(request)
     requisitos = revisar_requisitos(listado)
 
-    listado = {'laborales':listado[0],
-                'educaciones':listado[1],
-                'conocimientos':listado[2],
-                'competencias':listado[3],
-                'habilidades':listado[4],
-                'idiomas':listado[5],
-                'requisitos':requisitos,
+    listado = {'laborales': listado[0],
+                'educaciones': listado[1],
+                'conocimientos': listado[2],
+                'competencias': listado[3],
+                'habilidades': listado[4],
+                'idiomas': listado[5],
+                'requisitos': requisitos,
                 }
 
     return listado
 
+
 def revisar_requisitos(listado):
     '''
-    Validar si todos los requisitos se satisfacen 
+    Validar si todos los requisitos se satisfacen
     para proceder a la fijación de fecha para la cita.
     Retorna True si la información es suficiente.
     Retorna False si falta información.
@@ -68,11 +77,12 @@ def revisar_requisitos(listado):
             return False
     return True
 
+
 class CitasView(View):
     '''
     Clase para la renderización de las citas
     '''
-    template='perfil/editar_formulario.html'
+    template = 'perfil/editar_formulario.html'
     citas_form = CitasForm
     mensaje = ''
     tipo_mensaje = ''
@@ -81,7 +91,7 @@ class CitasView(View):
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
-    diccionario.update({'titulo':titulo})
+    diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -89,15 +99,16 @@ class CitasView(View):
         nueva = True
 
         self.tipo_mensaje = 'info'
-        self.mensaje = 'Debe seleccionar tres fechas tentativas en las que desearía tener una cita con nosotros.'
-        self.diccionario.update({'persona':usuario.profile.persona})
-        self.diccionario.update({'nueva':nueva})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'formulario':self.citas_form})
+        self.mensaje = 'Debe seleccionar tres fechas tentativas en las '
+        self.mensaje += 'que desearía tener una cita con nosotros.'
+        self.diccionario.update({'persona': usuario.profile.persona})
+        self.diccionario.update({'nueva': nueva})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'formulario': self.citas_form})
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -107,21 +118,26 @@ class CitasView(View):
         self.citas_form = self.citas_form(request.POST)
         usuario = request.user
         nueva = True
-        fecha_1 = datetime.datetime.strptime(request.POST['primera_fecha'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-        fecha_2 = datetime.datetime.strptime(request.POST['segunda_fecha'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-        fecha_3 = datetime.datetime.strptime(request.POST['tercera_fecha'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-
-
+        fecha_1 = datetime.datetime.strptime(
+                request.POST['primera_fecha'],
+                "%d/%m/%Y").strftime("%Y-%m-%d")
+        fecha_2 = datetime.datetime.strptime(
+                request.POST['segunda_fecha'],
+                "%d/%m/%Y").strftime("%Y-%m-%d")
+        fecha_3 = datetime.datetime.strptime(
+                request.POST['tercera_fecha'],
+                "%d/%m/%Y").strftime("%Y-%m-%d")
 
         if self.citas_form.is_valid():
             if nueva:
-                cita = Cita.objects.create(
-                        usuario=usuario.profile,
+                cita = Cita.objects.create(usuario = usuario.profile,
                         primera_fecha = fecha_1,
                         segunda_fecha = fecha_2,
                         tercera_fecha = fecha_3)
-                self.mensaje = "Las fechas para cita ha sido cargada con éxito. "
-                self.mensaje += "Se ha enviado su información a los administradores"
+
+                self.mensaje = "Las fechas para cita ha sido cargada con "
+                self.mensaje += "éxito. Se ha enviado su información a "
+                self.mensaje += "los administradores"
                 self.tipo_mensaje = 'success'
                 self.template = 'perfil/perfil.html'
         else:

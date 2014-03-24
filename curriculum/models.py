@@ -127,8 +127,8 @@ class ListaIdiomas(models.Model):
     def __unicode__(self):
         return u'%s' % (self.nombre)
 
-NIVEL_IDIOMA = (('4', 'Nativo'),
-                ('3', 'Fluido'),
+NIVEL_IDIOMA = (('4', 'Fluido'),
+                ('3', 'Alto'),
                 ('2', 'Medio'),
                 ('1', 'Bajo'))
 
@@ -136,9 +136,15 @@ NIVEL_IDIOMA = (('4', 'Nativo'),
 class Idioma(models.Model):
     persona = models.ForeignKey(Persona)
     idioma = models.ForeignKey('ListaIdiomas')
-    nivel_leido = models.CharField(max_length=10, choices=NIVEL_IDIOMA)
-    nivel_escrito = models.CharField(max_length=10, choices=NIVEL_IDIOMA)
-    nivel_hablado = models.CharField(max_length=10, choices=NIVEL_IDIOMA)
+    nivel_leido = models.CharField(max_length=10,
+            choices=NIVEL_IDIOMA,
+            verbose_name=u'nivel de lectura')
+    nivel_escrito = models.CharField(max_length=10,
+            choices=NIVEL_IDIOMA,
+            verbose_name=u'nivel de escritura')
+    nivel_hablado = models.CharField(max_length=10,
+            choices=NIVEL_IDIOMA,
+            verbose_name=u'Fluidez de conversación')
 
     class Meta:
         db_table = u'idioma'
@@ -247,13 +253,14 @@ class Educacion(models.Model):
     persona = models.ForeignKey(Persona)
     titulo = models.CharField(max_length=50,
             help_text=u'título universitario que obtuvo',
-            verbose_name=u'título')
+            verbose_name=u'título académico')
     institucion = models.ForeignKey(Institucion,
             help_text=u'indique la institución en la cual participó',
             verbose_name=u'institución')
     carrera = models.CharField(max_length=50,
             help_text=u'carrera que estudió')
-    tipo = models.ForeignKey('TipoEducacion')
+    tipo = models.ForeignKey('TipoEducacion',
+            verbose_name=u'nivel académico')
     fecha_inicio = models.DateField(help_text=u'fecha en la que inició')
     fecha_fin = models.DateField(help_text=u'fecha en la que terminó')
 
