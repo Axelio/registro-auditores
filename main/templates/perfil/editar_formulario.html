@@ -36,11 +36,17 @@
                         {% if mensaje %}
                             <div class="ink-alert basic {{ tipo_mensaje }}">
                                 <button class="ink-dismiss">&times;</button>
-                                <p>{{ mensaje }}</p>
+                                <p>{{ error }}</p>
                             </div>
                         {% endif %}
                         <form class="ink-form" method="POST">{% csrf_token %}
                             <fieldset class="column-group">
+                                {% ifequal titulo 'educacion' %}
+                                    <div class="ink-alert basic info">
+                                        <button class="ink-dismiss">&times;</button>
+                                        <p>Recuerde proporcionar información de estudios únicamente culminados</p>
+                                    </div>
+                                {% endifequal %}
                                 {% ifequal titulo 'competencias' %}
                                 {% load perfil %}
                                 <h3>Indique su nivel de conocimiento en:</h3>
