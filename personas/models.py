@@ -1,5 +1,6 @@
 # -*- coding: UTF8 -*-
 from django.db import models
+from django.core.validators import MaxLengthValidator
 from lugares.models import *
 
 # Modelo de Persona
@@ -33,7 +34,7 @@ class Persona(models.Model):
     tlf_oficina = models.CharField(max_length=15, blank=True, verbose_name=u'teléfono de oficina', help_text=u'Número telefónico de oficina')
     tlf_contacto = models.CharField(choices=TELEFONO_PUBLICO, max_length=10, help_text=u'Seleccione el teléfono que establecerá el cual será contactado', default='fijo', verbose_name=u'teléfono de contacto')
     estado_civil = models.CharField(choices=ESTADO_CIVIL, max_length=15, help_text='Señale su estado civil', default='s')
-    email = models.EmailField(help_text='Indique un correo electrónico válido')
+    email = models.EmailField(help_text='Indique un correo electrónico válido', validators=[MaxLengthValidator(2000)])
     class Meta:
         db_table = u'personas'
         verbose_name = "persona"

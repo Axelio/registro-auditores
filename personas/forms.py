@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.forms import ModelForm, TextInput, Textarea, Select, DateInput
+from django.contrib.auth.models import User
 from captcha.fields import ReCaptchaField
 from lib.funciones import fecha_futura
 from personas.models import Persona
@@ -94,7 +95,8 @@ class PersonaForm(forms.ModelForm):
     Formulario general para el ingreso de personas
     '''
 
-    email2 = forms.EmailField(widget=TextInput(
+    email2 = forms.EmailField(label='Confirme email',
+            widget=TextInput(
                 attrs={
                     'type': 'email',
                     'required': 'required',
@@ -144,7 +146,9 @@ class PersonaForm(forms.ModelForm):
                 attrs={
                     'type': 'text',
                     'required': 'required',
-                    'class': 'form-control',
+                    'class': 'ink-datepicker',
+                    'data-position': 'bottom',
+                    'data-format': 'dd/mm/yyyy',
                     'placeholder': 'Fecha de nacimiento',
                     'id':'popupDatepicker'}),
             'email': TextInput(
@@ -171,13 +175,29 @@ class PersonaForm(forms.ModelForm):
                     'placeholder': u'Teléfono de oficina'}),
         }
 
-    def clean_email(self):
-        '''
-        Función para validar correos electrónicos
-        '''
-        if not self.cleaned_data['email'] == self.data['email2']:
+    def clean(self):
+        error = None
+
+        email = self.cleaned_data['email']
+        cedula = self.cleaned_data['cedula']
+
+        # Revisar si la cédula coincide con alguna otra en la base de datos 
+        if Persona.objects.filter(cedula=cedula).exists():
+            error = u'Esta persona ya se encuentra '
+            error += u'registrada con esa cédula.'
+
+        # Revisar si el email coincide con algún otro de la base de datos
+        if Persona.objects.filter(email=email).exists() or User.objects.filter(email=email).exists():
+            error = u'Esta persona ya se encuentra '
+            error += 'registrada con ese email.'
+
+        # Revisar ambos mails coincidan
+        if not self.cleaned_data['email'] == self.cleaned_data['email2']:
             error = u'Los correos electrónicos deben coincidir'
+
+        if error:
             raise forms.ValidationError(error)
+
         return self.cleaned_data
 
     def clean_fecha_nacimiento(self):
@@ -189,6 +209,6 @@ class PersonaForm(forms.ModelForm):
         # Si fecha_actual es futura (función en lib/funciones.py)
         if fecha_futura(self.cleaned_data['fecha_nacimiento']):
             error = u'La fecha de nacimiento '
-            error = u'no puede ser mayor ni igual al día de hoy'
+            error += u'no puede ser mayor ni igual al día de hoy'
             raise forms.ValidationError(error)
         return self.cleaned_data['fecha_nacimiento']

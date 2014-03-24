@@ -251,7 +251,7 @@ class CurriculumView(View):
     Clase para postulación de currículum
     '''
     template='curriculum/postulacion.html'
-    persona_form = PersonaForm() 
+    persona_form = PersonaForm
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -259,6 +259,8 @@ class CurriculumView(View):
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
+        self.diccionario.update({'curriculum':True})
+        self.diccionario.update({'form':self.persona_form()})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -271,29 +273,16 @@ class CurriculumView(View):
         error_general = ''
         error = False
 
-        if self.persona_form.is_valid():
-
-            # Revisar si ya hay alguna cédula o email guardada para este usuario
-            if Persona.objects.filter(cedula=request.POST['cedula']).exists():
-                error = True
-                error_general = u'Esta persona ya se encuentra registrada con esa cédula.'
-            if Persona.objects.filter(email=request.POST['email']).exists() or User.objects.filter(email=request.POST['email']).exists():
-                error = True
-                error_general = u'Esta persona ya se encuentra registrada con ese email.'
+        if not self.persona_form.is_valid():
 
             self.diccionario.update(csrf(request))
-            self.diccionario.update({'persona_form':self.persona_form})
-            self.diccionario.update({'valor_email2':valor_email2})
-            self.diccionario.update({'email2_error':email2_error})
-            self.diccionario.update({'error_general':error_general})
-
-        # Si hay algún error, se renderiza de nuevo la plantilla con los errores encontrados
-        if error or not self.persona_form.is_valid():
-            self.diccionario.update({'persona_form':self.persona_form})
+            self.diccionario.update({'curriculum':True})
+            self.diccionario.update({'form':self.persona_form})
             return render(request, 
                            template_name=self.template,
                            dictionary=self.diccionario,
                          )
+
         else:
             estado = Estado.objects.get(id=request.POST['reside'])
             fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 

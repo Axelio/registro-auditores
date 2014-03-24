@@ -46,6 +46,7 @@ class CitasForm(forms.ModelForm):
                     'required': 'required',
                     'class': 'ink-datepicker',
                     'data-format': 'dd/mm/yyyy',
+                    'data-position': 'bottom',
                     'placeholder': 'Fecha de inicio',
                     'data-position': 'bottom'}),
 
