@@ -67,9 +67,9 @@ def cambiar_clave(request):
     titulo = 'cambiar contraseña'
     diccionario.update({'titulo':titulo})
     diccionario.update({'palabra_clave':'cambiar'})
-    diccionario.update({'auth':True})
+    diccionario.update({'cambiar_clave':True})
     diccionario.update({'formulario':True})
-    return password_change(request, template_name='auth/formulario.html',
+    return password_change(request, template_name='auth/password_reset_form.html',
                 post_change_redirect=reverse('inicio'),
                 extra_context = diccionario,
                 )

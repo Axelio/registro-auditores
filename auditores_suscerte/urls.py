@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import logout
 from django.conf import settings
@@ -5,17 +6,20 @@ from django.conf.urls.static import static
 import os
 
 from django.contrib import admin
+from django.contrib.auth.views import (password_reset,
+        password_reset_done, password_reset_confirm,
+        password_reset_complete, password_change,
+        password_change_done)
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import TemplateView
 from personas.views import PersonalesView
 from curriculum.views import (PerfilView,
     EducacionView, LaboralView, CompetenciaView,
     HabilidadView, ConocimientoView, IdiomaView,
     EditarPersonaView, CitasView)
 from auth.views import *
-from django.contrib.auth.views import (password_reset,
-        password_reset_done, password_reset_confirm,
-        password_reset_complete)
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import TemplateView
+from auth.forms import (ValidatingSetPasswordForm,
+    ValidatingPasswordChangeForm)
 
 admin.autodiscover()
 
@@ -33,10 +37,15 @@ urlpatterns = patterns('',
         password_reset_done,
         {'template_name': 'auth/password_reset_done.html'},
         name='password_reset_done'),
+    url(r'^clave_cambiada/$', 
+        password_change_done,
+        {'post_save_redirect': reverse_lazy('perfil')},
+        name='password_change_done'),
     url(r'^clave/confirmacion/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',
         password_reset_confirm,
         {'post_reset_redirect': reverse_lazy('password_reset_complete'),
-         'template_name': 'auth/confirmar_cambiar_clave.html'},
+         'template_name': 'auth/confirmar_cambiar_clave.html',
+         'set_password_form': ValidatingSetPasswordForm},
         name='password_reset_confirm'),
     url(r'^clave/reestablcimiento/completo$',
         password_reset_complete,
@@ -54,7 +63,15 @@ urlpatterns = patterns('',
         auth,
         name='auth'),
     url(r'cambiar_clave/',
-        cambiar_clave,
+        password_change,
+        {'password_change_form': ValidatingPasswordChangeForm,
+        'template_name': 'auth/password_reset_form.html',
+        'extra_context': 
+            {'cambiar_clave': True,
+             'formulario': True,
+             'titulo': u'cambiar contraseña',
+             'palabra_clave': 'cambiar',},
+        },
         name='cambiar_clave'),
     url(r'^perfil/info_personal/*$',
         EditarPersonaView.as_view(),

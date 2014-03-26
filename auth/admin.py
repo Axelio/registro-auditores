@@ -66,7 +66,8 @@ class UserProfileAdmin(UserAdmin):
             return super(UserProfileAdmin,self).user_change_password(request,id,form_url)
 
     
-    ''' No mostrar la opción de SuperUsuario si no se es un superusuario. Evitar bug de escalabilida de permisos
+    ''' 
+    No mostrar la opcion de SuperUsuario si no se es un superusuario. Evitar bug de escalabilida de permisos
     '''
     def change_view(self, request, *args, **kwargs):
         # for non-superuser

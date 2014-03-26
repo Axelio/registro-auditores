@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.contrib import auth
 from django.contrib.auth import authenticate, get_user_model
-from auth.models import *
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth.forms import SetPasswordForm, PasswordChangeForm
 from django.utils.datastructures import SortedDict
+from django.views.decorators.debug import sensitive_post_parameters
+from passwords.fields import PasswordField
+from auditores_suscerte import settings
+from auth.models import *
 
 class AuthenticationForm(forms.Form):
     """
@@ -107,3 +112,11 @@ class CambiarClaveForm(forms.Form):
         if commit:
             self.user.save()
         return self.user
+
+
+class ValidatingSetPasswordForm(SetPasswordForm):
+    new_password1 = PasswordField(label=_("New password"))
+    new_password1 = PasswordField(label=_("New password confirmation"))
+
+class ValidatingPasswordChangeForm(PasswordChangeForm):
+    new_password1 = PasswordField(label=_("New password"))

@@ -8,6 +8,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+PASSWORD_MIN_LENGTH = 8
+PASSWORD_MAX_LENGTH = 120
+PASSWORD_COMPLEXITY = {
+    "UPPER":  1,
+    "LOWER":  1,
+    "DIGITS": 1,
+}
+
 RECAPTCHA_PUBLIC_KEY = '6Ld-Z_ASAAAAAB948Z2NOCG2VKDVPC80ShdNwp10'
 RECAPTCHA_PRIVATE_KEY = '6Ld-Z_ASAAAAAN38iuzIo2tH3QPZDiGnrZgMV-7a'
 RECAPTCHA_USE_SSL = True
@@ -67,6 +75,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'captcha',
     'axes',
+    'passwords',
     'compressor',
     'curriculum',
     'lugares',
