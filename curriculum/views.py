@@ -94,13 +94,20 @@ class CitasView(View):
     diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
-        self.diccionario.update(csrf(request))
+        listado = aptitudes(request)
+        requisitos = revisar_requisitos(listado)
         usuario = request.user
+        self.diccionario.update(csrf(request))
         nueva = True
-
-        self.tipo_mensaje = 'info'
-        self.mensaje = 'Debe seleccionar tres fechas tentativas en las '
-        self.mensaje += 'que desearía tener una cita con nosotros.'
+        if requisitos:
+            self.tipo_mensaje = 'info'
+            self.mensaje = 'Debe seleccionar tres fechas tentativas en las '
+            self.mensaje += 'que desearía tener una cita con nosotros.'
+        else:
+            self.template = 'perfil/perfil.html'
+            self.tipo_mensaje = 'warning'
+            self.mensaje = u'Debe tener toda la información '
+            self.mensaje += u'curricular completa. Por favor, revísela.'
         self.diccionario.update({'persona': usuario.profile.persona})
         self.diccionario.update({'nueva': nueva})
         self.diccionario.update({'mensaje': self.mensaje})
@@ -114,36 +121,47 @@ class CitasView(View):
                      )
 
     def post(self, request, *args, **kwargs):
-        self.diccionario.update(csrf(request))
-        self.citas_form = self.citas_form(request.POST)
+        listado = aptitudes(request)
+        requisitos = revisar_requisitos(listado)
         usuario = request.user
+        self.diccionario.update(csrf(request))
         nueva = True
-        fecha_1 = datetime.datetime.strptime(
-                request.POST['primera_fecha'],
-                "%d/%m/%Y").strftime("%Y-%m-%d")
-        fecha_2 = datetime.datetime.strptime(
-                request.POST['segunda_fecha'],
-                "%d/%m/%Y").strftime("%Y-%m-%d")
-        fecha_3 = datetime.datetime.strptime(
-                request.POST['tercera_fecha'],
-                "%d/%m/%Y").strftime("%Y-%m-%d")
-
-        if self.citas_form.is_valid():
-            if nueva:
-                cita = Cita.objects.create(usuario = usuario.profile,
-                        primera_fecha = fecha_1,
-                        segunda_fecha = fecha_2,
-                        tercera_fecha = fecha_3)
-
-                self.mensaje = "Las fechas para cita ha sido cargada con "
-                self.mensaje += "éxito. Se ha enviado su información a "
-                self.mensaje += "los administradores"
-                self.tipo_mensaje = 'success'
-                self.template = 'perfil/perfil.html'
+        if not requisitos:
+            self.template = 'perfil/perfil.html'
+            self.tipo_mensaje = 'warning'
+            self.mensaje = u'Debe tener toda la información '
+            self.mensaje += u'curricular completa. Por favor, revísela.'
         else:
-            if self.citas_form.errors:
-                self.mensaje = self.citas_form.errors['__all__'][0]
-                self.tipo_mensaje = 'error'
+            self.diccionario.update(csrf(request))
+            self.citas_form = self.citas_form(request.POST)
+            usuario = request.user
+            nueva = True
+            fecha_1 = datetime.datetime.strptime(
+                    request.POST['primera_fecha'],
+                    "%d/%m/%Y").strftime("%Y-%m-%d")
+            fecha_2 = datetime.datetime.strptime(
+                    request.POST['segunda_fecha'],
+                    "%d/%m/%Y").strftime("%Y-%m-%d")
+            fecha_3 = datetime.datetime.strptime(
+                    request.POST['tercera_fecha'],
+                    "%d/%m/%Y").strftime("%Y-%m-%d")
+
+            if self.citas_form.is_valid():
+                if nueva:
+                    cita = Cita.objects.create(usuario = usuario.profile,
+                            primera_fecha = fecha_1,
+                            segunda_fecha = fecha_2,
+                            tercera_fecha = fecha_3)
+
+                    self.mensaje = "Las fechas para cita ha sido cargada con "
+                    self.mensaje += "éxito. Se ha enviado su información a "
+                    self.mensaje += "los administradores"
+                    self.tipo_mensaje = 'success'
+                    self.template = 'perfil/perfil.html'
+            else:
+                if self.citas_form.errors:
+                    self.mensaje = self.citas_form.errors['__all__'][0]
+                    self.tipo_mensaje = 'error'
         self.diccionario.update({'persona':usuario.profile.persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})

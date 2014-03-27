@@ -36,7 +36,7 @@
                         {% if mensaje %}
                             <div class="ink-alert basic {{ tipo_mensaje }}">
                                 <button class="ink-dismiss">&times;</button>
-                                <p>{{ error }}</p>
+                                <p>{{ mensaje }}</p>
                             </div>
                         {% endif %}
                         <form class="ink-form" method="POST">{% csrf_token %}

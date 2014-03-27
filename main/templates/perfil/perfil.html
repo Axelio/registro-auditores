@@ -18,6 +18,17 @@
     {% include 'menu_perfil.html' %}
 
     <div class="space">
+        {% if not requisitos %}
+            <div class="ink-alert basic warning">
+                <button class="ink-dismiss">&times;</button>
+                <p>Recuerde actualizar toda su información curricular para poder solicitar una cita.</p>
+            </div>
+        {% else %}
+            <div class="ink-alert basic warning">
+                <button class="ink-dismiss">&times;</button>
+            </div>
+            <p>Debe <a href="citas">fijar su cita</a> para notificarle a los administradores la culminación de su carga curricular.</p>
+        {% endif %}
         {% if mensaje %}
             <div class="ink-alert basic {{ tipo_mensaje }}">
                 <button class="ink-dismiss" id="cerrar">&times;</button>
@@ -28,12 +39,6 @@
             <div class="large-30 medium-50 small-100">
                 {% include "perfil/informacion_personal.html" %}
                 <div class="box">
-                    {% if not requisitos %}
-                        <br />
-                        <span class="ink-label info">Nota</span> recuerde actualizar toda su información curricular para poder solicitar una cita.
-                    {% endif %}
-                    <br />
-                    <span class="ink-label info">Nota</span> Debe <a href="citas">fijar su cita</a> para notificarle a los administradores la culminación de su carga curricular.
                 </div>
             </div>
             <div class="large-70 medium-50 small-100 push-left">
