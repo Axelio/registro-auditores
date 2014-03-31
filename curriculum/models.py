@@ -266,7 +266,7 @@ class Educacion(models.Model):
         verbose_name_plural = u'educaciones'
 
     def __unicode__(self):
-        return u'%s: %s (%s)' % (self.persona, self.institucion, self.carrera)
+        return u'%s: %s (%s)' % (self.persona, self.institucion, self.titulo)
 
 
 class TipoEducacion(models.Model):
