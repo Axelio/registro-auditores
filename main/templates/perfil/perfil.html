@@ -20,14 +20,14 @@
     <div class="space">
         {% if not requisitos %}
             <div class="ink-alert basic warning">
-                <button class="ink-dismiss">&times;</button>
+                <button class="ink-dismiss" id="cerrar">&times;</button>
                 <p>Recuerde actualizar toda su información curricular para poder solicitar una cita.</p>
             </div>
         {% else %}
             <div class="ink-alert basic warning">
-                <button class="ink-dismiss">&times;</button>
+                <button class="ink-dismiss" id="cerrar">&times;</button>
+                <p>Debe <a href="citas">fijar su cita</a> para notificarle a los administradores la culminación de su carga curricular.</p>
             </div>
-            <p>Debe <a href="citas">fijar su cita</a> para notificarle a los administradores la culminación de su carga curricular.</p>
         {% endif %}
         {% if mensaje %}
             <div class="ink-alert basic {{ tipo_mensaje }}">
@@ -38,8 +38,6 @@
         <div class="column-group gutters">
             <div class="large-30 medium-50 small-100">
                 {% include "perfil/informacion_personal.html" %}
-                <div class="box">
-                </div>
             </div>
             <div class="large-70 medium-50 small-100 push-left">
                 <div class="box">

@@ -81,6 +81,17 @@ class CitasForm(forms.ModelForm):
             raise forms.ValidationError(
                     u'La fecha elegida no puede ser menor a la actual')
 
+        # Ninguna fecha puede ser igual a otra
+        error_fechas_iguales = u'Las fechas no se pueden repetir'
+        if primera_fecha == segunda_fecha:
+            raise forms.ValidationError(error_fechas_iguales)
+
+        if primera_fecha == tercera_fecha:
+            raise forms.ValidationError(error_fechas_iguales)
+
+        if segunda_fecha == tercera_fecha:
+            raise forms.ValidationError(error_fechas_iguales)
+
         return self.cleaned_data
 
 

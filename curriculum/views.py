@@ -103,6 +103,10 @@ class CitasView(View):
             self.tipo_mensaje = 'info'
             self.mensaje = 'Debe seleccionar tres fechas tentativas en las '
             self.mensaje += 'que desearía tener una cita con nosotros.'
+            cita = Cita.objects.filter(usuario = usuario.profile)
+            if cita.exists():
+                self.citas_form = self.citas_form(instance = cita[0])
+
         else:
             self.template = 'perfil/perfil.html'
             self.tipo_mensaje = 'warning'
@@ -148,10 +152,18 @@ class CitasView(View):
 
             if self.citas_form.is_valid():
                 if nueva:
-                    cita = Cita.objects.create(usuario = usuario.profile,
-                            primera_fecha = fecha_1,
-                            segunda_fecha = fecha_2,
-                            tercera_fecha = fecha_3)
+                    cita = Cita.objects.filter(usuario = usuario.profile)
+                    if cita.exists():
+                        cita = cita[0]
+                        cita.primera_fecha = primera_fecha = fecha_1
+                        cita.segunda_fecha = segunda_fecha = fecha_2
+                        cita.tercera_fecha = tercera_fecha = fecha_3
+                        cita.save()
+                    else:
+                        cita = Cita.objects.create(usuario = usuario.profile,
+                                primera_fecha = fecha_1,
+                                segunda_fecha = fecha_2,
+                                tercera_fecha = fecha_3)
 
                     self.mensaje = "Las fechas para cita ha sido cargada con "
                     self.mensaje += "éxito. Se ha enviado su información a "
@@ -245,7 +257,6 @@ class EducacionView(View):
             tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
             fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
             fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            carrera = request.POST['carrera']
             titulo = request.POST['titulo']
 
             if kwargs['palabra'] == 'editar':
@@ -253,7 +264,6 @@ class EducacionView(View):
                 # Búsqueda de variables con los IDs enviados por POST
                 educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
                 educacion.institucion = institucion
-                educacion.carrera = carrera
                 educacion.tipo = tipo
                 educacion.fecha_inicio = fecha_inicio
                 educacion.fecha_fin = fecha_fin
@@ -265,14 +275,16 @@ class EducacionView(View):
                 self.tipo_mensaje = u'success'
             else:
                 # Si se crea una Educación
-                educacion = Educacion.objects.create(persona=persona, institucion=institucion, carrera=carrera, tipo=tipo, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, titulo=titulo)
+                educacion = Educacion.objects.create(persona=persona, institucion=institucion, tipo=tipo, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, titulo=titulo)
                 self.mensaje = u'Información educacional ha sido creada exitosamente'
                 self.tipo_mensaje = u'success'
 
             self.template = 'perfil/perfil.html'
 
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'persona':persona})
+        self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.educacion_form})
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)

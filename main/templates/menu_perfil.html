@@ -13,11 +13,15 @@
                         <li><a class="small scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
                         <li><a class="small scrollableLink" href="{% url 'perfil' %}#otros_conocimientos">Conocimientos</a></li>
                         <li><a class="small scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+                        {% if requisitos %}
+                            <li><a class="small scrollableLink" href="{% url 'citas' %}">Citas</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
                     <ul class="submenu">
                         <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
+                        <li><a class="small" href="/admin">Panel administrativo</a></li>
                         <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
                     </ul>
                 </li>
@@ -50,6 +54,9 @@
                 <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
                 <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
                 <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+                {% if requisitos %}
+                    <li><a class="small scrollableLink" href="{% url 'citas' %}">Citas</a></li>
+                {% endif %}
             </ul>
         </li>
         <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Perfil <i class="icon-caret-down"></i></a>
