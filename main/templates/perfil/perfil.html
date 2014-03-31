@@ -18,6 +18,12 @@
     {% include 'menu_perfil.html' %}
 
     <div class="space">
+        {% if mensaje %}
+            <div class="ink-alert basic {{ tipo_mensaje }}">
+                <button class="ink-dismiss" id="cerrar">&times;</button>
+                <p>{{ mensaje }}</p>
+            </div>
+        {% endif %}
         {% if not requisitos %}
             <div class="ink-alert basic warning">
                 <button class="ink-dismiss" id="cerrar">&times;</button>
@@ -27,12 +33,6 @@
             <div class="ink-alert basic warning">
                 <button class="ink-dismiss" id="cerrar">&times;</button>
                 <p>Debe <a href="citas">fijar su cita</a> para notificarle a los administradores la culminación de su carga curricular.</p>
-            </div>
-        {% endif %}
-        {% if mensaje %}
-            <div class="ink-alert basic {{ tipo_mensaje }}">
-                <button class="ink-dismiss" id="cerrar">&times;</button>
-                <p>{{ mensaje }}</p>
             </div>
         {% endif %}
         <div class="column-group gutters">

@@ -250,6 +250,7 @@ class EducacionView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
         guardado = False
+        nueva = True
 
         persona = request.user.userprofile_set.get_query_set()[0].persona
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
