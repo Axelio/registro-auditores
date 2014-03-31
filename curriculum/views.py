@@ -371,6 +371,8 @@ class CurriculumView(View):
             usuario.last_name = request.POST['primer_apellido']
             usuario.save()
 
+            usuario_perfil = UserProfile.objects.create(persona=persona, user=usuario)
+
             # Envío de mail
             asunto = u'[SUSCERTE] Creación de cuenta exitosa'
             mensaje = Mensaje.objects.get(caso='Creación de usuario (email)')
@@ -378,7 +380,7 @@ class CurriculumView(View):
             destinatarios = (request.POST['email'],)
 
             # Sustitución de variables clave y usuario
-            mensaje = mensaje.mensaje.replace('<clave>','%s'%(clave)).replace('<usuario>','%s'%(request.POST['email']))
+            mensaje = mensaje.mensaje.replace('<clave>','%s'%(clave)).replace('<cuenta>','%s'%(request.POST['email']))
             send_mail(subject=asunto, message=mensaje, from_email=emisor, recipient_list=destinatarios)
 
         self.template = 'curriculum/aprobados.html'

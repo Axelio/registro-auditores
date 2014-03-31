@@ -62,6 +62,8 @@
                                     {% ifnotequal palabra_clave 'resetear' %}
                                         <fieldset class="small">
                                             <a href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a>
+                                            -
+                                            <a href="{% url 'curriculum' %}">Regístrate</a>
                                         </fieldset>
                                         <div>
                                             <input type="submit" value="Entrar" class="ink-button blue">
