@@ -16,7 +16,8 @@ from personas.views import PersonalesView
 from curriculum.views import (PerfilView,
     EducacionView, LaboralView, CompetenciaView,
     HabilidadView, ConocimientoView, IdiomaView,
-    EditarPersonaView, CitasView, CertificacionView)
+    EditarPersonaView, CitasView, CertificacionView,
+    CursoView)
 from auth.views import *
 from auth.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
@@ -113,6 +114,10 @@ urlpatterns = patterns('',
     url(r'^perfil/idioma/(?P<palabra>\w+)/(?P<idioma_id>[\d]+)*$',
         login_required(IdiomaView.as_view()),
         name='idioma'),
+
+    url(r'^perfil/curso/(?P<palabra>\w+)/(?P<curso_id>[\d]+)*$',
+        login_required(CursoView.as_view()),
+        name='curso'),
 
     url(r'^perfil/certificacion/(?P<palabra>\w+)/(?P<certificacion_id>[\d]+)*$',
         login_required(CertificacionView.as_view()),

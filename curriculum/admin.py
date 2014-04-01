@@ -40,3 +40,16 @@ admin.site.register(Educacion)
 admin.site.register(TipoEducacion)
 admin.site.register(Laboral)
 admin.site.register(ListaIdiomas)
+class CursoAdmin(admin.ModelAdmin):
+    list_display = (
+            'usuario',
+            'titulo',
+            'estado',
+            'fecha_inicio',
+            'fecha_fin',
+            'horas')
+
+    list_filter = (
+            'fecha_inicio',
+            'fecha_fin')
+admin.site.register(Curso, CursoAdmin)

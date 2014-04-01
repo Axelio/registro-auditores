@@ -9,6 +9,7 @@ from curriculum.models import (
         Certificacion, Conocimiento, Competencia,
         ListaCompetencia, Educacion, Laboral,
         Competencia, Habilidad, Idioma, Cita,
+        Curso,
 )
 from lugares.models import Institucion
 import datetime
@@ -146,6 +147,59 @@ class ConocimientoAdminForm(forms.ModelForm):
     class Meta:
         # Se determina cuál es el modelo al que va a referirse el formulario
         model = Conocimiento
+
+
+class CursoForm(forms.ModelForm):
+    '''
+    Formulario general para el ingreso de certificaciones
+    '''
+
+    class Meta:
+        # Se determina cuál es el modelo al que va a referirse el formulario
+        model = Curso
+        exclude = ('usuario',)
+        widgets = {
+            'fecha_inicio': TextInput(
+                attrs={
+                    'type': 'text',
+                    'required': 'required',
+                    'class': 'ink-datepicker',
+                    'data-format': 'dd/mm/yyyy',
+                    'data-position': 'bottom'}),
+            'fecha_fin': TextInput(
+                attrs={
+                    'type': 'text',
+                    'required': 'required',
+                    'class': 'ink-datepicker',
+                    'data-format': 'dd/mm/yyyy',
+                    'data-position': 'bottom'}),
+        }
+
+    def clean(self):
+        '''
+        Función para validaciones generales del modelo Certificacion
+        '''
+        fecha_inicio = self.cleaned_data['fecha_inicio']
+        fecha_fin = self.cleaned_data['fecha_fin']
+        error = u'La fecha final no puede ser mayor ni igual al día de hoy'
+
+        # La fecha inicial no puede ser mayor a la final:
+        if fecha_inicio > fecha_fin:
+            raise forms.ValidationError(error)
+        return self.cleaned_data
+
+    def clean_fecha_inicio(self):
+        '''
+        Función para validar el campo de fecha inicio
+        '''
+        # Fecha actual
+        fecha_actual = datetime.date.today()
+        error = u'La fecha de inicio no puede ser mayor ni igual a hoy'
+
+        # Si fecha_actual es futura (función en lib/funciones.py)
+        if fecha_futura(self.cleaned_data['fecha_inicio']):
+            raise forms.ValidationError(error)
+        return self.cleaned_data['fecha_inicio']
 
 
 class CertificacionForm(forms.ModelForm):

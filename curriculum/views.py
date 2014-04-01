@@ -37,6 +37,8 @@ def aptitudes(request):
             persona=request.user.profile.persona)
     certifcaciones = Certificacion.objects.filter(
             persona=request.user.profile.persona).order_by('-fecha_fin')
+    cursos = Curso.objects.filter(
+            usuario=request.user.profile).order_by('-fecha_fin')
 
     listado.append(laborales)
     listado.append(educaciones)
@@ -45,6 +47,7 @@ def aptitudes(request):
     listado.append(habilidades)
     listado.append(idiomas)
     listado.append(certifcaciones)
+    listado.append(cursos)
 
     return listado
 
@@ -55,6 +58,7 @@ def lista_filtros(request):
     '''
     listado = aptitudes(request)
     requisitos = revisar_requisitos(listado)
+    cita = Cita.objects.filter(usuario = request.user.profile)
 
     listado = {'laborales': listado[0],
                 'educaciones': listado[1],
@@ -63,8 +67,12 @@ def lista_filtros(request):
                 'habilidades': listado[4],
                 'idiomas': listado[5],
                 'certificaciones': listado[6],
+                'cursos': listado[7],
                 'requisitos': requisitos,
                 }
+
+    if cita.exists():
+        listado.update({'cita': cita[0]})
 
     return listado
 
@@ -109,8 +117,13 @@ class CitasView(View):
             self.mensaje += 'que desearía tener una cita con nosotros.'
             cita = Cita.objects.filter(usuario = usuario.profile)
             if cita.exists():
-                self.citas_form = self.citas_form(instance = cita[0])
-
+                if cita[0].cita_fijada == '':
+                    # Si la fecha fijada está en blanco (no ha sido fijada)
+                    # Se le permite al usuario la edición de la misma
+                    self.citas_form = self.citas_form(instance = cita[0])
+                else:
+                    # Sino, debe redireccionarle al perfil de nuevo
+                    return redirect('perfil')
         else:
             self.template = 'perfil/perfil.html'
             self.tipo_mensaje = 'warning'
@@ -1164,7 +1177,8 @@ class CertificacionView(View):
             if kwargs['palabra'] == 'editar':
                 # Si se edita una Certificación
                 # Búsqueda de variables con los IDs enviados por POST
-                certificacion.titulo = Certificacion.objects.get(id=int(kwargs['habilidad_id']))
+                certificacion = Certificacion.objects.get(id=int(kwargs['certificacion_id']))
+                certificacion.titulo = request.POST['titulo']
                 certificacion.codigo_certificacion = request.POST['codigo_certificacion']
                 certificacion.institucion = institucion
                 certificacion.fecha_inicio = fecha_inicio
@@ -1182,6 +1196,7 @@ class CertificacionView(View):
                         institucion = institucion,
                         lugar = estado,
                         codigo_certificacion = request.POST['codigo_certificacion'],
+                        titulo = request.POST['titulo'],
                         fecha_inicio = fecha_inicio,
                         fecha_fin = fecha_fin,
                         horas = request.POST['horas'])
@@ -1193,6 +1208,119 @@ class CertificacionView(View):
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'formulario': self.certificacion_form})
+        self.lista_filtros = lista_filtros(request)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+
+
+class CursoView(View):
+    '''
+    Clase para la renderización de los datos de habilidad
+    '''
+    template='perfil/editar_formulario.html'
+    curso_form = CursoForm
+    mensaje = ''
+    tipo_mensaje = ''
+    titulo = u'curso'
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = True
+
+        try:
+            persona = Persona.objects.get(id=usuario.profile.persona.id)
+        except:
+            raise Http404
+
+        self.diccionario.update({'formulario':self.curso_form()})
+        if kwargs.has_key('curso_id') and not kwargs['curso_id'] == None:
+            nueva = False
+            try:
+                curso = Curso.objects.get(id=int(kwargs['curso_id']))
+            except:
+                raise Http404
+
+            if curso.usuario == usuario.profile:
+                self.curso_form = self.curso_form(instance=curso)
+            else:
+                raise PermissionDenied
+
+        # Si se elimina una Habilidad
+        if kwargs['palabra'] == 'eliminar':
+            certificacion = Curso.objects.get(id=int(kwargs['curso_id']))
+            certificacion.delete()
+
+            self.mensaje = u'Curso eliminado exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'persona': persona})
+        self.diccionario.update({'nueva': nueva})
+        self.diccionario.update({'mensaje':self. mensaje})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'formulario': self.curso_form})
+        self.lista_filtros = lista_filtros(request)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        persona = request.user.profile.persona
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+
+            estado = Estado.objects.get(id=request.POST['estado'])
+            institucion = Institucion.objects.get(id=request.POST['institucion'])
+            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+
+            if kwargs['palabra'] == 'editar':
+                # Si se edita un Curso
+                # Búsqueda de variables con los IDs enviados por POST
+                curso = Curso.objects.get(id=int(kwargs['curso_id']))
+                curso.titulo = request.POST['titulo']
+                curso.institucion = institucion
+                curso.fecha_inicio = fecha_inicio
+                curso.fecha_fin = fecha_fin
+                curso.horas = request.POST['horas']
+                curso.estado = estado
+
+                curso.save()
+
+                self.mensaje = u'Curso editado exitosamente'
+                self.tipo_mensaje = u'success'
+            else:
+                # Si se crea un Curso
+                curso = Curso.objects.create(usuario = usuario.profile,
+                        institucion = institucion,
+                        estado = estado,
+                        titulo = request.POST['titulo'],
+                        fecha_inicio = fecha_inicio,
+                        fecha_fin = fecha_fin,
+                        horas = request.POST['horas'])
+                self.mensaje = u'Curso cargado exitosamente'
+                self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'formulario': self.curso_form})
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
