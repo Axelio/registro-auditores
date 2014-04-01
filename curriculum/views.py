@@ -24,9 +24,9 @@ def aptitudes(request):
     listado = []
 
     laborales = Laboral.objects.filter(
-            usuario=request.user.profile)
+            usuario=request.user.profile).order_by('-fecha_fin')
     educaciones = Educacion.objects.filter(
-            persona=request.user.profile.persona)
+            persona=request.user.profile.persona).order_by('-fecha_fin')
     conocimientos = Conocimiento.objects.filter(
             usuario=request.user.profile)
     competencias = Competencia.objects.filter(
@@ -35,6 +35,8 @@ def aptitudes(request):
             usuario=request.user.profile)
     idiomas = Idioma.objects.filter(
             persona=request.user.profile.persona)
+    certifcaciones = Certificacion.objects.filter(
+            persona=request.user.profile.persona).order_by('-fecha_fin')
 
     listado.append(laborales)
     listado.append(educaciones)
@@ -42,6 +44,7 @@ def aptitudes(request):
     listado.append(competencias)
     listado.append(habilidades)
     listado.append(idiomas)
+    listado.append(certifcaciones)
 
     return listado
 
@@ -59,6 +62,7 @@ def lista_filtros(request):
                 'competencias': listado[3],
                 'habilidades': listado[4],
                 'idiomas': listado[5],
+                'certificaciones': listado[6],
                 'requisitos': requisitos,
                 }
 
@@ -1077,6 +1081,118 @@ class IdiomaView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.idioma_form})
+        self.lista_filtros = lista_filtros(request)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+
+class CertificacionView(View):
+    '''
+    Clase para la renderización de los datos de habilidad
+    '''
+    template='perfil/editar_formulario.html'
+    certificacion_form = CertificacionForm
+    mensaje = ''
+    tipo_mensaje = ''
+    titulo = u'certificación'
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+        nueva = True
+
+        try:
+            persona = Persona.objects.get(id=usuario.profile.persona.id)
+        except:
+            raise Http404
+
+        self.diccionario.update({'formulario':self.certificacion_form()})
+        if kwargs.has_key('certificacion_id') and not kwargs['certificacion_id'] == None:
+            nueva = False
+            try:
+                certificacion = Certificacion.objects.get(id=int(kwargs['certificacion_id']))
+            except:
+                raise Http404
+
+            if certificacion.persona == persona:
+                self.certificacion_form = self.certificacion_form(instance=certificacion)
+            else:
+                raise PermissionDenied
+
+        # Si se elimina una Habilidad
+        if kwargs['palabra'] == 'eliminar':
+            certificacion = Certificacion.objects.get(id=int(kwargs['certificacion_id']))
+            certificacion.delete()
+
+            self.mensaje = u'Certificación eliminada exitosamente'
+            self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'persona': persona})
+        self.diccionario.update({'nueva': nueva})
+        self.diccionario.update({'mensaje':self. mensaje})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'formulario': self.certificacion_form})
+        self.lista_filtros = lista_filtros(request)
+        self.diccionario.update(self.lista_filtros)
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        persona = request.user.profile.persona
+        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+
+            estado = Estado.objects.get(id=request.POST['lugar'])
+            institucion = Institucion.objects.get(id=request.POST['institucion'])
+            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+
+            if kwargs['palabra'] == 'editar':
+                # Si se edita una Certificación
+                # Búsqueda de variables con los IDs enviados por POST
+                certificacion.titulo = Certificacion.objects.get(id=int(kwargs['habilidad_id']))
+                certificacion.codigo_certificacion = request.POST['codigo_certificacion']
+                certificacion.institucion = institucion
+                certificacion.fecha_inicio = fecha_inicio
+                certificacion.fecha_fin = fecha_fin
+                certificacion.horas = request.POST['horas']
+                certificacion.lugar = estado
+
+                certificacion.save()
+
+                self.mensaje = u'Habilidad editada exitosamente'
+                self.tipo_mensaje = u'success'
+            else:
+                # Si se crea una Certificacion
+                certificacion = Certificacion.objects.create(persona = persona,
+                        institucion = institucion,
+                        lugar = estado,
+                        codigo_certificacion = request.POST['codigo_certificacion'],
+                        fecha_inicio = fecha_inicio,
+                        fecha_fin = fecha_fin,
+                        horas = request.POST['horas'])
+                self.mensaje = u'Certificación creada exitosamente'
+                self.tipo_mensaje = u'success'
+
+            self.template = 'perfil/perfil.html'
+
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'formulario': self.certificacion_form})
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
         return render(request, 

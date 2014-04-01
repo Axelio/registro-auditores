@@ -150,16 +150,33 @@ class ConocimientoAdminForm(forms.ModelForm):
 
 class CertificacionForm(forms.ModelForm):
     '''
-    Formulario general para el ingreso de personas
+    Formulario general para el ingreso de certificaciones
     '''
 
     class Meta:
         # Se determina cuál es el modelo al que va a referirse el formulario
         model = Certificacion
+        exclude = ('persona',)
+        widgets = {
+            'fecha_inicio': TextInput(
+                attrs={
+                    'type': 'text',
+                    'required': 'required',
+                    'class': 'ink-datepicker',
+                    'data-format': 'dd/mm/yyyy',
+                    'data-position': 'bottom'}),
+            'fecha_fin': TextInput(
+                attrs={
+                    'type': 'text',
+                    'required': 'required',
+                    'class': 'ink-datepicker',
+                    'data-format': 'dd/mm/yyyy',
+                    'data-position': 'bottom'}),
+        }
 
     def clean(self):
         '''
-        Función para validaciones generales del modelo Curriculum
+        Función para validaciones generales del modelo Certificacion
         '''
         fecha_inicio = self.cleaned_data['fecha_inicio']
         fecha_fin = self.cleaned_data['fecha_fin']

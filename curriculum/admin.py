@@ -5,9 +5,7 @@ from curriculum.forms import (
         CompetenciaForm, Educacion, 
         ConocimientoAdminForm)
 
-class CertificacionAdmin(admin.ModelAdmin):
-    form = CertificacionForm
-admin.site.register(Certificacion, CertificacionAdmin)
+admin.site.register(Certificacion)
 
 class ConocimientoAdmin(admin.ModelAdmin):
     form = ConocimientoAdminForm
