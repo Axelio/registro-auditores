@@ -94,7 +94,7 @@ class Persona(models.Model):
 
 class Auditor(models.Model):
     persona = models.ForeignKey('Persona')
-    acreditado = models.BooleanField(max_length=15)
+    acreditado = models.BooleanField()
     fecha_acreditacion = models.DateField()
     fecha_desacreditacion = models.DateField()
     observacion = models.TextField(
