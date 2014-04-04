@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     # url(r'^$', 'auditores_suscerte.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^postulacion$', CurriculumView.as_view(), name='curriculum'),
+    url(r'^postulacion/$', CurriculumView.as_view(), name='curriculum'),
 )

@@ -29,8 +29,6 @@ def aptitudes(request):
             persona=request.user.profile.persona).order_by('-fecha_fin')
     conocimientos = Conocimiento.objects.filter(
             usuario=request.user.profile)
-    competencias = Competencia.objects.filter(
-            usuario=request.user.profile)
     habilidades = Habilidad.objects.filter(
             usuario=request.user.profile)
     idiomas = Idioma.objects.filter(
@@ -43,7 +41,6 @@ def aptitudes(request):
     listado.append(laborales)
     listado.append(educaciones)
     listado.append(conocimientos)
-    listado.append(competencias)
     listado.append(habilidades)
     listado.append(idiomas)
     listado.append(certifcaciones)
@@ -63,11 +60,10 @@ def lista_filtros(request):
     listado = {'laborales': listado[0],
                 'educaciones': listado[1],
                 'conocimientos': listado[2],
-                'competencias': listado[3],
-                'habilidades': listado[4],
-                'idiomas': listado[5],
-                'certificaciones': listado[6],
-                'cursos': listado[7],
+                'habilidades': listado[3],
+                'idiomas': listado[4],
+                'certificaciones': listado[5],
+                'cursos': listado[6],
                 'requisitos': requisitos,
                 }
 
@@ -433,6 +429,11 @@ class PerfilView(View):
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'mensaje':mensaje})
         self.diccionario.update({'tipo':tipo})
+
+        # Revisamos si el usuario pertenece al grupo Operador
+        # Y si pertenece, le cambiamos la plantilla y los filtros
+        if usuario.groups.filter(name__iexact='operador').exists():
+            self.template = 'perfil/perfil_operador.html'
 
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)

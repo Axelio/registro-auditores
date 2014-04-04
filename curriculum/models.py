@@ -7,7 +7,7 @@ from django.contrib.admin.models import LogEntry, ADDITION, DELETION, CHANGE
 from django.contrib import messages
 from django.core.mail import send_mail
 from personas.models import Persona
-from lugares.models import Estado, Institucion
+from lugares.models import Estado, Institucion, Pais
 from auth.models import UserProfile
 from auditores_suscerte import settings
 
@@ -30,12 +30,12 @@ class Certificacion(models.Model):
     persona = models.ForeignKey(Persona)
     titulo = models.CharField(max_length=500, verbose_name=u'título')
     codigo_certificacion = models.CharField(max_length=30,
+            blank = True,
             verbose_name=u'código de certificación')
     institucion = models.ForeignKey(Institucion, verbose_name=u'institución')
     fecha_inicio = models.DateField()
-    fecha_fin = models.DateField()
-    horas = models.IntegerField()
-    lugar = models.ForeignKey(Estado)
+    fecha_fin = models.DateField(blank=True)
+    pais = models.ForeignKey(Pais)
 
     class Meta:
         db_table = u'certificacion'
@@ -227,7 +227,8 @@ class Curso(models.Model):
 class Laboral(models.Model):
     usuario = models.ForeignKey(UserProfile)
     empresa = models.CharField(max_length=100)
-    sector = models.CharField(max_length=60)
+    sector = models.CharField(max_length=60,
+            help_text = u'Financiero, Industrial, Tecnológico, entre otros.')
     estado = models.ForeignKey(Estado)
     telefono = models.CharField(max_length=15, verbose_name=u'teléfono')
     cargo = models.CharField(max_length=60)

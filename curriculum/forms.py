@@ -359,3 +359,29 @@ class LaboralForm(forms.ModelForm):
                     'type': 'text',
                     'placeholder': 'Dirección de la empresa'}),
         }
+
+    def clean_fecha_inicio(self):
+        '''
+        Función para validar el campo de fecha inicio
+        '''
+        # Fecha actual
+        fecha_actual = datetime.date.today()
+        error = u'La fecha de inicio no puede ser mayor ni igual a hoy'
+
+        # Si fecha_actual es futura (función en lib/funciones.py)
+        if fecha_futura(self.cleaned_data['fecha_inicio']):
+            raise forms.ValidationError(error)
+        return self.cleaned_data['fecha_inicio']
+
+    def clean_fecha_fin(self):
+        '''
+        Función para validar el campo de fecha fin
+        '''
+        # Fecha actual
+        fecha_actual = datetime.date.today()
+        error = u'La fecha final no puede ser mayor ni igual a hoy'
+
+        # Si fecha_actual es futura (función en lib/funciones.py)
+        if fecha_futura(self.cleaned_data['fecha_fin']):
+            raise forms.ValidationError(error)
+        return self.cleaned_data['fecha_fin']

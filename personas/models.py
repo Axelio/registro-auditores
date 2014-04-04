@@ -71,7 +71,8 @@ class Persona(models.Model):
             help_text=u'Seleccione el teléfono que establecerá \
                     el cual será contactado',
             default='fijo',
-            verbose_name=u'teléfono de contacto')
+            verbose_name=u'teléfono de contacto (tome en cuenta que \
+                    esta información será pública)')
     estado_civil = models.CharField(
             choices=ESTADO_CIVIL,
             max_length=15,
@@ -79,6 +80,8 @@ class Persona(models.Model):
             default='s')
     email = models.EmailField(
             help_text='Indique un correo electrónico válido',
+            verbose_name=u'Email (tome en cuenta que \
+                    esta información será pública)',
             validators=[MaxLengthValidator(2000)])
 
     class Meta:
