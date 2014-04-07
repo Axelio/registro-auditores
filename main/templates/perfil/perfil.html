@@ -82,7 +82,7 @@
                                 <div class="button-group push-right">
                                     <a href="{% url 'educacion' 'nueva' %}" class="ink-button">Añadir</a>
                                     <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
-                                    <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                    <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ educacion }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                 </div>
                                 <br />
                             {% endfor %}
@@ -112,7 +112,7 @@
                                 <div class="button-group push-right">
                                     <a href="{% url 'laboral' 'nueva' %}" class="ink-button">Añadir</a>
                                     <a href="{% url 'laboral' 'editar' laboral.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
-                                    <a href="{% url 'laboral' 'eliminar' laboral.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                    <a href="{% url 'laboral' 'eliminar' laboral.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ laboral }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                 </div>
                             {% endfor %}
                         {% else %}
@@ -137,7 +137,7 @@
                                 <div class="button-group push-right">
                                     <a href="{% url 'curso' 'nueva' %}" class="ink-button">Añadir</a>
                                     <a href="{% url 'curso' 'editar' curso.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
-                                    <a href="{% url 'curso' 'eliminar' curso.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                    <a href="{% url 'curso' 'eliminar' curso.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ curso }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                 </div>
                                 <br />
                             {% endfor %}
@@ -164,7 +164,7 @@
                                 <div class="button-group push-right">
                                     <a href="{% url 'certificacion' 'nueva' %}" class="ink-button">Añadir</a>
                                     <a href="{% url 'certificacion' 'editar' certificacion.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
-                                    <a href="{% url 'certificacion' 'eliminar' certificacion.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                    <a href="{% url 'certificacion' 'eliminar' certificacion.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash" onclick="return confirm('Está a punto de eliminar {{ certificacion }}, ¿está seguro?')"></span></span></a>
                                 </div>
                                 <br />
                             {% endfor %}
@@ -189,7 +189,7 @@
                                         <div class="button-group push-right">
                                             <a href="{% url 'habilidad' 'nueva' %}" class="ink-button">Añadir</a>
                                             <a href="{% url 'habilidad' 'editar' habilidad.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
-                                            <a href="{% url 'habilidad' 'eliminar' habilidad.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                            <a href="{% url 'habilidad' 'eliminar' habilidad.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ habilidad }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +211,7 @@
                                 <div>{{ conocimiento.otros_conocimientos }}</div>
                                 <div class="button-group push-right">
                                     <a href="{% url 'conocimiento' 'editar' conocimiento.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
-                                    <a href="{% url 'conocimiento' 'eliminar' conocimiento.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                    <a href="{% url 'conocimiento' 'eliminar' conocimiento.id %}" onclick="return confirm('Está a punto de eliminar {{ conocimiento }}, ¿está seguro?')" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                 </div>
                             {% endfor %}
                         {% else %}
@@ -263,7 +263,7 @@
                                     <div class="button-group push-right">
                                         <a href="{% url 'idioma' 'nueva' %}" class="ink-button" style="padding:1px 12px">Añadir</a>
                                         <a href="{% url 'idioma' 'editar' idioma.id %}" class="ink-button blue" style="padding:1px 12px"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
-                                        <a href="{% url 'idioma' 'eliminar' idioma.id %}" class="ink-button red" style="padding:1px 12px"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                        <a href="{% url 'idioma' 'eliminar' idioma.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ idioma }}, ¿está seguro?')" style="padding:1px 12px"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
                                     </td>
                                 </tr>
                             {% endfor %}
