@@ -17,6 +17,17 @@ from auth.models import *
 import datetime
 
 
+def listaAspirantes():
+    # En teoría, todos los usuarios que no esten en grupo operadores
+    # son aspirantes, así que filtramos a los usuarios
+    # que no esten en el grupo Operadores
+    aspirantes = User.objects.filter(
+            is_active = True).exclude(
+                    groups__name__iexact='operador')
+
+    return aspirantes
+
+
 def aptitudes(request):
     '''
     Revisión de cada una de las aptitudes de la persona
@@ -433,6 +444,10 @@ class PerfilView(View):
         # Revisamos si el usuario pertenece al grupo Operador
         # Y si pertenece, le cambiamos la plantilla y los filtros
         if usuario.groups.filter(name__iexact='operador').exists():
+            aspirantes = listaAspirantes()
+            auditores = Auditor.objects.filter(acreditado=True)
+            self.diccionario.update({'aspirantes':aspirantes})
+            self.diccionario.update({'auditores':auditores})
             self.template = 'perfil/perfil_operador.html'
 
         self.lista_filtros = lista_filtros(request)
