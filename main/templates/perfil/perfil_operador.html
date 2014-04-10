@@ -48,35 +48,23 @@
                         <table class="ink-table hover" width="100%">
                             <tbody>
                             <thead class="small">
-                                    <th>#</th>
+                                    <th>Cédula</th>
                                     <th>Nombres</th>
-                                    <th>Título</th>
-                                    <th>Universidad</th>
-                                    <th>Acción</th>
+                                    <th>Apellidos</th>
+                                    <th>Cargar evaluación</th>
                             </thead>
                             <tbody>
                                 {% for aspirante in aspirantes %}
                                 <tr align="center">
-                                    <td>{{ aspirante.id }}</td>
-                                    <td>{{ aspirante.profile.persona.primer_nombre }} {{ auditor.profile.persona.primer_apellido }}</td>
+                                    <td>{{ aspirante.profile.persona.cedula }}</td>
+                                    <td>{{ aspirante.profile.persona.primer_nombre }} {{ auditor.profile.persona.segundo_nombre }}</td>
+                                    <td>{{ aspirante.profile.persona.primer_apellido }} {{ auditor.profile.persona.segundo_apellido }}</td>
                                     <td>
-                                        {% for educacion in aspirante.profile.persona.educacion_set.get_queryset %}
-                                            {{ educacion.titulo }}  
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        {% for educacion in aspirante.profile.persona.educacion_set.get_queryset %}
-                                            {{ educacion.institucion.nombre }}  
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        <div class="button-group push-right">
-                                            <a href="" class="ink-button blue">
-                                                <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
-                                                    <i class="icon-file-text"></i>
-                                                </span>
-                                            </a>
-                                        </div>
+                                        <a href="" class="ink-button blue">
+                                            <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
+                                                <i class="icon-file-text"></i>
+                                            </span>
+                                        </a>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -107,8 +95,8 @@
                             <thead class="small">
                                     <th>#</th>
                                     <th>Nombres</th>
-                                    <th>Acreditado el</th>
-                                    <th>Vencimiento</th>
+                                    <th>Acreditado</th>
+                                    <th>Vence en</th>
                                     <th>TLF</th>
                                     <th>Email</th>
                                     <th>Acción</th>
@@ -131,7 +119,8 @@
                                             {{ persona.movil }}
                                         {% endifequal %}
                                     </td>
-                                    <td>{{ auditor.persona.email }}</td>
+                                    {% load perfil %}
+                                    <td>{{ auditor.persona.email|mail_antispam }}</td>
                                     <td>
                                         <div class="button-group push-right">
                                             <a href="" class="ink-button blue">
