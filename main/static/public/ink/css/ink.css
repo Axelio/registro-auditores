@@ -2449,6 +2449,9 @@ footer {
   background: #f0f0f0;
   overflow: hidden;
   bottom: 0;
+  position:fixed;
+  width:100%;
+  bottom:0px;
 }
 /*!
  *  Font Awesome 3.2.1
