@@ -63,14 +63,14 @@
                                     <td>{{ auditor.fecha_acreditacion|date:"SHORT_DATE_FORMAT" }}</td>
                                     <td>{{ auditor.fecha_desacreditacion|date:"SHORT_DATE_FORMAT" }}</td>
                                     <td>
-                                        {% ifequal persona.tlf_contacto 'fijo' %}
-                                            {{ persona.tlf_reside }}
+                                        {% ifequal auditor.persona.tlf_contacto 'fijo' %}
+                                            {{ auditor.persona.tlf_reside }}
                                         {% endifequal %}
-                                        {% ifequal persona.tlf_contacto 'oficina' %}
-                                            {{ persona.oficina }}
+                                        {% ifequal auditor.persona.tlf_contacto 'oficina' %}
+                                            {{ auditor.persona.oficina }}
                                         {% endifequal %}
-                                        {% ifequal persona.tlf_contacto 'movil' %}
-                                            {{ persona.movil }}
+                                        {% ifequal auditor.persona.tlf_contacto 'movil' %}
+                                            {{ auditor.persona.movil }}
                                         {% endifequal %}
                                     </td>
                                     {% load perfil %}
