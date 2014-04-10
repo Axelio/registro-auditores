@@ -1,4 +1,4 @@
-<nav class="ink-navigation ink-grid hide-small hide-medium ie7 sticky">
+<nav class="ink-navigation hide-small hide-medium ie7 sticky">
     <ul class="menu horizontal shadowed grey">
     <li class=><a href="#"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
     {% if not auth %}
@@ -28,6 +28,19 @@
                 </li>
             </div>
         {% endif %}
+    {% else %}
+        <div class="push-right">
+            <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
+            <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
+                <ul class="submenu">
+                    <li><a class="small" href="/admin">Panel administrativo</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
+                        <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </div>
     {% endif %}
     </ul>
 </nav>
@@ -45,27 +58,47 @@
     </ul>
 
     <ul class="menu vertical flat gray hide-all" id="topbar_menu">
-    <div class="push-right">
-        <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
-        <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Currículum <i class="icon-caret-down"></i></a>
-            <ul class="submenu">
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
-                <li><a class="small scrollableLink" href="{% url 'perfil' %}#certificacion">Certificaciones</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
-                {% if requisitos %}
-                    <li><a class="small scrollableLink" href="{% url 'citas' %}">Citas</a></li>
-                {% endif %}
-            </ul>
-        </li>
-        <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Perfil <i class="icon-caret-down"></i></a>
-            <ul class="submenu">
-                <li class="small"><a href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
-                <li class="small"><a href="{% url 'salir' %}">Cerrar sesión</a></li>
-            </ul>
-        </li>
+    {% if not auth %}
+        {% if user.is_authenticated %}
+            <div class="push-right">
+                <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
+                <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Currículum <i class="icon-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
+                        <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
+                        <li><a class="small scrollableLink" href="{% url 'perfil' %}#certificacion">Certificaciones</a></li>
+                        <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
+                        <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
+                        <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
+                        <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+                        {% if requisitos %}
+                            <li><a class="small scrollableLink" href="{% url 'citas' %}">Citas</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Perfil <i class="icon-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
+                        <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="push-right">
+            {% if user.is_authenticated %}
+                <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
+                <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a class="small" href="/admin">Panel administrativo</a></li>
+                            <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
+                            <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
+                    </ul>
+            {% else %}
+                <li><a href="/admin">Panel administrativo</a></li>
+            {% endif %}
+            </li>
+        </div>
+    {% endif %}
     </ul>
 </nav>

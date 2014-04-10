@@ -17,7 +17,7 @@ from curriculum.views import (PerfilView,
     EducacionView, LaboralView, CompetenciaView,
     HabilidadView, ConocimientoView, IdiomaView,
     EditarPersonaView, CitasView, CertificacionView,
-    CursoView)
+    CursoView, VerAuditores)
 from auth.views import *
 from auth.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
@@ -82,6 +82,10 @@ urlpatterns = patterns('',
              'palabra_clave': 'cambiar'},
         },
         name='cambiar_clave'),
+
+    url(r'^listado_auditores/',
+        VerAuditores.as_view(),
+        name='listado_auditores'),
 
     url(r'^perfil/info_personal/*$',
         login_required(EditarPersonaView.as_view()),

@@ -8,6 +8,8 @@ from django.http import Http404, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.db.models import Q
+from django.core.paginator import (Paginator, EmptyPage,
+        PageNotAnInteger)
 
 from curriculum.models import *
 from curriculum.forms import *
@@ -22,7 +24,7 @@ def listaAspirantes():
     # son aspirantes, así que filtramos a los usuarios
     # que no esten en el grupo Operadores
     aspirantes = User.objects.filter(
-            is_active = True).exclude(
+            is_active=True).exclude(
                     groups__name__iexact='operador')
 
     return aspirantes
@@ -66,7 +68,7 @@ def lista_filtros(request):
     '''
     listado = aptitudes(request)
     requisitos = revisar_requisitos(listado)
-    cita = Cita.objects.filter(usuario = request.user.profile)
+    cita = Cita.objects.filter(usuario=request.user.profile)
 
     listado = {'laborales': listado[0],
                 'educaciones': listado[1],
@@ -122,12 +124,12 @@ class CitasView(View):
             self.tipo_mensaje = 'info'
             self.mensaje = 'Debe seleccionar tres fechas tentativas en las '
             self.mensaje += 'que desearía tener una cita con nosotros.'
-            cita = Cita.objects.filter(usuario = usuario.profile)
+            cita = Cita.objects.filter(usuario=usuario.profile)
             if cita.exists():
                 if cita[0].cita_fijada == '':
                     # Si la fecha fijada está en blanco (no ha sido fijada)
                     # Se le permite al usuario la edición de la misma
-                    self.citas_form = self.citas_form(instance = cita[0])
+                    self.citas_form = self.citas_form(instance=cita[0])
                 else:
                     # Sino, debe redireccionarle al perfil de nuevo
                     return redirect('perfil')
@@ -176,7 +178,7 @@ class CitasView(View):
 
             if self.citas_form.is_valid():
                 if nueva:
-                    cita = Cita.objects.filter(usuario = usuario.profile)
+                    cita = Cita.objects.filter(usuario=usuario.profile)
                     if cita.exists():
                         cita = cita[0]
                         cita.primera_fecha = primera_fecha = fecha_1
@@ -184,10 +186,10 @@ class CitasView(View):
                         cita.tercera_fecha = tercera_fecha = fecha_3
                         cita.save()
                     else:
-                        cita = Cita.objects.create(usuario = usuario.profile,
-                                primera_fecha = fecha_1,
-                                segunda_fecha = fecha_2,
-                                tercera_fecha = fecha_3)
+                        cita = Cita.objects.create(usuario=usuario.profile,
+                                primera_fecha=fecha_1,
+                                segunda_fecha=fecha_2,
+                                tercera_fecha=fecha_3)
 
                     self.mensaje = "Las fechas para cita ha sido cargada con "
                     self.mensaje += "éxito. Se ha enviado su información a "
@@ -198,23 +200,27 @@ class CitasView(View):
                 if self.citas_form.errors:
                     self.mensaje = self.citas_form.errors['__all__'][0]
                     self.tipo_mensaje = 'error'
-        self.diccionario.update({'persona':usuario.profile.persona})
-        self.diccionario.update({'nueva':nueva})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'formulario':self.citas_form})
+
+        self.diccionario.update({'persona': usuario.profile.persona})
+        self.diccionario.update({'nueva': nueva})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'formulario': self.citas_form})
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
+
 
 class EducacionView(View):
     '''
     Clase para la renderización de los datos educativos
     '''
-    template='perfil/editar_formulario.html'
+
+    template = 'perfil/editar_formulario.html'
     educacion_form = EducacionForm
     mensaje = ''
     tipo_mensaje = ''
@@ -223,7 +229,7 @@ class EducacionView(View):
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
-    diccionario.update({'titulo':titulo})
+    diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -235,8 +241,8 @@ class EducacionView(View):
         except:
             raise Http404
 
-        self.diccionario.update({'formulario':self.educacion_form()})
-        if kwargs.has_key('educacion_id') and not kwargs['educacion_id'] == None:
+        self.diccionario.update({'formulario': self.educacion_form()})
+        if kwargs.has_key('educacion_id') and kwargs['educacion_id'] != None:
             nueva = False
             try:
                 educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
@@ -1344,3 +1350,37 @@ class CursoView(View):
                        dictionary=self.diccionario,
                      )
 
+
+class VerAuditores(View):
+    '''
+    Clase para las consultas de los auditores
+    '''
+    template = 'auditores.html'
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+
+    def get(self, request, *args, **kwargs):
+        fecha_actual = datetime.date.today()
+        auditores = Auditor.objects.filter(
+                fecha_desacreditacion__gte=fecha_actual,
+                acreditado = True)
+
+        paginator = Paginator(auditores, 25) # Show 25 contacts per page
+
+        page = request.GET.get('page')
+        try:
+            auditores = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            auditores = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            auditores = paginator.page(paginator.num_pages)
+
+        self.diccionario.update({'auditores':auditores})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )

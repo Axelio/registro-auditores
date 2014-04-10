@@ -36,11 +36,21 @@
                         <div class="column-group push-center">
                             <nav class="ink-navigation">
                                 <ul class="pagination shadowed rounded blue push-right small">
-                                    <li class="previous"><a href="#">Previous</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li class="next"><a href="#">Next</a></li>
+                                {% if aspirantes.has_previous %}
+                                    <li class="previous"><a href="?page={{ aspirantes.previous_page_number }}">Anterior</a></li>
+                                {% else %}
+                                    <li class="previous disabled"><a href="#">Anterior</a></li>
+                                {% endif %}
+
+                                <li>
+                                    <a href="#">{{ aspirantes.number }}/{{ aspirantes.paginator.num_pages }}</a>
+                                </li>
+
+                                {% if aspirantes.has_next %}
+                                    <li class="next"><a href="?page={{ aspirantes.next_page_number }}">Sigueinte</a></li>
+                                {% else %}
+                                    <li class="next disabled"><a href="#">Sigueinte</a></li>
+                                {% endif %}
                                 </ul>
                             </nav>
                         </div>
@@ -82,11 +92,21 @@
                         <div class="column-group push-center">
                             <nav class="ink-navigation">
                                 <ul class="pagination shadowed rounded blue push-right small">
-                                    <li class="previous"><a href="#">Previous</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li class="next"><a href="#">Next</a></li>
+                                {% if auditores.has_previous %}
+                                    <li class="previous"><a href="?page={{ auditores.previous_page_number }}">Anterior</a></li>
+                                {% else %}
+                                    <li class="previous disabled"><a href="#">Anterior</a></li>
+                                {% endif %}
+
+                                <li>
+                                    <a href="#">{{ auditores.number }}/{{ auditores.paginator.num_pages }}</a>
+                                </li>
+
+                                {% if auditores.has_next %}
+                                    <li class="next"><a href="?page={{ auditores.next_page_number }}">Sigueinte</a></li>
+                                {% else %}
+                                    <li class="next disabled"><a href="#">Sigueinte</a></li>
+                                {% endif %}
                                 </ul>
                             </nav>
                         </div>
