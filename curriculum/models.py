@@ -198,8 +198,7 @@ class ListaCompetencia(models.Model):
 class Competencia(models.Model):
     usuario = models.ForeignKey(UserProfile)
     competencia = models.ForeignKey('ListaCompetencia', unique=True)
-    nivel = models.CharField(max_length=10, choices=NIVELES_COMPETENCIA,
-            default='nada')
+    puntaje = models.DecimalField(max_digits=3, decimal_places=2)
 
     class Meta:
         db_table = 'competencia'

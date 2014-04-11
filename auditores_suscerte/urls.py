@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import logout
 from django.conf import settings
@@ -107,7 +107,7 @@ urlpatterns = patterns('',
         login_required(ConocimientoView.as_view()),
         name='conocimiento'),
 
-    url(r'^perfil/competencia/(?P<palabra>\w+)/(?P<competencia_id>[\d]+)*$',
+    url(r'^perfil/competencia/(?P<aspirante_id>[\d]+)/',
         login_required(CompetenciaView.as_view()),
         name='competencia'),
 

@@ -8,6 +8,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+LIST_PER_PAGE = 25
+
 PASSWORD_MIN_LENGTH = 8
 PASSWORD_MAX_LENGTH = 120
 PASSWORD_COMPLEXITY = {
@@ -15,6 +17,8 @@ PASSWORD_COMPLEXITY = {
     "LOWER":  1,
     "DIGITS": 1,
 }
+
+PUNTAJE = [x * 0.5 for x in range(0, 7)] #Puntaje del 0.0 al 3.0 de 0.5 en 0.5
 
 RECAPTCHA_PUBLIC_KEY = '6Ld-Z_ASAAAAAB948Z2NOCG2VKDVPC80ShdNwp10'
 RECAPTCHA_PRIVATE_KEY = '6Ld-Z_ASAAAAAN38iuzIo2tH3QPZDiGnrZgMV-7a'

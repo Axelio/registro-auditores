@@ -452,9 +452,32 @@ class PerfilView(View):
         if usuario.groups.filter(name__iexact='operador').exists():
             aspirantes = listaAspirantes()
             auditores = Auditor.objects.filter(acreditado=True)
+            self.template = 'perfil/perfil_operador.html'
+
+            paginator = Paginator(auditores, settings.LIST_PER_PAGE)
+            page = request.GET.get('page')
+            try:
+                auditores = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                auditores = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                auditores = paginator.page(paginator.num_pages)
+
+            paginator = Paginator(aspirantes, settings.LIST_PER_PAGE)
+            page = request.GET.get('page')
+            try:
+                aspirantes = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                aspirantes = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                aspirantes = paginator.page(paginator.num_pages)
+
             self.diccionario.update({'aspirantes':aspirantes})
             self.diccionario.update({'auditores':auditores})
-            self.template = 'perfil/perfil_operador.html'
 
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
@@ -695,7 +718,7 @@ class CompetenciaView(View):
     '''
     Clase para la renderización de los datos de conocimientos generales
     '''
-    template='perfil/editar_formulario.html' # Plantilla que utilizará por defecto para renderizar
+    template='carga_evaluacion.html' # Plantilla que utilizará por defecto para renderizar
     mensaje = '' # Mensaje que se le mostrará al usuario
     tipo_mensaje = '' # Si el mensaje es de éxito o de error
     titulo = 'competencias' # Título a ser renderizado en la plantilla
@@ -705,9 +728,6 @@ class CompetenciaView(View):
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
     diccionario.update({'titulo':titulo})
-    lista = ListaCompetencia.objects.exclude(tipo='academico')
-    lista = lista.exclude(tipo='requerido')
-    diccionario.update({'lista_competencia':lista})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -720,42 +740,26 @@ class CompetenciaView(View):
         except:
             raise Http404
 
-        # Actualización del diccionario con el formulario
-        self.diccionario.update({'formulario':self.competencia_form()})
+        competencias = ListaCompetencia.objects.all()
+        aspirante = User.objects.get(id=kwargs['aspirante_id'])
 
-        # Si se elimina una Competencia 
-        if kwargs['palabra'] == 'eliminar':
-            competencia = Competencia.objects.filter(usuario=persona.userprofile)
-            if competencia.exists():
-                for comp in competencia:
-                    comp.delete()
-                self.mensaje = u'Competencia ha sido eliminada exitosamente'
-                self.tipo_mensaje = u'success'
-            else:
-                self.mensaje = u'Usted no tiene ninguna competencia que eliminar.'
-                self.tipo_mensaje = u'warning'
+        puntajes = settings.PUNTAJE
 
-            self.template = 'perfil/perfil.html'
-
-        if kwargs.has_key('competencia_id') and not kwargs['competencia_id'] == None:
-            if kwargs['palabra'] == 'editar':
-                nueva = False
-
-            try:
-                competencia = Competencia.objects.get(id=int(kwargs['competencia_id']))
-            except:
-                raise Http404
-
-            # Si el usuario de laboral no es el mismo al loggeado, retornar permisos denegados
-            if competencia.usuario == usuario.profile:
-                self.competencia_form = self.competencia_form(instance=conocimiento)
-            else:
-                raise PermissionDenied
-
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'persona':persona})
-        self.diccionario.update({'nueva':nueva})
+        self.diccionario.update({'competencias_academicas': competencias.filter(
+                tipo='academico')})
+        self.diccionario.update({'competencias_basicas': competencias.filter(
+                tipo='basico')})
+        self.diccionario.update({'competencias_complementarias': competencias.filter(
+                tipo='complementario')})
+        self.diccionario.update({'competencias_requeridas': competencias.filter(
+                tipo='requerido')})
+        self.diccionario.update({'competencias_auditoria': competencias.filter(
+                tipo='auditoria')})
+        self.diccionario.update({'puntajes': puntajes})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'persona': persona})
+        self.diccionario.update({'nueva': nueva})
         self.diccionario.update({'formulario':self.competencia_form})
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
@@ -1367,7 +1371,7 @@ class VerAuditores(View):
                 fecha_desacreditacion__gte=fecha_actual,
                 acreditado = True)
 
-        paginator = Paginator(auditores, 25) # Show 25 contacts per page
+        paginator = Paginator(auditores,  settings.LIST_PER_PAGE) # Show 25 contacts per page
 
         page = request.GET.get('page')
         try:

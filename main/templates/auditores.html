@@ -26,6 +26,7 @@
                         <form class="ink-form" method="post">{% csrf_token %}
                         <div class="column-group push-center">
                             <nav class="ink-navigation">
+                                <a class="ink-button blue" href="{% url 'inicio' %}">Volver al inicio</a>
                                 <ul class="pagination shadowed rounded blue push-right small">
                                 {% if auditores.has_previous %}
                                     <li class="previous"><a href="?page={{ auditores.previous_page_number }}">Anterior</a></li>
@@ -85,6 +86,9 @@
                     <h4><div class="ink-titulo_superior"><i class="icon-exclamation"></i> Auditores acreditados</div></h4>
                     <p>Por ahora no tenemos ningún auditor acreditado.</p>
                 {% endif%}
+                <div class="push-center">
+                    <a class="ink-button blue" href="{% url 'inicio' %}">Volver al inicio</a>
+                </div>
             </div>
         </div>
     </div>

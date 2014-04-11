@@ -18,8 +18,8 @@ class IdiomaAdmin(admin.ModelAdmin):
 admin.site.register(Idioma, IdiomaAdmin)
 
 class CompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('competencia', 'nivel')
-    list_filter = ('nivel',)
+    list_display = ('competencia', 'puntaje')
+    list_filter = ('competencia',)
 admin.site.register(Competencia, CompetenciaAdmin)
 
 class ListaCompetenciaAdmin(admin.ModelAdmin):
