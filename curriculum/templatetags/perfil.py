@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.template import Library
 from django.utils.html import format_html
-from curriculum.models import NIVELES_COMPETENCIA, Competencia
+from curriculum.models import (NIVELES_COMPETENCIA,
+    Competencia, ListaCompetencia)
 
 register = Library()
 
@@ -40,3 +41,22 @@ def mail_antispam(email):
     texto = usuario + ' en ' + servicio
     return texto
 register.filter(mail_antispam)
+
+
+@register.filter(name="puntaje_limite", is_safe=True)
+def puntaje_limite(competencia_id):
+    '''
+    Función para limitar el puntaje
+    segun la opcion que tenga
+    '''
+    competencia = ListaCompetencia.objects.get(id=competencia_id)
+    puntos = []
+    puntos.append(0.0)
+    puntaje = 0.0
+
+    while puntaje < competencia.puntaje:
+        puntaje = puntaje + 0.5
+        puntos.append(puntaje)
+
+    return puntos
+register.filter(puntaje_limite)

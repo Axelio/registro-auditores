@@ -85,7 +85,7 @@
                                                          <input type="text">
                                                       {% else %}
                                                           <select id="id_nivel" name="nivel">
-                                                              {% for puntaje in puntajes %}
+                                                              {% for puntaje in l_competencia.id|puntaje_limite %}
                                                                   <option value="{{ puntaje }}">{{ puntaje }}</option>
                                                               {% endfor %}
                                                           </select>
@@ -116,7 +116,7 @@
                                                          <input type="text">
                                                       {% else %}
                                                           <select id="id_nivel" name="nivel">
-                                                              {% for puntaje in puntajes %}
+                                                              {% for puntaje in l_competencia.id|puntaje_limite %}
                                                                   <option value="{{ puntaje }}">{{ puntaje }}</option>
                                                               {% endfor %}
                                                           </select>
@@ -143,39 +143,15 @@
                                                     <span class="small">{{ l_competencia.help_text }}</span>
                                                 </td>
                                                 <td class="content-right">
-                                                      <select id="id_nivel" name="nivel">
-                                                          {% for puntaje in puntajes %}
-                                                              <option value="{{ puntaje }}">{{ puntaje }}</option>
-                                                          {% endfor %}
-                                                      </select>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </section>
-                                <section id="auditoria">
-                                    <div class="content-center"><b>Experticia en auditoría</b></div>
-                                    <table class="ink-table">
-                                        <thead>
-                                            <th>Conocimiento</th>
-                                            <th align="right">Puntaje</th>
-                                        </thead>
-                                        <tbody>
-                                        {% for l_competencia in competencias_auditoria %}
-                                            <tr>
-                                                <td>
-                                                    <label>{{ l_competencia }}</label><br />
-                                                    <span class="small">{{ l_competencia.help_text }}</span>
-                                                </td>
-                                                <td class="content-right">
-                                                      <select id="id_nivel" name="nivel">
-                                                          {% for puntaje in puntajes %}
-                                                              <option value="{{ puntaje }}">{{ puntaje }}</option>
-                                                          {% endfor %}
-                                                      </select>
-                                                    </div>
+                                                    {% if l_competencia.id < 27 or l_competencia.od > 30 %}
+                                                        <input type="text">
+                                                    {% else %}
+                                                        <select id="id_nivel" name="nivel">
+                                                        {% for puntaje in l_competencia.id|puntaje_limite %}
+                                                            <option value="{{ puntaje }}">{{ puntaje }}</option>
+                                                        {% endfor %}
+                                                        </select>
+                                                    {% endif %}
                                                 </td>
                                             </tr>
                                         {% endfor %}
