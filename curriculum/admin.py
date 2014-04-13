@@ -23,9 +23,10 @@ class CompetenciaAdmin(admin.ModelAdmin):
 admin.site.register(Competencia, CompetenciaAdmin)
 
 class ListaCompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('nombre','tipo',)
+    list_display = ('nombre','puntaje','tipo',)
     list_filter = ('tipo',)
     ordering = ('tipo','id')
+admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
 
 class CitaAdmin(admin.ModelAdmin):
     list_display = (
@@ -35,7 +36,6 @@ class CitaAdmin(admin.ModelAdmin):
             'tercera_fecha',
             'cita_fijada')
 admin.site.register(Cita, CitaAdmin)
-admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
 admin.site.register(Educacion)
 admin.site.register(TipoEducacion)
 admin.site.register(Laboral)

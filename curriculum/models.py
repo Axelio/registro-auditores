@@ -185,6 +185,7 @@ TIPO_CONOCIMIENTO = (
 class ListaCompetencia(models.Model):
     nombre = models.CharField(max_length=200)
     tipo = models.CharField(max_length=20, choices=TIPO_CONOCIMIENTO)
+    puntaje = models.DecimalField(max_digits=3, decimal_places=2)
 
     class Meta:
         db_table = 'lista_competencia'
