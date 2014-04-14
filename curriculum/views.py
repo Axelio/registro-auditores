@@ -723,7 +723,7 @@ class CompetenciaView(View):
     tipo_mensaje = '' # Si el mensaje es de éxito o de error
     titulo = 'competencias' # Título a ser renderizado en la plantilla
     lista_filtros = '' # Listado filtrado de objetos que llegarán a la plantilla
-    competencia_form = CompetenciaForm
+    competencia_form = CompetenciaPruebaForm
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -744,17 +744,8 @@ class CompetenciaView(View):
         aspirante = User.objects.get(id=kwargs['aspirante_id'])
 
         puntajes = settings.PUNTAJE
+        
 
-        self.diccionario.update({'competencias_academicas': competencias.filter(
-                tipo='academico')})
-        self.diccionario.update({'competencias_basicas': competencias.filter(
-                tipo='basico')})
-        self.diccionario.update({'competencias_complementarias': competencias.filter(
-                tipo='complementario')})
-        self.diccionario.update({'competencias_requeridas': competencias.filter(
-                tipo='requerido')})
-        self.diccionario.update({'competencias_auditoria': competencias.filter(
-                tipo='auditoria')})
         self.diccionario.update({'puntajes': puntajes})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})

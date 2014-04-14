@@ -96,6 +96,16 @@ class CitasForm(forms.ModelForm):
         return self.cleaned_data
 
 
+class CompetenciaPruebaForm(forms.ModelForm):
+    '''
+    Formulario para el ingreso de Competencias en el panel administrativo
+    '''
+
+    class Meta:
+        model = Competencia
+        exclude = ('usuario','competencia')
+
+
 class CompetenciaForm(forms.ModelForm):
     '''
     Formulario para el ingreso de Competencias en el panel administrativo

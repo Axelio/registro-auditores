@@ -54,7 +54,7 @@ def puntaje_limite(competencia_id):
     puntos.append(0.0)
     puntaje = 0.0
 
-    while puntaje < competencia.puntaje:
+    while puntaje < competencia.puntaje_maximo:
         puntaje = puntaje + 0.5
         puntos.append(puntaje)
 

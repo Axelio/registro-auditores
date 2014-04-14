@@ -187,9 +187,9 @@ TIPOS_PUNTAJE = (('int', 'Cantidades'), ('float', 'Puntos'))
 class ListaCompetencia(models.Model):
     nombre = models.CharField(max_length=200)
     tipo = models.CharField(max_length=20, choices=TIPO_CONOCIMIENTO)
-    puntaje_maximo = models.DecimalField(max_digits=3, decimal_places=2, verbose_name=u'puntaje máximo', blank=True, null=True)
-    puntaje_minimo = models.DecimalField(max_digits=3, decimal_places=2, verbose_name=u'puntaje mínimo', default=0.0, blank=True, null=True)
-    tipo_puntaje = models.CharField(max_length=10, choices=TIPOS_PUNTAJE, blank=True, null=True) 
+    puntaje_maximo = models.DecimalField(max_digits=3, decimal_places=2, verbose_name=u'puntaje máximo', null=True, blank=True)
+    puntaje_minimo = models.DecimalField(max_digits=3, decimal_places=2, verbose_name=u'puntaje mínimo', default=0.0, null=True, blank=True)
+    tipo_puntaje = models.CharField(max_length=10, choices=TIPOS_PUNTAJE, null=True, blank=True) 
 
     class Meta:
         db_table = 'lista_competencia'
@@ -202,7 +202,7 @@ class ListaCompetencia(models.Model):
 
 class Competencia(models.Model):
     usuario = models.ForeignKey(UserProfile)
-    competencia = models.ForeignKey('ListaCompetencia', unique=True)
+    competencia = models.ForeignKey('ListaCompetencia', unique_together = (UserProfile, ListaCompetencia))
     puntaje = models.DecimalField(max_digits=3, decimal_places=2)
 
     class Meta:
