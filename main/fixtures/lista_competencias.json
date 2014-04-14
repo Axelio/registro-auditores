@@ -3,8 +3,10 @@
     "pk": 1, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Redes, telecomunicaciones ", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "basico"
     }
 },
@@ -12,8 +14,10 @@
     "pk": 2, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "Desarrollo, mantenimiento, instalaci\u00f3n y configuraci\u00f3n de sistemas y aplicaciones ", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "basico"
     }
 },
@@ -21,8 +25,10 @@
     "pk": 3, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "Equipamiento TIC, instalaci\u00f3n, configuraci\u00f3n y mantenimiento de equipos TIC ", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "basico"
     }
 },
@@ -30,8 +36,10 @@
     "pk": 4, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Infraestructura de clave p\u00fablica", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "basico"
     }
 },
@@ -39,8 +47,10 @@
     "pk": 5, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en TIC, certificaci\u00f3n de datos y firmas electr\u00f3nicas", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "basico"
     }
 },
@@ -48,8 +58,10 @@
     "pk": 6, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Organizaci\u00f3n y sistemas, procesos, normas y procedimientos", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "basico"
     }
 },
@@ -57,8 +69,10 @@
     "pk": 7, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "TSU", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "academico"
     }
 },
@@ -66,8 +80,10 @@
     "pk": 8, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Profesional universitario", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "academico"
     }
 },
@@ -75,8 +91,10 @@
     "pk": 9, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Especialidad", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "academico"
     }
 },
@@ -84,8 +102,10 @@
     "pk": 10, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Maestr\u00eda", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "academico"
     }
 },
@@ -93,8 +113,10 @@
     "pk": 11, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "3", 
         "nombre": "Doctorado", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "academico"
     }
 },
@@ -102,8 +124,10 @@
     "pk": 12, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Bases de datos y administraci\u00f3n de datos", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -111,8 +135,10 @@
     "pk": 13, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "Planificaci\u00f3n de la gesti\u00f3n de \u00e1reas TIC", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -120,8 +146,10 @@
     "pk": 14, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "Gesti\u00f3n de proyectos TIC", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -129,8 +157,10 @@
     "pk": 15, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Calidad de la infraestructura y componentes TIC, calidad de gesti\u00f3n en TIC, niveles de   servicios con uso de las TIC", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -138,8 +168,10 @@
     "pk": 16, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Administraci\u00f3n y configuraci\u00f3n de ambientes y de los sistemas operativos", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -147,8 +179,10 @@
     "pk": 17, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "3", 
         "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en auditor\u00eda TIC", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -156,8 +190,10 @@
     "pk": 18, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "3", 
         "nombre": "Marco legal y normativo que rige las TIC y SCDFE en la RBV", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -165,8 +201,10 @@
     "pk": 19, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "Participaci\u00f3n como asistente o ponente en conferencias o seminarios en \u00e1reas inherentes    a: Sistemas, inform\u00e1tica, computaci\u00f3n o afines a las TIC", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "complementario"
     }
 },
@@ -174,8 +212,10 @@
     "pk": 20, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "0.5", 
         "nombre": "Certificaciones nacionales en TIC", 
+        "puntaje_maximo": "0.5", 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -183,8 +223,10 @@
     "pk": 21, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "Certificaciones internacionales en TIC", 
+        "puntaje_maximo": "1", 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -192,8 +234,10 @@
     "pk": 22, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1.5", 
         "nombre": "Certificaciones nacionales como auditores TIC", 
+        "puntaje_maximo": "1.5", 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -201,8 +245,10 @@
     "pk": 23, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Certificaciones internacionales como auditores TIC", 
+        "puntaje_maximo": "2", 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -210,8 +256,10 @@
     "pk": 24, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1.5", 
         "nombre": "Certificaciones nacionales en seguridad TIC", 
+        "puntaje_maximo": "1.5", 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -219,8 +267,10 @@
     "pk": 25, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Certificaciones internacionales en seguridad TIC", 
+        "puntaje_maximo": "2", 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -228,8 +278,10 @@
     "pk": 26, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Riesgo, seguridad de la informaci\u00f3n, control y auditor\u00eda TIC ", 
+        "puntaje_maximo": null, 
+        "tipo_puntaje": null, 
+        "puntaje_minimo": "0", 
         "tipo": "basico"
     }
 },
@@ -237,8 +289,10 @@
     "pk": 27, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "2", 
         "nombre": "Experiencia en auditor\u00eda en TIC", 
+        "puntaje_maximo": "2", 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -246,8 +300,10 @@
     "pk": 28, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "3", 
         "nombre": "Experiencia en auditor\u00edas especializadas en seguridad de la informaci\u00f3n", 
+        "puntaje_maximo": "3", 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -255,8 +311,10 @@
     "pk": 29, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "4", 
-        "nombre": "Experiencia en auditor\u00eda", 
+        "nombre": "Auditor\u00eda en infraestructura de clave p\u00fablica", 
+        "puntaje_maximo": "4", 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 },
@@ -264,8 +322,10 @@
     "pk": 30, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "puntaje": "1", 
         "nombre": "Otras experiencias en auditor\u00eda", 
+        "puntaje_maximo": "1", 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": "0", 
         "tipo": "requerido"
     }
 }
