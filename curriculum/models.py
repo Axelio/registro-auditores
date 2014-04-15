@@ -202,7 +202,7 @@ class ListaCompetencia(models.Model):
 
 class Competencia(models.Model):
     usuario = models.ForeignKey(UserProfile)
-    competencia = models.ForeignKey('ListaCompetencia', unique_together = (UserProfile, ListaCompetencia))
+    competencia = models.ForeignKey('ListaCompetencia')
     puntaje = models.DecimalField(max_digits=3, decimal_places=2)
 
     class Meta:

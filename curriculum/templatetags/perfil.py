@@ -60,3 +60,16 @@ def puntaje_limite(competencia_id):
 
     return puntos
 register.filter(puntaje_limite)
+
+
+@register.filter(name="seleccionado", is_safe=True)
+def seleccionado(puntaje_id, puntaje):
+    '''
+    Función para determinar si
+    un puntaje está o no seleccionado
+    '''
+    if puntaje_id == puntaje:
+        return "selected"
+    else:
+        return ""
+register.filter(seleccionado)

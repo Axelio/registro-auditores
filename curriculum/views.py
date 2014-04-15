@@ -10,6 +10,8 @@ from django.shortcuts import redirect
 from django.db.models import Q
 from django.core.paginator import (Paginator, EmptyPage,
         PageNotAnInteger)
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 from curriculum.models import *
 from curriculum.forms import *
@@ -433,6 +435,10 @@ class PerfilView(View):
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
 
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(PerfilView, self).dispatch(*args, **kwargs)
+
     def get(self, request, *args, **kwargs):
         mensaje = ''
         tipo = ''
@@ -721,18 +727,20 @@ class CompetenciaView(View):
     template='carga_evaluacion.html' # Plantilla que utilizará por defecto para renderizar
     mensaje = '' # Mensaje que se le mostrará al usuario
     tipo_mensaje = '' # Si el mensaje es de éxito o de error
-    titulo = 'competencias' # Título a ser renderizado en la plantilla
+    titulo = u'cargando evaluación' # Título a ser renderizado en la plantilla
     lista_filtros = '' # Listado filtrado de objetos que llegarán a la plantilla
     competencia_form = CompetenciaPruebaForm
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
     diccionario.update({'titulo':titulo})
+    competencias = ListaCompetencia.objects.all()
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
         usuario = request.user
         nueva = True
+        error = False 
 
         # Obtener la persona para renderizarla en la plantilla
         try:
@@ -740,17 +748,17 @@ class CompetenciaView(View):
         except:
             raise Http404
 
-        competencias = ListaCompetencia.objects.all()
         aspirante = User.objects.get(id=kwargs['aspirante_id'])
 
         puntajes = settings.PUNTAJE
-        
 
+        self.diccionario.update({'competencias': self.competencias})
         self.diccionario.update({'puntajes': puntajes})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'persona': persona})
         self.diccionario.update({'nueva': nueva})
+        self.diccionario.update({'error': error})
         self.diccionario.update({'formulario':self.competencia_form})
         self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
@@ -761,45 +769,39 @@ class CompetenciaView(View):
 
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        self.competencia_form = self.competencia_form(request.POST)
-        respuestas = request.POST.getlist('nivel')
-
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-            if kwargs['palabra'] == 'editar':
-                for respuesta in respuestas:
-                    nivel = respuesta.split('_')[0] # Optebnemos el nivel elegido
-                    l_competencia = respuesta.split('_')[1] # Optenemos el ID de la competencia
-                    l_competencia = ListaCompetencia.objects.get(id=l_competencia)
-
-                    competencia = Competencia.objects.get(usuario=request.user.profile, competencia = l_competencia)
-                    competencia.nivel = nivel
-                    competencia.save()
-
-                self.mensaje = u'Las competencias han sido editadas exitosamente'
-                self.tipo_mensaje = u'success'
-
-            else:
-                # Si se crea información laboral 
-                for respuesta in respuestas:
-                    nivel = respuesta.split('_')[0] # Optebnemos el nivel elegido
-                    l_competencia = respuesta.split('_')[1] # Optenemos el ID de la competencia
-                    l_competencia = ListaCompetencia.objects.get(id=l_competencia)
-
-                    competencia = Competencia.objects.create(usuario=request.user.profile, nivel=nivel, competencia=l_competencia)
-
-                self.mensaje = u'Las competencias han sido creadas exitosamente'
-                self.tipo_mensaje = u'success'
-
-
-            self.template = 'perfil/perfil.html'
 
         persona = request.user.profile.persona
 
+        for valor in request.POST.items():
+            if not valor[0].__contains__('csrf'):
+                puntuacion = float(valor[1].replace(',','.'))
+
+                competencia = valor[0]
+                competencia = competencia.split('_')[1]
+                competencia = ListaCompetencia.objects.get(id=competencia)
+
+                usuario = request.path_info.split('/')[3]
+                usuario = UserProfile.objects.get(user__id=usuario)
+
+                try:
+                    Competencia.objects.create(
+                            competencia=competencia,
+                            usuario=usuario,
+                            puntaje=puntuacion)
+                except:
+                    self.tipo_mensaje = 'error'
+                    self.mensaje = u'Parece que ha ocurrido un error. \
+                            Por favor, vuelva a intentarlo'
+                else:
+                    self.template = 'curriculum/aprobados.html'
+                    self.tipo_mensaje = 'success'
+                    self.mensaje = u'Entrevista cargada exitosamente.'
+
+
+        self.diccionario.update({'competencias': self.competencias})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
-
-        self.diccionario.update({'formulario':self.competencia_form})
         self.diccionario.update({'titulo':self.titulo})
 
         self.lista_filtros = lista_filtros(request)
@@ -809,6 +811,7 @@ class CompetenciaView(View):
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
+
 
 class HabilidadView(View):
     '''
