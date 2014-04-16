@@ -80,6 +80,7 @@ class Persona(models.Model):
             default='s')
     email = models.EmailField(
             help_text='Indique un correo electrónico válido',
+            unique=True,
             verbose_name=u'Email (tome en cuenta que \
                     esta información será pública)',
             validators=[MaxLengthValidator(2000)])
