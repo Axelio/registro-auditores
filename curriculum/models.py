@@ -30,7 +30,7 @@ class Certificacion(models.Model):
     persona = models.ForeignKey(Persona)
     titulo = models.CharField(max_length=500, verbose_name=u'título')
     codigo_certificacion = models.CharField(max_length=30,
-            blank = True,
+            blank=True,
             verbose_name=u'código de certificación')
     institucion = models.ForeignKey(Institucion, verbose_name=u'institución')
     fecha_inicio = models.DateField()
@@ -181,15 +181,32 @@ TIPO_CONOCIMIENTO = (
             ('complementario', 'Conocimiento Complementario'),
             ('requerido', 'Conocimiento Requerido'))
 
-TIPOS_PUNTAJE = (('int', 'Cantidades'), ('float', 'Puntos')) 
+
+class TipoCompetencia(models.Model):
+    nombre = models.CharField(max_length=50)
+    puntaje_maximo = models.FloatField(verbose_name=u'puntaje máximo')
+
+    class Meta:
+        db_table = 'tipo_competencia'
+        verbose_name = 'tipo de competencia'
+        verbose_name_plural = 'tipos de competancias'
+
+    def __unicode__(self):
+        return u'%s' % (self.nombre)
+
+TIPOS_PUNTAJE = (('int', 'Cantidades'), ('float', 'Puntos'))
 
 
 class ListaCompetencia(models.Model):
     nombre = models.CharField(max_length=200)
-    tipo = models.CharField(max_length=20, choices=TIPO_CONOCIMIENTO)
-    puntaje_maximo = models.DecimalField(max_digits=3, decimal_places=2, verbose_name=u'puntaje máximo', null=True, blank=True)
-    puntaje_minimo = models.DecimalField(max_digits=3, decimal_places=2, verbose_name=u'puntaje mínimo', default=0.0, null=True, blank=True)
-    tipo_puntaje = models.CharField(max_length=10, choices=TIPOS_PUNTAJE, null=True, blank=True) 
+    tipo_competencia = models.ForeignKey(TipoCompetencia,
+            null=True, blank=True)
+    puntaje_maximo = models.FloatField(verbose_name=u'puntaje máximo',
+            null=True, blank=True)
+    puntaje_minimo = models.FloatField(verbose_name=u'puntaje mínimo',
+            default=0.0, null=True, blank=True)
+    tipo_puntaje = models.CharField(max_length=10, choices=TIPOS_PUNTAJE,
+            null=True, blank=True)
 
     class Meta:
         db_table = 'lista_competencia'
@@ -203,7 +220,7 @@ class ListaCompetencia(models.Model):
 class Competencia(models.Model):
     usuario = models.ForeignKey(UserProfile)
     competencia = models.ForeignKey('ListaCompetencia')
-    puntaje = models.DecimalField(max_digits=3, decimal_places=2)
+    puntaje = models.FloatField()
 
     class Meta:
         db_table = 'competencia'
@@ -232,7 +249,7 @@ class Laboral(models.Model):
     usuario = models.ForeignKey(UserProfile)
     empresa = models.CharField(max_length=100)
     sector = models.CharField(max_length=60,
-            help_text = u'Financiero, Industrial, Tecnológico, entre otros.')
+            help_text=u'Financiero, Industrial, Tecnológico, entre otros.')
     estado = models.ForeignKey(Estado)
     telefono = models.CharField(max_length=15, verbose_name=u'teléfono')
     cargo = models.CharField(max_length=60)

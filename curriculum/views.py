@@ -18,6 +18,7 @@ from curriculum.forms import *
 from personas.models import *
 from personas.forms import *
 from auth.models import *
+
 import datetime
 
 
@@ -734,7 +735,7 @@ class CompetenciaView(View):
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
     diccionario.update({'titulo':titulo})
-    competencias = ListaCompetencia.objects.all()
+    competencias = ListaCompetencia.objects.all().order_by('tipo')
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -783,11 +784,16 @@ class CompetenciaView(View):
                 usuario = request.path_info.split('/')[3]
                 usuario = UserProfile.objects.get(user__id=usuario)
 
+                # -- Procesamiento de puntaje --
+                # Procesando datos con cantidades (X puntos c/u)
+                if competencia.tipo_puntaje == 'int':
+                    puntuacion = float(puntuacion * int(competencia.puntaje_maximo))
+
                 try:
                     Competencia.objects.create(
                             competencia=competencia,
                             usuario=usuario,
-                            puntaje=puntuacion)
+                    puntaje=puntuacion)
                 except:
                     self.tipo_mensaje = 'error'
                     self.mensaje = u'Parece que ha ocurrido un error. \
