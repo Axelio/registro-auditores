@@ -201,7 +201,8 @@ class ListaCompetencia(models.Model):
     nombre = models.CharField(max_length=200)
     tipo = models.ForeignKey(TipoCompetencia)
     puntaje_maximo = models.FloatField(verbose_name=u'puntaje máximo')
-    puntaje_minimo = models.FloatField(verbose_name=u'puntaje mínimo', default=0.0)
+    puntaje_minimo = models.FloatField(verbose_name=u'puntaje mínimo',
+            default=0.0)
     tipo_puntaje = models.CharField(max_length=10, choices=TIPOS_PUNTAJE)
 
     class Meta:
@@ -223,6 +224,48 @@ class Competencia(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.tipo)
+
+
+class Aprobacion(models.Model):
+    '''
+    Clase para definir puntajes de aprobación
+    tanto para evaluación como entrevista
+    '''
+    entrevista_maxima = models.FloatField(
+            verbose_name='entrevista máxima',
+            help_text=u'defina putuación máxima')
+    entrevista_aprobatoria = models.FloatField(
+            help_text=u'defina putuación mínima aprobatoria')
+    evaluacion_maxima = models.FloatField(
+            verbose_name='evaluación máxima',
+            help_text=u'defina putuación máxima')
+    evaluacion_aprobatoria = models.FloatField(
+            verbose_name='evaluación aprobatoria',
+            help_text=u'defina putuación mínima aprobatoria')
+
+    class Meta:
+        db_table = 'aprobacion'
+        verbose_name = u'aprobación'
+        verbose_name_plural = 'aprobaciones'
+
+    def __unicode__(self):
+        return u'Entrevistas: %s/%s. \
+                Evaluaciones: %s/%s' % (self.entrevista_aprobatoria,
+                self.entrevista_maxima, self.evaluacion_aprobatoria,
+                self.evaluacion_maxima)
+
+
+class Evaluacion(models.Model):
+    usuario = models.ForeignKey(UserProfile)
+    puntaje = models.FloatField()
+
+    class Meta:
+        db_table = 'competencia'
+        verbose_name = u'evaluación'
+        verbose_name_plural = u'evaluaciones'
+
+    def __unicode__(self):
+        return u'%s' % (self.usuario)
 
 
 class Curso(models.Model):

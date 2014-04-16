@@ -61,6 +61,7 @@
                                     <th>Cédula</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
+                                    <th>Cargar entrevista</th>
                                     <th>Cargar evaluación</th>
                             </thead>
                             <tbody>
@@ -73,6 +74,13 @@
                                         <a href="{% url 'competencia' aspirante.id %}" class="ink-button blue">
                                             <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
                                                 <i class="icon-file-text"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'evaluacion' aspirante.id %}" class="ink-button blue">
+                                            <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
+                                                <i class="icon-book"></i>
                                             </span>
                                         </a>
                                     </td>

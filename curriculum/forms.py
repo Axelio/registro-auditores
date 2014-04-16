@@ -9,7 +9,7 @@ from curriculum.models import (
         Certificacion, Conocimiento, Competencia,
         ListaCompetencia, Educacion, Laboral,
         Competencia, Habilidad, Idioma, Cita,
-        Curso,
+        Curso, Evaluacion, Aprobacion,
 )
 from lugares.models import Institucion
 import datetime
@@ -303,6 +303,31 @@ class EducacionForm(forms.ModelForm):
                     'placeholder': 'Fecha de culminación',
                     'data-position': 'bottom'}),
         }
+
+
+class EvaluacionForm(forms.ModelForm):
+    '''
+    Formulario para el ingreso de Competencias en el panel administrativo
+    '''
+
+    class Meta:
+        model = Evaluacion
+        exclude = ('usuario',)
+        widgets = {
+            'puntaje': TextInput(
+                attrs={
+                    'type': 'number',
+                    'required': 'required',
+                    'min': '0',}),
+                }
+    
+    def clean_puntaje(self):
+        parametros = Aprobacion.objects.last()
+        error = u'El puntaje máximo para \
+                las evaluaciones es %s puntos' %( parametros.evaluacion_maxima )
+        if self.cleaned_data['puntaje'] > parametros.evaluacion_maxima:
+            raise forms.ValidationError(error)
+        return self.cleaned_data['puntaje']
 
 
 class LaboralForm(forms.ModelForm):

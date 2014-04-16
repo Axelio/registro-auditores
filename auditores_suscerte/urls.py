@@ -17,7 +17,7 @@ from curriculum.views import (PerfilView,
     EducacionView, LaboralView, CompetenciaView,
     HabilidadView, ConocimientoView, IdiomaView,
     EditarPersonaView, CitasView, CertificacionView,
-    CursoView, VerAuditores)
+    CursoView, VerAuditores, EvaluacionView)
 from auth.views import *
 from auth.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
@@ -106,6 +106,10 @@ urlpatterns = patterns('',
     url(r'^perfil/conocimiento/(?P<palabra>\w+)/(?P<conocimiento_id>[\d]+)*$',
         login_required(ConocimientoView.as_view()),
         name='conocimiento'),
+
+    url(r'^perfil/evaluacion/(?P<aspirante_id>[\d]+)/',
+        login_required(EvaluacionView.as_view()),
+        name='evaluacion'),
 
     url(r'^perfil/competencia/(?P<aspirante_id>[\d]+)/',
         login_required(CompetenciaView.as_view()),

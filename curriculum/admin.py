@@ -49,10 +49,6 @@ class CitaAdmin(admin.ModelAdmin):
             'tercera_fecha',
             'cita_fijada')
 admin.site.register(Cita, CitaAdmin)
-admin.site.register(Educacion)
-admin.site.register(TipoEducacion)
-admin.site.register(Laboral)
-admin.site.register(ListaIdiomas)
 
 
 class CursoAdmin(admin.ModelAdmin):
@@ -68,3 +64,16 @@ class CursoAdmin(admin.ModelAdmin):
             'fecha_inicio',
             'fecha_fin')
 admin.site.register(Curso, CursoAdmin)
+class AprobacionAdmin(admin.ModelAdmin):
+    list_display = (
+        'entrevista_aprobatoria',
+        'entrevista_maxima',
+        'evaluacion_aprobatoria',
+        'evaluacion_maxima',
+            )
+admin.site.register(Aprobacion, AprobacionAdmin)
+admin.site.register(Educacion)
+admin.site.register(TipoEducacion)
+admin.site.register(Laboral)
+admin.site.register(ListaIdiomas)
+admin.site.register(Evaluacion)
