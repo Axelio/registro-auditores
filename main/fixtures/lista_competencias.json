@@ -7,7 +7,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "basico"
+        "tipo_competencia": 2
     }
 },
 {
@@ -18,7 +18,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "basico"
+        "tipo_competencia": 2
     }
 },
 {
@@ -29,7 +29,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "basico"
+        "tipo_competencia": 2
     }
 },
 {
@@ -40,7 +40,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "basico"
+        "tipo_competencia": 2
     }
 },
 {
@@ -51,7 +51,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "basico"
+        "tipo_competencia": 2
     }
 },
 {
@@ -62,7 +62,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "basico"
+        "tipo_competencia": 2
     }
 },
 {
@@ -73,7 +73,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "academico"
+        "tipo_competencia": 1
     }
 },
 {
@@ -84,7 +84,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "academico"
+        "tipo_competencia": 1
     }
 },
 {
@@ -95,7 +95,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "academico"
+        "tipo_competencia": 1
     }
 },
 {
@@ -106,7 +106,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "academico"
+        "tipo_competencia": 1
     }
 },
 {
@@ -117,7 +117,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "academico"
+        "tipo_competencia": 1
     }
 },
 {
@@ -128,7 +128,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -139,7 +139,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -150,7 +150,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -161,7 +161,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -172,7 +172,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -183,7 +183,7 @@
         "puntaje_maximo": "3", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -194,7 +194,7 @@
         "puntaje_maximo": "3", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -205,7 +205,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "complementario"
+        "tipo_competencia": 3
     }
 },
 {
@@ -216,7 +216,7 @@
         "puntaje_maximo": "0.5", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -227,7 +227,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -238,7 +238,7 @@
         "puntaje_maximo": "1.5", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -249,7 +249,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -260,7 +260,7 @@
         "puntaje_maximo": "1.5", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -271,7 +271,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "int", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -282,7 +282,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "basico"
+        "tipo_competencia": 2
     }
 },
 {
@@ -293,7 +293,7 @@
         "puntaje_maximo": "2", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -304,7 +304,7 @@
         "puntaje_maximo": "3", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -315,7 +315,7 @@
         "puntaje_maximo": "4", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 },
 {
@@ -326,7 +326,7 @@
         "puntaje_maximo": "1", 
         "tipo_puntaje": "float", 
         "puntaje_minimo": "0", 
-        "tipo": "requerido"
+        "tipo_competencia": 4
     }
 }
 ]
