@@ -773,35 +773,46 @@ class CompetenciaView(View):
 
         persona = request.user.profile.persona
 
+        listado_tipo_competencia = []
+
         for valor in request.POST.items():
             if not valor[0].__contains__('csrf'):
                 puntuacion = float(valor[1].replace(',','.'))
 
-                competencia = valor[0]
-                competencia = competencia.split('_')[1]
-                competencia = ListaCompetencia.objects.get(id=competencia)
+                lista_competencia = valor[0]
+                lista_competencia = lista_competencia.split('_')[1]
+                lista_competencia = ListaCompetencia.objects.get(id=lista_competencia)
 
                 usuario = request.path_info.split('/')[3]
                 usuario = UserProfile.objects.get(user__id=usuario)
-
-                # -- Procesamiento de puntaje --
-                # Procesando datos con cantidades (X puntos c/u)
-                if competencia.tipo_puntaje == 'int':
-                    puntuacion = float(puntuacion * int(competencia.puntaje_maximo))
-
-                try:
-                    Competencia.objects.create(
-                            competencia=competencia,
-                            usuario=usuario,
-                    puntaje=puntuacion)
-                except:
-                    self.tipo_mensaje = 'error'
-                    self.mensaje = u'Parece que ha ocurrido un error. \
-                            Por favor, vuelva a intentarlo'
+                
+                competencia = Competencia.objects.filter(usuario=usuario, tipo=lista_competencia.tipo)
+                if competencia.exists():
+                    competencia = competencia[0]
+                    competencia.puntaje = competencia.puntaje + puntuacion
+                    competencia.save()
                 else:
-                    self.template = 'curriculum/aprobados.html'
-                    self.tipo_mensaje = 'success'
-                    self.mensaje = u'Entrevista cargada exitosamente.'
+                    competencia = Competencia.objects.create(
+                            tipo=lista_competencia.tipo,
+                            usuario=usuario,
+                            puntaje=puntuacion)
+
+                if lista_competencia.tipo_puntaje == 'int':
+                    puntuacion = float(puntuacion * int(lista_competencia.puntaje_maximo))
+
+        # Revisión de puntuación máxima
+        competencia = Competencia.objects.all()
+        import pdb
+        pdb.set_trace()
+        for comp in competencia:
+            if comp.puntaje > comp.tipo.puntaje_maximo:
+                comp.puntaje = comp.tipo.puntaje_maximo
+                comp.save()
+
+
+        self.template = 'curriculum/aprobados.html'
+        self.tipo_mensaje = 'success'
+        self.mensaje = u'Entrevista cargada exitosamente.'
 
 
         self.diccionario.update({'competencias': self.competencias})

@@ -189,7 +189,7 @@ class TipoCompetencia(models.Model):
     class Meta:
         db_table = 'tipo_competencia'
         verbose_name = 'tipo de competencia'
-        verbose_name_plural = 'tipos de competancias'
+        verbose_name_plural = 'tipos de competencias'
 
     def __unicode__(self):
         return u'%s' % (self.nombre)
@@ -199,14 +199,10 @@ TIPOS_PUNTAJE = (('int', 'Cantidades'), ('float', 'Puntos'))
 
 class ListaCompetencia(models.Model):
     nombre = models.CharField(max_length=200)
-    tipo_competencia = models.ForeignKey(TipoCompetencia,
-            null=True, blank=True)
-    puntaje_maximo = models.FloatField(verbose_name=u'puntaje máximo',
-            null=True, blank=True)
-    puntaje_minimo = models.FloatField(verbose_name=u'puntaje mínimo',
-            default=0.0, null=True, blank=True)
-    tipo_puntaje = models.CharField(max_length=10, choices=TIPOS_PUNTAJE,
-            null=True, blank=True)
+    tipo = models.ForeignKey(TipoCompetencia)
+    puntaje_maximo = models.FloatField(verbose_name=u'puntaje máximo')
+    puntaje_minimo = models.FloatField(verbose_name=u'puntaje mínimo', default=0.0)
+    tipo_puntaje = models.CharField(max_length=10, choices=TIPOS_PUNTAJE)
 
     class Meta:
         db_table = 'lista_competencia'
@@ -219,14 +215,14 @@ class ListaCompetencia(models.Model):
 
 class Competencia(models.Model):
     usuario = models.ForeignKey(UserProfile)
-    competencia = models.ForeignKey('ListaCompetencia')
+    tipo = models.ForeignKey('TipoCompetencia')
     puntaje = models.FloatField()
 
     class Meta:
         db_table = 'competencia'
 
     def __unicode__(self):
-        return u'%s' % (self.competencia)
+        return u'%s' % (self.tipo)
 
 
 class Curso(models.Model):

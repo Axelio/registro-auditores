@@ -22,8 +22,9 @@ admin.site.register(Idioma, IdiomaAdmin)
 
 
 class CompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('competencia', 'puntaje')
-    list_filter = ('competencia__tipo_competencia',)
+    list_display = ('usuario', 'tipo', 'puntaje')
+    list_filter = ('tipo',)
+    ordering = ('tipo__listacompetencia__tipo', 'id')
 admin.site.register(Competencia, CompetenciaAdmin)
 
 
@@ -34,9 +35,9 @@ admin.site.register(TipoCompetencia, TipoCompetenciaAdmin)
 
 
 class ListaCompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'tipo_competencia', 'puntaje_maximo')
-    list_filter = ('tipo_competencia',)
-    ordering = ('tipo_competencia', 'id')
+    list_display = ('nombre', 'tipo', 'puntaje_maximo')
+    list_filter = ('tipo',)
+    ordering = ('tipo', 'id')
 admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
 
 
