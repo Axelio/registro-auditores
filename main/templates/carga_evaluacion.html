@@ -44,7 +44,6 @@
                                 {% load perfil %}
                                 <h3>Indique el puntaje según las competencias:</h3>
                                 <section id="entrevista">
-                                    <div class="content-center"><b>PRUEBA</b></div>
                                     <table class="ink-table">
                                         <thead>
                                             <th>Conocimiento</th>
@@ -61,7 +60,7 @@
                                                       {% ifequal l_competencia.tipo_puntaje "float" %}
                                                           <select id="id_nivel" name="puntaje_{{ l_competencia.id }}">
                                                               {% for puntaje in l_competencia.id|puntaje_limite %}
-                                                                  <option value="{{ puntaje }}">{{ puntaje }}</option>
+                                                                  <option>{{ puntaje }}</option>
                                                               {% endfor %}
                                                           </select>
                                                       {% else %}
