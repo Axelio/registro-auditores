@@ -100,14 +100,14 @@ class PersonalesView(View):
                usuario_perfil = UserProfile.objects.create(user=usuario, persona=persona)
 
             # Envío de mail
-            asunto = u'[SUSCERTE] Creación de cuenta exitosa'
+            asunto = u'%sCreación de cuenta exitosa' % (settings.EMAIL_SUBJECT_PREFIX)
             mensaje = Mensaje.objects.get(caso='Creación de usuario (email)')
             emisor = settings.EMAIL_HOST_USER
             destinatarios = (request.POST['email'],)
 
             # Sustitución de variables clave y usuario
             mensaje = mensaje.mensaje.replace('<clave>','%s'%(clave)).replace('<usuario>','%s'%(request.POST['email']))
-            send_mail(subject=asunto, message=mensaje, from_email=emisor, recipient_list=destinatarios)
+            send_mail(subject=asunto, message=mensaje, from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
 
         self.template = 'curriculum/aprobados.html'
         mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')

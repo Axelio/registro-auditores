@@ -81,7 +81,7 @@ def post_save_cita(sender, **kwargs):
     if cita.cita_fijada == None or cita.cita_fijada == '':
         # Si no hay una fecha fijada aún,
         # se envía un mail a los admin
-        asunto = u'[SUSCERTE] Nueva propuesta de cita de %s' % (cita.usuario)
+        asunto = u'Nueva propuesta de cita de %s' % (cita.usuario)
         emisor = settings.EMAIL_HOST_USER
         destinatarios = settings.MANAGERS
         mensaje = 'Ha llegado una nueva solicitud de cita para entrevista,'
@@ -92,7 +92,7 @@ def post_save_cita(sender, **kwargs):
     else:
         # Si hay una fecha fijada, se envía un mail
         # al usuario indicándole la fecha definitiva
-        asunto = u'[SUSCERTE] Fijada fecha para cita'
+        asunto = u'%sFijada fecha para cita' % (settings.EMAIL_SUBJECT_PREFIX)
         emisor = settings.EMAIL_HOST_USER
         destinatarios = [cita.usuario.user.email]
 
@@ -111,7 +111,7 @@ def post_save_cita(sender, **kwargs):
         mensaje += u'para el día %s' % (fecha_fijada)
 
     send_mail(subject=asunto, message=mensaje,
-                from_email=emisor, recipient_list=destinatarios)
+                from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
 
 
 class ListaIdiomas(models.Model):
