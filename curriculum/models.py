@@ -218,6 +218,7 @@ class Competencia(models.Model):
     usuario = models.ForeignKey(UserProfile)
     tipo = models.ForeignKey('TipoCompetencia')
     puntaje = models.FloatField()
+    fecha = models.DateField(auto_now_add=True)
 
     class Meta:
         db_table = 'competencia'
@@ -258,9 +259,10 @@ class Aprobacion(models.Model):
 class Evaluacion(models.Model):
     usuario = models.ForeignKey(UserProfile)
     puntaje = models.FloatField()
+    fecha = models.DateField(auto_now_add=True)
 
     class Meta:
-        db_table = 'competencia'
+        db_table = 'evaluacion'
         verbose_name = u'evaluación'
         verbose_name_plural = u'evaluaciones'
 

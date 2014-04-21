@@ -22,8 +22,8 @@ admin.site.register(Idioma, IdiomaAdmin)
 
 
 class CompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'tipo', 'puntaje')
-    list_filter = ('tipo',)
+    list_display = ('usuario', 'tipo', 'puntaje', 'fecha')
+    list_filter = ('tipo', 'fecha')
     ordering = ('tipo__listacompetencia__tipo', 'id')
 admin.site.register(Competencia, CompetenciaAdmin)
 
@@ -71,9 +71,18 @@ class AprobacionAdmin(admin.ModelAdmin):
         'evaluacion_aprobatoria',
         'evaluacion_maxima',
             )
+
+
+class EvaluacionAdmin(admin.ModelAdmin):
+    list_display = (
+            'usuario',
+            'puntaje',
+            'fecha')
+    list_filter = (
+            'fecha',)
+admin.site.register(Evaluacion, EvaluacionAdmin)
 admin.site.register(Aprobacion, AprobacionAdmin)
 admin.site.register(Educacion)
 admin.site.register(TipoEducacion)
 admin.site.register(Laboral)
 admin.site.register(ListaIdiomas)
-admin.site.register(Evaluacion)

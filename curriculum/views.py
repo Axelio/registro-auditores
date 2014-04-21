@@ -12,6 +12,8 @@ from django.core.paginator import (Paginator, EmptyPage,
         PageNotAnInteger)
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.humanize.templatetags.humanize import intcomma
+from django.utils import formats
 
 from curriculum.models import *
 from curriculum.forms import *
@@ -86,6 +88,42 @@ def lista_filtros(request):
         listado.update({'cita': cita[0]})
 
     return listado
+
+
+def revisar_entrevista(usuario):
+    '''
+    Validar según los puntajes de aprobación
+    de las entrevistas, que el usuario haya aprobado
+    '''
+    competencias = Competencia.objects.filter(
+            usuario=usuario)
+    puntajes = 0.0
+
+    aprobaciones = Aprobacion.objects.last()
+
+    for competencia in competencias:
+        puntajes += float(competencia.puntaje)
+
+    if puntajes >= float(aprobaciones.entrevista_aprobatoria):
+        return True
+    else:
+        return False
+
+
+def revisar_evaluacion(usuario):
+    '''
+    Validar según los puntajes de aprobación
+    de las entrevistas, que el usuario haya aprobado
+    '''
+    evaluacion = Evaluacion.objects.filter(
+            usuario=usuario).latest('fecha')
+
+    aprobaciones = Aprobacion.objects.last()
+
+    if evaluacion.puntaje >= float(aprobaciones.evaluacion_aprobatoria):
+        return True
+    else:
+        return False
 
 
 def revisar_requisitos(listado):
@@ -1470,13 +1508,32 @@ class EvaluacionView(View):
                 evaluacion.puntaje = request.POST['puntaje']
                 evaluacion.save()
             else:
-                evaluacion = Evaluacion.objects.Create(
+                evaluacion = Evaluacion.objects.create(
                         usuario=usuario,
                         puntaje = request.POST['puntaje'])
 
             self.template = 'curriculum/aprobados.html'
             self.tipo_mensaje = 'success'
-            self.mensaje = u'Entrevista cargada exitosamente.'
+            self.mensaje = u'Evaluación cargada exitosamente.'
+
+            # Se llama una función de revisión de aprobación tanto de evaluación
+            # como de entrevista por separado (mejor manejo a nivel general e
+            # independiente y se llama una función de notificación según los puntajes
+            asunto = u'[SUSCERTE] Notificación de inscripción'
+            destinatarios = (usuario.persona.email,)
+            emisor = settings.EMAIL_HOST_USER
+            if revisar_entrevista(usuario) and revisar_evaluacion(usuario):
+                mensaje = Mensaje.objects.get(caso=u'Aprobación como auditor')
+            else:
+                mensaje = Mensaje.objects.get(caso=u'No aprobación como auditor')
+
+            # Sustitución de variables clave y usuario
+            mensaje = mensaje.mensaje.replace('<PRIMER_NOMBRE>','%s' % (usuario.persona.primer_nombre))
+            mensaje = mensaje.replace('<PRIMER_APELLIDO>','%s' % (usuario.persona.primer_apellido))
+            mensaje = mensaje.replace('<CEDULA>','%s' % (intcomma(usuario.persona.cedula)))
+            mensaje = mensaje.replace('<FECHA>','%s' % (formats.date_format(evaluacion.fecha, "DATE_FORMAT")))
+
+            send_mail(subject=asunto, message=mensaje, from_email=emisor, recipient_list=destinatarios)
 
         else:
             if self.evaluacion_form.errors:
@@ -1487,6 +1544,7 @@ class EvaluacionView(View):
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'formulario': self.evaluacion_form})
+
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
