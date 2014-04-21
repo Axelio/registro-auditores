@@ -23,7 +23,10 @@ User.profile = property(funcion)
 
 class Mensaje(models.Model):
     caso = models.CharField(max_length=100)
-    mensaje = models.TextField()
+    mensaje = models.TextField(
+            help_text=u'Por favor, tenga en cuenta que los campos \
+                    contenidos en "< >" son parámetros que toma el \
+                    sistema para establecer variables. No los edite.')
     class Meta:
         db_table ='mensaje'
     def __unicode__(self):
