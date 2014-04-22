@@ -1,11 +1,12 @@
 # -*- coding: UTF8 -*-
 from django.shortcuts import render
 from django.views.generic.base import View
-from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
 from django.http import Http404, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
+from django.core.context_processors import csrf
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.db.models import Q
 from django.core.paginator import (Paginator, EmptyPage,
@@ -31,7 +32,7 @@ def get_operadores():
     return User.objects.filter(groups__name__iexact='operador')
 
 
-def revisar_acreditaciones():
+def revisar_acreditaciones(request):
     '''
     Se revisa si hay alguna acreditación
     pronta a vencer dado a PERIODO_REV_ACREDITACION
@@ -61,9 +62,8 @@ def revisar_acreditaciones():
         emisor = settings.EMAIL_HOST_USER
 
         send_mail(subject=asunto, message=mensaje, from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
-        return True
-    else:
-        return False
+    url = reverse('inicio')
+    return HttpResponseRedirect(url)
 
 
 def listaAspirantes():
