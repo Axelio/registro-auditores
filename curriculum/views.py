@@ -24,6 +24,48 @@ from auth.models import *
 import datetime
 
 
+def get_operadores():
+    '''
+    Función diseñara para retornar el listado de operadores
+    '''
+    return User.objects.filter(groups__name__iexact='operador')
+
+
+def revisar_acreditaciones():
+    '''
+    Se revisa si hay alguna acreditación
+    pronta a vencer dado a PERIODO_REV_ACREDITACION
+    especificada eni el settings. Si hay alguna por
+    vencerse, retorna True
+    '''
+    fecha_actual = datetime.date.today()
+    fecha_limite = datetime.datetime(
+            fecha_actual.year,
+            fecha_actual.month + settings.PERIODO_REV_ACREDITACION,
+            fecha_actual.day)
+
+    lista_auditores = Auditor.objects.filter(fecha_desacreditacion__lte=fecha_limite)
+    auditores = ''
+    for auditor in lista_auditores:
+        auditores +=  u'%s (%s) se vence el: %s \n' % (auditor.persona, auditor.persona.email, formats.date_format(auditor.fecha_desacreditacion, "DATE_FORMAT"))
+        #auditores +=  u'%s (%s) se vence el: %s \n' % (auditor.persona, auditor.persona.email, auditor.fecha_desacreditacion)#formats.date_format(auditor.fecha_desacreditacion, "DATE_FORMAT"))
+
+    destinatarios = []
+
+    for operador in get_operadores():
+        destinatarios.append(operador.profile.persona.email)
+
+    if lista_auditores.exists():
+        asunto = u'%sEstado de auditores' % (settings.EMAIL_SUBJECT_PREFIX)
+        mensaje = u'A continuación, el listado de los auditores prontos a vencer su acreditación:\n \n %s' % (auditores)
+        emisor = settings.EMAIL_HOST_USER
+
+        send_mail(subject=asunto, message=mensaje, from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
+        return True
+    else:
+        return False
+
+
 def listaAspirantes():
     # En teoría, todos los usuarios que no esten en grupo operadores
     # son aspirantes, así que filtramos a los usuarios
