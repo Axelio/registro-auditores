@@ -111,7 +111,8 @@ class PersonaForm(forms.ModelForm):
         widgets = {
             'cedula': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'number',
+                    'min': 0,
                     'required': 'required',
                     'class': 'form-control',
                     'placeholder': 'Cédula de Identidad'}),
@@ -159,18 +160,21 @@ class PersonaForm(forms.ModelForm):
                     'placeholder': 'Email del solicitante'}),
             'tlf_reside': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'number',
+                    'min': 0,
                     'required': 'required',
                     'class': 'form-control',
                     'placeholder': u'Teléfono de residencia'}),
             'tlf_movil': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'number',
+                    'min': 0,
                     'class': 'form-control',
                     'placeholder': u'Teléfono móvil'}),
             'tlf_oficina': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'number',
+                    'min': 0,
                     'class': 'form-control',
                     'placeholder': u'Teléfono de oficina'}),
         }
