@@ -51,7 +51,7 @@ urlpatterns = patterns('',
          'set_password_form': ValidatingSetPasswordForm},
         name='password_reset_confirm'),
 
-    url(r'^clave/reestablcimiento/completo$',
+    url(r'^clave/reestablcimiento/completo/$',
         password_reset_complete,
         {'template_name': 'auth/clave_cambiada.html'},
         name='password_reset_complete'),
