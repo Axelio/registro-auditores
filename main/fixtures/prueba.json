@@ -1,0 +1,3235 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.mensaje", 
+    "fields": {
+        "caso": "Creaci\u00f3n de usuario (email)", 
+        "mensaje": "Hemos creado su cuenta exitosamente.\r\n\r\nSu usuario es: <cuenta>\r\nSu contrase\u00f1a es: <clave>\r\n\r\nPor favor, recuerde cambiarla desde su cuenta una vez ingrese en su sesi\u00f3n.\r\n\r\nCordialmente.\r\nSUSCERTE\r\nSuperintendencia de Servicios de Sertificaci\u00f3n Electr\u00f3nica"
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.mensaje", 
+    "fields": {
+        "caso": "Creaci\u00f3n de usuario (web)", 
+        "mensaje": "Su solicitud ha sido procesada exitosamente. En su correo electr\u00f3nico se encuentra la informaci\u00f3n necesaria para que pueda ingresar a su sesi\u00f3n correctamente.\r\n\r\nEn SUSCERTE valoramos el talento humano como pieza fundamental para el desarrollo sustentable cient\u00edfico, tecnol\u00f3gico y de innovaci\u00f3n."
+    }
+},
+{
+    "pk": 1, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "logentry", 
+        "name": "log entry", 
+        "app_label": "admin"
+    }
+},
+{
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "permission", 
+        "name": "permission", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 3, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "group", 
+        "name": "group", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 4, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "user", 
+        "name": "user", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "userprofile", 
+        "name": "Usuario", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 6, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "mensaje", 
+        "name": "mensaje", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 7, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "logentry", 
+        "name": "log entry", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 8, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "contenttype", 
+        "name": "content type", 
+        "app_label": "contenttypes"
+    }
+},
+{
+    "pk": 9, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "session", 
+        "name": "session", 
+        "app_label": "sessions"
+    }
+},
+{
+    "pk": 10, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "site", 
+        "name": "site", 
+        "app_label": "sites"
+    }
+},
+{
+    "pk": 11, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "accessattempt", 
+        "name": "access attempt", 
+        "app_label": "axes"
+    }
+},
+{
+    "pk": 12, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "accesslog", 
+        "name": "access log", 
+        "app_label": "axes"
+    }
+},
+{
+    "pk": 13, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "certificacion", 
+        "name": "certificaci\u00f3n", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 14, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "cita", 
+        "name": "cita", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 15, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "listaidiomas", 
+        "name": "lista de idiomas", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 16, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "idioma", 
+        "name": "idioma", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 17, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "conocimiento", 
+        "name": "conocimiento", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 18, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "habilidad", 
+        "name": "habilidad", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 19, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "tipocompetencia", 
+        "name": "tipo de competencia", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 20, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "listacompetencia", 
+        "name": "lista de competancia", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 21, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "competencia", 
+        "name": "competencia", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 22, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "aprobacion", 
+        "name": "aprobaci\u00f3n", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 23, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "evaluacion", 
+        "name": "evaluaci\u00f3n", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 24, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "curso", 
+        "name": "curso", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 25, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "laboral", 
+        "name": "laboral", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 26, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "educacion", 
+        "name": "educaci\u00f3n", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 27, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "tipoeducacion", 
+        "name": "tipos de educaci\u00f3n", 
+        "app_label": "curriculum"
+    }
+},
+{
+    "pk": 28, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "pais", 
+        "name": "pa\u00eds", 
+        "app_label": "lugares"
+    }
+},
+{
+    "pk": 29, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "estado", 
+        "name": "estado", 
+        "app_label": "lugares"
+    }
+},
+{
+    "pk": 30, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "institucion", 
+        "name": "instituci\u00f3n", 
+        "app_label": "lugares"
+    }
+},
+{
+    "pk": 31, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "nacionalidad", 
+        "name": "nacionalidad", 
+        "app_label": "lugares"
+    }
+},
+{
+    "pk": 32, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "persona", 
+        "name": "persona", 
+        "app_label": "personas"
+    }
+},
+{
+    "pk": 33, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "auditor", 
+        "name": "auditor", 
+        "app_label": "personas"
+    }
+},
+{
+    "pk": 34, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "certificadoelectronico", 
+        "name": "certificado electr\u00f3nico", 
+        "app_label": "personas"
+    }
+},
+{
+    "pk": "49a9bx87dyar6txjlgf93z1tk2qant98", 
+    "model": "sessions.session", 
+    "fields": {
+        "expire_date": "2014-05-05T14:38:32.798Z", 
+        "session_data": "NjhkMmM0ZTgwZWFiOWYxNjlmZjU4MzY2NWIzZGE5NWI2NDdlNGQ2Zjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
+    }
+},
+{
+    "pk": "zhikw3titpj0q45r7hvyjzqz88aij3ip", 
+    "model": "sessions.session", 
+    "fields": {
+        "expire_date": "2014-05-05T14:36:24.135Z", 
+        "session_data": "ZjE2YmYzMTg0ZmNkYTJhYmMxODU3NzE5MDcxYTU0NWJhYjQ4YTEwNTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0="
+    }
+},
+{
+    "pk": 1, 
+    "model": "sites.site", 
+    "fields": {
+        "domain": "example.com", 
+        "name": "example.com"
+    }
+},
+{
+    "pk": 1, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Alem\u00e1n"
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "\u00c1rabe"
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Chino"
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Espa\u00f1ol"
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Franc\u00e9s"
+    }
+},
+{
+    "pk": 6, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Ingl\u00e9s"
+    }
+},
+{
+    "pk": 7, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Italiano"
+    }
+},
+{
+    "pk": 8, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Japon\u00e9s"
+    }
+},
+{
+    "pk": 9, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Portugu\u00e9s"
+    }
+},
+{
+    "pk": 10, 
+    "model": "curriculum.listaidiomas", 
+    "fields": {
+        "nombre": "Ruso"
+    }
+},
+{
+    "pk": 1, 
+    "model": "curriculum.tipocompetencia", 
+    "fields": {
+        "nombre": "Nivel acad\u00e9mico", 
+        "puntaje_maximo": 8.0
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.tipocompetencia", 
+    "fields": {
+        "nombre": "Conocimientos b\u00e1sico", 
+        "puntaje_maximo": 12.0
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.tipocompetencia", 
+    "fields": {
+        "nombre": "Conocimientos requeridos", 
+        "puntaje_maximo": 15.0
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.tipocompetencia", 
+    "fields": {
+        "nombre": "Conocimientos requeridos", 
+        "puntaje_maximo": 10.0
+    }
+},
+{
+    "pk": 1, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Redes, telecomunicaciones ", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 2
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Desarrollo, mantenimiento, instalaci\u00f3n y configuraci\u00f3n de sistemas y aplicaciones ", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Equipamiento TIC, instalaci\u00f3n, configuraci\u00f3n y mantenimiento de equipos TIC ", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 2
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Infraestructura de clave p\u00fablica", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 2
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en TIC, certificaci\u00f3n de datos y firmas electr\u00f3nicas", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 2
+    }
+},
+{
+    "pk": 6, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Organizaci\u00f3n y sistemas, procesos, normas y procedimientos", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 2
+    }
+},
+{
+    "pk": 7, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "TSU", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 1
+    }
+},
+{
+    "pk": 8, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Profesional universitario", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 1
+    }
+},
+{
+    "pk": 9, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Especialidad", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 1
+    }
+},
+{
+    "pk": 10, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Maestr\u00eda", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 1
+    }
+},
+{
+    "pk": 11, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Doctorado", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 1
+    }
+},
+{
+    "pk": 12, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Bases de datos y administraci\u00f3n de datos", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 13, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Planificaci\u00f3n de la gesti\u00f3n de \u00e1reas TIC", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 14, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Gesti\u00f3n de proyectos TIC", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 15, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Calidad de la infraestructura y componentes TIC, calidad de gesti\u00f3n en TIC, niveles de   servicios con uso de las TIC", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 16, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Administraci\u00f3n y configuraci\u00f3n de ambientes y de los sistemas operativos", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 17, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en auditor\u00eda TIC", 
+        "puntaje_maximo": 3.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 18, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Marco legal y normativo que rige las TIC y SCDFE en la RBV", 
+        "puntaje_maximo": 3.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 19, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Participaci\u00f3n como asistente o ponente en conferencias o seminarios en \u00e1reas inherentes    a: Sistemas, inform\u00e1tica, computaci\u00f3n o afines a las TIC", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 3
+    }
+},
+{
+    "pk": 20, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Certificaciones nacionales en TIC", 
+        "puntaje_maximo": 0.5, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 21, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Certificaciones internacionales en TIC", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 22, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Certificaciones nacionales como auditores TIC", 
+        "puntaje_maximo": 1.5, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 23, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Certificaciones internacionales como auditores TIC", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 24, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Certificaciones nacionales en seguridad TIC", 
+        "puntaje_maximo": 1.5, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 25, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Certificaciones internacionales en seguridad TIC", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "int", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 26, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Riesgo, seguridad de la informaci\u00f3n, control y auditor\u00eda TIC ", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 2
+    }
+},
+{
+    "pk": 27, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Experiencia en auditor\u00eda en TIC", 
+        "puntaje_maximo": 2.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 28, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Experiencia en auditor\u00edas especializadas en seguridad de la informaci\u00f3n", 
+        "puntaje_maximo": 3.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 29, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Auditor\u00eda en infraestructura de clave p\u00fablica", 
+        "puntaje_maximo": 4.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 30, 
+    "model": "curriculum.listacompetencia", 
+    "fields": {
+        "nombre": "Otras experiencias en auditor\u00eda", 
+        "puntaje_maximo": 1.0, 
+        "tipo_puntaje": "float", 
+        "puntaje_minimo": 0.0, 
+        "tipo": 4
+    }
+},
+{
+    "pk": 1, 
+    "model": "curriculum.aprobacion", 
+    "fields": {
+        "entrevista_maxima": 45.0, 
+        "evaluacion_aprobatoria": 120.0, 
+        "evaluacion_maxima": 150.0, 
+        "entrevista_aprobatoria": 23.0
+    }
+},
+{
+    "pk": 1, 
+    "model": "curriculum.evaluacion", 
+    "fields": {
+        "puntaje": 130.0, 
+        "fecha": "2014-04-21", 
+        "usuario": 1
+    }
+},
+{
+    "pk": 1, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Profesional Universitario"
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Maestr\u00eda"
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "TSU"
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Especialidad"
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.tipoeducacion", 
+    "fields": {
+        "tipo": "Doctorado"
+    }
+},
+{
+    "pk": 1, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "Venezuela"
+    }
+},
+{
+    "pk": 1, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Amazonas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Anzo\u00e1tegui", 
+        "pais": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Apure", 
+        "pais": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Aragua", 
+        "pais": 1
+    }
+},
+{
+    "pk": 5, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Barinas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 6, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Bol\u00edvar", 
+        "pais": 1
+    }
+},
+{
+    "pk": 7, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Carabobo", 
+        "pais": 1
+    }
+},
+{
+    "pk": 8, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Cojedes", 
+        "pais": 1
+    }
+},
+{
+    "pk": 9, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Delta Amacuro", 
+        "pais": 1
+    }
+},
+{
+    "pk": 10, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Dependencias Federales", 
+        "pais": 1
+    }
+},
+{
+    "pk": 11, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Distrito Capital", 
+        "pais": 1
+    }
+},
+{
+    "pk": 12, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Falc\u00f3n", 
+        "pais": 1
+    }
+},
+{
+    "pk": 13, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Gu\u00e1rico", 
+        "pais": 1
+    }
+},
+{
+    "pk": 14, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Lara", 
+        "pais": 1
+    }
+},
+{
+    "pk": 15, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "M\u00e9rida", 
+        "pais": 1
+    }
+},
+{
+    "pk": 16, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Miranda", 
+        "pais": 1
+    }
+},
+{
+    "pk": 17, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Monagas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 18, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Nueva Esparta", 
+        "pais": 1
+    }
+},
+{
+    "pk": 19, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Portuguesa", 
+        "pais": 1
+    }
+},
+{
+    "pk": 20, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Sucre", 
+        "pais": 1
+    }
+},
+{
+    "pk": 21, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "T\u00e1chira", 
+        "pais": 1
+    }
+},
+{
+    "pk": 22, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Trujillo", 
+        "pais": 1
+    }
+},
+{
+    "pk": 23, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Vargas", 
+        "pais": 1
+    }
+},
+{
+    "pk": 24, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Yaracuy", 
+        "pais": 1
+    }
+},
+{
+    "pk": 25, 
+    "model": "lugares.estado", 
+    "fields": {
+        "nombre": "Zulia", 
+        "pais": 1
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_logentry", 
+        "name": "Can add log entry", 
+        "content_type": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_logentry", 
+        "name": "Can change log entry", 
+        "content_type": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_logentry", 
+        "name": "Can delete log entry", 
+        "content_type": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_permission", 
+        "name": "Can add permission", 
+        "content_type": 2
+    }
+},
+{
+    "pk": 5, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_permission", 
+        "name": "Can change permission", 
+        "content_type": 2
+    }
+},
+{
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_permission", 
+        "name": "Can delete permission", 
+        "content_type": 2
+    }
+},
+{
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_group", 
+        "name": "Can add group", 
+        "content_type": 3
+    }
+},
+{
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_group", 
+        "name": "Can change group", 
+        "content_type": 3
+    }
+},
+{
+    "pk": 9, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_group", 
+        "name": "Can delete group", 
+        "content_type": 3
+    }
+},
+{
+    "pk": 10, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_user", 
+        "name": "Can add user", 
+        "content_type": 4
+    }
+},
+{
+    "pk": 11, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_user", 
+        "name": "Can change user", 
+        "content_type": 4
+    }
+},
+{
+    "pk": 12, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_user", 
+        "name": "Can delete user", 
+        "content_type": 4
+    }
+},
+{
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_userprofile", 
+        "name": "Can add Usuario", 
+        "content_type": 5
+    }
+},
+{
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_userprofile", 
+        "name": "Can change Usuario", 
+        "content_type": 5
+    }
+},
+{
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_userprofile", 
+        "name": "Can delete Usuario", 
+        "content_type": 5
+    }
+},
+{
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_mensaje", 
+        "name": "Can add mensaje", 
+        "content_type": 6
+    }
+},
+{
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_mensaje", 
+        "name": "Can change mensaje", 
+        "content_type": 6
+    }
+},
+{
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_mensaje", 
+        "name": "Can delete mensaje", 
+        "content_type": 6
+    }
+},
+{
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_logentry", 
+        "name": "Can add log entry", 
+        "content_type": 7
+    }
+},
+{
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_logentry", 
+        "name": "Can change log entry", 
+        "content_type": 7
+    }
+},
+{
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_logentry", 
+        "name": "Can delete log entry", 
+        "content_type": 7
+    }
+},
+{
+    "pk": 22, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_contenttype", 
+        "name": "Can add content type", 
+        "content_type": 8
+    }
+},
+{
+    "pk": 23, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_contenttype", 
+        "name": "Can change content type", 
+        "content_type": 8
+    }
+},
+{
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_contenttype", 
+        "name": "Can delete content type", 
+        "content_type": 8
+    }
+},
+{
+    "pk": 25, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_session", 
+        "name": "Can add session", 
+        "content_type": 9
+    }
+},
+{
+    "pk": 26, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_session", 
+        "name": "Can change session", 
+        "content_type": 9
+    }
+},
+{
+    "pk": 27, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_session", 
+        "name": "Can delete session", 
+        "content_type": 9
+    }
+},
+{
+    "pk": 28, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_site", 
+        "name": "Can add site", 
+        "content_type": 10
+    }
+},
+{
+    "pk": 29, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_site", 
+        "name": "Can change site", 
+        "content_type": 10
+    }
+},
+{
+    "pk": 30, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_site", 
+        "name": "Can delete site", 
+        "content_type": 10
+    }
+},
+{
+    "pk": 31, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_accessattempt", 
+        "name": "Can add access attempt", 
+        "content_type": 11
+    }
+},
+{
+    "pk": 32, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_accessattempt", 
+        "name": "Can change access attempt", 
+        "content_type": 11
+    }
+},
+{
+    "pk": 33, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_accessattempt", 
+        "name": "Can delete access attempt", 
+        "content_type": 11
+    }
+},
+{
+    "pk": 34, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_accesslog", 
+        "name": "Can add access log", 
+        "content_type": 12
+    }
+},
+{
+    "pk": 35, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_accesslog", 
+        "name": "Can change access log", 
+        "content_type": 12
+    }
+},
+{
+    "pk": 36, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_accesslog", 
+        "name": "Can delete access log", 
+        "content_type": 12
+    }
+},
+{
+    "pk": 37, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_certificacion", 
+        "name": "Can add certificaci\u00f3n", 
+        "content_type": 13
+    }
+},
+{
+    "pk": 38, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_certificacion", 
+        "name": "Can change certificaci\u00f3n", 
+        "content_type": 13
+    }
+},
+{
+    "pk": 39, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_certificacion", 
+        "name": "Can delete certificaci\u00f3n", 
+        "content_type": 13
+    }
+},
+{
+    "pk": 40, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_cita", 
+        "name": "Can add cita", 
+        "content_type": 14
+    }
+},
+{
+    "pk": 41, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_cita", 
+        "name": "Can change cita", 
+        "content_type": 14
+    }
+},
+{
+    "pk": 42, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_cita", 
+        "name": "Can delete cita", 
+        "content_type": 14
+    }
+},
+{
+    "pk": 43, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_listaidiomas", 
+        "name": "Can add lista de idiomas", 
+        "content_type": 15
+    }
+},
+{
+    "pk": 44, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_listaidiomas", 
+        "name": "Can change lista de idiomas", 
+        "content_type": 15
+    }
+},
+{
+    "pk": 45, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_listaidiomas", 
+        "name": "Can delete lista de idiomas", 
+        "content_type": 15
+    }
+},
+{
+    "pk": 46, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_idioma", 
+        "name": "Can add idioma", 
+        "content_type": 16
+    }
+},
+{
+    "pk": 47, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_idioma", 
+        "name": "Can change idioma", 
+        "content_type": 16
+    }
+},
+{
+    "pk": 48, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_idioma", 
+        "name": "Can delete idioma", 
+        "content_type": 16
+    }
+},
+{
+    "pk": 49, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_conocimiento", 
+        "name": "Can add conocimiento", 
+        "content_type": 17
+    }
+},
+{
+    "pk": 50, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_conocimiento", 
+        "name": "Can change conocimiento", 
+        "content_type": 17
+    }
+},
+{
+    "pk": 51, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_conocimiento", 
+        "name": "Can delete conocimiento", 
+        "content_type": 17
+    }
+},
+{
+    "pk": 52, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_habilidad", 
+        "name": "Can add habilidad", 
+        "content_type": 18
+    }
+},
+{
+    "pk": 53, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_habilidad", 
+        "name": "Can change habilidad", 
+        "content_type": 18
+    }
+},
+{
+    "pk": 54, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_habilidad", 
+        "name": "Can delete habilidad", 
+        "content_type": 18
+    }
+},
+{
+    "pk": 55, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_tipocompetencia", 
+        "name": "Can add tipo de competencia", 
+        "content_type": 19
+    }
+},
+{
+    "pk": 56, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_tipocompetencia", 
+        "name": "Can change tipo de competencia", 
+        "content_type": 19
+    }
+},
+{
+    "pk": 57, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_tipocompetencia", 
+        "name": "Can delete tipo de competencia", 
+        "content_type": 19
+    }
+},
+{
+    "pk": 58, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_listacompetencia", 
+        "name": "Can add lista de competancia", 
+        "content_type": 20
+    }
+},
+{
+    "pk": 59, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_listacompetencia", 
+        "name": "Can change lista de competancia", 
+        "content_type": 20
+    }
+},
+{
+    "pk": 60, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_listacompetencia", 
+        "name": "Can delete lista de competancia", 
+        "content_type": 20
+    }
+},
+{
+    "pk": 61, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_competencia", 
+        "name": "Can add competencia", 
+        "content_type": 21
+    }
+},
+{
+    "pk": 62, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_competencia", 
+        "name": "Can change competencia", 
+        "content_type": 21
+    }
+},
+{
+    "pk": 63, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_competencia", 
+        "name": "Can delete competencia", 
+        "content_type": 21
+    }
+},
+{
+    "pk": 64, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_aprobacion", 
+        "name": "Can add aprobaci\u00f3n", 
+        "content_type": 22
+    }
+},
+{
+    "pk": 65, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_aprobacion", 
+        "name": "Can change aprobaci\u00f3n", 
+        "content_type": 22
+    }
+},
+{
+    "pk": 66, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_aprobacion", 
+        "name": "Can delete aprobaci\u00f3n", 
+        "content_type": 22
+    }
+},
+{
+    "pk": 67, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_evaluacion", 
+        "name": "Can add evaluaci\u00f3n", 
+        "content_type": 23
+    }
+},
+{
+    "pk": 68, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_evaluacion", 
+        "name": "Can change evaluaci\u00f3n", 
+        "content_type": 23
+    }
+},
+{
+    "pk": 69, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_evaluacion", 
+        "name": "Can delete evaluaci\u00f3n", 
+        "content_type": 23
+    }
+},
+{
+    "pk": 70, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_curso", 
+        "name": "Can add curso", 
+        "content_type": 24
+    }
+},
+{
+    "pk": 71, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_curso", 
+        "name": "Can change curso", 
+        "content_type": 24
+    }
+},
+{
+    "pk": 72, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_curso", 
+        "name": "Can delete curso", 
+        "content_type": 24
+    }
+},
+{
+    "pk": 73, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_laboral", 
+        "name": "Can add laboral", 
+        "content_type": 25
+    }
+},
+{
+    "pk": 74, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_laboral", 
+        "name": "Can change laboral", 
+        "content_type": 25
+    }
+},
+{
+    "pk": 75, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_laboral", 
+        "name": "Can delete laboral", 
+        "content_type": 25
+    }
+},
+{
+    "pk": 76, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_educacion", 
+        "name": "Can add educaci\u00f3n", 
+        "content_type": 26
+    }
+},
+{
+    "pk": 77, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_educacion", 
+        "name": "Can change educaci\u00f3n", 
+        "content_type": 26
+    }
+},
+{
+    "pk": 78, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_educacion", 
+        "name": "Can delete educaci\u00f3n", 
+        "content_type": 26
+    }
+},
+{
+    "pk": 79, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_tipoeducacion", 
+        "name": "Can add tipos de educaci\u00f3n", 
+        "content_type": 27
+    }
+},
+{
+    "pk": 80, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_tipoeducacion", 
+        "name": "Can change tipos de educaci\u00f3n", 
+        "content_type": 27
+    }
+},
+{
+    "pk": 81, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_tipoeducacion", 
+        "name": "Can delete tipos de educaci\u00f3n", 
+        "content_type": 27
+    }
+},
+{
+    "pk": 82, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_pais", 
+        "name": "Can add pa\u00eds", 
+        "content_type": 28
+    }
+},
+{
+    "pk": 83, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_pais", 
+        "name": "Can change pa\u00eds", 
+        "content_type": 28
+    }
+},
+{
+    "pk": 84, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_pais", 
+        "name": "Can delete pa\u00eds", 
+        "content_type": 28
+    }
+},
+{
+    "pk": 85, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_estado", 
+        "name": "Can add estado", 
+        "content_type": 29
+    }
+},
+{
+    "pk": 86, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_estado", 
+        "name": "Can change estado", 
+        "content_type": 29
+    }
+},
+{
+    "pk": 87, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_estado", 
+        "name": "Can delete estado", 
+        "content_type": 29
+    }
+},
+{
+    "pk": 88, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_institucion", 
+        "name": "Can add instituci\u00f3n", 
+        "content_type": 30
+    }
+},
+{
+    "pk": 89, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_institucion", 
+        "name": "Can change instituci\u00f3n", 
+        "content_type": 30
+    }
+},
+{
+    "pk": 90, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_institucion", 
+        "name": "Can delete instituci\u00f3n", 
+        "content_type": 30
+    }
+},
+{
+    "pk": 91, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_nacionalidad", 
+        "name": "Can add nacionalidad", 
+        "content_type": 31
+    }
+},
+{
+    "pk": 92, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_nacionalidad", 
+        "name": "Can change nacionalidad", 
+        "content_type": 31
+    }
+},
+{
+    "pk": 93, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_nacionalidad", 
+        "name": "Can delete nacionalidad", 
+        "content_type": 31
+    }
+},
+{
+    "pk": 94, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_persona", 
+        "name": "Can add persona", 
+        "content_type": 32
+    }
+},
+{
+    "pk": 95, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_persona", 
+        "name": "Can change persona", 
+        "content_type": 32
+    }
+},
+{
+    "pk": 96, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_persona", 
+        "name": "Can delete persona", 
+        "content_type": 32
+    }
+},
+{
+    "pk": 97, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_auditor", 
+        "name": "Can add auditor", 
+        "content_type": 33
+    }
+},
+{
+    "pk": 98, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_auditor", 
+        "name": "Can change auditor", 
+        "content_type": 33
+    }
+},
+{
+    "pk": 99, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_auditor", 
+        "name": "Can delete auditor", 
+        "content_type": 33
+    }
+},
+{
+    "pk": 100, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_certificadoelectronico", 
+        "name": "Can add certificado electr\u00f3nico", 
+        "content_type": 34
+    }
+},
+{
+    "pk": 101, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_certificadoelectronico", 
+        "name": "Can change certificado electr\u00f3nico", 
+        "content_type": 34
+    }
+},
+{
+    "pk": 102, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_certificadoelectronico", 
+        "name": "Can delete certificado electr\u00f3nico", 
+        "content_type": 34
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "Operador", 
+        "permissions": [
+            2, 
+            20, 
+            17, 
+            11, 
+            14, 
+            32, 
+            34, 
+            35, 
+            38, 
+            41, 
+            50, 
+            53, 
+            59, 
+            44, 
+            56, 
+            79, 
+            80, 
+            86, 
+            87, 
+            89, 
+            90, 
+            29
+        ]
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "axelio", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2014-04-21T14:36:23Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$TstxYRkEcBSL$9Sywa1QzAX6nZ8c/hOSwAVxwkJIyi1Hb64aMCezfWAE=", 
+        "email": "diaz.axelio@gmail.com", 
+        "date_joined": "2014-04-21T14:35:26Z"
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "operador", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-04-21T14:38:32.697Z", 
+        "groups": [
+            1
+        ], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$oYxbKKyUfAhx$zslQBTBJttUdgd47dvT/ijNYe2h6WtILiykdh+Z7eG0=", 
+        "email": "", 
+        "date_joined": "2014-04-21T14:37:32Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": 1, 
+        "user": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": 2, 
+        "user": 2
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.mensaje", 
+    "fields": {
+        "caso": "Creaci\u00f3n de usuario (email)", 
+        "mensaje": "Hemos creado su cuenta exitosamente.\r\n\r\nSu usuario es: <cuenta>\r\nSu contrase\u00f1a es: <clave>\r\n\r\nPor favor, recuerde cambiarla desde su cuenta una vez ingrese en su sesi\u00f3n.\r\n\r\nCordialmente.\r\nSUSCERTE\r\nSuperintendencia de Servicios de Sertificaci\u00f3n Electr\u00f3nica"
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.mensaje", 
+    "fields": {
+        "caso": "Creaci\u00f3n de usuario (web)", 
+        "mensaje": "Su solicitud ha sido procesada exitosamente. En su correo electr\u00f3nico se encuentra la informaci\u00f3n necesaria para que pueda ingresar a su sesi\u00f3n correctamente.\r\n\r\nEn SUSCERTE valoramos el talento humano como pieza fundamental para el desarrollo sustentable cient\u00edfico, tecnol\u00f3gico y de innovaci\u00f3n."
+    }
+},
+{
+    "pk": 1, 
+    "model": "personas.persona", 
+    "fields": {
+        "reside": 4, 
+        "fecha_nacimiento": "1990-08-20", 
+        "tlf_contacto": "fijo", 
+        "genero": 0, 
+        "tlf_reside": "02446634984", 
+        "tlf_movil": "", 
+        "tlf_oficina": "", 
+        "direccion": "", 
+        "email": "diaz.axelio@gmail.com", 
+        "segundo_apellido": "", 
+        "segundo_nombre": "", 
+        "primer_apellido": "D\u00edaz", 
+        "primer_nombre": "Axel", 
+        "estado_civil": "s", 
+        "cedula": "19276008"
+    }
+},
+{
+    "pk": 2, 
+    "model": "personas.persona", 
+    "fields": {
+        "reside": 5, 
+        "fecha_nacimiento": "1990-08-20", 
+        "tlf_contacto": "fijo", 
+        "genero": 0, 
+        "tlf_reside": "02446634984", 
+        "tlf_movil": "", 
+        "tlf_oficina": "", 
+        "direccion": "", 
+        "email": "asd@asd.com", 
+        "segundo_apellido": "", 
+        "segundo_nombre": "", 
+        "primer_apellido": "opera", 
+        "primer_nombre": "operador", 
+        "estado_civil": "s", 
+        "cedula": "123123"
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": 1, 
+        "user": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": 2, 
+        "user": 2
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "axelio", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2014-04-21T14:36:23Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$TstxYRkEcBSL$9Sywa1QzAX6nZ8c/hOSwAVxwkJIyi1Hb64aMCezfWAE=", 
+        "email": "diaz.axelio@gmail.com", 
+        "date_joined": "2014-04-21T14:35:26Z"
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "operador", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-04-21T14:38:32.697Z", 
+        "groups": [
+            1
+        ], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$oYxbKKyUfAhx$zslQBTBJttUdgd47dvT/ijNYe2h6WtILiykdh+Z7eG0=", 
+        "email": "", 
+        "date_joined": "2014-04-21T14:37:32Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "Operador", 
+        "permissions": [
+            2, 
+            20, 
+            17, 
+            11, 
+            14, 
+            32, 
+            34, 
+            35, 
+            38, 
+            41, 
+            50, 
+            53, 
+            59, 
+            44, 
+            56, 
+            79, 
+            80, 
+            86, 
+            87, 
+            89, 
+            90, 
+            29
+        ]
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_logentry", 
+        "name": "Can add log entry", 
+        "content_type": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_logentry", 
+        "name": "Can change log entry", 
+        "content_type": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_logentry", 
+        "name": "Can delete log entry", 
+        "content_type": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_permission", 
+        "name": "Can add permission", 
+        "content_type": 2
+    }
+},
+{
+    "pk": 5, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_permission", 
+        "name": "Can change permission", 
+        "content_type": 2
+    }
+},
+{
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_permission", 
+        "name": "Can delete permission", 
+        "content_type": 2
+    }
+},
+{
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_group", 
+        "name": "Can add group", 
+        "content_type": 3
+    }
+},
+{
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_group", 
+        "name": "Can change group", 
+        "content_type": 3
+    }
+},
+{
+    "pk": 9, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_group", 
+        "name": "Can delete group", 
+        "content_type": 3
+    }
+},
+{
+    "pk": 10, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_user", 
+        "name": "Can add user", 
+        "content_type": 4
+    }
+},
+{
+    "pk": 11, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_user", 
+        "name": "Can change user", 
+        "content_type": 4
+    }
+},
+{
+    "pk": 12, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_user", 
+        "name": "Can delete user", 
+        "content_type": 4
+    }
+},
+{
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_userprofile", 
+        "name": "Can add Usuario", 
+        "content_type": 5
+    }
+},
+{
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_userprofile", 
+        "name": "Can change Usuario", 
+        "content_type": 5
+    }
+},
+{
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_userprofile", 
+        "name": "Can delete Usuario", 
+        "content_type": 5
+    }
+},
+{
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_mensaje", 
+        "name": "Can add mensaje", 
+        "content_type": 6
+    }
+},
+{
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_mensaje", 
+        "name": "Can change mensaje", 
+        "content_type": 6
+    }
+},
+{
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_mensaje", 
+        "name": "Can delete mensaje", 
+        "content_type": 6
+    }
+},
+{
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_logentry", 
+        "name": "Can add log entry", 
+        "content_type": 7
+    }
+},
+{
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_logentry", 
+        "name": "Can change log entry", 
+        "content_type": 7
+    }
+},
+{
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_logentry", 
+        "name": "Can delete log entry", 
+        "content_type": 7
+    }
+},
+{
+    "pk": 22, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_contenttype", 
+        "name": "Can add content type", 
+        "content_type": 8
+    }
+},
+{
+    "pk": 23, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_contenttype", 
+        "name": "Can change content type", 
+        "content_type": 8
+    }
+},
+{
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_contenttype", 
+        "name": "Can delete content type", 
+        "content_type": 8
+    }
+},
+{
+    "pk": 25, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_session", 
+        "name": "Can add session", 
+        "content_type": 9
+    }
+},
+{
+    "pk": 26, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_session", 
+        "name": "Can change session", 
+        "content_type": 9
+    }
+},
+{
+    "pk": 27, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_session", 
+        "name": "Can delete session", 
+        "content_type": 9
+    }
+},
+{
+    "pk": 28, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_site", 
+        "name": "Can add site", 
+        "content_type": 10
+    }
+},
+{
+    "pk": 29, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_site", 
+        "name": "Can change site", 
+        "content_type": 10
+    }
+},
+{
+    "pk": 30, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_site", 
+        "name": "Can delete site", 
+        "content_type": 10
+    }
+},
+{
+    "pk": 31, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_accessattempt", 
+        "name": "Can add access attempt", 
+        "content_type": 11
+    }
+},
+{
+    "pk": 32, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_accessattempt", 
+        "name": "Can change access attempt", 
+        "content_type": 11
+    }
+},
+{
+    "pk": 33, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_accessattempt", 
+        "name": "Can delete access attempt", 
+        "content_type": 11
+    }
+},
+{
+    "pk": 34, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_accesslog", 
+        "name": "Can add access log", 
+        "content_type": 12
+    }
+},
+{
+    "pk": 35, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_accesslog", 
+        "name": "Can change access log", 
+        "content_type": 12
+    }
+},
+{
+    "pk": 36, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_accesslog", 
+        "name": "Can delete access log", 
+        "content_type": 12
+    }
+},
+{
+    "pk": 37, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_certificacion", 
+        "name": "Can add certificaci\u00f3n", 
+        "content_type": 13
+    }
+},
+{
+    "pk": 38, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_certificacion", 
+        "name": "Can change certificaci\u00f3n", 
+        "content_type": 13
+    }
+},
+{
+    "pk": 39, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_certificacion", 
+        "name": "Can delete certificaci\u00f3n", 
+        "content_type": 13
+    }
+},
+{
+    "pk": 40, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_cita", 
+        "name": "Can add cita", 
+        "content_type": 14
+    }
+},
+{
+    "pk": 41, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_cita", 
+        "name": "Can change cita", 
+        "content_type": 14
+    }
+},
+{
+    "pk": 42, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_cita", 
+        "name": "Can delete cita", 
+        "content_type": 14
+    }
+},
+{
+    "pk": 43, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_listaidiomas", 
+        "name": "Can add lista de idiomas", 
+        "content_type": 15
+    }
+},
+{
+    "pk": 44, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_listaidiomas", 
+        "name": "Can change lista de idiomas", 
+        "content_type": 15
+    }
+},
+{
+    "pk": 45, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_listaidiomas", 
+        "name": "Can delete lista de idiomas", 
+        "content_type": 15
+    }
+},
+{
+    "pk": 46, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_idioma", 
+        "name": "Can add idioma", 
+        "content_type": 16
+    }
+},
+{
+    "pk": 47, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_idioma", 
+        "name": "Can change idioma", 
+        "content_type": 16
+    }
+},
+{
+    "pk": 48, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_idioma", 
+        "name": "Can delete idioma", 
+        "content_type": 16
+    }
+},
+{
+    "pk": 49, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_conocimiento", 
+        "name": "Can add conocimiento", 
+        "content_type": 17
+    }
+},
+{
+    "pk": 50, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_conocimiento", 
+        "name": "Can change conocimiento", 
+        "content_type": 17
+    }
+},
+{
+    "pk": 51, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_conocimiento", 
+        "name": "Can delete conocimiento", 
+        "content_type": 17
+    }
+},
+{
+    "pk": 52, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_habilidad", 
+        "name": "Can add habilidad", 
+        "content_type": 18
+    }
+},
+{
+    "pk": 53, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_habilidad", 
+        "name": "Can change habilidad", 
+        "content_type": 18
+    }
+},
+{
+    "pk": 54, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_habilidad", 
+        "name": "Can delete habilidad", 
+        "content_type": 18
+    }
+},
+{
+    "pk": 55, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_tipocompetencia", 
+        "name": "Can add tipo de competencia", 
+        "content_type": 19
+    }
+},
+{
+    "pk": 56, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_tipocompetencia", 
+        "name": "Can change tipo de competencia", 
+        "content_type": 19
+    }
+},
+{
+    "pk": 57, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_tipocompetencia", 
+        "name": "Can delete tipo de competencia", 
+        "content_type": 19
+    }
+},
+{
+    "pk": 58, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_listacompetencia", 
+        "name": "Can add lista de competancia", 
+        "content_type": 20
+    }
+},
+{
+    "pk": 59, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_listacompetencia", 
+        "name": "Can change lista de competancia", 
+        "content_type": 20
+    }
+},
+{
+    "pk": 60, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_listacompetencia", 
+        "name": "Can delete lista de competancia", 
+        "content_type": 20
+    }
+},
+{
+    "pk": 61, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_competencia", 
+        "name": "Can add competencia", 
+        "content_type": 21
+    }
+},
+{
+    "pk": 62, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_competencia", 
+        "name": "Can change competencia", 
+        "content_type": 21
+    }
+},
+{
+    "pk": 63, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_competencia", 
+        "name": "Can delete competencia", 
+        "content_type": 21
+    }
+},
+{
+    "pk": 64, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_aprobacion", 
+        "name": "Can add aprobaci\u00f3n", 
+        "content_type": 22
+    }
+},
+{
+    "pk": 65, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_aprobacion", 
+        "name": "Can change aprobaci\u00f3n", 
+        "content_type": 22
+    }
+},
+{
+    "pk": 66, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_aprobacion", 
+        "name": "Can delete aprobaci\u00f3n", 
+        "content_type": 22
+    }
+},
+{
+    "pk": 67, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_evaluacion", 
+        "name": "Can add evaluaci\u00f3n", 
+        "content_type": 23
+    }
+},
+{
+    "pk": 68, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_evaluacion", 
+        "name": "Can change evaluaci\u00f3n", 
+        "content_type": 23
+    }
+},
+{
+    "pk": 69, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_evaluacion", 
+        "name": "Can delete evaluaci\u00f3n", 
+        "content_type": 23
+    }
+},
+{
+    "pk": 70, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_curso", 
+        "name": "Can add curso", 
+        "content_type": 24
+    }
+},
+{
+    "pk": 71, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_curso", 
+        "name": "Can change curso", 
+        "content_type": 24
+    }
+},
+{
+    "pk": 72, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_curso", 
+        "name": "Can delete curso", 
+        "content_type": 24
+    }
+},
+{
+    "pk": 73, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_laboral", 
+        "name": "Can add laboral", 
+        "content_type": 25
+    }
+},
+{
+    "pk": 74, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_laboral", 
+        "name": "Can change laboral", 
+        "content_type": 25
+    }
+},
+{
+    "pk": 75, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_laboral", 
+        "name": "Can delete laboral", 
+        "content_type": 25
+    }
+},
+{
+    "pk": 76, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_educacion", 
+        "name": "Can add educaci\u00f3n", 
+        "content_type": 26
+    }
+},
+{
+    "pk": 77, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_educacion", 
+        "name": "Can change educaci\u00f3n", 
+        "content_type": 26
+    }
+},
+{
+    "pk": 78, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_educacion", 
+        "name": "Can delete educaci\u00f3n", 
+        "content_type": 26
+    }
+},
+{
+    "pk": 79, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_tipoeducacion", 
+        "name": "Can add tipos de educaci\u00f3n", 
+        "content_type": 27
+    }
+},
+{
+    "pk": 80, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_tipoeducacion", 
+        "name": "Can change tipos de educaci\u00f3n", 
+        "content_type": 27
+    }
+},
+{
+    "pk": 81, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_tipoeducacion", 
+        "name": "Can delete tipos de educaci\u00f3n", 
+        "content_type": 27
+    }
+},
+{
+    "pk": 82, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_pais", 
+        "name": "Can add pa\u00eds", 
+        "content_type": 28
+    }
+},
+{
+    "pk": 83, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_pais", 
+        "name": "Can change pa\u00eds", 
+        "content_type": 28
+    }
+},
+{
+    "pk": 84, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_pais", 
+        "name": "Can delete pa\u00eds", 
+        "content_type": 28
+    }
+},
+{
+    "pk": 85, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_estado", 
+        "name": "Can add estado", 
+        "content_type": 29
+    }
+},
+{
+    "pk": 86, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_estado", 
+        "name": "Can change estado", 
+        "content_type": 29
+    }
+},
+{
+    "pk": 87, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_estado", 
+        "name": "Can delete estado", 
+        "content_type": 29
+    }
+},
+{
+    "pk": 88, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_institucion", 
+        "name": "Can add instituci\u00f3n", 
+        "content_type": 30
+    }
+},
+{
+    "pk": 89, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_institucion", 
+        "name": "Can change instituci\u00f3n", 
+        "content_type": 30
+    }
+},
+{
+    "pk": 90, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_institucion", 
+        "name": "Can delete instituci\u00f3n", 
+        "content_type": 30
+    }
+},
+{
+    "pk": 91, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_nacionalidad", 
+        "name": "Can add nacionalidad", 
+        "content_type": 31
+    }
+},
+{
+    "pk": 92, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_nacionalidad", 
+        "name": "Can change nacionalidad", 
+        "content_type": 31
+    }
+},
+{
+    "pk": 93, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_nacionalidad", 
+        "name": "Can delete nacionalidad", 
+        "content_type": 31
+    }
+},
+{
+    "pk": 94, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_persona", 
+        "name": "Can add persona", 
+        "content_type": 32
+    }
+},
+{
+    "pk": 95, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_persona", 
+        "name": "Can change persona", 
+        "content_type": 32
+    }
+},
+{
+    "pk": 96, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_persona", 
+        "name": "Can delete persona", 
+        "content_type": 32
+    }
+},
+{
+    "pk": 97, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_auditor", 
+        "name": "Can add auditor", 
+        "content_type": 33
+    }
+},
+{
+    "pk": 98, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_auditor", 
+        "name": "Can change auditor", 
+        "content_type": 33
+    }
+},
+{
+    "pk": 99, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_auditor", 
+        "name": "Can delete auditor", 
+        "content_type": 33
+    }
+},
+{
+    "pk": 100, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_certificadoelectronico", 
+        "name": "Can add certificado electr\u00f3nico", 
+        "content_type": 34
+    }
+},
+{
+    "pk": 101, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_certificadoelectronico", 
+        "name": "Can change certificado electr\u00f3nico", 
+        "content_type": 34
+    }
+},
+{
+    "pk": 102, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_certificadoelectronico", 
+        "name": "Can delete certificado electr\u00f3nico", 
+        "content_type": 34
+    }
+},
+{
+    "pk": 1, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 1, 
+        "action_time": "2014-04-21T14:37:00.459Z", 
+        "object_repr": "19276008 D\u00edaz Axel", 
+        "object_id": "1", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 32
+    }
+},
+{
+    "pk": 2, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-04-21T14:37:05.815Z", 
+        "object_repr": "axelio", 
+        "object_id": "1", 
+        "change_message": "A\u00f1adido/a \"Axel D\u00edaz\" Usuario.", 
+        "user": 1, 
+        "content_type": 4
+    }
+},
+{
+    "pk": 3, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 1, 
+        "action_time": "2014-04-21T14:37:31.131Z", 
+        "object_repr": "123123 opera operador", 
+        "object_id": "2", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 32
+    }
+},
+{
+    "pk": 4, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 1, 
+        "action_time": "2014-04-21T14:37:32.860Z", 
+        "object_repr": "operador", 
+        "object_id": "2", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 4
+    }
+},
+{
+    "pk": 5, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-04-21T14:37:37.543Z", 
+        "object_repr": "operador", 
+        "object_id": "2", 
+        "change_message": "Modificado/a groups.", 
+        "user": 1, 
+        "content_type": 4
+    }
+},
+{
+    "pk": 6, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 1, 
+        "action_time": "2014-04-21T14:44:09.159Z", 
+        "object_repr": "Entrevistas: 23.0/45.0.                 Evaluaciones: 120.0/150.0", 
+        "object_id": "1", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 22
+    }
+},
+{
+    "pk": 7, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 3, 
+        "action_time": "2014-04-21T15:01:09.869Z", 
+        "object_repr": "Nivel acad\u00e9mico", 
+        "object_id": "3", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 21
+    }
+},
+{
+    "pk": 8, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 3, 
+        "action_time": "2014-04-21T15:01:10.004Z", 
+        "object_repr": "Conocimientos b\u00e1sico", 
+        "object_id": "2", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 21
+    }
+},
+{
+    "pk": 9, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 3, 
+        "action_time": "2014-04-21T15:01:10.112Z", 
+        "object_repr": "Conocimientos requeridos", 
+        "object_id": "4", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 21
+    }
+},
+{
+    "pk": 10, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 3, 
+        "action_time": "2014-04-21T15:01:10.232Z", 
+        "object_repr": "Conocimientos requeridos", 
+        "object_id": "1", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 21
+    }
+}
+]
