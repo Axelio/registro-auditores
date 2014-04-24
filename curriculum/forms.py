@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
-from lib.funciones import fecha_futura
+from lib.funciones import fecha_futura, fecha_pasada
 from curriculum.models import (
         Certificacion, Conocimiento, Competencia,
         ListaCompetencia, Educacion, Laboral,
@@ -82,6 +82,24 @@ class CitasForm(forms.ModelForm):
             raise forms.ValidationError(
                     u'La fecha elegida no puede ser menor a la actual')
 
+        # Si fecha es pasada (función en lib/funciones.py)
+        if fecha_pasada(primera_fecha):
+            error = u'La fecha no puede ser \
+                    menor ni igual al día de hoy'
+            raise forms.ValidationError(error)
+
+        # Si fecha es pasada (función en lib/funciones.py)
+        if fecha_pasada(segunda_fecha):
+            error = u'La fecha no puede ser \
+                    menor ni igual al día de hoy'
+            raise forms.ValidationError(error)
+
+        # Si fecha es pasada (función en lib/funciones.py)
+        if fecha_pasada(tercera_fecha):
+            error = u'La fecha no puede ser \
+                    menor ni igual al día de hoy'
+            raise forms.ValidationError(error)
+
         # Ninguna fecha puede ser igual a otra
         error_fechas_iguales = u'Las fechas no se pueden repetir'
         if primera_fecha == segunda_fecha:
@@ -103,7 +121,7 @@ class CompetenciaPruebaForm(forms.ModelForm):
 
     class Meta:
         model = Competencia
-        exclude = ('usuario','competencia')
+        exclude = ('usuario', 'competencia')
 
 
 class CompetenciaForm(forms.ModelForm):
@@ -256,7 +274,6 @@ class CertificacionForm(forms.ModelForm):
         Función para validar el campo de fecha inicio
         '''
         # Fecha actual
-        fecha_actual = datetime.date.today()
         error = u'La fecha de inicio no puede ser mayor ni igual a hoy'
 
         # Si fecha_actual es futura (función en lib/funciones.py)
@@ -304,6 +321,30 @@ class EducacionForm(forms.ModelForm):
                     'data-position': 'bottom'}),
         }
 
+    def clean_fecha_inicio(self):
+        '''
+        Función para validar el campo de fecha inicio
+        '''
+        # Fecha actual
+        error = u'La fecha de inicio no puede ser mayor ni igual a hoy'
+
+        # Si fecha_fin es futura (función en lib/funciones.py)
+        if fecha_futura(self.cleaned_data['fecha_inicio']):
+            raise forms.ValidationError(error)
+        return self.cleaned_data['fecha_inicio']
+
+    def clean_fecha_fin(self):
+        '''
+        Función para validar el campo de fecha inicio
+        '''
+        # Fecha actual
+        error = u'La fecha fin no puede ser mayor ni igual a hoy'
+
+        # Si fecha_fin es futura (función en lib/funciones.py)
+        if fecha_futura(self.cleaned_data['fecha_fin']):
+            raise forms.ValidationError(error)
+        return self.cleaned_data['fecha_fin']
+
 
 class EvaluacionForm(forms.ModelForm):
     '''
@@ -318,13 +359,14 @@ class EvaluacionForm(forms.ModelForm):
                 attrs={
                     'type': 'number',
                     'required': 'required',
-                    'min': '0',}),
+                    'min': '0'}),
                 }
-    
+
     def clean_puntaje(self):
         parametros = Aprobacion.objects.last()
         error = u'El puntaje máximo para \
-                las evaluaciones es %s puntos' %( parametros.evaluacion_maxima )
+                las evaluaciones es \
+                %s puntos' % (parametros.evaluacion_maxima)
         if self.cleaned_data['puntaje'] > parametros.evaluacion_maxima:
             raise forms.ValidationError(error)
         return self.cleaned_data['puntaje']

@@ -80,8 +80,6 @@ class EditarPersonaForm(forms.ModelForm):
         '''
         Función para validar el campo de fecha de nacimiento
         '''
-        # Fecha actual
-        fecha_actual = datetime.date.today()
         # Si fecha_actual es futura (función en lib/funciones.py)
         if fecha_futura(self.cleaned_data['fecha_nacimiento']):
             error = u'La fecha de nacimiento no '
