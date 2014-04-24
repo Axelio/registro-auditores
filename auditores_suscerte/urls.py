@@ -41,7 +41,7 @@ urlpatterns = patterns('',
 
     url(r'^clave_cambiada/$',
         password_change_done,
-        {'post_save_redirect': reverse_lazy('perfil')},
+        {'template_name': 'auth/clave_cambiada.html'},
         name='password_change_done'),
 
     url(r'^clave/confirmacion/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',
