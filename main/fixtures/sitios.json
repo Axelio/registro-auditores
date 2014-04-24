@@ -1,0 +1,10 @@
+[
+{
+    "pk": 1, 
+    "model": "sites.site", 
+    "fields": {
+        "domain": "10.16.13.114", 
+        "name": "SUSCERTE"
+    }
+}
+]

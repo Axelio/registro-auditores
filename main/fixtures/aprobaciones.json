@@ -1,0 +1,12 @@
+[
+{
+    "pk": 1, 
+    "model": "curriculum.aprobacion", 
+    "fields": {
+        "entrevista_maxima": 45.0, 
+        "evaluacion_aprobatoria": 120.0, 
+        "evaluacion_maxima": 150.0, 
+        "entrevista_aprobatoria": 23.0
+    }
+}
+]
