@@ -1,6 +1,6 @@
 <nav class="ink-navigation hide-small hide-medium ie7 sticky">
     <ul class="menu horizontal shadowed grey">
-    <li class=><a href="#"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
+        <li class=><a href="{% url 'inicio' %}"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
         <div class="push-right">
             {% if user.is_authenticated %}
             <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
