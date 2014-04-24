@@ -19,33 +19,31 @@
                 <div class="box">
                     <div class="column-group" style="background:white">
                         <div class="space">
-                            {% if not user.is_authenticated %}
-                                <fieldset class="column-group">
-                                    {% ifnotequal mensaje_error '' %}
-                                        <div class="ink-alert block error">
-                                            <h4>Vaya, parece que hay un error</h4>
-                                            <p>{{ mensaje_error }}</p>
-                                        </div>
-                                    {% endifnotequal %}
-                                    {% for formulario in form %}
-                                        {% if formulario.errors%}
-                                            <div class="ink-alert basic error">
-                                                <p>{{ formulario.errors }}</p>
-                                            </div>
-                                        {% endif %}
-                                        <div class="control-group required validation">
-                                            {{ formulario.label }}
-                                        <div class="control">
-                                            {{ formulario }}
-                                        </div>
-                                            <p class="tip">{{ formulario.help_text }}</p>
-                                        </div>
-                                    {% endfor %}
-                                </fieldset>
-                                    <div>
-                                        <input type="submit" value="Enviar" class="ink-button blue">
+                            <fieldset class="column-group">
+                                {% ifnotequal mensaje_error '' %}
+                                    <div class="ink-alert block error">
+                                        <h4>Vaya, parece que hay un error</h4>
+                                        <p>{{ mensaje_error }}</p>
                                     </div>
-                            {% endif %}
+                                {% endifnotequal %}
+                                {% for formulario in form %}
+                                    {% if formulario.errors%}
+                                        <div class="ink-alert basic error">
+                                            <p>{{ formulario.errors }}</p>
+                                        </div>
+                                    {% endif %}
+                                    <div class="control-group required validation">
+                                        {{ formulario.label }}
+                                    <div class="control">
+                                        {{ formulario }}
+                                    </div>
+                                        <p class="tip">{{ formulario.help_text }}</p>
+                                    </div>
+                                {% endfor %}
+                            </fieldset>
+                                <div>
+                                    <input type="submit" value="Enviar" class="ink-button blue">
+                                </div>
                         </div>
                     </div>
                 </div>

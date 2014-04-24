@@ -418,13 +418,10 @@ class CurriculumView(View):
     diccionario.update({'persona_form':persona_form})
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            return redirect('inicio')
         self.diccionario.update(csrf(request))
         self.diccionario.update({'curriculum':True})
+        self.diccionario.update({'mensaje_error':''})
         self.diccionario.update({'form':self.persona_form()})
-        mensaje_error = ''
-        self.diccionario.update({'mensaje_error':mensaje_error})
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,

@@ -3,8 +3,6 @@ from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import logout
 from django.conf import settings
 from django.conf.urls.static import static
-import os
-
 from django.contrib import admin
 from django.contrib.auth.views import (password_reset,
         password_reset_done, password_reset_confirm,
@@ -22,6 +20,7 @@ from auth.views import *
 from auth.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
 from django.contrib.auth.decorators import login_required
+import os
 
 
 admin.autodiscover()
