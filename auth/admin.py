@@ -3,6 +3,7 @@ from django.contrib import admin
 from auth.models import UserProfile, Mensaje
 from django.contrib.auth.admin import UserAdmin, User
 from django.utils.translation import ugettext_lazy as _
+from django.utils.decorators import method_decorator
 
 # Register your models here.
 class UserProfileInline(admin.StackedInline):
@@ -57,7 +58,7 @@ class UserProfileAdmin(UserAdmin):
     
     ''' Evita escalabilidad de privilegios cuando  un usuario staff NO superUsuario intente cambiar la clave de un SuperUsuario. '''
     from django.views.decorators.debug import sensitive_post_parameters
-    @sensitive_post_parameters()
+    @method_decorator(sensitive_post_parameters())
     def user_change_password(self,request,id,form_url=''):
         if not  request.user.is_superuser and self.queryset(request).get(pk=id).is_superuser:
             from django.core.exceptions import PermissionDenied
