@@ -2,7 +2,7 @@
 from django.template import Library
 from django.utils.html import format_html
 from curriculum.models import (NIVELES_COMPETENCIA,
-    Competencia, ListaCompetencia)
+    Competencia, ListaCompetencia, Evaluacion, Competencia)
 
 register = Library()
 
@@ -73,3 +73,52 @@ def seleccionado(puntaje_id, puntaje):
     else:
         return ""
 register.filter(seleccionado)
+
+
+@register.filter(name="evaluado", is_safe=True)
+def evaluado(usuario_id):
+    '''
+    Función para determinar si
+    un puntaje está o no seleccionado
+    '''
+    evaluaciones = Evaluacion.objects.filter(usuario__id=usuario_id)
+    if evaluaciones.exists():
+        return True
+    else:
+        return False
+register.filter(evaluado)
+
+
+@register.filter(name="puntaje_evaluacion", is_safe=True)
+def puntaje_evaluacion(usuario_id):
+    '''
+    Función para determinar si
+    un puntaje está o no seleccionado
+    '''
+    evaluaciones = Evaluacion.objects.filter(usuario__id=usuario_id)
+    if evaluaciones:
+        evaluaciones = evaluaciones[0]
+        return evaluaciones.puntaje
+
+register.filter(puntaje_evaluacion)
+
+
+@register.filter(name="entrevistado", is_safe=True)
+def entrevistado(usuario_id):
+    '''
+    Función para determinar si
+    un puntaje está o no seleccionado
+    '''
+    return True
+register.filter(entrevistado)
+
+
+@register.filter(name="puntaje_entrevistado", is_safe=True)
+def puntaje_entrevistado(usuario_id):
+    '''
+    Función para determinar si
+    un puntaje está o no seleccionado
+    '''
+    return 1
+
+register.filter(puntaje_entrevistado)

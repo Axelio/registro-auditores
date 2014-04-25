@@ -9,6 +9,7 @@
 
 {% load static %}
 {% load humanize %} 
+{% load perfil %}
  
   <!-- Main Page Content and Sidebar -->
   
@@ -69,18 +70,26 @@
                                     <td>{{ aspirante.profile.persona.primer_nombre }} {{ auditor.profile.persona.segundo_nombre }}</td>
                                     <td>{{ aspirante.profile.persona.primer_apellido }} {{ auditor.profile.persona.segundo_apellido }}</td>
                                     <td>
-                                        <a href="{% url 'competencia' aspirante.id %}" class="ink-button blue">
-                                            <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
-                                                <i class="icon-file-text"></i>
-                                            </span>
-                                        </a>
+                                        {% if aspirante.id|entrevistado %}
+                                            {{ aspirante.id|puntaje_entrevistado }}
+                                        {% else %}
+                                            <a href="{% url 'competencia' aspirante.id %}" class="ink-button blue">
+                                                <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
+                                                    <i class="icon-file-text"></i>
+                                                </span>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                     <td>
-                                        <a href="{% url 'evaluacion' aspirante.id %}" class="ink-button blue">
-                                            <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
-                                                <i class="icon-book"></i>
-                                            </span>
-                                        </a>
+                                        {% if aspirante.id|evaluado %}
+                                            {{ aspirante.id|puntaje_evaluacion }}
+                                        {% else %}
+                                            <a href="{% url 'evaluacion' aspirante.id %}" class="ink-button blue">
+                                                <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
+                                                    <i class="icon-book"></i>
+                                                </span>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -125,7 +134,6 @@
                                     <th>Vence en</th>
                                     <th>TLF</th>
                                     <th>Email</th>
-                                    <th>Acción</th>
                             </thead>
                             <tbody>
                                 {% for auditor in auditores %}
@@ -145,17 +153,7 @@
                                             {{ persona.movil }}
                                         {% endifequal %}
                                     </td>
-                                    {% load perfil %}
                                     <td>{{ auditor.persona.email|mail_antispam }}</td>
-                                    <td>
-                                        <div class="button-group push-right">
-                                            <a href="" class="ink-button blue">
-                                                <span class="tooltip ink-label" data-tip-text="Actualizar" data-tip-where="mousefix" data-tip-color="blue">
-                                                    <i class="icon-refresh"></i>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
