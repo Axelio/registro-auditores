@@ -643,7 +643,7 @@ class EditarPersonaView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.persona_form})
 
-        self.lista_filtros = lista_filtros(request.user.profile.persona)
+        self.lista_filtros = lista_filtros(request)
         self.diccionario.update(self.lista_filtros)
 
         return render(request, 
@@ -1296,7 +1296,6 @@ class CertificacionView(View):
                 certificacion.institucion = institucion
                 certificacion.fecha_inicio = fecha_inicio
                 certificacion.fecha_fin = fecha_fin
-                certificacion.horas = request.POST['horas']
                 certificacion.lugar = pais 
 
                 certificacion.save()
@@ -1311,8 +1310,7 @@ class CertificacionView(View):
                         codigo_certificacion = request.POST['codigo_certificacion'],
                         titulo = request.POST['titulo'],
                         fecha_inicio = fecha_inicio,
-                        fecha_fin = fecha_fin,
-                        horas = request.POST['horas'])
+                        fecha_fin = fecha_fin)
                 self.mensaje = u'Certificación creada exitosamente'
                 self.tipo_mensaje = u'success'
 
