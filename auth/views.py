@@ -12,55 +12,12 @@ from auth.forms import AuthenticationForm
 # Create your views here.
 def auth(request):
     diccionario = {}
+    if request.user.groups.get_query_set().filter(name__iexact='operador').exists():
+        return HttpResponseRedirect(reverse('perfil'))
     diccionario.update({'user':request.user})
     diccionario.update({'auth':True})
     return login(request, template_name='auth/formulario.html', extra_context=diccionario)
 
-class Auth2(View):
-    tipo_mensaje = ''
-    mensaje = ''
-    form = AuthenticationForm
-    template = 'auth/formulario.html'
-    diccionario = {}
-    
-    def get(self, request, *args, **kwargs):
-        self.form = self.form()
-        if request.user.is_authenticated():
-            if request.GET.has_key('next'):
-                return HttpResponseRedirect(request.GET['next'])
-
-        self.diccionario.update({'user':request.user})
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'form':self.form})
-        return render(request, 
-                       template_name=self.template,
-                       dictionary=self.diccionario,
-                     )
-
-    @method_decorator(watch_login)
-    def post(self, request, *args, **kwargs):
-        form = self.form(request.POST)
-        self.diccionario.update({'user':request.user})
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'formulario':form})
-        if form.is_valid():
-            usuario = request.user
-            login(request, form.get_user())
-            if request.GET.has_key('next'):
-                return HttpResponseRedirect(request.GET['next'])
-        else:
-            error = ''
-            error = form.errors[form.errors.keys()[0]]
-
-            self.diccionario.update({'tipo_mensaje':'error'})
-            self.diccionario.update({'error':error[0]})
-
-            return render(request, 
-                           template_name=self.template,
-                           dictionary=self.diccionario,
-                         )
 
 def cambiar_clave(request):
     diccionario = {}
