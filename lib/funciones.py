@@ -32,3 +32,14 @@ def fecha_pasada(fecha):
         return True
     else:
         return False
+
+
+def fechas_superiores(fecha_inicio, fecha_fin):
+    '''
+    Funcion para determinar si la fecha inicial es mayor
+    a la fecha final enviada por el usuario.
+    '''
+    if fecha_inicio > fecha_fin:
+        return True
+    else:
+        return False
