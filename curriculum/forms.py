@@ -187,6 +187,11 @@ class CursoForm(forms.ModelForm):
         model = Curso
         exclude = ('usuario',)
         widgets = {
+            'horas': TextInput(
+                attrs={
+                    'type': 'number',
+                    'required': 'required',
+                    'min': 0}),
             'fecha_inicio': TextInput(
                 attrs={
                     'type': 'text',
@@ -201,6 +206,7 @@ class CursoForm(forms.ModelForm):
                     'class': 'ink-datepicker',
                     'data-format': 'dd/mm/yyyy',
                     'data-position': 'bottom'}),
+
         }
 
     def clean(self):

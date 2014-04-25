@@ -365,34 +365,36 @@ class EducacionView(View):
         nueva = True
 
         persona = request.user.userprofile_set.get_query_set()[0].persona
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-            institucion = Institucion.objects.get(id=request.POST['institucion'])
-            tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
-            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            titulo = request.POST['titulo']
+        self.educacion_form = self.educacion_form(request.POST)
+        if self.educacion_form.is_valid():
+            if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+                institucion = Institucion.objects.get(id=request.POST['institucion'])
+                tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
+                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                titulo = request.POST['titulo']
 
-            if kwargs['palabra'] == 'editar':
-                # Si se edita una Educación
-                # Búsqueda de variables con los IDs enviados por POST
-                educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
-                educacion.institucion = institucion
-                educacion.tipo = tipo
-                educacion.fecha_inicio = fecha_inicio
-                educacion.fecha_fin = fecha_fin
-                educacion.titulo = titulo
+                if kwargs['palabra'] == 'editar':
+                    # Si se edita una Educación
+                    # Búsqueda de variables con los IDs enviados por POST
+                    educacion = Educacion.objects.get(id=int(kwargs['educacion_id']))
+                    educacion.institucion = institucion
+                    educacion.tipo = tipo
+                    educacion.fecha_inicio = fecha_inicio
+                    educacion.fecha_fin = fecha_fin
+                    educacion.titulo = titulo
 
-                educacion.save()
+                    educacion.save()
 
-                self.mensaje = u'Información educacional ha sido editada exitosamente'
-                self.tipo_mensaje = u'success'
-            else:
-                # Si se crea una Educación
-                educacion = Educacion.objects.create(persona=persona, institucion=institucion, tipo=tipo, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, titulo=titulo)
-                self.mensaje = u'Información educacional ha sido creada exitosamente'
-                self.tipo_mensaje = u'success'
+                    self.mensaje = u'Información educacional ha sido editada exitosamente'
+                    self.tipo_mensaje = u'success'
+                else:
+                    # Si se crea una Educación
+                    educacion = Educacion.objects.create(persona=persona, institucion=institucion, tipo=tipo, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, titulo=titulo)
+                    self.mensaje = u'Información educacional ha sido creada exitosamente'
+                    self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+                self.template = 'perfil/perfil.html'
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
@@ -736,7 +738,7 @@ class LaboralView(View):
                     # Si se edita información laboral 
                     # Búsqueda de variables con los IDs enviados por POST
                     
-                    laboral = laboral.objects.get(id=kwargs['laboral_id'])
+                    laboral = Laboral.objects.get(id=kwargs['laboral_id'])
                     laboral.empresa = empresa
                     laboral.sector = sector
                     laboral.estado = estado
@@ -1280,7 +1282,7 @@ class CertificacionView(View):
         persona = request.user.profile.persona
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
 
-            estado = Estado.objects.get(id=request.POST['lugar'])
+            pais = Estado.objects.get(id=request.POST['pais'])
             institucion = Institucion.objects.get(id=request.POST['institucion'])
             fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
             fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
@@ -1295,7 +1297,7 @@ class CertificacionView(View):
                 certificacion.fecha_inicio = fecha_inicio
                 certificacion.fecha_fin = fecha_fin
                 certificacion.horas = request.POST['horas']
-                certificacion.lugar = estado
+                certificacion.lugar = pais 
 
                 certificacion.save()
 
@@ -1305,7 +1307,7 @@ class CertificacionView(View):
                 # Si se crea una Certificacion
                 certificacion = Certificacion.objects.create(persona = persona,
                         institucion = institucion,
-                        lugar = estado,
+                        pais = pais,
                         codigo_certificacion = request.POST['codigo_certificacion'],
                         titulo = request.POST['titulo'],
                         fecha_inicio = fecha_inicio,
