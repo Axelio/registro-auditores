@@ -26,10 +26,14 @@
             {% endif %}
             <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
                 <ul class="submenu">
-                    <li><a class="small" href="/admin">Panel administrativo</a></li>
                 {% if user.is_authenticated %}
+                    {% ifequal user.groups.all.0.name 'Operador' %}
+                        <li><a class="small" href="/admin">Panel administrativo</a></li>
+                    {% endifequal %}
                     <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
                     <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
+                {% else %}
+                    <li><a class="small" href="/admin">Panel administrativo</a></li>
                 {% endif %}
                 </ul>
             </li>
@@ -52,27 +56,30 @@
     <ul class="menu vertical flat gray hide-all" id="topbar_menu">
     <div class="push-right">
         {% if user.is_authenticated %}
-        <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
-        {% ifnotequal user.groups.all.0.name 'Operador' %}
-        <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Currículum <i class="icon-caret-down"></i></a>
-            <ul class="submenu">
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
-                <li><a class="small scrollableLink" href="{% url 'perfil' %}#certificacion">Certificaciones</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
-                <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
-                {% if requisitos %}
-                    <li><a class="small scrollableLink" href="{% url 'citas' %}">Citas</a></li>
-                {% endif %}
-            </ul>
-        </li>
-        {% endifnotequal %}
+            <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
+            {% ifnotequal user.groups.all.0.name 'Operador' %}
+            <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Currículum <i class="icon-caret-down"></i></a>
+                <ul class="submenu">
+                    <li><a class="scrollableLink" href="{% url 'perfil' %}#educacion">Educativos</a></li>
+                    <li><a class="scrollableLink" href="{% url 'perfil' %}#laboral">Laboral</a></li>
+                    <li><a class="small scrollableLink" href="{% url 'perfil' %}#certificacion">Certificaciones</a></li>
+                    <li><a class="scrollableLink" href="{% url 'perfil' %}#competencias">Competencias</a></li>
+                    <li><a class="scrollableLink" href="{% url 'perfil' %}#habilidades">Habilidades</a></li>
+                    <li><a class="scrollableLink" href="{% url 'perfil' %}#conocimiento">Conocimientos</a></li>
+                    <li><a class="scrollableLink" href="{% url 'perfil' %}#idioma">Idiomas</a></li>
+                    {% if requisitos %}
+                        <li><a class="small scrollableLink" href="{% url 'citas' %}">Citas</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            {% endifnotequal %}
         {% endif %}
         <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
             <ul class="submenu">
             {% if user.is_authenticated %}
+                    {% ifequal user.groups.all.0.name 'Operador' %}
+                        <li><a class="small" href="/admin">Panel administrativo</a></li>
+                    {% endifequal %}
                 <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
                 <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
             {% else %}
