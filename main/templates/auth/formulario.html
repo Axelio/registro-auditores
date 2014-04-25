@@ -63,8 +63,6 @@
                                         <fieldset class="small">
                                             <a href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a>
                                             -
-                                            <a href="{% url 'curriculum' %}">Regístrate</a>
-                                            -
                                             <a href="{% url 'listado_auditores' %}">Ver listado de auditores</a>
                                         </fieldset>
                                         <div>
@@ -124,6 +122,43 @@
             </div>
         </form>
     </div>
+    {% if not user.is_authenticated %}
+        <div class="space">
+            <div class="box">
+                <div class="space">
+                    <section id="inscribirse">
+                        <div class="column-group">
+                            <div class="content-center">
+                                <h2><a>¿Cómo me inscribo?</a></h2>
+                            </div>
+                            <div class="content-left gutters">
+                                <br />
+                                <p>Envíanos un correo solicitándonos ser Auditor acreditado por SUSCERTE al correo <img src="/main/static/images/correo_ra.png"> con tu Currículum Vitae adjunto.</p>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="content-center">
+                                <h2><a>¿Y luego?</a></h2>
+                            </div>
+                            <div class="content-left gutters">
+                                <br />
+                                <p>SUSCERTE te creará un usuario para que puedas <a href="{% url 'inicio' %}">ingresar</a>. Al crearse el usuario automáticamente se te enviará un mail a tu correo electrónico con tu usuario y una contraseña aleatoria.</p>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="content-center">
+                                <h2><a>¿Cómo me acredito?</a></h2>
+                            </div>
+                            <div class="content-left gutters">
+                                <br />
+                                <p>Deberás cargar tu currículum a través del sistema una vez autenticado, luego se te citará a una entrevista y una evaluación para acreditarte. Una vez acreditado podrás consultarte en la lista de <a href="{% url 'listado_auditores' %}">auditores acreditados</a>.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 </div>
 
 {% include 'footer.html' %} 
