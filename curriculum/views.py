@@ -306,7 +306,7 @@ class EducacionView(View):
     educacion_form = EducacionForm
     mensaje = ''
     tipo_mensaje = ''
-    titulo = 'educacion'
+    titulo = u'educación'
     lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
