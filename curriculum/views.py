@@ -829,10 +829,7 @@ class CompetenciaView(View):
 
         aspirante = User.objects.get(id=kwargs['aspirante_id'])
 
-        puntajes = settings.PUNTAJE
-
         self.diccionario.update({'competencias': self.competencias})
-        self.diccionario.update({'puntajes': puntajes})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'persona': persona})
@@ -1501,7 +1498,7 @@ class EvaluacionView(View):
     evaluacion_form = EvaluacionForm
     mensaje = ''
     tipo_mensaje = ''
-    titulo = u'certificación'
+    titulo = u'evaluación'
     lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
