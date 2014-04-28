@@ -104,7 +104,7 @@ class Auditor(models.Model):
     fecha_desacreditacion = models.DateField(
             verbose_name = u'fecha de desacreditación')
     observacion = models.TextField(
-            help_text='Razones por la cual se desacredita al auditor',
+            help_text='Razones por la cual se acredita o desacredita al auditor',
             verbose_name=u'observación')
 
     class Meta:

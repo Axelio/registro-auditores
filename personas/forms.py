@@ -4,7 +4,7 @@ from django.forms import ModelForm, TextInput, Textarea, Select, DateInput
 from django.contrib.auth.models import User
 from captcha.fields import ReCaptchaField
 from lib.funciones import fecha_futura
-from personas.models import Persona
+from personas.models import Persona, Auditor
 import datetime
 
 TELEFONO_PUBLICO = (('movil', u'Teléfono móvil'),
@@ -214,3 +214,23 @@ class PersonaForm(forms.ModelForm):
             error += u'no puede ser mayor ni igual al día de hoy'
             raise forms.ValidationError(error)
         return self.cleaned_data['fecha_nacimiento']
+
+
+class AcreditacionForm(forms.ModelForm):
+    '''
+    Clase para definir el formulario para 
+    acreditar a un auditor
+    '''
+    
+    class Meta:
+        # Se determina cuál es el modelo al que va a utilizar
+        model = Auditor
+        fields = ('observacion',)
+
+        widgets = {
+            'observacion': Textarea(
+                attrs={
+                    'required': 'required',
+                    }
+                )
+             }

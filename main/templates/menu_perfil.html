@@ -27,9 +27,9 @@
             <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
                 <ul class="submenu">
                 {% if user.is_authenticated %}
-                    {% ifequal user.groups.all.0.name 'Operador' %}
+                    {% if user.is_staff  %}
                         <li><a class="small" href="/admin">Panel administrativo</a></li>
-                    {% endifequal %}
+                    {% endif %}
                     <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
                     <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
                 {% else %}
@@ -77,9 +77,9 @@
         <li><a class="scrollableLink" href="#">Configuración <i class="icon-caret-down"></i></a>
             <ul class="submenu">
             {% if user.is_authenticated %}
-                    {% ifequal user.groups.all.0.name 'Operador' %}
+                    {% if user.is_staff %}
                         <li><a class="small" href="/admin">Panel administrativo</a></li>
-                    {% endifequal %}
+                    {% endif %}
                 <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
                 <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
             {% else %}

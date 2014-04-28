@@ -70,9 +70,10 @@ def listaAspirantes():
     # En teoría, todos los usuarios que no esten en grupo operadores
     # son aspirantes, así que filtramos a los usuarios
     # que no esten en el grupo Operadores
-    aspirantes = User.objects.filter(
-            is_active=True).exclude(
-                    groups__name__iexact='operador')
+    personas = Persona.objects.filter()
+    auditores = Auditor.objects.filter(acreditado=True)
+    aspirantes = User.objects.filter(is_active=True).exclude(
+            Q(userprofile__persona__auditor__in=auditores)|Q(groups__name__iexact='operador'))
     return aspirantes
 
 
@@ -503,6 +504,7 @@ class CurriculumView(View):
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
+
 
 class PerfilView(View):
     '''
@@ -1587,3 +1589,72 @@ class EvaluacionView(View):
                      )
 
 
+class AcreditarView(View):
+    '''
+    Clase para la edición de datos de información de la persona
+    '''
+    template='auditores/formulario.html'
+    acreditacion_form = AcreditacionForm
+    titulo = 'acreditar'
+    mensaje = ''
+    tipo_mensaje = ''
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        nueva = False
+
+        if not request.user.groups.filter(name__iexact='operador').exists():
+            raise PermissionDenied
+
+        try:
+            persona = Persona.objects.get(userprofile=request.user.profile)
+        except:
+            raise Http404
+
+        usuario = User.objects.get(id=kwargs['usuario_id'])
+
+        self.diccionario.update({'usuario': usuario})
+        self.diccionario.update({'nueva': nueva})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'form': self.acreditacion_form})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        self.acreditacion_form = self.acreditacion_form(request.POST)
+
+        if self.acreditacion_form.is_valid():
+            fecha_actual = datetime.date.today()
+            fecha_limite = datetime.datetime(
+                    fecha_actual.year,
+                    fecha_actual.month + settings.PERIODO_REV_ACREDITACION,
+                    fecha_actual.day)
+            
+            persona = Persona.objects.get(userprofile__user__id=kwargs['usuario_id'])
+            auditor = Auditor.objects.create(persona=persona,
+                    acreditado=True,
+                    fecha_acreditacion=fecha_actual,
+                    fecha_desacreditacion=fecha_limite,
+                    observacion=request.POST['observacion'])
+            return HttpResponseRedirect(reverse('inicio'))
+        else:
+            self.diccionario.update({'usuario': usuario})
+            self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+            self.diccionario.update({'mensaje': self.mensaje})
+            self.diccionario.update({'form': self.acreditacion_form})
+
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )

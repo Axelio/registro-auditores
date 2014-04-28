@@ -15,7 +15,8 @@ from curriculum.views import (PerfilView,
     EducacionView, LaboralView, CompetenciaView,
     HabilidadView, ConocimientoView, IdiomaView,
     EditarPersonaView, CitasView, CertificacionView,
-    CursoView, VerAuditores, EvaluacionView, revisar_acreditaciones)
+    CursoView, VerAuditores, EvaluacionView, revisar_acreditaciones,
+    AcreditarView)
 from auth.views import *
 from auth.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
@@ -137,6 +138,10 @@ urlpatterns = patterns('',
     url(r'^revisar_acreditaciones/$',
         'curriculum.views.revisar_acreditaciones',
         name='revisar_acreditaciones'),
+
+    url(r'^acreditar/(?P<usuario_id>[\d]+)*$',
+        login_required(AcreditarView.as_view()),
+        name='acreditar'),
 
     url(r'^$',
         auth, name='inicio'),
