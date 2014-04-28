@@ -119,6 +119,12 @@ def puntaje_entrevistado(usuario_id):
     Función para determinar si
     un puntaje está o no seleccionado
     '''
-    return 1
+    competencias = Competencia.objects.filter(
+            usuario__id=usuario_id)
 
+    puntaje = 0.0
+    for competencia in competencias:
+        puntaje += competencia.puntaje
+
+    return puntaje
 register.filter(puntaje_entrevistado)
