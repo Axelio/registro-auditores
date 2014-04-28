@@ -1443,7 +1443,7 @@ class VerAuditores(View):
     '''
     Clase para las consultas de los auditores
     '''
-    template = 'auditores.html'
+    template = 'auditores/auditores.html'
     lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
