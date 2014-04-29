@@ -12,7 +12,7 @@
     "model": "auth.mensaje", 
     "fields": {
         "caso": "Creaci\u00f3n de usuario (web)", 
-        "mensaje": "Su solicitud ha sido procesada exitosamente. En su correo electr\u00f3nico se encuentra la informaci\u00f3n necesaria para que pueda ingresar a su sesi\u00f3n correctamente.\r\n\r\nEn SUSCERTE valoramos el talento humano como pieza fundamental para el desarrollo sustentable cient\u00edfico, tecnol\u00f3gico y de innovaci\u00f3n."
+        "mensaje": "La solicitud de creaci\u00f3n de un nuevo usuario se ha realizado con \u00e9xito. Se envi\u00f3 un email al usuario con los datos para el ingreso a la nueva cuenta.\r\n\r\nEn SUSCERTE valoramos el talento humano como pieza fundamental para el desarrollo sustentable cient\u00edfico, tecnol\u00f3gico y de innovaci\u00f3n."
     }
 },
 {
