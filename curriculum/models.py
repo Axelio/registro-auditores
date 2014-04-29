@@ -10,6 +10,7 @@ from personas.models import Persona
 from lugares.models import Estado, Institucion, Pais
 from auth.models import UserProfile
 from auditores_suscerte import settings
+from auth.models import Mensaje
 
 # Modelos para construir el Curriculum
 
@@ -105,10 +106,11 @@ def post_save_cita(sender, **kwargs):
         else:
             fecha_fijada = cita.tercera_fecha
 
-        mensaje = u'Se ha elegido una fecha definitiva para su '
-        mensaje += u'cita según sus propuestas, por lo que '
-        mensaje += u'se ha fijado la cita '
-        mensaje += u'para el día %s' % (fecha_fijada)
+        # Envío de mail
+        mensaje = Mensaje.objects.get(caso='Postulación de cita')
+
+        # Sustitución de variables clave y usuario
+        mensaje = mensaje.mensaje.replace('<fecha>','%s'%(fecha_fijada))
 
     send_mail(subject=asunto, message=mensaje,
                 from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)

@@ -5,7 +5,12 @@
             {% if user.is_authenticated %}
             <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
                 {% ifequal user.groups.all.0.name 'Operador' %}
-                <li><a class="scrollableLink" href="{% url 'revisar_acreditaciones' %}" onclick="return confirm('La información está a punto de ser enviada a todos los operadores.')">Revisar acreditaciones</a></li>
+                <li><a class="scrollableLink" href="#">Acciones<i class="icon-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a class="scrollableLink small" href="{% url 'revisar_acreditaciones' %}" onclick="return confirm('Le enviará a todos los operadores los próximos auditores cuya vigencia está a punto de vencerse.')">Revisar acreditaciones</a></li>
+                        <li><a class="small" href="{% url 'curriculum' %}">Nuevo aspirante</a></li>
+                    </ul>
+                </li>
                 {% endifequal %}
                 {% ifnotequal user.groups.all.0.name 'Operador' %}
                 <li><a class="scrollableLink" href="#">Currículum <i class="icon-caret-down"></i></a>
@@ -30,9 +35,6 @@
                     {% if user.is_staff  %}
                         <li><a class="small" href="/admin">Panel administrativo</a></li>
                     {% endif %}
-                    {% ifequal user.groups.all.0.name 'Operador' %}
-                    <li><a class="small" href="{% url 'curriculum' %}">Nuevo aspirante</a></li>
-                    {% endifequal %}
                     <li><a class="small" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
                     <li><a class="small" href="{% url 'salir' %}">Cerrar sesión</a></li>
                 {% else %}

@@ -97,7 +97,15 @@
                                             {% endif %}
                                         </td>
                                         <td>
-                                            <a href="{% url 'acreditar' aspirante.id %}">Acreditar</a>
+                                            {% if aspirante.id|citado %}
+                                                {% if aspirante.id|evaluado %}
+                                                    {% if aspirante.id|evaluado %}
+                                                        <a href="{% url 'acreditar' aspirante.id %}">Acreditar</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% else %}
+                                                <a href="{% url 'acreditar' aspirante.id %}">Fijar cita</a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                     {% endfor %}

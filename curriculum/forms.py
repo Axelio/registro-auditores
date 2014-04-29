@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.shortcuts import render_to_response
-from django.forms import ModelForm, TextInput, Textarea
+from django.forms import ModelForm, TextInput, Textarea, Select
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura, fecha_pasada, fechas_superiores
@@ -21,6 +21,23 @@ NIVELES_COMPTETENCIA = (
         ('basico', u'Básico'),
         ('nada', 'Nada'),
         )
+
+
+class FijarCitaForm(forms.ModelForm):
+    '''
+    Formulario para la fijación de una fecha para la entrevista
+    '''
+    
+    class Meta:
+        model = Cita
+        fields = ('cita_fijada',)
+        widgets = {
+            'cita_fijada': Select(
+                attrs={
+                    'required': 'required',
+                   }
+                )
+            }
 
 
 class CitasForm(forms.ModelForm):

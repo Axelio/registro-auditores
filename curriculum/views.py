@@ -49,7 +49,6 @@ def revisar_acreditaciones(request):
     auditores = ''
     for auditor in lista_auditores:
         auditores +=  u'%s (%s) se vence el: %s \n' % (auditor.persona, auditor.persona.email, formats.date_format(auditor.fecha_desacreditacion, "DATE_FORMAT"))
-        #auditores +=  u'%s (%s) se vence el: %s \n' % (auditor.persona, auditor.persona.email, auditor.fecha_desacreditacion)#formats.date_format(auditor.fecha_desacreditacion, "DATE_FORMAT"))
 
     destinatarios = []
 
@@ -72,8 +71,15 @@ def listaAspirantes():
     # que no esten en el grupo Operadores
     personas = Persona.objects.filter()
     auditores = Auditor.objects.filter(acreditado=True)
-    aspirantes = User.objects.filter(is_active=True).exclude(
-            Q(userprofile__persona__auditor__in=auditores)|Q(groups__name__iexact='operador'))
+    citas = Cita.objects.all()
+    citados = []
+
+    for cita in citas:
+        citados.append(cita.usuario)
+
+    aspirantes = User.objects.filter(is_active=True, userprofile__in=citados)
+    aspirantes = aspirantes.exclude(Q(userprofile__persona__auditor__in=auditores)|Q(groups__name__iexact='operador'))
+
     return aspirantes
 
 
@@ -1660,6 +1666,71 @@ class AcreditarView(View):
             self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
             self.diccionario.update({'mensaje': self.mensaje})
             self.diccionario.update({'form': self.acreditacion_form})
+
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+
+class FijarCitaView(View):
+    '''
+    Clase para la edición de datos de información de la persona
+    '''
+    template='auditores/fijar_cita.html'
+    cita_form = FijarCitaForm
+    titulo = 'fijar cita'
+    mensaje = ''
+    tipo_mensaje = ''
+    lista_filtros = ''
+
+    # Envío de variables a la plantilla a través de diccionario
+    diccionario = {}
+    diccionario.update({'titulo':titulo})
+
+    def get(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        nueva = False
+
+        if not request.user.groups.filter(name__iexact='operador').exists():
+            raise PermissionDenied
+
+        try:
+            persona = Persona.objects.get(userprofile=request.user.profile)
+        except:
+            raise Http404
+
+        usuario = User.objects.get(id=kwargs['usuario_id'])
+        cita = Cita.objects.get(usuario=usuario)
+
+        self.diccionario.update({'usuario': usuario})
+        self.diccionario.update({'cita': cita})
+        self.diccionario.update({'nueva': nueva})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        self.diccionario.update({'form': self.cita_form })
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
+
+    def post(self, request, *args, **kwargs):
+        self.diccionario.update(csrf(request))
+        usuario = request.user
+
+        self.cita_form = self.cita_form(request.POST)
+
+        if self.cita_form.is_valid():
+            cita = Cita.objects.get(usuario__id=kwargs['usuario_id'])
+            cita.cita_fijada = request.POST['cita_fijada']
+            cita.save()
+            
+            return HttpResponseRedirect(reverse('inicio'))
+        else:
+            self.diccionario.update({'usuario': usuario})
+            self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+            self.diccionario.update({'mensaje': self.mensaje})
+            self.diccionario.update({'form': self.cita_form})
 
         return render(request, 
                        template_name=self.template,

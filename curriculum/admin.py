@@ -23,7 +23,7 @@ admin.site.register(Idioma, IdiomaAdmin)
 
 class CompetenciaAdmin(admin.ModelAdmin):
     list_display = ('usuario', 'tipo', 'puntaje', 'fecha')
-    list_filter = ('tipo', 'fecha')
+    list_filter = ('usuario', 'tipo', 'fecha')
     ordering = ('tipo__listacompetencia__tipo', 'id')
 admin.site.register(Competencia, CompetenciaAdmin)
 

@@ -2,7 +2,8 @@
 from django.template import Library
 from django.utils.html import format_html
 from curriculum.models import (NIVELES_COMPETENCIA,
-    Competencia, ListaCompetencia, Evaluacion, Competencia)
+    Competencia, ListaCompetencia, Evaluacion, Competencia,
+    Cita)
 
 register = Library()
 
@@ -133,3 +134,24 @@ def puntaje_entrevistado(usuario_id):
 
     return puntaje
 register.filter(puntaje_entrevistado)
+
+
+@register.filter(name="citado", is_safe=True)
+def citado(usuario_id):
+    '''
+    Función para determinar si
+    la persona tiene una cita fijada
+    '''
+    cita = Cita.objects.filter(
+            usuario__id=usuario_id)
+
+    if cita.exists():
+        cita = cita[0]
+
+    # Si la fecha no ha sido fijada,
+    # se retorna False
+    if cita.cita_fijada == '':
+        return False
+    else:
+        return True
+register.filter(citado)
