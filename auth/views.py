@@ -18,9 +18,7 @@ def auth(request):
         return HttpResponseRedirect(reverse('perfil'))
     diccionario.update({'user':request.user})
     diccionario.update({'auth':True})
-    #return login(request, authentication_form=AuthenticationForm, template_name='auth/formulario.html', extra_context=diccionario)
-    return login(request, template_name='auth/formulario.html', extra_context=diccionario)
-
+    return login(request, authentication_form=AuthenticationForm, template_name='auth/formulario.html', extra_context=diccionario)
 
 def cambiar_clave(request):
     diccionario = {}
