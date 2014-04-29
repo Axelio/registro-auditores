@@ -1,0 +1,101 @@
+{% include "base_ink.html" %}
+
+
+
+{% block personales %}
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <body>
+
+{% load static %}
+{% load humanize %} 
+ 
+  <!-- Main Page Content and Sidebar -->
+  
+<div class="ink-grid">
+    {% include 'menu_perfil.html' %}
+
+    <div class="space">
+        <div class="column-group">
+            <div class="box">
+                {% if auditores %}
+                    <section id="auditores">
+                        <h4><div class="ink-titulo_superior"><i class="icon-check"></i> Auditores inscritos</div></h4>
+                        <form class="ink-form" method="post">{% csrf_token %}
+                        <div class="column-group push-center">
+                            <nav class="ink-navigation">
+                                <a class="ink-button blue" href="{% url 'inicio' %}">Volver al inicio</a>
+                                <ul class="pagination shadowed rounded blue push-right small">
+                                {% if auditores.has_previous %}
+                                    <li class="previous"><a href="?page={{ auditores.previous_page_number }}">Anterior</a></li>
+                                {% else %}
+                                    <li class="previous disabled"><a href="#">Anterior</a></li>
+                                {% endif %}
+
+                                <li>
+                                    <a href="#">{{ auditores.number }}/{{ auditores.paginator.num_pages }}</a>
+                                </li>
+
+                                {% if auditores.has_next %}
+                                    <li class="next"><a href="?page={{ auditores.next_page_number }}">Sigueinte</a></li>
+                                {% else %}
+                                    <li class="next disabled"><a href="#">Sigueinte</a></li>
+                                {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <table class="ink-table hover" width="100%">
+                            <thead class="small">
+                                    <th>#</th>
+                                    <th>Nombres</th>
+                                    <th>Acreditado</th>
+                                    <th>Vence en</th>
+                                    <th>TLF</th>
+                                    <th>Email</th>
+                            </thead>
+                            <tbody>
+                                {% for auditor in auditores %}
+                                <tr align="center">
+                                    <td>{{ auditor.id }}</td>
+                                    <td>{{ auditor.persona.primer_nombre }} {{ auditor.persona.primer_apellido }}</td>
+                                    <td>{{ auditor.fecha_acreditacion|date:"SHORT_DATE_FORMAT" }}</td>
+                                    <td>{{ auditor.fecha_desacreditacion|date:"SHORT_DATE_FORMAT" }}</td>
+                                    <td>
+                                        {% ifequal auditor.persona.tlf_contacto 'fijo' %}
+                                            {{ auditor.persona.tlf_reside }}
+                                        {% endifequal %}
+                                        {% ifequal auditor.persona.tlf_contacto 'oficina' %}
+                                            {{ auditor.persona.oficina }}
+                                        {% endifequal %}
+                                        {% ifequal auditor.persona.tlf_contacto 'movil' %}
+                                            {{ auditor.persona.movil }}
+                                        {% endifequal %}
+                                    </td>
+                                    {% load perfil %}
+                                    <td>{{ auditor.persona.email|mail_antispam }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                    </section>
+                {% else %}
+                    <h4><div class="ink-titulo_superior"><i class="icon-exclamation"></i> Auditores acreditados</div></h4>
+                    <p>Por ahora no tenemos ningún auditor acreditado.</p>
+                {% endif%}
+                <div class="push-center">
+                    <a class="ink-button blue" href="{% url 'inicio' %}">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %} 
+
+  </body>
+</html>
+{% endblock %}
