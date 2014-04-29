@@ -721,20 +721,20 @@ class LaboralView(View):
         usuario = request.user
         guardado = False
 
-        usuario = usuario.profile
-        empresa = request.POST['empresa']
-        sector = request.POST['sector']
-        estado = Estado.objects.get(id=request.POST['estado'])
-        telefono = request.POST['telefono']
-        cargo = request.POST['cargo']
-        funcion = request.POST['funcion']
-        fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-        fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-        retiro = request.POST['retiro']
-        direccion_empresa = request.POST['direccion_empresa']
-        trabajo_actual = False
-
         if self.laboral_form.is_valid():
+
+            usuario = usuario.profile
+            empresa = request.POST['empresa']
+            sector = request.POST['sector']
+            estado = Estado.objects.get(id=request.POST['estado'])
+            telefono = request.POST['telefono']
+            cargo = request.POST['cargo']
+            funcion = request.POST['funcion']
+            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            retiro = request.POST['retiro']
+            direccion_empresa = request.POST['direccion_empresa']
+            trabajo_actual = False
             if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
                 if kwargs['palabra'] == 'editar':
                     # Si se edita información laboral 
@@ -1281,7 +1281,7 @@ class CertificacionView(View):
         persona = request.user.profile.persona
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
 
-            pais = Estado.objects.get(id=request.POST['pais'])
+            pais = Pais.objects.get(id=request.POST['pais'])
             institucion = Institucion.objects.get(id=request.POST['institucion'])
             fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
             fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
@@ -1391,42 +1391,49 @@ class CursoView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
+        self.curso_form = self.curso_form(request.POST)
+
         persona = request.user.profile.persona
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+        if self.curso_form.is_valid():
+            if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
 
-            estado = Estado.objects.get(id=request.POST['estado'])
-            institucion = Institucion.objects.get(id=request.POST['institucion'])
-            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                estado = Estado.objects.get(id=request.POST['estado'])
+                institucion = Institucion.objects.get(id=request.POST['institucion'])
+                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
 
-            if kwargs['palabra'] == 'editar':
-                # Si se edita un Curso
-                # Búsqueda de variables con los IDs enviados por POST
-                curso = Curso.objects.get(id=int(kwargs['curso_id']))
-                curso.titulo = request.POST['titulo']
-                curso.institucion = institucion
-                curso.fecha_inicio = fecha_inicio
-                curso.fecha_fin = fecha_fin
-                curso.horas = request.POST['horas']
-                curso.estado = estado
+                if kwargs['palabra'] == 'editar':
+                    # Si se edita un Curso
+                    # Búsqueda de variables con los IDs enviados por POST
+                    curso = Curso.objects.get(id=int(kwargs['curso_id']))
+                    curso.titulo = request.POST['titulo']
+                    curso.institucion = institucion
+                    curso.fecha_inicio = fecha_inicio
+                    curso.fecha_fin = fecha_fin
+                    curso.horas = request.POST['horas']
+                    curso.estado = estado
 
-                curso.save()
+                    curso.save()
 
-                self.mensaje = u'Curso editado exitosamente'
-                self.tipo_mensaje = u'success'
-            else:
-                # Si se crea un Curso
-                curso = Curso.objects.create(usuario = usuario.profile,
-                        institucion = institucion,
-                        estado = estado,
-                        titulo = request.POST['titulo'],
-                        fecha_inicio = fecha_inicio,
-                        fecha_fin = fecha_fin,
-                        horas = request.POST['horas'])
-                self.mensaje = u'Curso cargado exitosamente'
-                self.tipo_mensaje = u'success'
+                    self.mensaje = u'Curso editado exitosamente'
+                    self.tipo_mensaje = u'success'
+                else:
+                    # Si se crea un Curso
+                    curso = Curso.objects.create(usuario = usuario.profile,
+                            institucion = institucion,
+                            estado = estado,
+                            titulo = request.POST['titulo'],
+                            fecha_inicio = fecha_inicio,
+                            fecha_fin = fecha_fin,
+                            horas = request.POST['horas'])
+                    self.mensaje = u'Curso cargado exitosamente'
+                    self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+                self.template = 'perfil/perfil.html'
+        else:
+            if self.curso_form.errors.has_key('__all__'):
+                self.mensaje = self.evaluacion_form.errors['__all__'][0]
+                self.tipo_mensaje = 'error'
 
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})

@@ -222,7 +222,7 @@ class CursoForm(forms.ModelForm):
 
         error = u'La fecha de inicio no puede ser mayor a la final'
         if fechas_superiores(self.cleaned_data['fecha_inicio'],
-                self.cleaned_data['fecha_fin']):
+                self.cleaned_data['fecha_inicio']):
             raise forms.ValidationError(error)
         return self.cleaned_data['fecha_inicio']
 
@@ -349,7 +349,7 @@ class EducacionForm(forms.ModelForm):
 
         error = u'La fecha de inicio no puede ser mayor a la final'
         if fechas_superiores(self.cleaned_data['fecha_inicio'],
-                self.cleaned_data['fecha_fin']):
+                self.cleaned_data['fecha_inicio']):
             raise forms.ValidationError(error)
         return self.cleaned_data['fecha_inicio']
 
@@ -471,7 +471,7 @@ class LaboralForm(forms.ModelForm):
 
         error = u'La fecha de inicio no puede ser mayor a la final'
         if fechas_superiores(self.cleaned_data['fecha_inicio'],
-                self.cleaned_data['fecha_fin']):
+                self.cleaned_data['fecha_inicio']):
             raise forms.ValidationError(error)
         return self.cleaned_data['fecha_inicio']
 
