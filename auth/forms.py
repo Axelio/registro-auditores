@@ -8,6 +8,7 @@ from django.contrib.auth.forms import SetPasswordForm, PasswordChangeForm
 from django.utils.datastructures import SortedDict
 from django.views.decorators.debug import sensitive_post_parameters
 from passwords.fields import PasswordField
+from captcha.fields import ReCaptchaField
 from auditores_suscerte import settings
 from auth.models import *
 
@@ -18,6 +19,7 @@ class AuthenticationForm(forms.Form):
     """
     username = forms.CharField(label="Usuario", max_length=254, widget = forms.TextInput(attrs={'type':'text', 'class':'input-block-level', 'required':'required', 'placeholder':_('User')}))
     password = forms.CharField(max_length=200, widget = forms.PasswordInput(attrs={'type':'password', 'class':'input-block-level','required':'required','placeholder':_('Password')}))
+    captcha = ReCaptchaField()
 
     error_messages = {
         'invalid_login': _(u"Usuario y/o contraseña inválido. "

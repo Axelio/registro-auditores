@@ -9,7 +9,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-PERIODO_REV_ACREDITACION = 3 # Definido en meses, por defecto 3
+PERIODO_REV_ACREDITACION = 3 # Definido en meses, por defecto 3 REVISIÓN
+PERIODO_VENC_ACREDITACION = 3 # Definido en años, por defecto 3 VENCIMIENTO
 
 LIST_PER_PAGE = 25
 

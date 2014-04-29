@@ -14,5 +14,21 @@
         "caso": "Creaci\u00f3n de usuario (web)", 
         "mensaje": "Su solicitud ha sido procesada exitosamente. En su correo electr\u00f3nico se encuentra la informaci\u00f3n necesaria para que pueda ingresar a su sesi\u00f3n correctamente.\r\n\r\nEn SUSCERTE valoramos el talento humano como pieza fundamental para el desarrollo sustentable cient\u00edfico, tecnol\u00f3gico y de innovaci\u00f3n."
     }
+},
+{
+    "pk": 3, 
+    "model": "auth.mensaje", 
+    "fields": {
+        "caso": "Aprobaci\u00f3n como auditor", 
+        "mensaje": "Caracas,  \r\n\r\nCiudadano \r\n<PRIMER_NOMBRE> <PRIMER_APELLIDO>\r\nC.I. N\u00b0 V-<CEDULA>\r\nPresente.-\r\n\r\nPor medio del presente y de conformidad con lo establecido en el art\u00edculo 73 y siguientes de la Ley Org\u00e1nica de Procedimientos Administrativos, cumplo con notificarle la decisi\u00f3n contenida del Providencia Administrativa N\u00ba 011-13, de fecha <FECHA>,  emitida por la SUPERINTENDENCIA DE SERVICIOS DE CERTIFICACI\u00d3N ELECTR\u00d3NICA (SUSCERTE), \u00f3rgano desconcentrado adscrito al Ministerio del Poder Popular para Ciencia, Tecnolog\u00eda e Innovaci\u00f3n, actuando como \u00f3rgano competente, a trav\u00e9s de la cual se resolvi\u00f3 aprobar su inscripci\u00f3n en el Registro de Auditores de esta Superintendencia por el lapso de tres (03) a\u00f1os contados a partir de la fecha de emisi\u00f3n del referido acto, ello de conformidad con los fundamentos de hecho y de derecho explanados en la motivaci\u00f3n del documento cuyo original se acompa\u00f1a a la presente notificaci\u00f3n. "
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.mensaje", 
+    "fields": {
+        "caso": "No aprobaci\u00f3n como auditor", 
+        "mensaje": "Caracas,  \r\n\r\nCiudadano \r\n<PRIMER_NOMBRE> <PRIMER_APELLIDO>\r\nC.I. N\u00b0 V-<CEDULA>\r\nPresente.-\r\n\r\nPor medio del presente y de conformidad con lo establecido en los art\u00edculos 73 y 75 la Ley Org\u00e1nica de Procedimientos Administrativos, cumplo con notificarle la decisi\u00f3n contenida del Providencia Administrativa N\u00ba 019-13, de fecha <FECHA>,  emitida por la SUPERINTENDENCIA DE SERVICIOS DE CERTIFICACI\u00d3N ELECTR\u00d3NICA (SUSCERTE), \u00f3rgano desconcentrado adscrito al Ministerio del Poder Popular para Ciencia, Tecnolog\u00eda e Innovaci\u00f3n, actuando como \u00f3rgano competente, a trav\u00e9s de la cual se resolvi\u00f3 negar su solicitud de inscripci\u00f3n en el Registro de Auditores de esta Superintendencia, ello de conformidad con los fundamentos de hecho y de derecho explanados en la motivaci\u00f3n del referido acto administrativo, cuyo documento original se acompa\u00f1a a la presente notificaci\u00f3n. \r\n\r\nDe igual forma, se le hace expresa menci\u00f3n que de considerar lesionado sus derechos o intereses leg\u00edtimos con la presente decisi\u00f3n, podr\u00e1 ejercer Recurso de Reconsideraci\u00f3n, por ante este mismo despacho, dentro de los quince (15) d\u00edas h\u00e1biles siguientes a su notificaci\u00f3n, conforme al art\u00edculo 94 de la Ley Org\u00e1nica de Procedimientos Administrativos. Igualmente, podr\u00e1 recurrir del mencionado acto, sin necesidad de agotar previamente la v\u00eda administrativa, por ante los tribunales de la Jurisdicci\u00f3n Contencioso Administrativa competentes, de conformidad con los art\u00edculos 27 y 32 de la Ley Org\u00e1nica de la Jurisdicci\u00f3n Contencioso Administrativa, dentro de los ciento ochenta (180) d\u00edas siguientes a la notificaci\u00f3n."
+    }
 }
 ]

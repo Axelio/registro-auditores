@@ -1637,8 +1637,8 @@ class AcreditarView(View):
         if self.acreditacion_form.is_valid():
             fecha_actual = datetime.date.today()
             fecha_limite = datetime.datetime(
-                    fecha_actual.year,
-                    fecha_actual.month + settings.PERIODO_REV_ACREDITACION,
+                    fecha_actual.year + settings.PERIODO_VENC_ACREDITACION,
+                    fecha_actual.month,
                     fecha_actual.day)
             
             persona = Persona.objects.get(userprofile__user__id=kwargs['usuario_id'])
