@@ -19,15 +19,3 @@ def auth(request):
     diccionario.update({'user':request.user})
     diccionario.update({'auth':True})
     return login(request, authentication_form=AuthenticationForm, template_name='auth/formulario.html', extra_context=diccionario)
-
-def cambiar_clave(request):
-    diccionario = {}
-    titulo = 'cambiar contraseña'
-    diccionario.update({'titulo':titulo})
-    diccionario.update({'palabra_clave':'cambiar'})
-    diccionario.update({'cambiar_clave':True})
-    diccionario.update({'formulario':True})
-    return password_change(request, template_name='auth/password_reset_form.html',
-                post_change_redirect=reverse('inicio'),
-                extra_context = diccionario,
-                )
