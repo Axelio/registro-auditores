@@ -531,6 +531,12 @@ class PerfilView(View):
         tipo = ''
         self.diccionario.update(csrf(request))
         usuario = request.user
+        if usuario.user.last_login == usuario.user.date_joined():
+            mensaje = 'Recuerde cambiar su contraseña por seguridad...'
+            tipo_mensaje = 'warning'
+            self.diccionario.update({'tipo_mensaje':tipo_mensaje})
+            self.diccionario.update({'mensaje':mensaje})
+
         try:
             persona = Persona.objects.get(userprofile=usuario.profile)
         except:
