@@ -75,6 +75,7 @@ urlpatterns = patterns('',
         login_required(password_change),
         {'password_change_form': ValidatingPasswordChangeForm,
         'template_name': 'auth/password_reset_form.html',
+        'post_change_redirect': 'logout/',
         'extra_context':
             {'cambiar_clave': True,
              'formulario': True,
