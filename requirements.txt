@@ -1,4 +1,4 @@
-Django==1.6.3 # Framework de desarrollo web con python
+Django==1.6.4 # Framework de desarrollo web con python
 django-compressor==1.3 # Compresor de archivos js y css
 django-axes==1.3.6 # Paquete de seguridad para manejar intentos masivos de ingreso
 pytz#==2014.2 # Paquete requerido por django-axes para obtener zonas horarias
