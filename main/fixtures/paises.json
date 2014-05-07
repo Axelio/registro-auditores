@@ -5,5 +5,1629 @@
     "fields": {
         "nombre": "Venezuela"
     }
+},
+{
+    "pk": 2, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "AUSTRIA"
+    }
+},
+{
+    "pk": 3, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BELGICA"
+    }
+},
+{
+    "pk": 4, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BULGARIA"
+    }
+},
+{
+    "pk": 5, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CHIPRE"
+    }
+},
+{
+    "pk": 6, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "DINAMARCA"
+    }
+},
+{
+    "pk": 7, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ESPA\u00d1A"
+    }
+},
+{
+    "pk": 8, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "FINLANDIA"
+    }
+},
+{
+    "pk": 9, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "FRANCIA"
+    }
+},
+{
+    "pk": 10, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GRECIA"
+    }
+},
+{
+    "pk": 11, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "HUNGRIA"
+    }
+},
+{
+    "pk": 12, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "IRLANDA"
+    }
+},
+{
+    "pk": 13, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ITALIA"
+    }
+},
+{
+    "pk": 14, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LUXEMBURGO"
+    }
+},
+{
+    "pk": 15, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MALTA"
+    }
+},
+{
+    "pk": 16, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PAISES BAJOS"
+    }
+},
+{
+    "pk": 17, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "POLONIA"
+    }
+},
+{
+    "pk": 18, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PORTUGAL"
+    }
+},
+{
+    "pk": 19, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "REINO UNIDO"
+    }
+},
+{
+    "pk": 20, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ALEMANIA"
+    }
+},
+{
+    "pk": 21, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "RUMANIA"
+    }
+},
+{
+    "pk": 22, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SUECIA"
+    }
+},
+{
+    "pk": 23, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LETONIA"
+    }
+},
+{
+    "pk": 24, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ESTONIA"
+    }
+},
+{
+    "pk": 25, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LITUANIA"
+    }
+},
+{
+    "pk": 26, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "REPUBLICA CHECA"
+    }
+},
+{
+    "pk": 27, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "REPUBLICA ESLOVACA"
+    }
+},
+{
+    "pk": 28, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ESLOVENIA"
+    }
+},
+{
+    "pk": 29, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ALBANIA"
+    }
+},
+{
+    "pk": 30, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLANDIA"
+    }
+},
+{
+    "pk": 31, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LIECHTENSTEIN"
+    }
+},
+{
+    "pk": 32, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MONACO"
+    }
+},
+{
+    "pk": 33, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NORUEGA"
+    }
+},
+{
+    "pk": 34, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ANDORRA"
+    }
+},
+{
+    "pk": 35, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SAN MARINO"
+    }
+},
+{
+    "pk": 36, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SANTA SEDE"
+    }
+},
+{
+    "pk": 37, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SUIZA"
+    }
+},
+{
+    "pk": 38, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "UCRANIA"
+    }
+},
+{
+    "pk": 39, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BELARUS"
+    }
+},
+{
+    "pk": 40, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GEORGIA"
+    }
+},
+{
+    "pk": 41, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BOSNIA Y HERZEGOVINA"
+    }
+},
+{
+    "pk": 42, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CROACIA"
+    }
+},
+{
+    "pk": 43, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ARMENIA"
+    }
+},
+{
+    "pk": 44, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "RUSIA"
+    }
+},
+{
+    "pk": 45, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MACEDONIA "
+    }
+},
+{
+    "pk": 46, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SERBIA"
+    }
+},
+{
+    "pk": 47, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MONTENEGRO"
+    }
+},
+{
+    "pk": 48, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUERNESEY"
+    }
+},
+{
+    "pk": 49, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SVALBARD Y JAN MAYEN"
+    }
+},
+{
+    "pk": 50, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS FEROE"
+    }
+},
+{
+    "pk": 51, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLA DE MAN"
+    }
+},
+{
+    "pk": 52, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GIBRALTAR"
+    }
+},
+{
+    "pk": 53, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS DEL CANAL"
+    }
+},
+{
+    "pk": 54, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "JERSEY"
+    }
+},
+{
+    "pk": 55, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS ALAND"
+    }
+},
+{
+    "pk": 56, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TURQUIA"
+    }
+},
+{
+    "pk": 57, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BURKINA FASO"
+    }
+},
+{
+    "pk": 58, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ANGOLA"
+    }
+},
+{
+    "pk": 59, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ARGELIA"
+    }
+},
+{
+    "pk": 60, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BENIN"
+    }
+},
+{
+    "pk": 61, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BOTSWANA"
+    }
+},
+{
+    "pk": 62, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BURUNDI"
+    }
+},
+{
+    "pk": 63, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CABO VERDE"
+    }
+},
+{
+    "pk": 64, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CAMERUN"
+    }
+},
+{
+    "pk": 65, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "COMORES"
+    }
+},
+{
+    "pk": 66, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CONGO"
+    }
+},
+{
+    "pk": 67, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "COSTA DE MARFIL"
+    }
+},
+{
+    "pk": 68, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "DJIBOUTI"
+    }
+},
+{
+    "pk": 69, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "EGIPTO"
+    }
+},
+{
+    "pk": 70, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GABON"
+    }
+},
+{
+    "pk": 71, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GAMBIA"
+    }
+},
+{
+    "pk": 72, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GHANA"
+    }
+},
+{
+    "pk": 73, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUINEA"
+    }
+},
+{
+    "pk": 74, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUINEA-BISSAU"
+    }
+},
+{
+    "pk": 75, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUINEA ECUATORIAL"
+    }
+},
+{
+    "pk": 76, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "KENIA"
+    }
+},
+{
+    "pk": 77, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LESOTHO"
+    }
+},
+{
+    "pk": 78, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LIBERIA"
+    }
+},
+{
+    "pk": 79, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LIBIA"
+    }
+},
+{
+    "pk": 80, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MADAGASCAR"
+    }
+},
+{
+    "pk": 81, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MALAWI"
+    }
+},
+{
+    "pk": 82, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MALI"
+    }
+},
+{
+    "pk": 83, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MARRUECOS"
+    }
+},
+{
+    "pk": 84, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MAURICIO"
+    }
+},
+{
+    "pk": 85, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MAURITANIA"
+    }
+},
+{
+    "pk": 86, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MOZAMBIQUE"
+    }
+},
+{
+    "pk": 87, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NAMIBIA"
+    }
+},
+{
+    "pk": 88, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NIGER"
+    }
+},
+{
+    "pk": 89, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NIGERIA"
+    }
+},
+{
+    "pk": 90, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "REPUBLICA CENTROAFRICANA"
+    }
+},
+{
+    "pk": 91, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SUDAFRICA"
+    }
+},
+{
+    "pk": 92, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "RUANDA"
+    }
+},
+{
+    "pk": 93, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SANTO TOME Y PRINCIPE"
+    }
+},
+{
+    "pk": 94, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SENEGAL"
+    }
+},
+{
+    "pk": 95, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SEYCHELLES"
+    }
+},
+{
+    "pk": 96, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SIERRA LEONA"
+    }
+},
+{
+    "pk": 97, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SOMALIA"
+    }
+},
+{
+    "pk": 98, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SUDAN"
+    }
+},
+{
+    "pk": 99, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SWAZILANDIA"
+    }
+},
+{
+    "pk": 100, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TANZANIA"
+    }
+},
+{
+    "pk": 101, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CHAD"
+    }
+},
+{
+    "pk": 102, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TOGO"
+    }
+},
+{
+    "pk": 103, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TUNEZ"
+    }
+},
+{
+    "pk": 104, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "UGANDA"
+    }
+},
+{
+    "pk": 105, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "REP.DEMOCRATICA DEL CONGO"
+    }
+},
+{
+    "pk": 106, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ZAMBIA"
+    }
+},
+{
+    "pk": 107, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ZIMBABWE"
+    }
+},
+{
+    "pk": 108, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ZIMBABWE"
+    }
+},
+{
+    "pk": 109, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SANTA HELENA"
+    }
+},
+{
+    "pk": 110, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "REUNION"
+    }
+},
+{
+    "pk": 111, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MAYOTTE"
+    }
+},
+{
+    "pk": 112, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SAHARA OCCIDENTAL"
+    }
+},
+{
+    "pk": 113, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CANADA"
+    }
+},
+{
+    "pk": 114, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ESTADOS UNIDOS DE AMERICA"
+    }
+},
+{
+    "pk": 115, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MEXICO"
+    }
+},
+{
+    "pk": 116, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GROENLANDIA"
+    }
+},
+{
+    "pk": 117, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ANTIGUA Y BARBUDA"
+    }
+},
+{
+    "pk": 118, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BAHAMAS"
+    }
+},
+{
+    "pk": 119, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BARBADOS"
+    }
+},
+{
+    "pk": 120, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BELICE"
+    }
+},
+{
+    "pk": 121, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "COSTA RICA"
+    }
+},
+{
+    "pk": 122, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CUBA"
+    }
+},
+{
+    "pk": 123, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "DOMINICA"
+    }
+},
+{
+    "pk": 124, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "EL SALVADOR"
+    }
+},
+{
+    "pk": 125, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GRANADA"
+    }
+},
+{
+    "pk": 126, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUATEMALA"
+    }
+},
+{
+    "pk": 127, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "HAITI"
+    }
+},
+{
+    "pk": 128, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "HONDURAS"
+    }
+},
+{
+    "pk": 129, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "JAMAICA"
+    }
+},
+{
+    "pk": 130, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NICARAGUA"
+    }
+},
+{
+    "pk": 131, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PANAMA"
+    }
+},
+{
+    "pk": 132, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SAN VICENTE Y LAS GRANADINAS"
+    }
+},
+{
+    "pk": 133, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "REPUBLICA DOMINICANA"
+    }
+},
+{
+    "pk": 134, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TRINIDAD Y TOBAGO"
+    }
+},
+{
+    "pk": 135, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SANTA LUCIA"
+    }
+},
+{
+    "pk": 136, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SAN CRISTOBAL Y NIEVES"
+    }
+},
+{
+    "pk": 137, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS CAIM\u00c1N"
+    }
+},
+{
+    "pk": 138, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS TURCAS Y CAICOS"
+    }
+},
+{
+    "pk": 139, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS V\u00cdRGENES DE LOS ESTADOS UNIDOS"
+    }
+},
+{
+    "pk": 140, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUADALUPE"
+    }
+},
+{
+    "pk": 141, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ANTILLAS HOLANDESAS"
+    }
+},
+{
+    "pk": 142, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ARUBA"
+    }
+},
+{
+    "pk": 143, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MONTSERRAT"
+    }
+},
+{
+    "pk": 144, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ANGUILLA"
+    }
+},
+{
+    "pk": 145, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SAN BARTOLOME"
+    }
+},
+{
+    "pk": 146, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MARTINICA"
+    }
+},
+{
+    "pk": 147, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PUERTO RICO"
+    }
+},
+{
+    "pk": 148, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BERMUDAS"
+    }
+},
+{
+    "pk": 149, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS VIRGENES BRITANICAS"
+    }
+},
+{
+    "pk": 150, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ARGENTINA"
+    }
+},
+{
+    "pk": 151, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BOLIVIA"
+    }
+},
+{
+    "pk": 152, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BRASIL"
+    }
+},
+{
+    "pk": 153, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "COLOMBIA"
+    }
+},
+{
+    "pk": 154, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CHILE"
+    }
+},
+{
+    "pk": 155, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ECUADOR"
+    }
+},
+{
+    "pk": 156, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUYANA"
+    }
+},
+{
+    "pk": 157, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PARAGUAY"
+    }
+},
+{
+    "pk": 158, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PERU"
+    }
+},
+{
+    "pk": 159, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SURINAM"
+    }
+},
+{
+    "pk": 160, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "URUGUAY"
+    }
+},
+{
+    "pk": 161, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUAYANA FRANCESA"
+    }
+},
+{
+    "pk": 162, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS MALVINAS"
+    }
+},
+{
+    "pk": 163, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "AFGANISTAN"
+    }
+},
+{
+    "pk": 164, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ARABIA SAUDI"
+    }
+},
+{
+    "pk": 165, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BAHREIN"
+    }
+},
+{
+    "pk": 166, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BANGLADESH"
+    }
+},
+{
+    "pk": 167, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MYANMAR"
+    }
+},
+{
+    "pk": 168, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CHINA"
+    }
+},
+{
+    "pk": 169, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "EMIRATOS ARABES UNIDOS"
+    }
+},
+{
+    "pk": 170, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "FILIPINAS"
+    }
+},
+{
+    "pk": 171, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "INDIA"
+    }
+},
+{
+    "pk": 172, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "INDONESIA"
+    }
+},
+{
+    "pk": 173, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "IRAQ"
+    }
+},
+{
+    "pk": 174, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "IRAN"
+    }
+},
+{
+    "pk": 175, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISRAEL"
+    }
+},
+{
+    "pk": 176, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "JAPON"
+    }
+},
+{
+    "pk": 177, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "JORDANIA"
+    }
+},
+{
+    "pk": 178, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "CAMBOYA"
+    }
+},
+{
+    "pk": 179, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "KUWAIT"
+    }
+},
+{
+    "pk": 180, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LAOS"
+    }
+},
+{
+    "pk": 181, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "LIBANO"
+    }
+},
+{
+    "pk": 182, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MALASIA"
+    }
+},
+{
+    "pk": 183, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MALDIVAS"
+    }
+},
+{
+    "pk": 184, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MONGOLIA"
+    }
+},
+{
+    "pk": 185, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NEPAL"
+    }
+},
+{
+    "pk": 186, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "OMAN"
+    }
+},
+{
+    "pk": 187, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PAKISTAN"
+    }
+},
+{
+    "pk": 188, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "QATAR"
+    }
+},
+{
+    "pk": 189, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "COREA"
+    }
+},
+{
+    "pk": 190, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "COREA DEL NORTE "
+    }
+},
+{
+    "pk": 191, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SINGAPUR"
+    }
+},
+{
+    "pk": 192, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SIRIA"
+    }
+},
+{
+    "pk": 193, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SRI LANKA"
+    }
+},
+{
+    "pk": 194, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TAILANDIA"
+    }
+},
+{
+    "pk": 195, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "VIETNAM"
+    }
+},
+{
+    "pk": 196, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BRUNEI"
+    }
+},
+{
+    "pk": 197, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS MARSHALL"
+    }
+},
+{
+    "pk": 198, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "YEMEN"
+    }
+},
+{
+    "pk": 199, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "AZERBAIYAN"
+    }
+},
+{
+    "pk": 200, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "KAZAJSTAN"
+    }
+},
+{
+    "pk": 201, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "KIRGUISTAN"
+    }
+},
+{
+    "pk": 202, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TADYIKISTAN"
+    }
+},
+{
+    "pk": 203, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TURKMENISTAN"
+    }
+},
+{
+    "pk": 204, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "UZBEKISTAN"
+    }
+},
+{
+    "pk": 205, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS MARIANAS DEL NORTE"
+    }
+},
+{
+    "pk": 206, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PALESTINA"
+    }
+},
+{
+    "pk": 207, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "HONG KONG"
+    }
+},
+{
+    "pk": 208, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "BHUT\u00c1N"
+    }
+},
+{
+    "pk": 209, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "GUAM"
+    }
+},
+{
+    "pk": 210, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MACAO"
+    }
+},
+{
+    "pk": 211, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "AUSTRALIA"
+    }
+},
+{
+    "pk": 212, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "FIJI"
+    }
+},
+{
+    "pk": 213, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NUEVA ZELANDA"
+    }
+},
+{
+    "pk": 214, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PAPUA NUEVA GUINEA"
+    }
+},
+{
+    "pk": 215, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS SALOMON"
+    }
+},
+{
+    "pk": 216, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SAMOA"
+    }
+},
+{
+    "pk": 217, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TONGA"
+    }
+},
+{
+    "pk": 218, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "VANUATU"
+    }
+},
+{
+    "pk": 219, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "MICRONESIA"
+    }
+},
+{
+    "pk": 220, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TUVALU"
+    }
+},
+{
+    "pk": 221, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS COOK"
+    }
+},
+{
+    "pk": 222, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NAURU"
+    }
+},
+{
+    "pk": 223, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "PALAOS"
+    }
+},
+{
+    "pk": 224, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TIMOR ORIENTAL"
+    }
+},
+{
+    "pk": 225, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "POLINESIA FRANCESA"
+    }
+},
+{
+    "pk": 226, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLA NORFOLK"
+    }
+},
+{
+    "pk": 227, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "KIRIBATI"
+    }
+},
+{
+    "pk": 228, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NIUE"
+    }
+},
+{
+    "pk": 229, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "ISLAS PITCAIRN"
+    }
+},
+{
+    "pk": 230, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "TOKELAU"
+    }
+},
+{
+    "pk": 231, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "NUEVA CALEDONIA"
+    }
+},
+{
+    "pk": 232, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "WALLIS Y FORTUNA"
+    }
+},
+{
+    "pk": 233, 
+    "model": "lugares.pais", 
+    "fields": {
+        "nombre": "SAMOA AMERICANA"
+    }
 }
 ]

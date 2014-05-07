@@ -1,0 +1,482 @@
+[
+{
+    "pk": 1, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Central de Venezuela UCV", 
+        "estado": 11
+    }
+},
+{
+    "pk": 2, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental R\u00f3mulo Gallegos UNERG", 
+        "estado": 13
+    }
+},
+{
+    "pk": 3, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental Polit\u00e9cnica de la Fuerza Armada Nacional UNEFA", 
+        "estado": 11
+    }
+},
+{
+    "pk": 4, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad de Los Andes ULA", 
+        "estado": 15
+    }
+},
+{
+    "pk": 5, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad de Carabobo UC", 
+        "estado": 7
+    }
+},
+{
+    "pk": 6, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad de Oriente UDO", 
+        "estado": 2
+    }
+},
+{
+    "pk": 7, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad del Zulia LUZ", 
+        "estado": 25
+    }
+},
+{
+    "pk": 8, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Bolivariana de Venezuela UBV", 
+        "estado": 11
+    }
+},
+{
+    "pk": 9, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Centro Occidental Lisandro Alvarado UCLA", 
+        "estado": 14
+    }
+},
+{
+    "pk": 10, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Latinoamericana y del Caribe", 
+        "estado": 11
+    }
+},
+{
+    "pk": 11, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Abierta UNA", 
+        "estado": 11
+    }
+},
+{
+    "pk": 12, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental de Guayana UNEG", 
+        "estado": 6
+    }
+},
+{
+    "pk": 13, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora UNELLEZ", 
+        "estado": 5
+    }
+},
+{
+    "pk": 14, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental de Yaracuy UNEY", 
+        "estado": 24
+    }
+},
+{
+    "pk": 15, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental del T\u00e1chira UNET", 
+        "estado": 21
+    }
+},
+{
+    "pk": 16, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental de la Seguridad UNES", 
+        "estado": 11
+    }
+},
+{
+    "pk": 17, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental Francisco de Miranda UNEFM", 
+        "estado": 12
+    }
+},
+{
+    "pk": 18, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental Mar\u00edtima del Caribe UMC", 
+        "estado": 11
+    }
+},
+{
+    "pk": 19, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental Polit\u00e9cnica Antonio Jos\u00e9 de Sucre UNEXPO", 
+        "estado": 11
+    }
+},
+{
+    "pk": 20, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental Rafael Mar\u00eda Baralt UNERMB", 
+        "estado": 25
+    }
+},
+{
+    "pk": 21, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental Sim\u00f3n Rodr\u00edguez UNESR", 
+        "estado": 11
+    }
+},
+{
+    "pk": 22, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nacional Experimental Sur del Lago Jes\u00fas Mar\u00eda Sempr\u00fan UNESUR", 
+        "estado": 25
+    }
+},
+{
+    "pk": 23, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Sim\u00f3n Bol\u00edvar USB", 
+        "estado": 16
+    }
+},
+{
+    "pk": 24, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Pedag\u00f3gica Experimental Libertador UPEL", 
+        "estado": 11
+    }
+},
+{
+    "pk": 25, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Polit\u00e9cnica Territorial de Aragua \u201cFederico Brito Figueroa\u201d UPTA", 
+        "estado": 4
+    }
+},
+{
+    "pk": 26, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Alejandro de Humboldt, UNIHUMBOLDT", 
+        "estado": 11
+    }
+},
+{
+    "pk": 27, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Alonso de Ojeda, UNIOJEDA", 
+        "estado": 25
+    }
+},
+{
+    "pk": 28, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Arturo Michelena, UAM", 
+        "estado": 7
+    }
+},
+{
+    "pk": 29, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Bicentenaria de Aragua, UBA", 
+        "estado": 4
+    }
+},
+{
+    "pk": 30, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Cat\u00f3lica Andr\u00e9s Bello, UCAB", 
+        "estado": 11
+    }
+},
+{
+    "pk": 31, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Cat\u00f3lica Cecilio Acosta, UNICA", 
+        "estado": 25
+    }
+},
+{
+    "pk": 32, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Cat\u00f3lica del T\u00e1chira, UCAT", 
+        "estado": 21
+    }
+},
+{
+    "pk": 33, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Cat\u00f3lica Santa Rosa, SANTAROSA", 
+        "estado": 11
+    }
+},
+{
+    "pk": 34, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad de Falc\u00f3n, UDEFA", 
+        "estado": 12
+    }
+},
+{
+    "pk": 35, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad de Margarita, UNIMAR", 
+        "estado": 18
+    }
+},
+{
+    "pk": 36, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Dr. Jos\u00e9 Gregorio Hern\u00e1ndez", 
+        "estado": 25
+    }
+},
+{
+    "pk": 37, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Ferm\u00edn Toro, UFT", 
+        "estado": 14
+    }
+},
+{
+    "pk": 38, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Jos\u00e9 Antonio P\u00e1ez, UJAP", 
+        "estado": 4
+    }
+},
+{
+    "pk": 39, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Jose Francisco Camacho,UJFC", 
+        "estado": 11
+    }
+},
+{
+    "pk": 40, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Jos\u00e9 Antonio P\u00e1ez, UJAP", 
+        "estado": 11
+    }
+},
+{
+    "pk": 41, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Metropolitana, UNIMET", 
+        "estado": 16
+    }
+},
+{
+    "pk": 42, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Monte\u00e1vila, UMA", 
+        "estado": 11
+    }
+},
+{
+    "pk": 43, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nororiental Gran Mariscal de Ayacucho, UGMA", 
+        "estado": 2
+    }
+},
+{
+    "pk": 44, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Nueva Esparta, UNE", 
+        "estado": 18
+    }
+},
+{
+    "pk": 45, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Panamericana del Puerto, UNIPAP", 
+        "estado": 7
+    }
+},
+{
+    "pk": 46, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Polit\u00e9cnico Santiago Mari\u00f1o, IUPSM", 
+        "estado": 11
+    }
+},
+{
+    "pk": 47, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Rafael Belloso Chac\u00edn, URBE", 
+        "estado": 25
+    }
+},
+{
+    "pk": 48, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Rafael Urdaneta, URU", 
+        "estado": 25
+    }
+},
+{
+    "pk": 49, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Santa Mar\u00eda USM", 
+        "estado": 16
+    }
+},
+{
+    "pk": 50, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Tecnol\u00f3gica del Centro, UNITEC", 
+        "estado": 4
+    }
+},
+{
+    "pk": 51, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Valle del Momboy, UVM", 
+        "estado": 22
+    }
+},
+{
+    "pk": 52, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Universidad Yacamb\u00fa, YACAMBU", 
+        "estado": 19
+    }
+},
+{
+    "pk": 53, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Universitario de Polic\u00eda Cient\u00edfica IUT", 
+        "estado": 11
+    }
+},
+{
+    "pk": 54, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Universitario de Tecnolog\u00eda Agroindustrial Regi\u00f3n los Andes IUTAI", 
+        "estado": 15
+    }
+},
+{
+    "pk": 55, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Universitario de Tecnolog\u00eda del Estado Portuguesa IUTEP", 
+        "estado": 19
+    }
+},
+{
+    "pk": 56, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Universitario de Tecnolog\u00eda del Estado Trujillo Don R\u00f3mulo Bentancourt IUTET", 
+        "estado": 22
+    }
+},
+{
+    "pk": 57, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Universitario de Tecnolog\u00eda Dr. Federico Rivero Palacio IUT", 
+        "estado": 16
+    }
+},
+{
+    "pk": 58, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Universitario de Tecnolog\u00eda del Oeste Mariscal Sucre IUTOMS", 
+        "estado": 11
+    }
+},
+{
+    "pk": 59, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Universitario Experimental de Tecnolog\u00eda Andr\u00e9s Eloy Blanco IUETAEB", 
+        "estado": 14
+    }
+},
+{
+    "pk": 60, 
+    "model": "lugares.institucion", 
+    "fields": {
+        "nombre": "Instituto Venezolano de Audici\u00f3n y Lenguaje. Instituto Universitario IVAL", 
+        "estado": 11
+    }
+}
+]
