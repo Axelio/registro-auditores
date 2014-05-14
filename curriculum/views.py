@@ -650,15 +650,47 @@ class EditarPersonaView(View):
         self.mensaje = u'Información personal editada exitosamente'
         self.tipo_mensaje = u'success'
 
-        self.template = 'perfil/perfil.html'
+        if usuario.groups.filter(name__iexact='operador').exists():
+            aspirantes = listaAspirantes()
+            auditores = Auditor.objects.filter(acreditado=True)
+            self.template = 'perfil/perfil_operador.html'
 
-        self.diccionario.update({'persona':persona})
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'formulario':self.persona_form})
+            paginator = Paginator(auditores, settings.LIST_PER_PAGE)
+            page = request.GET.get('page')
+            try:
+                auditores = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                auditores = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                auditores = paginator.page(paginator.num_pages)
 
-        self.lista_filtros = lista_filtros(request)
-        self.diccionario.update(self.lista_filtros)
+            paginator = Paginator(aspirantes, settings.LIST_PER_PAGE)
+            page = request.GET.get('page')
+            try:
+                aspirantes = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                aspirantes = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                aspirantes = paginator.page(paginator.num_pages)
+
+            self.diccionario.update({'aspirantes':aspirantes})
+            self.diccionario.update({'auditores':auditores})
+
+        else:
+
+            self.template = 'perfil/perfil.html'
+
+            self.diccionario.update({'persona':persona})
+            self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+            self.diccionario.update({'mensaje':self.mensaje})
+            self.diccionario.update({'formulario':self.persona_form})
+
+            self.lista_filtros = lista_filtros(request)
+            self.diccionario.update(self.lista_filtros)
 
         return render(request, 
                        template_name=self.template,
