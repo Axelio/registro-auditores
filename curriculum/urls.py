@@ -13,6 +13,5 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^postulacion/$', login_required(
-        staff_member_required(
-            CurriculumView.as_view())), name='curriculum'),
+            CurriculumView.as_view()), name='curriculum'),
 )
