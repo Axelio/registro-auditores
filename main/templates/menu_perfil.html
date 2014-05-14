@@ -7,7 +7,6 @@
                 {% ifequal user.groups.all.0.name 'Operador' %}
                 <li><a class="scrollableLink" href="#">Acciones<i class="icon-caret-down"></i></a>
                     <ul class="submenu">
-                        <li><a class="scrollableLink small" href="{% url 'revisar_acreditaciones' %}" onclick="return confirm('Le enviará a todos los operadores los próximos auditores cuya vigencia está a punto de vencerse.')">Revisar acreditaciones</a></li>
                         <li><a class="small" href="{% url 'curriculum' %}">Nuevo aspirante</a></li>
                     </ul>
                 </li>
