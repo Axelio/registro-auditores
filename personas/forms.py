@@ -60,17 +60,20 @@ class EditarPersonaForm(forms.ModelForm):
                     'placeholder': 'Fecha de inicio'}),
             'tlf_reside': TextInput(
                 attrs={
+                    'max': '9999999999',
                     'type': 'text',
                     'required': 'required',
                     'class': 'form-control',
                     'placeholder': u'Teléfono de residencia'}),
             'tlf_movil': TextInput(
                 attrs={
+                    'max': '9999999999',
                     'type': 'text',
                     'class': 'form-control',
                     'placeholder': u'Teléfono móvil'}),
             'tlf_oficina': TextInput(
                 attrs={
+                    'max': '9999999999',
                     'type': 'text',
                     'class': 'form-control',
                     'placeholder': u'Teléfono de oficina'}),
