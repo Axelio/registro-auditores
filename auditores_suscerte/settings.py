@@ -9,6 +9,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+AUTO_LOGOUT_DELAY = 3 # Cada unidad es un minuto, por ejemplo acá, son 15 minutos máximo de inactividad
+
 PERIODO_REV_ACREDITACION = 3 # Definido en meses, por defecto 3 REVISIÓN
 PERIODO_VENC_ACREDITACION = 3 # Definido en años, por defecto 3 VENCIMIENTO
 
@@ -97,6 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'auth.views.AutoLogout', 
     #'axes.middleware.FailedLoginMiddleware'
 )
 
