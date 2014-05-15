@@ -21,7 +21,7 @@
                 <div class="column-group" style="background:white">
                     <div class="space">
                         <fieldset class="column-group">
-                            <h3>{{ request.user.profile.persona }} ha propuesto que su entrevista sea en alguna de las siguientes fechas:</h3>
+                            <h3>{{ request.user.profile.persona.primer_nombre }} {{ request.user.profile.persona.primer_apellido }} ha propuesto que su entrevista sea en alguna de las siguientes fechas:</h3>
                             <p><label>Primera fecha:</label>
                                 {{ cita.primera_fecha }}
                             </p>
