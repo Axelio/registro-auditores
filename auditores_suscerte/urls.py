@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
-from django.contrib.auth.views import logout
+from django.contrib.auth.views import logout as deslogeo
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -63,7 +63,7 @@ urlpatterns = patterns('',
         include('curriculum.urls')),
 
     url(r'logout/',
-        logout,
+        deslogeo,
         {'next_page': '/'},
         name='salir'),
 
