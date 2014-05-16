@@ -24,6 +24,32 @@ from auth.models import *
 
 import datetime
 
+def notificar_entrevista_evaluacion(usuario):
+    evaluacion = Evaluacion.objects.filter(usuario=usuario)
+    competencias = Competencia.objects.filter(usuario=usuario)
+
+    if evaluacion.exists() and competencias.exists():
+        # Se llama una función de revisión de aprobación tanto de evaluación
+        # como de entrevista por separado (mejor manejo a nivel general e
+        # independiente y se llama una función de notificación según los puntajes
+        asunto = u'%sNotificación de inscripción' % (settings.EMAIL_SUBJECT_PREFIX)
+        destinatarios = (usuario.persona.email,)
+        emisor = settings.EMAIL_HOST_USER
+        if revisar_entrevista(usuario) and revisar_evaluacion(usuario):
+            mensaje = Mensaje.objects.get(caso=u'Aprobación como auditor')
+        else:
+            mensaje = Mensaje.objects.get(caso=u'No aprobación como auditor')
+
+        # Sustitución de variables clave y usuario
+        mensaje = mensaje.mensaje.replace('<PRIMER_NOMBRE>','%s' % (usuario.persona.primer_nombre))
+        mensaje = mensaje.replace('<PRIMER_APELLIDO>','%s' % (usuario.persona.primer_apellido))
+        mensaje = mensaje.replace('<CEDULA>','%s' % (intcomma(usuario.persona.cedula)))
+        mensaje = mensaje.replace('<FECHA>','%s' % (formats.date_format(evaluacion.fecha, "DATE_FORMAT")))
+
+        send_mail(subject=asunto, message=mensaje,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=destinatarios)
+
 
 def get_operadores():
     '''
@@ -935,6 +961,7 @@ class CompetenciaView(View):
         self.tipo_mensaje = 'success'
         self.mensaje = u'Entrevista cargada exitosamente.'
 
+        notificar_entrevista_evaluacion(usuario)
 
         self.diccionario.update({'competencias': self.competencias})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
@@ -1607,24 +1634,7 @@ class EvaluacionView(View):
             self.tipo_mensaje = 'success'
             self.mensaje = u'Evaluación cargada exitosamente.'
 
-            # Se llama una función de revisión de aprobación tanto de evaluación
-            # como de entrevista por separado (mejor manejo a nivel general e
-            # independiente y se llama una función de notificación según los puntajes
-            asunto = u'%sNotificación de inscripción' % (settings.EMAIL_SUBJECT_PREFIX)
-            destinatarios = (usuario.persona.email,)
-            emisor = settings.EMAIL_HOST_USER
-            if revisar_entrevista(usuario) and revisar_evaluacion(usuario):
-                mensaje = Mensaje.objects.get(caso=u'Aprobación como auditor')
-            else:
-                mensaje = Mensaje.objects.get(caso=u'No aprobación como auditor')
-
-            # Sustitución de variables clave y usuario
-            mensaje = mensaje.mensaje.replace('<PRIMER_NOMBRE>','%s' % (usuario.persona.primer_nombre))
-            mensaje = mensaje.replace('<PRIMER_APELLIDO>','%s' % (usuario.persona.primer_apellido))
-            mensaje = mensaje.replace('<CEDULA>','%s' % (intcomma(usuario.persona.cedula)))
-            mensaje = mensaje.replace('<FECHA>','%s' % (formats.date_format(evaluacion.fecha, "DATE_FORMAT")))
-
-            send_mail(subject=asunto, message=mensaje, from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
+            notificar_entrevista_evaluacion(usuario)
 
         else:
             if self.evaluacion_form.errors:
