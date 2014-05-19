@@ -148,10 +148,10 @@ def citado(usuario_id):
     if cita.exists():
         cita = cita[0]
 
-    # Si la fecha no ha sido fijada,
-    # se retorna False
-    if cita.cita_fijada == '':
-        return False
-    else:
-        return True
+        # Si la fecha no ha sido fijada,
+        # se retorna False
+        if cita.cita_fijada == '':
+            return False
+        else:
+            return True
 register.filter(citado)
