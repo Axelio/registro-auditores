@@ -250,6 +250,7 @@ class Aprobacion(models.Model):
         db_table = 'aprobacion'
         verbose_name = u'aprobación'
         verbose_name_plural = 'aprobaciones'
+        get_latest_by = 'fecha'
 
     def __unicode__(self):
         return u'Entrevistas: %s/%s. \

@@ -32,6 +32,7 @@ def notificar_entrevista_evaluacion(usuario):
         # Se llama una función de revisión de aprobación tanto de evaluación
         # como de entrevista por separado (mejor manejo a nivel general e
         # independiente y se llama una función de notificación según los puntajes
+        evaluacion = evaluacion.latest('fecha')
         asunto = u'%sNotificación de inscripción' % (settings.EMAIL_SUBJECT_PREFIX)
         destinatarios = (usuario.persona.email,)
         emisor = settings.EMAIL_HOST_USER
@@ -105,7 +106,6 @@ def listaAspirantes():
 
     aspirantes = User.objects.filter(is_active=True, userprofile__in=citados)
     aspirantes = aspirantes.exclude(Q(userprofile__persona__auditor__in=auditores)|Q(groups__name__iexact='operador'))
-
     return aspirantes
 
 
@@ -1751,7 +1751,7 @@ class FijarCitaView(View):
             raise Http404
 
         usuario = User.objects.get(id=kwargs['usuario_id'])
-        cita = Cita.objects.get(usuario=usuario)
+        cita = Cita.objects.get(usuario__user=usuario)
 
         self.diccionario.update({'usuario': usuario})
         self.diccionario.update({'cita': cita})
@@ -1771,7 +1771,7 @@ class FijarCitaView(View):
         self.cita_form = self.cita_form(request.POST)
 
         if self.cita_form.is_valid():
-            cita = Cita.objects.get(usuario__id=kwargs['usuario_id'])
+            cita = Cita.objects.get(usuario__user__id=kwargs['usuario_id'])
             cita.cita_fijada = request.POST['cita_fijada']
             cita.save()
             

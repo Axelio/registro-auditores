@@ -24,10 +24,10 @@
             </div>
         {% endif %}
         <div class="column-group gutters">
-            <div class="large-30 medium-50 small-100 push-left">
+            <div class="large-30 medium-100 small-100 push-left">
                 {% include "perfil/informacion_personal.html" %}
             </div>
-            <div class="large-70 medium-50 small-100 push-right">
+            <div class="large-70 medium-100 small-100 push-right">
                 <div class="box">
                     <section id="aspirantes">
                         <h4><div class="ink-titulo_superior"><i class="icon-check-minus"></i> Aspirantes a auditores</div></h4>
@@ -61,51 +61,59 @@
                                         <th>Cédula</th>
                                         <th>Nombres</th>
                                         <th>Apellidos</th>
-                                        {% if not aspirante.id|entrevistado %}
+                                        {% if not aspirante.get_profile.entrevista_set.get_query_set.exists %}
                                             <th>Entrevista</th>
                                         {% endif %}
-                                        {% if not aspirante.id|evaluado %}
+                                        {% if not aspirante.get_profile.evaluacion_set.get_query_set.exists %}
                                             <th>Evaluación</th>
                                         {% endif %}
                                 </thead>
                                 <tbody>
                                     {% for aspirante in aspirantes %}
                                     <tr align="center">
-                                        <td>{{ aspirante.profile.persona.cedula }}</td>
+                                        <td>{{ aspirante.profile.persona.cedula }} 
                                         <td>{{ aspirante.profile.persona.primer_nombre }} {{ auditor.profile.persona.segundo_nombre }}</td>
                                         <td>{{ aspirante.profile.persona.primer_apellido }} {{ auditor.profile.persona.segundo_apellido }}</td>
-                                        <td>
-                                            {% if aspirante.id|entrevistado %}
-                                                {{ aspirante.id|puntaje_entrevistado }}
-                                            {% else %}
-                                                <a href="{% url 'competencia' aspirante.id %}" class="ink-button blue">
-                                                    <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
-                                                        <i class="icon-file-text"></i>
-                                                    </span>
-                                                </a>
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            {% if aspirante.id|evaluado %}
-                                                {{ aspirante.id|puntaje_evaluacion }}
-                                            {% else %}
-                                                <a href="{% url 'evaluacion' aspirante.id %}" class="ink-button blue">
-                                                    <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
-                                                        <i class="icon-book"></i>
-                                                    </span>
-                                                </a>
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            {% if aspirante.id|citado %}
-                                                {% if aspirante.id|evaluado %}
-                                                    {% if aspirante.id|evaluado %}
-                                                        <a href="{% url 'acreditar' aspirante.id %}">Acreditar</a>
+                                            <td>
+                                                {% ifnotequal aspirante.get_profile.cita_set.get_query_set.last.cita_fijada '' %}
+                                                    {% if aspirante.id|puntaje_entrevistado %}
+                                                        {{ aspirante.id|puntaje_entrevistado }}
+                                                    {% else %}
+                                                        <a href="{% url 'competencia' aspirante.id %}" class="ink-button blue">
+                                                            <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
+                                                                <i class="icon-file-text"></i>
+                                                            </span>
+                                                        </a>
                                                     {% endif %}
+                                                {% else %}
+                                                    Fije la cita
+                                                {% endifnotequal %}
+                                            </td>
+                                            <td>
+                                                {% ifnotequal aspirante.get_profile.cita_set.get_query_set.last.cita_fijada '' %}
+                                                    {% if aspirante.get_profile.evaluacion_set.get_query_set.last.puntaje %}
+                                                        {{ aspirante.get_profile.evaluacion_set.get_query_set.last.puntaje }}
+                                                    {% else %}
+                                                        <a href="{% url 'evaluacion' aspirante.id %}" class="ink-button blue">
+                                                            <span class="tooltip ink-label" data-tip-text="Cargar calificaciones" data-tip-where="mousefix" data-tip-color="blue">
+                                                                <i class="icon-book"></i>
+                                                            </span>
+                                                        </a>
+                                                    {% endif %}
+                                                {% else %}
+                                                    Fije la cita
+                                                {% endifnotequal %}
+                                            </td>
+                                            <td>
+                                            {% ifnotequal aspirante.get_profile.cita_set.get_query_set.last.cita_fijada '' %}
+                                                {% if aspirante.get_profile.evaluacion_set.get_query_set.exists %}
+                                                    <a href="{% url 'acreditar' aspirante.id %}">Acreditar</a>
+                                                {% else %}
+                                                    Fije puntajes
                                                 {% endif %}
                                             {% else %}
                                                 <a href="{% url 'acreditar' aspirante.id %}">Fijar cita</a>
-                                            {% endif %}
+                                            {% endifnotequal %}
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -117,8 +125,6 @@
                         {% endif %}
                     </section>
                 </div>
-            </div>
-            <div class="large-70 medium-50 small-100 push-right">
                 <div class="box">
                     <section id="auditores">
                         <h4><div class="ink-titulo_superior"><i class="icon-check"></i> Auditores registrados</div></h4>

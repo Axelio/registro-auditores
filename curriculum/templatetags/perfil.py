@@ -76,49 +76,6 @@ def seleccionado(puntaje_id, puntaje):
 register.filter(seleccionado)
 
 
-@register.filter(name="evaluado", is_safe=True)
-def evaluado(usuario_id):
-    '''
-    Función para determinar si
-    un puntaje está o no seleccionado
-    '''
-    evaluaciones = Evaluacion.objects.filter(usuario__id=usuario_id)
-    if evaluaciones.exists():
-        return True
-    else:
-        return False
-register.filter(evaluado)
-
-
-@register.filter(name="puntaje_evaluacion", is_safe=True)
-def puntaje_evaluacion(usuario_id):
-    '''
-    Función para determinar si
-    un puntaje está o no seleccionado
-    '''
-    evaluaciones = Evaluacion.objects.filter(usuario__id=usuario_id)
-    if evaluaciones:
-        evaluaciones = evaluaciones[0]
-        return evaluaciones.puntaje
-
-register.filter(puntaje_evaluacion)
-
-
-@register.filter(name="entrevistado", is_safe=True)
-def entrevistado(usuario_id):
-    '''
-    Función para determinar si
-    un puntaje está o no seleccionado
-    '''
-    competencias = Competencia.objects.filter(
-            usuario__id=usuario_id)
-    if competencias.exists():
-        return True
-    else:
-        return False
-register.filter(entrevistado)
-
-
 @register.filter(name="puntaje_entrevistado", is_safe=True)
 def puntaje_entrevistado(usuario_id):
     '''
@@ -128,30 +85,12 @@ def puntaje_entrevistado(usuario_id):
     competencias = Competencia.objects.filter(
             usuario__id=usuario_id)
 
-    puntaje = 0.0
-    for competencia in competencias:
-        puntaje += competencia.puntaje
+    if competencias.exists():
+        puntaje = 0.0
+        for competencia in competencias:
+            puntaje += competencia.puntaje
 
-    return puntaje
+        return puntaje
+    else:
+        return False
 register.filter(puntaje_entrevistado)
-
-
-@register.filter(name="citado", is_safe=True)
-def citado(usuario_id):
-    '''
-    Función para determinar si
-    la persona tiene una cita fijada
-    '''
-    cita = Cita.objects.filter(
-            usuario__id=usuario_id)
-
-    if cita.exists():
-        cita = cita[0]
-
-        # Si la fecha no ha sido fijada,
-        # se retorna False
-        if cita.cita_fijada == '':
-            return False
-        else:
-            return True
-register.filter(citado)
