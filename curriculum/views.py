@@ -712,13 +712,14 @@ class EditarPersonaView(View):
 
             self.template = 'perfil/perfil.html'
 
-            self.diccionario.update({'persona':persona})
             self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
             self.diccionario.update({'mensaje':self.mensaje})
             self.diccionario.update({'formulario':self.persona_form})
 
             self.lista_filtros = lista_filtros(request)
             self.diccionario.update(self.lista_filtros)
+
+        self.diccionario.update({'persona':persona})
 
         return render(request, 
                        template_name=self.template,
