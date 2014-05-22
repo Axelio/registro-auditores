@@ -76,7 +76,7 @@
                                         <td>{{ aspirante.profile.persona.primer_apellido }} {{ auditor.profile.persona.segundo_apellido }}</td>
                                             <td>
                                                 {% ifnotequal aspirante.get_profile.cita_set.get_query_set.last.cita_fijada '' %}
-                                                    {% if aspirante.id|puntaje_entrevistado %}
+                                                    {% if aspirante.get_profile.competencia_set.get_query_set.exists %}
                                                         {{ aspirante.id|puntaje_entrevistado }}
                                                     {% else %}
                                                         <a href="{% url 'competencia' aspirante.id %}" class="ink-button blue">

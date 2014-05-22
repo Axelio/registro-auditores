@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.template import Library
 from django.utils.html import format_html
+from auth.models import User
 from curriculum.models import (NIVELES_COMPETENCIA,
     Competencia, ListaCompetencia, Evaluacion, Competencia,
     Cita)
@@ -63,27 +64,16 @@ def puntaje_limite(competencia_id):
 register.filter(puntaje_limite)
 
 
-@register.filter(name="seleccionado", is_safe=True)
-def seleccionado(puntaje_id, puntaje):
-    '''
-    Función para determinar si
-    un puntaje está o no seleccionado
-    '''
-    if puntaje_id == puntaje:
-        return "selected"
-    else:
-        return ""
-register.filter(seleccionado)
-
-
 @register.filter(name="puntaje_entrevistado", is_safe=True)
 def puntaje_entrevistado(usuario_id):
     '''
     Función para determinar si
     un puntaje está o no seleccionado
     '''
-    competencias = Competencia.objects.filter(
-            usuario__id=usuario_id)
+    usuario = User.objects.get(id=usuario_id)
+    competencias = usuario.get_profile().competencia_set.get_query_set()
+    ultima_competencia = competencias.latest('fecha')
+    competencias = competencias.filter(fecha=ultima_competencia.fecha)
 
     if competencias.exists():
         puntaje = 0.0
@@ -91,6 +81,4 @@ def puntaje_entrevistado(usuario_id):
             puntaje += competencia.puntaje
 
         return puntaje
-    else:
-        return False
 register.filter(puntaje_entrevistado)
