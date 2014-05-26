@@ -14,7 +14,7 @@
     "pk": 2, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "nombre": "Desarrollo, mantenimiento, instalaci\u00f3n y configuraci\u00f3n de sistemas y aplicaciones ", 
+        "nombre": "Equipamiento TIC, instalaci\u00f3n, configuraci\u00f3n y mantenimiento de equipos TIC ", 
         "puntaje_maximo": 1.0, 
         "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
@@ -25,7 +25,7 @@
     "pk": 3, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "nombre": "Equipamiento TIC, instalaci\u00f3n, configuraci\u00f3n y mantenimiento de equipos TIC ", 
+        "nombre": "Desarrollo, mantenimiento, instalaci\u00f3n y configuraci\u00f3n de sistemas y aplicaciones", 
         "puntaje_maximo": 1.0, 
         "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
@@ -36,7 +36,7 @@
     "pk": 4, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "nombre": "Infraestructura de clave p\u00fablica", 
+        "nombre": "Riesgo, seguridad de la informaci\u00f3n, control y auditor\u00eda TIC", 
         "puntaje_maximo": 2.0, 
         "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
@@ -47,7 +47,7 @@
     "pk": 5, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en TIC, certificaci\u00f3n de datos y firmas electr\u00f3nicas", 
+        "nombre": "Infraestructura de clave p\u00fablica", 
         "puntaje_maximo": 2.0, 
         "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
@@ -70,8 +70,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "TSU", 
-        "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 8.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -81,8 +81,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Profesional universitario", 
-        "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 8.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -92,8 +92,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Especialidad", 
-        "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 8.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -103,8 +103,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Maestr\u00eda", 
-        "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 8.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -114,8 +114,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Doctorado", 
-        "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 8.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -213,8 +213,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Certificaciones nacionales en TIC", 
-        "puntaje_maximo": 0.5, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 10.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -224,8 +224,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Certificaciones internacionales en TIC", 
-        "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 10.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -235,8 +235,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Certificaciones nacionales como auditores TIC", 
-        "puntaje_maximo": 1.5, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 10.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -246,8 +246,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Certificaciones internacionales como auditores TIC", 
-        "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 10.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -257,8 +257,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Certificaciones nacionales en seguridad TIC", 
-        "puntaje_maximo": 1.5, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 10.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -268,8 +268,8 @@
     "model": "curriculum.listacompetencia", 
     "fields": {
         "nombre": "Certificaciones internacionales en seguridad TIC", 
-        "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "puntaje_maximo": 10.0, 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -278,7 +278,7 @@
     "pk": 26, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "nombre": "Riesgo, seguridad de la informaci\u00f3n, control y auditor\u00eda TIC ", 
+        "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en TIC, certificaci\u00f3n de datos y firmas electr\u00f3nicas", 
         "puntaje_maximo": 2.0, 
         "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
@@ -311,7 +311,7 @@
     "pk": 29, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "nombre": "Auditor\u00eda en infraestructura de clave p\u00fablica", 
+        "nombre": "Experiencia en auditor\u00eda en infraestructura de clave p\u00fablica", 
         "puntaje_maximo": 4.0, 
         "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
@@ -322,7 +322,7 @@
     "pk": 30, 
     "model": "curriculum.listacompetencia", 
     "fields": {
-        "nombre": "Otras experiencias en auditor\u00eda", 
+        "nombre": "Experiencias en otros auditor\u00eda", 
         "puntaje_maximo": 1.0, 
         "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
