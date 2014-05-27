@@ -8,9 +8,8 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from personas.models import Persona
 from lugares.models import Estado, Institucion, Pais
-from auth.models import UserProfile
+from auth.models import UserProfile, Mensaje
 from auditores_suscerte import settings
-from auth.models import Mensaje
 
 # Modelos para construir el Curriculum
 
@@ -79,17 +78,19 @@ def post_save_cita(sender, **kwargs):
             segunda_fecha=cita.segunda_fecha,
             tercera_fecha=cita.tercera_fecha)
 
+    destinatarios = []
+
     if cita.cita_fijada == None or cita.cita_fijada == '':
         # Si no hay una fecha fijada aún,
         # se envía un mail a los admin
         asunto = u'Nueva propuesta de cita de %s' % (cita.usuario)
+        from curriculum.views import get_operadores
+        from operador in get_operadores():
+            destinatarios.append(operador.get_profile().persona.email)
         emisor = settings.EMAIL_HOST_USER
-        destinatarios = settings.MANAGERS
-        mensaje = 'Ha llegado una nueva solicitud de cita para entrevista,'
-        mensaje += ' por lo que este correo le ha llegado a los managers'
-        mensaje += ' para definir su fecha. Ahora mismo puede revisar la '
-        mensaje += 'propuesta en: '
-        mensaje += '%s/admin/curriculum/cita/%s/.' % (settings.HOST, cita.id)
+        mensaje = Mensaje.objects.get(caso='Propuesta de cita')
+        mensaje = mensaje.mensaje.replace('<LINK>','%s/admin/curriculum/cita/%s/.' % (settings.HOST, cita.id))
+
     else:
         # Si hay una fecha fijada, se envía un mail
         # al usuario indicándole la fecha definitiva
