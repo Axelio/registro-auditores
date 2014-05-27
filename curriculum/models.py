@@ -89,7 +89,7 @@ def post_save_cita(sender, **kwargs):
             destinatarios.append(operador.get_profile().persona.email)
         emisor = settings.EMAIL_HOST_USER
         mensaje = Mensaje.objects.get(caso='Propuesta de cita')
-        mensaje = mensaje.mensaje.replace('<LINK>','%s/admin/curriculum/cita/%s/.' % (settings.HOST, cita.id))
+        mensaje = mensaje.mensaje.replace('<LINK>','%s/fijar_cita/%s/.' % (settings.HOST, cita.usuario.id))
 
     else:
         # Si hay una fecha fijada, se envía un mail
