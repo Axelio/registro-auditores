@@ -85,7 +85,7 @@ def post_save_cita(sender, **kwargs):
         # se envía un mail a los admin
         asunto = u'Nueva propuesta de cita de %s' % (cita.usuario)
         from curriculum.views import get_operadores
-        from operador in get_operadores():
+        for operador in get_operadores():
             destinatarios.append(operador.get_profile().persona.email)
         emisor = settings.EMAIL_HOST_USER
         mensaje = Mensaje.objects.get(caso='Propuesta de cita')
