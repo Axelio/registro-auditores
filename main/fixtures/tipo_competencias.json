@@ -19,7 +19,7 @@
     "pk": 3, 
     "model": "curriculum.tipocompetencia", 
     "fields": {
-        "nombre": "Conocimientos requeridos", 
+        "nombre": "Conocimientos complementarios", 
         "puntaje_maximo": 15.0
     }
 },
@@ -28,6 +28,14 @@
     "model": "curriculum.tipocompetencia", 
     "fields": {
         "nombre": "Conocimientos requeridos", 
+        "puntaje_maximo": 10.0
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.tipocompetencia", 
+    "fields": {
+        "nombre": "Competencia de prueba", 
         "puntaje_maximo": 10.0
     }
 }
