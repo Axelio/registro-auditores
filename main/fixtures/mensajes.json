@@ -12,7 +12,7 @@
     "model": "auth.mensaje", 
     "fields": {
         "caso": "Creaci\u00f3n de usuario (web)", 
-        "mensaje": "Su solicitud de creaci\u00f3n de usuario ha sido procesada exitosamente. \r\n\r\nSe envi\u00f3 un correo electr\u00f3nico al aspirante con la informaci\u00f3n necesaria para que pueda ingresar a la nueva cuenta de usuario.\r\n\r\n"
+        "mensaje": "Se creo la cuenta del nuevo usuario satisfactoriamente y se env\u00edo autom\u00e1ticamente un email al correo registrado, para ingresar al sistema."
     }
 },
 {
