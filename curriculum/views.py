@@ -678,6 +678,11 @@ class EditarPersonaView(View):
             persona.estado_civil = request.POST['estado_civil']
             persona.save()
 
+            usuario.first_name = persona.primer_nombre
+            usuario.last_name = persona.primer_apellido
+            usuario.email = persona.email
+            usuario.save()
+
             self.mensaje = u'Información personal editada exitosamente'
             self.tipo_mensaje = u'success'
 
