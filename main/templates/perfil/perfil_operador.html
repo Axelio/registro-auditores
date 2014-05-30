@@ -128,62 +128,66 @@
                 <div class="box">
                     <section id="auditores">
                         <h4><div class="ink-titulo_superior"><i class="icon-check"></i> Auditores registrados</div></h4>
-                        <form class="ink-form" method="post">{% csrf_token %}
-                        <div class="column-group push-center">
-                            <nav class="ink-navigation">
-                                <ul class="pagination shadowed rounded blue push-right small">
-                                {% if auditores.has_previous %}
-                                    <li class="previous"><a href="?page={{ auditores.previous_page_number }}">Anterior</a></li>
-                                {% else %}
-                                    <li class="previous disabled"><a href="#">Anterior</a></li>
-                                {% endif %}
+                        {% if auditores %}
+                            <form class="ink-form" method="post">{% csrf_token %}
+                            <div class="column-group push-center">
+                                <nav class="ink-navigation">
+                                    <ul class="pagination shadowed rounded blue push-right small">
+                                    {% if auditores.has_previous %}
+                                        <li class="previous"><a href="?page={{ auditores.previous_page_number }}">Anterior</a></li>
+                                    {% else %}
+                                        <li class="previous disabled"><a href="#">Anterior</a></li>
+                                    {% endif %}
 
-                                <li>
-                                    <a href="#">{{ auditores.number }}/{{ auditores.paginator.num_pages }}</a>
-                                </li>
+                                    <li>
+                                        <a href="#">{{ auditores.number }}/{{ auditores.paginator.num_pages }}</a>
+                                    </li>
 
-                                {% if auditores.has_next %}
-                                    <li class="next"><a href="?page={{ auditores.next_page_number }}">Sigueinte</a></li>
-                                {% else %}
-                                    <li class="next disabled"><a href="#">Sigueinte</a></li>
-                                {% endif %}
-                                </ul>
-                            </nav>
-                        </div>
+                                    {% if auditores.has_next %}
+                                        <li class="next"><a href="?page={{ auditores.next_page_number }}">Sigueinte</a></li>
+                                    {% else %}
+                                        <li class="next disabled"><a href="#">Sigueinte</a></li>
+                                    {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
 
-                        <table class="ink-table hover" width="100%">
-                            <thead class="small">
-                                    <th>#</th>
-                                    <th>Nombres</th>
-                                    <th>Acreditado</th>
-                                    <th>Vence en</th>
-                                    <th>TLF</th>
-                                    <th>Email</th>
-                            </thead>
-                            <tbody>
-                                {% for auditor in auditores %}
-                                <tr align="center">
-                                    <td>{{ auditor.id }}</td>
-                                    <td>{{ auditor.persona.primer_nombre }} {{ auditor.persona.primer_apellido }}</td>
-                                    <td>{{ auditor.fecha_acreditacion|date:"SHORT_DATE_FORMAT" }}</td>
-                                    <td>{{ auditor.fecha_desacreditacion|date:"SHORT_DATE_FORMAT" }}</td>
-                                    <td>
-                                        {% ifequal persona.tlf_contacto 'fijo' %}
-                                            {{ persona.tlf_reside }}
-                                        {% endifequal %}
-                                        {% ifequal persona.tlf_contacto 'oficina' %}
-                                            {{ persona.oficina }}
-                                        {% endifequal %}
-                                        {% ifequal persona.tlf_contacto 'movil' %}
-                                            {{ persona.movil }}
-                                        {% endifequal %}
-                                    </td>
-                                    <td>{{ auditor.persona.email|mail_antispam }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </form>
+                            <table class="ink-table hover" width="100%">
+                                <thead class="small">
+                                        <th>#</th>
+                                        <th>Nombres</th>
+                                        <th>Acreditado</th>
+                                        <th>Vence en</th>
+                                        <th>TLF</th>
+                                        <th>Email</th>
+                                </thead>
+                                <tbody>
+                                    {% for auditor in auditores %}
+                                    <tr align="center">
+                                        <td>{{ auditor.id }}</td>
+                                        <td>{{ auditor.persona.primer_nombre }} {{ auditor.persona.primer_apellido }}</td>
+                                        <td>{{ auditor.fecha_acreditacion|date:"SHORT_DATE_FORMAT" }}</td>
+                                        <td>{{ auditor.fecha_desacreditacion|date:"SHORT_DATE_FORMAT" }}</td>
+                                        <td>
+                                            {% ifequal persona.tlf_contacto 'fijo' %}
+                                                {{ persona.tlf_reside }}
+                                            {% endifequal %}
+                                            {% ifequal persona.tlf_contacto 'oficina' %}
+                                                {{ persona.oficina }}
+                                            {% endifequal %}
+                                            {% ifequal persona.tlf_contacto 'movil' %}
+                                                {{ persona.movil }}
+                                            {% endifequal %}
+                                        </td>
+                                        <td>{{ auditor.persona.email|mail_antispam }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>Por ahora no hay ningún auditor registrado.<p>
+                        {% endif %}
+                        </form>
                     </section>
                 </div>
             </div>
