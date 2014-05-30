@@ -84,15 +84,13 @@ class PersonalesView(View):
             # Se crea el usuario con el correo electrónico por defecto y se crea una contraseña aleatoria para el usuario
             clave = User.objects.make_random_password()
             usuario = User.objects.create_user(username = request.POST['email'],
-                                              email = request.POST['email'], 
-                                              first_name = request.POST['primer_nombre'],
-                                              last_name = request.POST['segundo_nombre'],
                                               password = clave, 
                                              )
 
             usuario.is_active = True
             usuario.first_name = request.POST['primer_nombre']
             usuario.last_name = request.POST['primer_apellido']
+            usuario.email = request.POST['email']
             usuario.save()
 
             # Se asocia la persona con el usuario

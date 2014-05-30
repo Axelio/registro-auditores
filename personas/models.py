@@ -10,7 +10,7 @@ ESTADO_CIVIL = (('s', 'Soltero(a)'),
                 ('v', 'Viudo(a)'))
 
 TELEFONO_PUBLICO = (('movil', u'Teléfono móvil'),
-                    ('fijo', u'Teléfono fijo'),
+                    ('fijo', u'Teléfono de residencia'),
                     ('oficina', u'Teléfono de oficina'),
                     )
 
@@ -50,6 +50,8 @@ class Persona(models.Model):
             blank=True,
             help_text=u'Indique dirección donde reside')
     fecha_nacimiento = models.DateField(
+            blank=True,
+            null=True,
             help_text='Indique su fecha de nacimiento')
     tlf_reside = models.CharField(
             max_length=15,
@@ -76,6 +78,7 @@ class Persona(models.Model):
     estado_civil = models.CharField(
             choices=ESTADO_CIVIL,
             max_length=15,
+            blank=True,
             help_text='Señale su estado civil',
             default='s')
     email = models.EmailField(

@@ -57,7 +57,7 @@ class EditarPersonaForm(forms.ModelForm):
                     'required': 'required',
                     'class': 'ink-datepicker',
                     'data-format': 'dd/mm/yyyy',
-                    'placeholder': 'Fecha de inicio'}),
+                    'placeholder': 'Fecha de nacimiento'}),
             'tlf_reside': TextInput(
                 attrs={
                     'max': '9999999999',
