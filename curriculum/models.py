@@ -347,3 +347,18 @@ class TipoEducacion(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.tipo)
+
+
+class Ambito(models.Model):
+    '''
+    Contiene el ámbito de un proceso: inscripción, renovación, etc.
+    '''
+    tipo = models.CharField(max_length=30,
+            help_text=u'Ej: Inscripción, renovación, etc.')
+
+    class Meta:
+        db_table = u'ambito'
+        verbose_name = u'ámbito'
+
+    def __unicode__(self):
+        return u'%s' % (self.tipo)
