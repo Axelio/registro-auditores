@@ -35,7 +35,7 @@ admin.site.register(TipoCompetencia, TipoCompetenciaAdmin)
 
 
 class ListaCompetenciaAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'tipo', 'puntaje_maximo')
+    list_display = ('nombre', 'tipo', 'puntaje_maximo', 'tipo_puntaje')
     list_filter = ('tipo',)
     ordering = ('tipo', 'id')
 admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
