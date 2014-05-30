@@ -66,10 +66,16 @@ class CursoAdmin(admin.ModelAdmin):
 admin.site.register(Curso, CursoAdmin)
 class AprobacionAdmin(admin.ModelAdmin):
     list_display = (
-        'entrevista_aprobatoria',
-        'entrevista_maxima',
-        'evaluacion_aprobatoria',
-        'evaluacion_maxima',
+        'instrumento', 'ambito', 'puntaje_aprobatorio',
+        'puntaje_total', 'fecha'
+            )
+
+    search_fields = (
+        'instrumento', 'ambito'
+            )
+
+    list_filter = (
+        'ambito', 'fecha'
             )
 
 

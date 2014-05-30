@@ -235,17 +235,11 @@ class Aprobacion(models.Model):
     Clase para definir puntajes de aprobación
     tanto para evaluación como entrevista
     '''
-    entrevista_maxima = models.FloatField(
-            verbose_name='entrevista máxima',
-            help_text=u'defina putuación máxima')
-    entrevista_aprobatoria = models.FloatField(
-            help_text=u'defina putuación mínima aprobatoria')
-    evaluacion_maxima = models.FloatField(
-            verbose_name='evaluación máxima',
-            help_text=u'defina putuación máxima')
-    evaluacion_aprobatoria = models.FloatField(
-            verbose_name='evaluación aprobatoria',
-            help_text=u'defina putuación mínima aprobatoria')
+    instrumento = models.CharField(max_length='30')
+    ambito = models.ForeignKey('Ambito', verbose_name=u'ámbito')
+    puntaje_aprobatorio = models.FloatField()
+    puntaje_total = models.FloatField()
+    fecha = models.DateField(auto_now_add=True, verbose_name='fijada')
 
     class Meta:
         db_table = 'aprobacion'
@@ -254,10 +248,7 @@ class Aprobacion(models.Model):
         get_latest_by = 'fecha'
 
     def __unicode__(self):
-        return u'Entrevistas: %s/%s. \
-                Evaluaciones: %s/%s' % (self.entrevista_aprobatoria,
-                self.entrevista_maxima, self.evaluacion_aprobatoria,
-                self.evaluacion_maxima)
+        return u'%s' %(self.instrumento)
 
 
 class Evaluacion(models.Model):
