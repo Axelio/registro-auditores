@@ -1,0 +1,57 @@
+[
+{
+    "pk": 1, 
+    "model": "curriculum.aprobacion", 
+    "fields": {
+        "fecha": "2014-05-30", 
+        "puntaje_total": 45.0, 
+        "ambito": 1, 
+        "instrumento": "Evaluaci\u00f3n individual", 
+        "puntaje_aprobatorio": 23.0
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.aprobacion", 
+    "fields": {
+        "fecha": "2014-05-30", 
+        "puntaje_total": 195.0, 
+        "ambito": 1, 
+        "instrumento": "Examen", 
+        "puntaje_aprobatorio": 143.0
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.aprobacion", 
+    "fields": {
+        "fecha": "2014-05-30", 
+        "puntaje_total": 45.0, 
+        "ambito": 2, 
+        "instrumento": "Conocimientos requeridos", 
+        "puntaje_aprobatorio": 23.0
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.aprobacion", 
+    "fields": {
+        "fecha": "2014-05-30", 
+        "puntaje_total": 100.0, 
+        "ambito": 2, 
+        "instrumento": "Herramienta de evaluaci\u00f3n", 
+        "puntaje_aprobatorio": 75.0
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.aprobacion", 
+    "fields": {
+        "fecha": "2014-05-30", 
+        "puntaje_total": 50.0, 
+        "ambito": 2, 
+        "instrumento": "Evaluaci\u00f3n de los PSC", 
+        "puntaje_aprobatorio": 25.0
+    }
+}
+]
