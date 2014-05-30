@@ -107,7 +107,7 @@
                                             <td>
                                             {% ifnotequal aspirante.get_profile.cita_set.get_query_set.last.cita_fijada '' %}
                                                 {% if aspirante.get_profile.evaluacion_set.get_query_set.exists %}
-                                                    <a href="{% url 'acreditar' aspirante.id %}">Acreditar</a>
+                                                        Aprobado
                                                 {% else %}
                                                     Fije puntajes
                                                 {% endif %}

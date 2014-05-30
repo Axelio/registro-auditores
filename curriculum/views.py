@@ -656,70 +656,78 @@ class EditarPersonaView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
+        self.persona_form = self.persona_form(request.POST)
+
         persona = Persona.objects.get(id=usuario.profile.persona.id)
-        estado = Estado.objects.get(id=request.POST['reside'])
-        fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+        if self.persona_form.is_valid():
+            estado = Estado.objects.get(id=request.POST['reside'])
+            fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
 
-        persona.primer_nombre = request.POST['primer_nombre']
-        persona.segundo_nombre = request.POST['segundo_nombre']
-        persona.primer_apellido = request.POST['primer_apellido']
-        persona.segundo_apellido = request.POST['segundo_apellido']
-        persona.genero = request.POST['genero']
-        persona.reside = estado
-        persona.direccion = request.POST['direccion']
-        persona.fecha_nacimiento = fecha_nacimiento
-        persona.tlf_reside = request.POST['tlf_reside']
-        persona.tlf_movil = request.POST['tlf_movil']
-        persona.tlf_oficina = request.POST['tlf_oficina']
-        persona.tlf_contacto = request.POST['tlf_contacto']
-        persona.estado_civil = request.POST['estado_civil']
-        persona.save()
+            persona.primer_nombre = request.POST['primer_nombre']
+            persona.segundo_nombre = request.POST['segundo_nombre']
+            persona.primer_apellido = request.POST['primer_apellido']
+            persona.segundo_apellido = request.POST['segundo_apellido']
+            persona.genero = request.POST['genero']
+            persona.reside = estado
+            persona.direccion = request.POST['direccion']
+            persona.fecha_nacimiento = fecha_nacimiento
+            persona.tlf_reside = request.POST['tlf_reside']
+            persona.tlf_movil = request.POST['tlf_movil']
+            persona.tlf_oficina = request.POST['tlf_oficina']
+            persona.tlf_contacto = request.POST['tlf_contacto']
+            persona.estado_civil = request.POST['estado_civil']
+            persona.save()
 
-        self.mensaje = u'Información personal editada exitosamente'
-        self.tipo_mensaje = u'success'
+            self.mensaje = u'Información personal editada exitosamente'
+            self.tipo_mensaje = u'success'
 
-        if usuario.groups.filter(name__iexact='operador').exists():
-            aspirantes = listaAspirantes()
-            auditores = Auditor.objects.filter(acreditado=True)
-            self.template = 'perfil/perfil_operador.html'
+            if usuario.groups.filter(name__iexact='operador').exists():
+                aspirantes = listaAspirantes()
+                auditores = Auditor.objects.filter(acreditado=True)
+                self.template = 'perfil/perfil_operador.html'
 
-            paginator = Paginator(auditores, settings.LIST_PER_PAGE)
-            page = request.GET.get('page')
-            try:
-                auditores = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                auditores = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                auditores = paginator.page(paginator.num_pages)
+                paginator = Paginator(auditores, settings.LIST_PER_PAGE)
+                page = request.GET.get('page')
+                try:
+                    auditores = paginator.page(page)
+                except PageNotAnInteger:
+                    # If page is not an integer, deliver first page.
+                    auditores = paginator.page(1)
+                except EmptyPage:
+                    # If page is out of range (e.g. 9999), deliver last page of results.
+                    auditores = paginator.page(paginator.num_pages)
 
-            paginator = Paginator(aspirantes, settings.LIST_PER_PAGE)
-            page = request.GET.get('page')
-            try:
-                aspirantes = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                aspirantes = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                aspirantes = paginator.page(paginator.num_pages)
+                paginator = Paginator(aspirantes, settings.LIST_PER_PAGE)
+                page = request.GET.get('page')
+                try:
+                    aspirantes = paginator.page(page)
+                except PageNotAnInteger:
+                    # If page is not an integer, deliver first page.
+                    aspirantes = paginator.page(1)
+                except EmptyPage:
+                    # If page is out of range (e.g. 9999), deliver last page of results.
+                    aspirantes = paginator.page(paginator.num_pages)
 
-            self.diccionario.update({'aspirantes':aspirantes})
-            self.diccionario.update({'auditores':auditores})
+                self.diccionario.update({'aspirantes':aspirantes})
+                self.diccionario.update({'auditores':auditores})
+
+            else:
+
+                self.template = 'perfil/perfil.html'
+
+                self.lista_filtros = lista_filtros(request)
+                self.diccionario.update(self.lista_filtros)
 
         else:
+            if self.persona_form.errors.has_key('__all__'):
+                self.tipo_mensaje = 'error'
+                self.mensaje = self.persona_form.errors['__all__'][0]
 
-            self.template = 'perfil/perfil.html'
-
-            self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-            self.diccionario.update({'mensaje':self.mensaje})
-            self.diccionario.update({'formulario':self.persona_form})
-
-            self.lista_filtros = lista_filtros(request)
-            self.diccionario.update(self.lista_filtros)
-
+        persona = Persona.objects.get(id=usuario.profile.persona.id)
+        self.diccionario.update({'formulario':self.persona_form})
         self.diccionario.update({'persona':persona})
+        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
+        self.diccionario.update({'mensaje':self.mensaje})
 
         return render(request, 
                        template_name=self.template,

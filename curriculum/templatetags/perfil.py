@@ -2,6 +2,7 @@
 from django.template import Library
 from django.utils.html import format_html
 from auth.models import User
+from curriculum.models import Aprobacion
 from curriculum.models import (NIVELES_COMPETENCIA,
     Competencia, ListaCompetencia, Evaluacion, Competencia,
     Cita)
@@ -67,8 +68,8 @@ register.filter(puntaje_limite)
 @register.filter(name="puntaje_entrevistado", is_safe=True)
 def puntaje_entrevistado(usuario_id):
     '''
-    Función para determinar si
-    un puntaje está o no seleccionado
+    Función para determinar 
+    el puntaje de un usuario
     '''
     usuario = User.objects.get(id=usuario_id)
     competencias = usuario.get_profile().competencia_set.get_query_set()
@@ -82,3 +83,32 @@ def puntaje_entrevistado(usuario_id):
 
         return puntaje
 register.filter(puntaje_entrevistado)
+
+
+@register.filter(name="aprobado", is_safe=True)
+def aprobado(usuario_id):
+    '''
+    Función para determinar si
+    el aspirante aprobó o no entrevista y evaluación
+    '''
+    usuario = User.objects.get(id=usuario_id)
+
+    if competencias.exists():
+        aprobacion = Aprobacion.objects.last()
+
+        # Si el puntaje de la persona es menor
+        # que la aprobatoria, se retorna False
+        if usuario.get_profile().evaluacion_set.get_query_set().last().puntaje < aprobacion.evaluacion_aprobatoria: 
+            return False
+
+        competencias = usuario.get_profile().competencia_set.get_query_set()
+        ultima_competencia = competencias.latest('fecha')
+        competencias = competencias.filter(fecha=ultima_competencia.fecha)
+
+        # Si el puntaje de la persona NO es menor
+        # que la aprobatoria, se cambia aprobado a True
+        if not puntaje_entrevistado(usuario_id) < aprobacion.entrevista_aprobatoria:
+            return True
+        else:
+            return False
+register.filter(aprobado)
