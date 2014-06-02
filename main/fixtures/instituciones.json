@@ -296,14 +296,6 @@
     }
 },
 {
-    "pk": 38, 
-    "model": "lugares.institucion", 
-    "fields": {
-        "nombre": "Universidad Jos\u00e9 Antonio P\u00e1ez, UJAP", 
-        "estado": 4
-    }
-},
-{
     "pk": 39, 
     "model": "lugares.institucion", 
     "fields": {
