@@ -36,7 +36,7 @@
     "model": "auth.mensaje", 
     "fields": {
         "caso": "Postulaci\u00f3n de cita", 
-        "mensaje": "Saludos cordiales.\r\n\r\nPor medio del presente se le informa que su cita para continuar en el proceso de Registro de Auditores ante la SUPERINTENDENCIA DE SERVICIOS DE CERTIFICACI\u00d3N ELECTR\u00d3NICA (SUSCERTE), fue asignada con fecha  <fecha>.\r\n\r\nDirecci\u00f3n:: Av. Andres Bello. Edif. BFC. Piso 13. SUSCERTE. Caracas. Venezuela."
+        "mensaje": "Saludos cordiales.\r\n\r\nPor medio del presente se le informa que su cita para continuar en el proceso de Registro de Auditores ante la SUPERINTENDENCIA DE SERVICIOS DE CERTIFICACI\u00d3N ELECTR\u00d3NICA (SUSCERTE), fue asignada con fecha <fecha>.\r\n\r\nDirecci\u00f3n: Av. Andr\u00e9s Bello. Edif. BFC. Piso 13. SUSCERTE. Caracas. Venezuela."
     }
 },
 {
