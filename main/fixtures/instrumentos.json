@@ -1,0 +1,37 @@
+[
+{
+    "pk": 1, 
+    "model": "curriculum.instrumento", 
+    "fields": {
+        "nombre": "Examen"
+    }
+},
+{
+    "pk": 2, 
+    "model": "curriculum.instrumento", 
+    "fields": {
+        "nombre": "Examen individual"
+    }
+},
+{
+    "pk": 3, 
+    "model": "curriculum.instrumento", 
+    "fields": {
+        "nombre": "Conocimientos requeridos"
+    }
+},
+{
+    "pk": 4, 
+    "model": "curriculum.instrumento", 
+    "fields": {
+        "nombre": "Herramienta deevaluaci\u00f3n"
+    }
+},
+{
+    "pk": 5, 
+    "model": "curriculum.instrumento", 
+    "fields": {
+        "nombre": "Evaluaci\u00f3n de los PSC"
+    }
+}
+]
