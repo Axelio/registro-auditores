@@ -18,7 +18,7 @@ class AuthenticationForm(AuthenticationForm):
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
     """
-    captcha = ReCaptchaField()
+    #captcha = ReCaptchaField()
 
 
 class CambiarClaveForm(forms.Form):

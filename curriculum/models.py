@@ -22,6 +22,20 @@ NIVELES_COMPETENCIA = (
         )
 
 
+class Estatus(models.Model):
+    '''
+    Modelo de registro para distintos estados
+    con sus diferentes dependencias
+    '''
+    nombre = models.CharField(max_length=50)
+    dependencia = models.ForeignKey("self", null=True, blank=True)
+    class Meta:
+        db_table = u'estatus'
+
+    def __unicode__(self):
+        return u'%s' % (self.nombre)
+
+
 class Certificacion(models.Model):
     '''
     Modelo que registra cada uno de
@@ -145,7 +159,7 @@ class Idioma(models.Model):
             verbose_name=u'nivel de escritura')
     nivel_hablado = models.CharField(max_length=10,
             choices=NIVEL_IDIOMA,
-            verbose_name=u'Fluidez de conversación')
+            verbose_name=u'nivel de conversación')
 
     class Meta:
         db_table = u'idioma'
@@ -235,7 +249,7 @@ class Aprobacion(models.Model):
     Clase para definir puntajes de aprobación
     tanto para evaluación como entrevista
     '''
-    instrumento = models.CharField(max_length='30')
+    instrumento = models.ForeignKey('Instrumento')
     ambito = models.ForeignKey('Ambito', verbose_name=u'ámbito')
     puntaje_aprobatorio = models.FloatField()
     puntaje_total = models.FloatField()
@@ -251,8 +265,20 @@ class Aprobacion(models.Model):
         return u'%s' %(self.instrumento)
 
 
+class Instrumento(models.Model):
+    nombre = models.CharField(max_length=30,
+            help_text=u'Ej: Inscripción, renovación, etc.')
+
+    class Meta:
+        db_table = u'instrumento'
+
+    def __unicode__(self):
+        return u'%s' % (self.nombre)
+
+
 class Evaluacion(models.Model):
     usuario = models.ForeignKey(UserProfile)
+    tipo_prueba = models.ForeignKey('Instrumento')
     puntaje = models.FloatField()
     fecha = models.DateField(auto_now_add=True)
 
@@ -308,7 +334,7 @@ class Laboral(models.Model):
 class Educacion(models.Model):
     persona = models.ForeignKey(Persona)
     titulo = models.CharField(max_length=50,
-            help_text=u'título universitario que obtuvo',
+            help_text=u'título académico que obtuvo',
             verbose_name=u'título académico')
     institucion = models.ForeignKey(Institucion,
             help_text=u'indique la institución en la cual participó',

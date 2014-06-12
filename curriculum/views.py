@@ -1800,3 +1800,32 @@ class FijarCitaView(View):
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
+
+class RequisitosView(View):
+    '''
+    Función para determinar cuáles son los requisitos
+    faltantes por la persona segun su ámbito
+    '''
+    template = 'perfil/evaluar_requisitos.html'
+    diccionario = {}
+    mensaje = ''
+    tipo_mensaje = ''
+
+    def get(self, request, *args, **kwargs):
+        usuario = User.objects.get(id=kwargs['usuario_id'])
+
+        # Revisar si la persona ya es auditor (acreditado o no)
+        if not usuario.get_profile().persona.auditor_set.get_query_set().exists():
+            # Si no tiene ninguna, es un aspirante a auditor, no renovación
+
+            # Se filtran los requisitos por ámbito...
+            pass
+
+
+        self.diccionario.update({'usuario': usuario})
+        self.diccionario.update({'mensaje': self.mensaje})
+        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+        return render(request, 
+                       template_name=self.template,
+                       dictionary=self.diccionario,
+                     )
