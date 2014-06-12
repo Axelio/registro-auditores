@@ -22,20 +22,6 @@ NIVELES_COMPETENCIA = (
         )
 
 
-class Estatus(models.Model):
-    '''
-    Modelo de registro para distintos estados
-    con sus diferentes dependencias
-    '''
-    nombre = models.CharField(max_length=50)
-    dependencia = models.ForeignKey("self", null=True, blank=True)
-    class Meta:
-        db_table = u'estatus'
-
-    def __unicode__(self):
-        return u'%s' % (self.nombre)
-
-
 class Certificacion(models.Model):
     '''
     Modelo que registra cada uno de

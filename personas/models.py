@@ -15,6 +15,21 @@ TELEFONO_PUBLICO = (('movil', u'Teléfono móvil'),
                     )
 
 
+class Estatus(models.Model):
+    '''
+    Modelo de registro para distintos estados
+    con sus diferentes dependencias
+    '''
+    nombre = models.CharField(max_length=50)
+    dependencia = models.ForeignKey("self", null=True, blank=True)
+    class Meta:
+        db_table = u'estatus'
+        verbose_name_plural = "estatus"
+
+    def __unicode__(self):
+        return u'%s' % (self.nombre)
+
+
 class Persona(models.Model):
     '''
     Tabla de registro de personas
@@ -101,7 +116,7 @@ class Persona(models.Model):
 
 class Auditor(models.Model):
     persona = models.ForeignKey('Persona')
-    acreditado = models.BooleanField()
+    estatus = models.ForeignKey('Estatus')
     fecha_acreditacion = models.DateField(
             verbose_name = u'fecha de acreditación')
     fecha_desacreditacion = models.DateField(

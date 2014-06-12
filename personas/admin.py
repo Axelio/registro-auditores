@@ -31,10 +31,18 @@ class AuditorAdmin(admin.ModelAdmin):
     list_display = ('persona',
             'fecha_acreditacion',
             'fecha_desacreditacion',
-            'acreditado')
+            'estatus')
 
-    list_filter = ('acreditado',
+    list_filter = ('estatus',
             'fecha_acreditacion',
             'fecha_desacreditacion')
 admin.site.register(Auditor, AuditorAdmin)
+
+
+class EstatusAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'dependencia')
+    
+    ordering = ('dependencia',)
+admin.site.register(Estatus, EstatusAdmin)
+
 admin.site.register(CertificadoElectronico)
