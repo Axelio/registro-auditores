@@ -1,0 +1,58 @@
+[
+{
+    "pk": 1, 
+    "model": "personas.estatus", 
+    "fields": {
+        "nombre": "Inscrito", 
+        "dependencia": null
+    }
+},
+{
+    "pk": 2, 
+    "model": "personas.estatus", 
+    "fields": {
+        "nombre": "Renovado", 
+        "dependencia": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "personas.estatus", 
+    "fields": {
+        "nombre": "Vencido", 
+        "dependencia": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "personas.estatus", 
+    "fields": {
+        "nombre": "Denegado", 
+        "dependencia": null
+    }
+},
+{
+    "pk": 5, 
+    "model": "personas.estatus", 
+    "fields": {
+        "nombre": "Suspendido", 
+        "dependencia": 1
+    }
+},
+{
+    "pk": 6, 
+    "model": "personas.estatus", 
+    "fields": {
+        "nombre": "Revocado", 
+        "dependencia": 1
+    }
+},
+{
+    "pk": 7, 
+    "model": "personas.estatus", 
+    "fields": {
+        "nombre": "Retirado", 
+        "dependencia": 1
+    }
+}
+]
