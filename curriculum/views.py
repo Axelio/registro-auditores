@@ -93,19 +93,11 @@ def revisar_acreditaciones(request):
 
 
 def listaAspirantes():
-    # En teoría, todos los usuarios que no esten en grupo operadores
+    # En teoría, todos los usuarios que no esten en modelo Auditor
     # son aspirantes, así que filtramos a los usuarios
-    # que no esten en el grupo Operadores
-    personas = Persona.objects.filter()
-    auditores = Auditor.objects.filter(acreditado=True)
-    citas = Cita.objects.all()
-    citados = []
-
-    for cita in citas:
-        citados.append(cita.usuario)
-
-    aspirantes = User.objects.filter(is_active=True, userprofile__in=citados)
-    aspirantes = aspirantes.exclude(Q(userprofile__persona__auditor__in=auditores)|Q(groups__name__iexact='operador'))
+    # que no esten en el modelo Auditor
+    aspirantes = User.objects.filter(userprofile__persona__auditor=None)
+    aspirantes = aspirantes.exclude(groups__name__iexact='operador')
     return aspirantes
 
 
@@ -578,7 +570,7 @@ class PerfilView(View):
         # Y si pertenece, le cambiamos la plantilla y los filtros
         if usuario.groups.filter(name__iexact='operador').exists():
             aspirantes = listaAspirantes()
-            auditores = Auditor.objects.filter(acreditado=True)
+            auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
             self.template = 'perfil/perfil_operador.html'
 
             paginator = Paginator(auditores, settings.LIST_PER_PAGE)
@@ -1812,16 +1804,25 @@ class RequisitosView(View):
     tipo_mensaje = ''
 
     def get(self, request, *args, **kwargs):
-        usuario = User.objects.get(id=kwargs['usuario_id'])
 
         # Revisar si la persona ya es auditor (acreditado o no)
-        if not usuario.get_profile().persona.auditor_set.get_query_set().exists():
+        if not request.user.get_profile().persona.auditor_set.get_query_set().exists():
             # Si no tiene ninguna, es un aspirante a auditor, no renovación
 
             # Se filtran los requisitos por ámbito...
             pass
 
+        if not request.user.groups.filter(name__iexact='operador').exists():
+            raise PermissionDenied
 
+        try:
+            persona = Persona.objects.get(userprofile=request.user.profile)
+        except:
+            raise Http404
+
+        usuario = User.objects.get(id=kwargs['usuario_id'])
+
+        self.diccionario.update({'persona': request.user.get_profile().persona})
         self.diccionario.update({'usuario': usuario})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
