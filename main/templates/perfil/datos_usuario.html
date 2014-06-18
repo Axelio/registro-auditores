@@ -1,0 +1,229 @@
+{% include "base_ink.html" %}
+
+{% block personales %}
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <body>
+
+{% load static %}
+{% load humanize %} 
+{% load perfil %}
+ 
+  <!-- Main Page Content and Sidebar -->
+  
+<div class="ink-grid">
+    {% include 'menu_perfil.html' %}
+
+    <div class="space">
+        {% if mensaje %}
+            <div class="ink-alert basic {{ tipo_mensaje }}">
+                <button class="ink-dismiss" id="cerrar">&times;</button>
+                <p>{{ mensaje }}</p>
+            </div>
+        {% endif %}
+        <div class="column-group gutters">
+            <div class="large-30 medium-100 small-100 push-left">
+                {% include "perfil/informacion_personal.html" %}
+            </div>
+            <div class="large-70 medium-100 small-100 push-right">
+                <div class="box">
+                <h4><div class="ink-titulo_superior"><i class="icon-check-minus"></i> {{ usuario.get_profile.persona.primer_nombre }} {{ usuario.get_profile.persona.primer_apellido }}</div></h4>
+                    <div class="ink-tabs right"> 
+                        <ul class="tabs-nav">
+                            <li><a href="#personales">Datos personales</a></li>
+                            <li><a href="#curriculum">Resumen curricular</a></li>
+                            <li><a href="#requisitos">Requisitos de auditor</a></li>
+                        </ul>
+                        <div id="personales" class="tabs-content"> 
+                            <br />
+                            <b>Cédula de identidad:</b> {{ usuario.get_profile.persona.cedula }}
+                            <br />
+                            <b>Primer nombre:</b> {{ usuario.get_profile.persona.primer_nombre }}
+                            <br />
+                            <b>Primer apellido:</b> {{ usuario.get_profile.persona.primer_apellido }}
+                            <br />
+                            <b>Segundo nombre:</b> {{ usuario.get_profile.persona.segundo_nombre }}
+                            <br />
+                            <b>Segundo apellido:</b> {{ usuario.get_profile.persona.segundo_apellido }}
+                            <br />
+                            <b>Género:</b> 
+                                {% ifequal usuario.get_profile.persona.genero 0 %}
+                                    Masculino
+                                {% else %}
+                                    Femenino
+                                {% endifequal %}
+                            <br />
+                            <b>Reside:</b> {{ usuario.get_profile.persona.reside }}
+                            <br />
+                            <b>Dirección:</b> {{ usuario.get_profile.persona.direccion }}
+                            <br />
+                            <b>Fecha de nacimiento:</b> {{ usuario.get_profile.persona.fecha_nacimiento|date:"DATE_FORMAT" }}
+                            <br />
+                            <b>Teléfono de residencia:</b> {{ usuario.get_profile.persona.tlf_reside }}
+                            <br />
+                            <b>Fecha móvil:</b> {{ usuario.get_profile.persona.tlf_movil }}
+                            <br />
+                            <b>Fecha de oficina:</b> {{ usuario.get_profile.persona.tlf_oficina }}
+                            <br />
+                            <b>Estado civil:</b> 
+                                {% ifequal usuario.get_profile.persona.estado_civil 's' %}
+                                    Solter{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+                                {% endifequal %}
+                                {% ifequal usuario.get_profile.persona.estado_civil 'c' %}
+                                    Casad{% ifequal usuario.get_profile.persona.genero 0 %}o{% else %}a{% endifequal %}
+                                {% endifequal %}
+                                {% ifequal usuario.get_profile.persona.estado_civil 'd' %}
+                                    Divorciad{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+                                {% endifequal %}
+                                {% ifequal usuario.get_profile.persona.estado_civil 'v' %}
+                                    Viud{% ifequal persona.genero 0 %}o{% else %}a{% endifequal %}
+                                {% endifequal %}
+                            <br />
+                            <b>Correo electrónico:</b> <a href="mailto:{{ usuario.get_profile.persona.email }}">{{ usuario.get_profile.persona.email }}</a>
+                            <br />
+                        </div>
+                        <div id="curriculum" class="tabs-content"> 
+                            <h4>Educación</h4>
+                            <hr>
+                            {% for educacion in usuario.get_profile.persona.educacion_set.get_queryset %}
+                                <b>Título: </b> {{ educacion.titulo }}
+                                <br />
+                                <b>Institución: </b> {{ educacion.institucion }}
+                                <br />
+                                <b>Tipo: </b> {{ educacion.tipo }}
+                                <br />
+                                <b>Fecha de inicio: </b> {{ educacion.fecha_inicio|date:"DATE_FORMAT" }}
+                                <br />
+                                <b>Fecha culminación: </b> {{ educacion.fecha_fin|date:"DATE_FORMAT" }}
+                                <br /><br >
+                            {% endfor %}
+
+                            <br />
+
+                            <h4>Información laboral</h4>
+                            <hr>
+                            {% for laboral in usuario.get_profile.laboral_set.get_queryset %}
+                                <b>Empresa: </b> {{ laboral.empresa }}
+                                <br />
+                                <b>Cargo: </b> {{ laboral.cargo }}
+                                <br />
+                                <b>Fecha de inicio: </b> {{ laboral.fecha_inicio|date:"DATE_FORMAT" }}
+                                <br />
+                                <b>Fecha de culminación: </b> {{ laboral.fecha_fin|date:"DATE_FORMAT" }}
+                                <br />
+                                <b>Función: </b> {{ laboral.funcion }}
+                                <br />
+                                <b>Estado: </b> {{ laboral.estado }}
+                                <br /><br >
+                            {% endfor %}
+
+                            <br />
+
+                            <h4>Cursos</h4>
+                            <hr>
+                            {% for curso in usuario.get_profile.curso_set.get_queryset %}
+                                <b>Titulo: </b> {{ curso.titulo }}
+                                <br />
+                                <b>Institución: </b> {{ curso.institucion }}
+                                <br />
+                                <b>Lugar: </b> {{ curso.estado }}
+                                <br />
+                                <b>Fecha de inicio: </b> {{ curso.fecha_inicio|date:"DATE_FORMAT" }}
+                                <br />
+                                <b>Fecha de culminación: </b> {{ curso.fecha_fin|date:"DATE_FORMAT" }}
+                                <br />
+                                <b>Duración: </b> {{ curso.horas }} horas
+                                <br /><br >
+                            {% endfor %}
+
+                            <br />
+
+                            <h4>Certificaciones</h4>
+                            <hr>
+                            {% for certificacion in usuario.get_profile.persona.certificacion_set.get_queryset %}
+                                <b>Titulo: </b> {{ certificacion.titulo }}
+                                <br />
+                                <b>Código de certificación: </b> {{ certificacion.codigo }}
+                                <br />
+                                <b>Institución: </b> {{ certificacion.institucion }} horas
+                                <br /><br >
+                                <b>Fecha de inicio: </b> {{ certificacion.fecha_inicio|date:"DATE_FORMAT" }}
+                                <br />
+                                <b>Fecha de culminación: </b> {{ certificacion.fecha_fin|date:"DATE_FORMAT" }}
+                                <br />
+                                <b>Lugar: </b> {{ certificacion.pais }}
+                                <br /><br />
+                            {% endfor %}
+
+                            <br />
+
+                            <h4>Conocimientos profesionales</h4>
+                            <hr>
+                            {% for habilidad in usuario.get_profile.habilidad_set.get_queryset %}
+                                <b>Habilidad: </b> {{ habilidad.habilidad }}
+                                <br /><br />
+                            {% endfor %}
+
+                            <br />
+
+                            <h4>Otros conocimientos</h4>
+                            <hr>
+                            {% for conocimiento in usuario.get_profile.conocimiento_set.get_queryset %}
+                                <b>Conocimiento: </b> {{ conocimiento.otros_conocimientos }}
+                                <br /><br />
+                            {% endfor %}
+
+                            <br />
+
+                            <h4>Idiomas</h4>
+                            <hr>
+                            <table class="ink-table">
+                                <tr>
+                                    <b>
+                                        <th>
+                                            Idioma
+                                        </th>
+                                        <th>
+                                            Lectura
+                                        </th>
+                                        <th>
+                                            Escritura
+                                        </th>
+                                        <th>
+                                            Fluidez de conversación
+                                        </th>
+                                    </b>
+                                </tr>
+                            {% for idioma in usuario.get_profile.persona.idioma_set.get_queryset %}
+                                <tr align=center>
+                                    <td>
+                                        {{ idioma.idioma }}
+                                    </td>
+                                    <td>
+                                        {{ idioma.get_nivel_leido_display }}
+                                    </td>
+                                    <td>
+                                        {{ idioma.get_nivel_escrito_display }}
+                                    </td>
+                                    <td>
+                                        {{ idioma.get_nivel_hablado_display }}
+                                    </td>
+                                    <td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %} 
+
+  </body>
+</html>
+{% endblock %}
