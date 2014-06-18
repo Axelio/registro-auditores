@@ -62,7 +62,7 @@
                                         <th>Nombres</th>
                                         <th>Apellidos</th>
                                         <th>Correo electrónico</th>
-                                        <th>Requisitos</th>
+                                        <th>Datos</th>
                                 </thead>
                                 <tbody>
                                     {% for aspirante in aspirantes %}
@@ -71,7 +71,7 @@
                                         <td>{{ aspirante.profile.persona.primer_nombre }} {{ auditor.profile.persona.segundo_nombre }}</td>
                                         <td>{{ aspirante.profile.persona.primer_apellido }} {{ auditor.profile.persona.segundo_apellido }}</td>
                                         <td>{{ aspirante.profile.persona.email|mail_antispam }}</td>
-                                        <td><a href="{% url "requisitos" aspirante.id %}">Comprobar requisitos</a></td>
+                                        <td><a href="{% url "requisitos" aspirante.id %}">Revisar datos</a></td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

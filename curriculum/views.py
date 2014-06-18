@@ -1793,12 +1793,12 @@ class FijarCitaView(View):
                        dictionary=self.diccionario,
                      )
 
-class RequisitosView(View):
+class DatosView(View):
     '''
     Función para determinar cuáles son los requisitos
     faltantes por la persona segun su ámbito
     '''
-    template = 'perfil/evaluar_requisitos.html'
+    template = 'perfil/datos_usuario.html'
     diccionario = {}
     mensaje = ''
     tipo_mensaje = ''
