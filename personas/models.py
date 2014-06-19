@@ -117,10 +117,7 @@ class Persona(models.Model):
 class Auditor(models.Model):
     persona = models.ForeignKey('Persona')
     estatus = models.ForeignKey('Estatus')
-    fecha_acreditacion = models.DateField(
-            verbose_name = u'fecha de acreditación')
-    fecha_desacreditacion = models.DateField(
-            verbose_name = u'fecha de desacreditación')
+    fecha = models.DateField()
     observacion = models.TextField(
             help_text='Razones por la cual se acredita o desacredita al auditor',
             verbose_name=u'observación')

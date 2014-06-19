@@ -29,13 +29,11 @@ admin.site.register(Persona, PersonaAdmin)
 
 class AuditorAdmin(admin.ModelAdmin):
     list_display = ('persona',
-            'fecha_acreditacion',
-            'fecha_desacreditacion',
+            'fecha',
             'estatus')
 
     list_filter = ('estatus',
-            'fecha_acreditacion',
-            'fecha_desacreditacion')
+            'fecha')
 admin.site.register(Auditor, AuditorAdmin)
 
 

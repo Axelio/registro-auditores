@@ -30,7 +30,7 @@
             <div class="large-70 medium-100 small-100 push-right">
                 <div class="box">
                 <h4><div class="ink-titulo_superior"><i class="icon-check-minus"></i> {{ usuario.get_profile.persona.primer_nombre }} {{ usuario.get_profile.persona.primer_apellido }}</div></h4>
-                    <div class="ink-tabs right"> 
+                    <div class="ink-tabs top"> 
                         <ul class="tabs-nav">
                             <li><a href="#personales">Datos personales</a></li>
                             <li><a href="#curriculum">Resumen curricular</a></li>
@@ -84,6 +84,8 @@
                             <b>Correo electrónico:</b> <a href="mailto:{{ usuario.get_profile.persona.email }}">{{ usuario.get_profile.persona.email }}</a>
                             <br />
                         </div>
+
+
                         <div id="curriculum" class="tabs-content"> 
                             <h4>Educación</h4>
                             <hr>
@@ -214,6 +216,31 @@
                                 </tr>
                             {% endfor %}
                             </table>
+                        </div>
+
+
+                        <div id="requisitos" class="tabs-content"> 
+                            {% for momento in usuario.get_profile.persona.auditor_set.get_queryset %}
+                                <h1>{{ momento.estatus }}</h1>
+                            {% endfor %}
+
+                            {{ usuario.get_profile.persona.primer_nombre }} {{ usuario.get_profile.persona.primer_apellido }} aún no está registrado como auditor.
+                            <br /><br />
+                            Puntaje:
+                            {% if usuario.get_profile.competencia_set.get_query_set.exists %}
+                                {{ usuario.id|puntaje_entrevistado }}
+                            {% else %}
+                                <a href="{% url 'competencia' usuario.id %}">Cargar entrevista</a>
+                            {% endif %}
+
+                            <br />
+
+                            Puntaje:
+                            {% if usuario.get_profile.evaluacion_set.get_query_set.last.puntaje %}
+                                {{ usuario.get_profile.evaluacion_set.get_query_set.last.puntaje }}
+                            {% else %}
+                                <a href="{% url 'evaluacion' usuario.id %}">Cargar evaluación</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
