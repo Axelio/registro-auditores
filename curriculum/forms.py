@@ -390,7 +390,7 @@ class EvaluacionForm(forms.ModelForm):
 
     class Meta:
         model = Evaluacion
-        exclude = ('usuario',)
+        exclude = ('usuario', 'tipo_prueba')
         widgets = {
             'puntaje': TextInput(
                 attrs={
