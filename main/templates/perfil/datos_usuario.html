@@ -244,8 +244,13 @@
 
                             {% else %}
 
-                                {% for momento in usuario.get_profile.persona.auditor_set.get_queryset %}
+                                {% for momento in usuario.get_profile.persona.auditor_set.get_queryset|dictsort:"fecha" %}
                                     <h4>{{ momento.estatus }}</h4>
+                                    Nombre y apellido: {{ usuario.get_profile.persona.primer_nombre }} {{ usuario.get_profile.persona.segundo_nombre }}
+                                    Fecha: {{ momento.fecha|date:"DATE_FORMAT" }}
+                                    Estatus: {{ momento.estatus }}
+                                    <hr>
+                                    <br />
                                 {% endfor %}
                             {% endif %}
 
