@@ -3,35 +3,40 @@
     "pk": 1, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Examen"
+        "nombre": "Examen", 
+        "ambito": 1
     }
 },
 {
     "pk": 2, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Examen individual"
+        "nombre": "Examen individual", 
+        "ambito": 1
     }
 },
 {
     "pk": 3, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Conocimientos requeridos"
+        "nombre": "Conocimientos requeridos", 
+        "ambito": 2
     }
 },
 {
     "pk": 4, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Herramienta deevaluaci\u00f3n"
+        "nombre": "Herramienta de evaluaci\u00f3n", 
+        "ambito": 2
     }
 },
 {
     "pk": 5, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Evaluaci\u00f3n de los PSC"
+        "nombre": "Evaluaci\u00f3n de los PSC", 
+        "ambito": 2
     }
 }
 ]
