@@ -5,8 +5,6 @@ from curriculum.forms import (
         CompetenciaForm, Educacion,
         ConocimientoAdminForm)
 
-admin.site.register(Certificacion)
-
 
 class ConocimientoAdmin(admin.ModelAdmin):
     form = ConocimientoAdminForm
@@ -64,33 +62,45 @@ class CursoAdmin(admin.ModelAdmin):
             'fecha_inicio',
             'fecha_fin')
 admin.site.register(Curso, CursoAdmin)
+
+
 class AprobacionAdmin(admin.ModelAdmin):
     list_display = (
-        'instrumento', 'ambito', 'puntaje_aprobatorio',
+        'instrumento', 'puntaje_aprobatorio',
         'puntaje_total', 'fecha'
             )
 
     search_fields = (
-        'instrumento', 'ambito'
+        'instrumento',
             )
 
     list_filter = (
-        'ambito', 'fecha'
+        'fecha',
             )
+admin.site.register(Aprobacion, AprobacionAdmin)
 
 
 class EvaluacionAdmin(admin.ModelAdmin):
     list_display = (
             'usuario',
             'puntaje',
-            'fecha')
+            'fecha'
+            )
     list_filter = (
-            'fecha',)
+            'fecha',
+            )
 admin.site.register(Evaluacion, EvaluacionAdmin)
-admin.site.register(Aprobacion, AprobacionAdmin)
+
+
+class InstrumentoAdmin(admin.ModelAdmin):
+    list_display = (
+        'nombre',
+        'ambito',
+        )
+admin.site.register(Instrumento, InstrumentoAdmin)
 admin.site.register(Educacion)
 admin.site.register(TipoEducacion)
 admin.site.register(Laboral)
 admin.site.register(ListaIdiomas)
 admin.site.register(Ambito)
-admin.site.register(Instrumento)
+admin.site.register(Certificacion)

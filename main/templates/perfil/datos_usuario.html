@@ -239,7 +239,7 @@
                                 {% if usuario.get_profile.evaluacion_set.get_query_set.last.puntaje %}
                                     {{ usuario.get_profile.evaluacion_set.get_query_set.last.puntaje }}
                                 {% else %}
-                                    <a href="{% url 'evaluacion' usuario.id %}">Cargar evaluación</a>
+                                    <a href="{% url 'evaluacion' 2 usuario.id %}">Cargar evaluación</a>
                                 {% endif %}
 
                             {% else %}

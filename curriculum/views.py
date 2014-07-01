@@ -1558,26 +1558,8 @@ class VerAuditores(View):
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
-        
 
-class CargaEvaluacion(View):
-    '''
-    Clase para las consultas de los auditores
-    '''
-    template = 'auditores.html'
-    lista_filtros = ''
-    formulario = EvaluacionForm
 
-    # Envío de variables a la plantilla a través de diccionario
-    diccionario = {}
-
-    def get(self, request, *args, **kwargs):
-
-        diccionario.update()
-        return render(request, 
-                       template_name=self.template,
-                       dictionary=self.diccionario,
-                     )
 class EvaluacionView(View):
     '''
     Clase para la renderización de la evaluación
@@ -1619,34 +1601,44 @@ class EvaluacionView(View):
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
         self.evaluacion_form = self.evaluacion_form(request.POST)
-        request.POST
-        usuario = request.user
-        persona = request.user.profile.persona
 
-        if self.evaluacion_form.is_valid():
-            usuario = request.path_info.split('/')[3]
-            usuario = UserProfile.objects.get(user__id=usuario)
-            evaluacion = Evaluacion.objects.filter(usuario=usuario)
-            if evaluacion.exists():
-                evaluacion = evaluacion[0]
-                evaluacion.puntaje = request.POST['puntaje']
-                evaluacion.save()
-            else:
-                evaluacion = Evaluacion.objects.create(
-                        usuario=usuario,
-                        puntaje = request.POST['puntaje'])
+        instrumento = kwargs['evaluacion_id']
+        instrumento = Instrumento.objects.get(id=instrumento)
+        puntaje = float(request.POST['puntaje'])
 
-            self.template = 'curriculum/aprobados.html'
-            self.tipo_mensaje = 'success'
-            self.mensaje = u'Evaluación cargada exitosamente.'
+        # Filtrar las puntaciones del ultimo
+        # registro de el instrumento a evaluar
+        aprobacion = Aprobacion.objects.filter(instrumento=instrumento).latest()
 
-            notificar_entrevista_evaluacion(usuario)
-
+        if puntaje > aprobacion.puntaje_total:
+            self.tipo_mensaje = 'error'
+            self.mensaje = u'Ha introducido %s puntos. La puntuación máxima\
+                            permitida para %s es %s. Por favor, corrija el\
+                            puntaje' % (puntaje, instrumento,
+                            aprobacion.puntaje_total)
         else:
-            if self.evaluacion_form.errors:
-                if self.evaluacion_form.errors.has_key('__all__'):
-                    self.mensaje = self.evaluacion_form.errors['__all__'][0]
-                    self.tipo_mensaje = 'error'
+
+            if self.evaluacion_form.is_valid():
+                aspirante = kwargs['aspirante_id']
+                aspirante = User.objects.get(id=aspirante)
+                evaluacion = Evaluacion.objects.filter(usuario=aspirante)
+                evaluacion = Evaluacion.objects.create(
+                        usuario = aspirante.get_profile(),
+                        tipo_prueba = instrumento,
+                        puntaje = puntaje
+                        )
+
+                self.template = 'curriculum/aprobados.html'
+                self.tipo_mensaje = 'success'
+                self.mensaje = u'Evaluación cargada exitosamente.'
+
+                notificar_entrevista_evaluacion(aspirante)
+
+            else:
+                if self.evaluacion_form.errors:
+                    if self.evaluacion_form.errors.has_key('__all__'):
+                        self.mensaje = self.evaluacion_form.errors['__all__'][0]
+                        self.tipo_mensaje = 'error'
 
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})

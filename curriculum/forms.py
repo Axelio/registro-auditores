@@ -399,15 +399,6 @@ class EvaluacionForm(forms.ModelForm):
                     'min': '0'}),
                 }
 
-    def clean_puntaje(self):
-        parametros = Aprobacion.objects.last()
-        error = u'El puntaje máximo para \
-                las evaluaciones es \
-                %s puntos' % (parametros.evaluacion_maxima)
-        if self.cleaned_data['puntaje'] > parametros.evaluacion_maxima:
-            raise forms.ValidationError(error)
-        return self.cleaned_data['puntaje']
-
 
 class LaboralForm(forms.ModelForm):
     '''

@@ -108,7 +108,7 @@ urlpatterns = patterns('',
         login_required(ConocimientoView.as_view()),
         name='conocimiento'),
 
-    url(r'^perfil/evaluacion/(?P<aspirante_id>[\d]+)/',
+    url(r'^perfil/evaluacion/(?P<evaluacion_id>[\d]+)/(?P<aspirante_id>[\d]+)/',
         login_required(EvaluacionView.as_view()),
         name='evaluacion'),
 

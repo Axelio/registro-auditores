@@ -236,9 +236,8 @@ class Aprobacion(models.Model):
     tanto para evaluación como entrevista
     '''
     instrumento = models.ForeignKey('Instrumento')
-    ambito = models.ForeignKey('Ambito', verbose_name=u'ámbito')
     puntaje_aprobatorio = models.FloatField()
-    puntaje_total = models.FloatField()
+    puntaje_total = models.FloatField(verbose_name=u'puntaje máximo')
     fecha = models.DateField(auto_now_add=True, verbose_name='fijada')
 
     class Meta:
@@ -254,6 +253,7 @@ class Aprobacion(models.Model):
 class Instrumento(models.Model):
     nombre = models.CharField(max_length=30,
             help_text=u'Ej: Inscripción, renovación, etc.')
+    ambito = models.ForeignKey('Ambito', verbose_name=u'ámbito')
 
     class Meta:
         db_table = u'instrumento'
