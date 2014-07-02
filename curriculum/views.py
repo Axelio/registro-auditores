@@ -98,29 +98,34 @@ def listaAspirantes():
     # que no esten en el modelo Auditor
     aspirantes = User.objects.filter(userprofile__persona__auditor=None)
     aspirantes = aspirantes.exclude(groups__name__iexact='operador')
-    return aspirantes
+    lista_aspirantes = []
+    
+    for aspirante in aspirantes:
+        if revisar_requisitos(aptitudes(aspirante)):
+            lista_aspirantes.append(aspirante)
+    return lista_aspirantes
 
 
-def aptitudes(request):
+def aptitudes(usuario):
     '''
     Revisión de cada una de las aptitudes de la persona
     '''
     listado = []
 
     laborales = Laboral.objects.filter(
-            usuario=request.user.profile).order_by('-fecha_fin')
+            usuario=usuario.profile).order_by('-fecha_fin')
     educaciones = Educacion.objects.filter(
-            persona=request.user.profile.persona).order_by('-fecha_fin')
+            persona=usuario.profile.persona).order_by('-fecha_fin')
     conocimientos = Conocimiento.objects.filter(
-            usuario=request.user.profile)
+            usuario=usuario.profile)
     habilidades = Habilidad.objects.filter(
-            usuario=request.user.profile)
+            usuario=usuario.profile)
     idiomas = Idioma.objects.filter(
-            persona=request.user.profile.persona)
+            persona=usuario.profile.persona)
     certifcaciones = Certificacion.objects.filter(
-            persona=request.user.profile.persona).order_by('-fecha_fin')
+            persona=usuario.profile.persona).order_by('-fecha_fin')
     cursos = Curso.objects.filter(
-            usuario=request.user.profile).order_by('-fecha_fin')
+            usuario=usuario.profile).order_by('-fecha_fin')
 
     listado.append(laborales)
     listado.append(educaciones)
@@ -133,13 +138,13 @@ def aptitudes(request):
     return listado
 
 
-def lista_filtros(request):
+def lista_filtros(usuario):
     '''
     Envío de variables con las aptitudes ya filtradas
     '''
-    listado = aptitudes(request)
+    listado = aptitudes(usuario)
     requisitos = revisar_requisitos(listado)
-    cita = Cita.objects.filter(usuario=request.user.profile)
+    cita = Cita.objects.filter(usuario=usuario.profile)
 
     listado = {'laborales': listado[0],
                 'educaciones': listado[1],
@@ -222,7 +227,7 @@ class CitasView(View):
     diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
-        listado = aptitudes(request)
+        listado = aptitudes(request.user)
         requisitos = revisar_requisitos(listado)
         usuario = request.user
         self.diccionario.update(csrf(request))
@@ -250,7 +255,7 @@ class CitasView(View):
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'formulario': self.citas_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request,
                        template_name=self.template,
@@ -258,7 +263,7 @@ class CitasView(View):
                      )
 
     def post(self, request, *args, **kwargs):
-        listado = aptitudes(request)
+        listado = aptitudes(request.user)
         requisitos = revisar_requisitos(listado)
         usuario = request.user
         self.diccionario.update(csrf(request))
@@ -313,7 +318,7 @@ class CitasView(View):
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'formulario': self.citas_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
 
         return render(request,
@@ -376,7 +381,7 @@ class EducacionView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.educacion_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -426,7 +431,7 @@ class EducacionView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.educacion_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -598,7 +603,7 @@ class PerfilView(View):
             self.diccionario.update({'aspirantes':aspirantes})
             self.diccionario.update({'auditores':auditores})
 
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -637,7 +642,7 @@ class EditarPersonaView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.persona_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -712,7 +717,7 @@ class EditarPersonaView(View):
 
                 self.template = 'perfil/perfil.html'
 
-                self.lista_filtros = lista_filtros(request)
+                self.lista_filtros = lista_filtros(request.user)
                 self.diccionario.update(self.lista_filtros)
 
         else:
@@ -786,7 +791,7 @@ class LaboralView(View):
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'formulario':self.laboral_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -871,7 +876,7 @@ class LaboralView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'formulario':self.laboral_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
 
         return render(request, 
@@ -916,7 +921,7 @@ class CompetenciaView(View):
         self.diccionario.update({'nueva': nueva})
         self.diccionario.update({'error': error})
         self.diccionario.update({'formulario':self.competencia_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -975,7 +980,7 @@ class CompetenciaView(View):
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'titulo':self.titulo})
 
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
 
         return render(request, 
@@ -1037,7 +1042,7 @@ class HabilidadView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.habilidad_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1073,7 +1078,7 @@ class HabilidadView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.habilidad_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1140,7 +1145,7 @@ class ConocimientoView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.conocimiento_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1176,7 +1181,7 @@ class ConocimientoView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.conocimiento_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1239,7 +1244,7 @@ class IdiomaView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'formulario':self.idioma_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1285,7 +1290,7 @@ class IdiomaView(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'formulario':self.idioma_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1346,7 +1351,7 @@ class CertificacionView(View):
         self.diccionario.update({'mensaje':self. mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'formulario': self.certificacion_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1397,7 +1402,7 @@ class CertificacionView(View):
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'formulario': self.certificacion_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1459,7 +1464,7 @@ class CursoView(View):
         self.diccionario.update({'mensaje':self. mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'formulario': self.curso_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1517,7 +1522,7 @@ class CursoView(View):
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'formulario': self.curso_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
@@ -1591,7 +1596,7 @@ class EvaluacionView(View):
         self.diccionario.update({'mensaje':self. mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'formulario': self.evaluacion_form})
-        self.lista_filtros = lista_filtros(request)
+        self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
                        template_name=self.template,
