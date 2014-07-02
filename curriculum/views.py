@@ -704,11 +704,11 @@ class EditarPersonaView(View):
         try:
             persona = Persona.objects.get(userprofile=usuario.profile)
         except:
-            raise Http404
+            self.persona_form = self.persona_form()
+        else:
+            self.persona_form = self.persona_form(instance=persona)
+            self.diccionario.update({'persona':persona})
 
-        self.persona_form = self.persona_form(instance=persona)
-
-        self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
