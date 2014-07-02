@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.db.models import Q
 from django.shortcuts import render_to_response
 from django.forms import ModelForm, TextInput, Textarea, Select
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from lib.funciones import fecha_futura, fecha_pasada, fechas_superiores
+from auth.models import User
 from curriculum.models import (
         Certificacion, Conocimiento, Competencia,
         ListaCompetencia, Educacion, Laboral,
@@ -495,3 +497,31 @@ class LaboralForm(forms.ModelForm):
         if fecha_futura(self.cleaned_data['fecha_fin']):
             raise forms.ValidationError(error)
         return self.cleaned_data['fecha_fin']
+
+
+class EmailForm(forms.Form):
+    email = forms.EmailField()
+    email2 = forms.EmailField(help_text='Por favor, ingrese el \
+                              email nuevamente',
+                              label=u'Repita email')
+
+    def clean(self):
+        '''
+        Función para validar que el correo introducido no exista
+        en la base de datos actualmente
+        '''
+        if User.objects.filter(Q(username=self.cleaned_data['email']) | Q(email=self.cleaned_data['email'])):
+            raise forms.ValidationError(u'El correo electrónico "%s" \
+                    ya existe en la base de datos, por favor, verifique \
+                    y vuelva a intentarlo' % (self.cleaned_data['email']))
+        return self.cleaned_data
+
+    def clean_email2(self):
+        '''
+        Función para validar que ambos correos electrónicos sean iguales
+        '''
+        if self.cleaned_data['email'] != self.cleaned_data['email2']:
+            raise forms.ValidationError(u'Los correos electrónicos no \
+                                        coinciden, por favor, revise \
+                                        y vuelva a intentarlo')
+        return self.cleaned_data

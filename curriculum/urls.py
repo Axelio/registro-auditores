@@ -8,10 +8,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'auditores_suscerte.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    url(r'^postulacion/$', login_required(
-            CurriculumView.as_view()), name='curriculum'),
+    url(r'^nuevo_aspirante/$', login_required(
+            CrearAspirante.as_view()), name='nuevo_aspirante'),
 )

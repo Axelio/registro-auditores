@@ -7,7 +7,7 @@
                 {% ifequal user.groups.all.0.name 'Operador' %}
                 <li><a class="scrollableLink" href="#">Acciones<i class="icon-caret-down"></i></a>
                     <ul class="submenu">
-                        <li><a class="small" href="{% url 'curriculum' %}">Nuevo aspirante</a></li>
+                        <li><a class="small" href="{% url 'nuevo_aspirante' %}">Nuevo aspirante</a></li>
                     </ul>
                 </li>
                 {% endifequal %}
@@ -82,7 +82,7 @@
             <ul class="submenu">
             {% if user.is_authenticated %}
                 {% ifequal user.groups.all.0.name 'Operador' %}
-                <li><a class="small" href="{% url 'curriculum' %}">Nuevo aspirante</a></li>
+                <li><a class="small" href="{% url 'nuevo_aspirante' %}">Nuevo aspirante</a></li>
                 {% endifequal %}
                 {% if user.is_staff %}
                     <li><a class="small" href="/admin">Panel administrativo</a></li>
