@@ -48,13 +48,11 @@ class EditarPersonaForm(forms.ModelForm):
                     'placeholder': 'Segundo apellidos del solicitante'}),
             'direccion': Textarea(
                 attrs={
-                    'required': 'required',
                     'class': 'form-control',
                     'placeholder': 'Dirección del solicitante'}),
             'fecha_nacimiento': TextInput(
                 attrs={
                     'type': 'text',
-                    'required': 'required',
                     'class': 'ink-datepicker',
                     'data-format': 'dd/mm/yyyy',
                     'placeholder': 'Fecha de nacimiento'}),
@@ -96,18 +94,12 @@ class PersonaForm(forms.ModelForm):
     Formulario general para el ingreso de personas
     '''
 
-    email2 = forms.EmailField(label='Confirme email',
-            widget=TextInput(
-                attrs={
-                    'type': 'email',
-                    'required': 'required',
-                    'class': 'form-control',
-                    'placeholder': 'Confirme su correo'}))
     captcha = ReCaptchaField()
 
     class Meta:
         # Se determina cuál es el modelo al que va a utilizar
         model = Persona
+        exclude = ('email',)
 
         widgets = {
             'cedula': TextInput(
@@ -153,12 +145,6 @@ class PersonaForm(forms.ModelForm):
                     'data-format': 'dd/mm/yyyy',
                     'placeholder': 'Fecha de nacimiento',
                     'id':'popupDatepicker'}),
-            'email': TextInput(
-                attrs={
-                    'type': 'email',
-                    'required': 'required',
-                    'class': 'form-control',
-                    'placeholder': 'Email del solicitante'}),
             'tlf_reside': TextInput(
                 attrs={
                     'type': 'number',
@@ -181,27 +167,12 @@ class PersonaForm(forms.ModelForm):
         }
 
     def clean(self):
-        error = None
-
-        email = self.cleaned_data['email']
         cedula = self.cleaned_data['cedula']
 
         # Revisar si la cédula coincide con alguna otra en la base de datos 
         if Persona.objects.filter(cedula=cedula).exists():
-            error = u'Esta persona ya se encuentra '
-            error += u'registrada con esa cédula.'
-
-        # Revisar si el email coincide con algún otro de la base de datos
-        if Persona.objects.filter(email=email).exists() or User.objects.filter(email=email).exists():
-            error = u'Esta persona ya se encuentra '
-            error += 'registrada con ese email.'
-
-        # Revisar ambos mails coincidan
-        if not self.cleaned_data['email'] == self.cleaned_data['email2']:
-            error = u'Los correos electrónicos deben coincidir'
-
-        if error:
-            raise forms.ValidationError(error)
+            raise forms.ValidationError(u'Esta persona ya se encuentra \
+                                        registrada con esa cédula.')
 
         return self.cleaned_data
 

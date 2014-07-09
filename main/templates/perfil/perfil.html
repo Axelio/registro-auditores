@@ -20,7 +20,7 @@
     <div class="space">
         {% if mensaje %}
             <div class="ink-alert basic {{ tipo_mensaje }}">
-                <button class="ink-dismiss" id="cerrar">&times;</button>
+                <button class="ink-dismiss" {% if not persistente %} id="cerrar" {% endif %} >&times;</button>
                 <p>{{ mensaje }}</p>
             </div>
         {% endif %}

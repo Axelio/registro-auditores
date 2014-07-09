@@ -627,16 +627,18 @@ class PerfilView(View):
         tipo = ''
         self.diccionario.update(csrf(request))
         usuario = request.user
-        if usuario.last_login == usuario.date_joined:
+        if not request.session.get('ultima_sesion', False):
+            persistente = True
             mensaje = 'Recuerde cambiar su contraseña por seguridad...'
             tipo_mensaje = 'warning'
             self.diccionario.update({'tipo_mensaje':tipo_mensaje})
             self.diccionario.update({'mensaje':mensaje})
+            request.session['ultima_sesion'] = datetime.datetime.today()
 
         try:
             persona = Persona.objects.get(userprofile=usuario.profile)
         except:
-            return HttpResponseRedirect(reverse('info_personal'))
+            return HttpResponseRedirect(reverse('crear_persona'))
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'mensaje':mensaje})
