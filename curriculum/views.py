@@ -756,7 +756,7 @@ class EditarPersonaView(View):
 
             if usuario.groups.filter(name__iexact='operador').exists():
                 aspirantes = listaAspirantes()
-                auditores = Auditor.objects.filter(acreditado=True)
+                auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
                 self.template = 'perfil/perfil_operador.html'
 
                 paginator = Paginator(auditores, settings.LIST_PER_PAGE)
@@ -1612,10 +1612,7 @@ class VerAuditores(View):
     diccionario = {}
 
     def get(self, request, *args, **kwargs):
-        fecha_actual = datetime.date.today()
-        auditores = Auditor.objects.filter(
-                fecha_desacreditacion__gte=fecha_actual,
-                acreditado = True)
+        auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
 
         paginator = Paginator(auditores,  settings.LIST_PER_PAGE) # Show 25 contacts per page
 
@@ -1779,10 +1776,10 @@ class AcreditarView(View):
                     fecha_actual.day)
             
             persona = Persona.objects.get(userprofile__user__id=kwargs['usuario_id'])
+            estado = Estatus.objects.get(nombre='Inscrito')
             auditor = Auditor.objects.create(persona=persona,
-                    acreditado=True,
-                    fecha_acreditacion=fecha_actual,
-                    fecha_desacreditacion=fecha_limite,
+                    estatus=estado,
+                    fecha=fecha_actual,
                     observacion=request.POST['observacion'])
             return HttpResponseRedirect(reverse('inicio'))
         else:
