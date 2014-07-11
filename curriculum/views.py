@@ -522,8 +522,6 @@ class CurriculumView(View):
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        if not request.user.groups.filter(name__iexact='operador').exists():
-            raise PermissionDenied
         self.diccionario.update({'curriculum':True})
         self.diccionario.update({'mensaje_error':''})
         self.diccionario.update({'form':self.persona_form()})
