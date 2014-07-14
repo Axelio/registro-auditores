@@ -19,8 +19,11 @@
 
 
         {% block extra_css %}{% endblock extra_css %}
+        <script src="{% static "datetimepicker/jquery.datetimepicker.js" %} "></script>
+        <link href="{% static "datetimepicker/jquery.datetimepicker.css" %}" rel="stylesheet">
+
         <link href="{% static "ink/css/ink.css" %}" rel="stylesheet">
-        <link href="{% static "ink//css/docs.css" %}" rel="stylesheet">
+        <link href="{% static "ink/css/docs.css" %}" rel="stylesheet">
 	
         <script src="{% static "ink/js/ink-all.js" %} "></script>
         <script src="{% static "ink/js/ink.min.js" %} "></script>
