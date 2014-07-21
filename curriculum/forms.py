@@ -3,6 +3,7 @@ from django import forms
 from django.db.models import Q
 from django.shortcuts import render_to_response
 from django.forms import ModelForm, DateInput, TextInput, Textarea, Select
+from django.forms.extras.widgets import SelectDateWidget
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib.admin import widgets
@@ -43,18 +44,17 @@ class FijarCitaForm(forms.ModelForm):
             }
 
 
-class CitasForm(forms.ModelForm):
+class CitasForm(forms.Form):
     '''
     Formulario para la selección de fechas tentativas para la cita
     '''
-
-    class Meta:
-        model = Cita
-        exclude = ('usuario', 'cita_fijada')
+    fecha = forms.DateField(widget=forms.TextInput(attrs={'class':'vDateField'}))
+    hora = forms.TimeField(widget=forms.TextInput(attrs={'class':'vTimeField'}))
 
     def __init__(self, *args, **kwargs):
         super(CitasForm, self).__init__(*args, **kwargs)
-        self.fields['fecha'].widget = widgets.AdminSplitDateTime()
+        self.fields['fecha'].widget.attrs['class'] = 'ink-datepicker'
+        self.fields['hora'].widget.attrs['class'] = 'ink-timepicker'
 
     def clean(self):
         '''
