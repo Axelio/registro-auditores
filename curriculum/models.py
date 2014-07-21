@@ -45,18 +45,11 @@ class Certificacion(models.Model):
     def __unicode__(self):
         return u'%s - %s' % (self.persona, self.titulo)
 
-OPCIONES_CITAS = (('primera_fecha', 'Primera fecha'),
-                  ('segunda_fecha', 'Segunda fecha'),
-                  ('tercera_fecha', 'Tercera fecha'))
-
 
 class Cita(models.Model):
     usuario = models.ForeignKey(UserProfile)
-    primera_fecha = models.DateField()
-    segunda_fecha = models.DateField()
-    tercera_fecha = models.DateField()
-    cita_fijada = models.CharField(max_length=15,
-            choices=OPCIONES_CITAS, blank=True)
+    fecha = models.DateTimeField(verbose_name = 'fijar fecha y hora')
+    cita_fijada = models.BooleanField(default=False)
 
     class Meta:
         db_table = u'cita'
@@ -74,13 +67,12 @@ def post_save_cita(sender, **kwargs):
 
     citas = Cita.objects.filter(
             usuario=cita.usuario,
-            primera_fecha=cita.primera_fecha,
-            segunda_fecha=cita.segunda_fecha,
-            tercera_fecha=cita.tercera_fecha)
+            fecha=cita.fecha,
+            )
 
     destinatarios = []
 
-    if cita.cita_fijada == None or cita.cita_fijada == '':
+    if cita.cita_fijada == False:
         # Si no hay una fecha fijada aún,
         # se envía un mail a los admin
         asunto = u'Nueva propuesta de cita de %s' % (cita.usuario)
@@ -100,12 +92,7 @@ def post_save_cita(sender, **kwargs):
 
         # Búsqueda de fecha definitiva:
         fecha_fijada = ''
-        if cita.cita_fijada == 'primera_fecha':
-            fecha_fijada = cita.primera_fecha
-        elif cita.cita_fijada == 'segunda_fecha':
-            fecha_fijada = cita.segunda_fecha
-        else:
-            fecha_fijada = cita.tercera_fecha
+        fecha_fijada = cita.fecha
 
         # Envío de mail
         mensaje = Mensaje.objects.get(caso='Postulación de cita')

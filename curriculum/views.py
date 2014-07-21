@@ -14,6 +14,7 @@ from django.core.paginator import (Paginator, EmptyPage,
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.humanize.templatetags.humanize import intcomma
+from django.forms.formsets import formset_factory
 from django.utils import formats
 
 from curriculum.models import *
@@ -216,7 +217,7 @@ class CitasView(View):
     Clase para la renderización de las citas
     '''
     template = 'perfil/editar_formulario.html'
-    citas_form = CitasForm
+    citas_form = formset_factory(CitasForm, extra=3)
     mensaje = ''
     tipo_mensaje = ''
     titulo = 'citas'
@@ -278,14 +279,8 @@ class CitasView(View):
             self.citas_form = self.citas_form(request.POST)
             usuario = request.user
             nueva = True
-            fecha_1 = datetime.datetime.strptime(
-                    request.POST['primera_fecha'],
-                    "%d/%m/%Y").strftime("%Y-%m-%d")
-            fecha_2 = datetime.datetime.strptime(
-                    request.POST['segunda_fecha'],
-                    "%d/%m/%Y").strftime("%Y-%m-%d")
-            fecha_3 = datetime.datetime.strptime(
-                    request.POST['tercera_fecha'],
+            fecha = datetime.datetime.strptime(
+                    request.POST['fecha'],
                     "%d/%m/%Y").strftime("%Y-%m-%d")
 
             if self.citas_form.is_valid():
@@ -293,19 +288,15 @@ class CitasView(View):
                     cita = Cita.objects.filter(usuario=usuario.profile)
                     if cita.exists():
                         cita = cita[0]
-                        cita.primera_fecha = primera_fecha = fecha_1
-                        cita.segunda_fecha = segunda_fecha = fecha_2
-                        cita.tercera_fecha = tercera_fecha = fecha_3
+                        cita.fecha = fecha
                         cita.save()
                     else:
                         cita = Cita.objects.create(usuario=usuario.profile,
-                                primera_fecha=fecha_1,
-                                segunda_fecha=fecha_2,
-                                tercera_fecha=fecha_3)
+                                fecha=fecha)
 
-                    self.mensaje = "Las fechas para cita ha sido cargada con "
-                    self.mensaje += "éxito. Se ha enviado su información a "
-                    self.mensaje += "los administradores"
+                    self.mensaje = "Las fechas para cita ha sido cargada con \
+                                    éxito. Se ha enviado su información a \
+                                    los administradores"
                     self.tipo_mensaje = 'success'
                     self.template = 'perfil/perfil.html'
             else:

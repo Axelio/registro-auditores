@@ -2,10 +2,10 @@
 from django import forms
 from django.db.models import Q
 from django.shortcuts import render_to_response
-from django.forms import ModelForm, TextInput, Textarea, Select
+from django.forms import ModelForm, DateInput, TextInput, Textarea, Select
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
-from lib.funciones import fecha_futura, fecha_pasada, fechas_superiores
+from django.contrib.admin import widgets
 from auth.models import User
 from curriculum.models import (
         Certificacion, Conocimiento, Competencia,
@@ -14,6 +14,7 @@ from curriculum.models import (
         Curso, Evaluacion, Aprobacion,
 )
 from lugares.models import Institucion
+from lib.funciones import fecha_futura, fecha_pasada, fechas_superiores
 import datetime
 
 NIVELES_COMPTETENCIA = (
@@ -50,85 +51,29 @@ class CitasForm(forms.ModelForm):
     class Meta:
         model = Cita
         exclude = ('usuario', 'cita_fijada')
-        widgets = {
-            'primera_fecha': TextInput(
-                attrs={
-                    'type': 'text',
-                    'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'placeholder': 'Fecha de inicio',
-                    'data-position': 'bottom'}),
 
-            'segunda_fecha': TextInput(
-                attrs={
-                    'type': 'text',
-                    'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'data-position': 'bottom',
-                    'placeholder': 'Fecha de inicio',
-                    'data-position': 'bottom'}),
-
-            'tercera_fecha': TextInput(
-                attrs={
-                    'type': 'text',
-                    'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'placeholder': 'Fecha de inicio',
-                    'data-position': 'bottom'}),
-            }
+    def __init__(self, *args, **kwargs):
+        super(CitasForm, self).__init__(*args, **kwargs)
+        self.fields['fecha'].widget = widgets.AdminSplitDateTime()
 
     def clean(self):
         '''
         Función para validaciones generales del modelo Cita
         '''
 
-        primera_fecha = self.cleaned_data['primera_fecha']
-        segunda_fecha = self.cleaned_data['segunda_fecha']
-        tercera_fecha = self.cleaned_data['tercera_fecha']
+        fecha = self.cleaned_data['fecha']
         fecha_actual = datetime.date.today()
 
         # La fecha elegida no puede ser menor a la actual:
-        if primera_fecha < fecha_actual:
-            raise forms.ValidationError(
-                    u'La fecha elegida no puede ser menor a la actual')
-        if segunda_fecha < fecha_actual:
-            raise forms.ValidationError(
-                    u'La fecha elegida no puede ser menor a la actual')
-        if tercera_fecha < fecha_actual:
-            raise forms.ValidationError(
-                    u'La fecha elegida no puede ser menor a la actual')
+        if fecha < fecha_actual:
+            raise forms.ValidationError(u'La fecha elegida \
+                                        no puede ser menor a la actual')
 
         # Si fecha es pasada (función en lib/funciones.py)
         if fecha_pasada(primera_fecha):
             error = u'La fecha no puede ser \
                     menor ni igual al día de hoy'
             raise forms.ValidationError(error)
-
-        # Si fecha es pasada (función en lib/funciones.py)
-        if fecha_pasada(segunda_fecha):
-            error = u'La fecha no puede ser \
-                    menor ni igual al día de hoy'
-            raise forms.ValidationError(error)
-
-        # Si fecha es pasada (función en lib/funciones.py)
-        if fecha_pasada(tercera_fecha):
-            error = u'La fecha no puede ser \
-                    menor ni igual al día de hoy'
-            raise forms.ValidationError(error)
-
-        # Ninguna fecha puede ser igual a otra
-        error_fechas_iguales = u'Las fechas no se pueden repetir'
-        if primera_fecha == segunda_fecha:
-            raise forms.ValidationError(error_fechas_iguales)
-
-        if primera_fecha == tercera_fecha:
-            raise forms.ValidationError(error_fechas_iguales)
-
-        if segunda_fecha == tercera_fecha:
-            raise forms.ValidationError(error_fechas_iguales)
 
         return self.cleaned_data
 

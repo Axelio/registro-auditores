@@ -42,9 +42,7 @@ admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
 class CitaAdmin(admin.ModelAdmin):
     list_display = (
             'usuario',
-            'primera_fecha',
-            'segunda_fecha',
-            'tercera_fecha',
+            'fecha',
             'cita_fijada')
 admin.site.register(Cita, CitaAdmin)
 
