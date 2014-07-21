@@ -7,7 +7,7 @@
 		{% get_static_prefix as directorio %}
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="robots" content="index, follow" />
-		<meta name="keywords" content="Suscerte,seguridad,vencert,cenif,superintendencia,seguridad web,certificacion" />
+		<meta name="keywords" content="Suscerte,seguridad,vencert,cenif,superintendencia,seguridad web,certificacion,auditores" />
 		<meta name="description" content="Suscerte" />
         <link href="{{ directorio }}images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<title>{% block title %}.::SUSCERTE::.{% endblock %}</title>
@@ -19,8 +19,10 @@
 
 
         {% block extra_css %}{% endblock extra_css %}
-        <script src="{% static "datetimepicker/jquery.datetimepicker.js" %} "></script>
-        <link href="{% static "datetimepicker/jquery.datetimepicker.css" %}" rel="stylesheet">
+        <script src="{% static "jquery-timepicker/jquery.timepicker.js" %} "></script>
+        <script src="{% static "jquery-timepicker/jquery.timepicker.js" %} "></script>
+        <script src="{% static "jquery-timepicker/GruntFile.js" %} "></script>
+        <link rel="stylesheet" type="text/css" href="{% static "jquery-timepicker/jquery.timepicker.css" %}" >
 
         <link href="{% static "ink/css/ink.css" %}" rel="stylesheet">
         <link href="{% static "ink/css/docs.css" %}" rel="stylesheet">
