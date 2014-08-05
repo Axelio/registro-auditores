@@ -96,7 +96,7 @@ urlpatterns = patterns('',
         login_required(CurriculumView.as_view()),
         name='crear_persona'),
 
-    url(r'^perfil/citas/*$',
+    url(r'^perfil/citas/$',
         login_required(CitasView.as_view()),
         name='citas'),
 
