@@ -235,8 +235,8 @@ class CitasView(View):
         nueva = True
         if requisitos:
             self.tipo_mensaje = 'info'
-            self.mensaje = 'Debe seleccionar tres fechas tentativas en las '
-            self.mensaje += 'que desearía tener una cita con nosotros.'
+            self.mensaje = 'Debe seleccionar tres fechas/horas tentativas en las \
+                            que desearía tener una cita con nosotros.'
             cita = Cita.objects.filter(usuario=usuario.profile)
             if cita.exists():
                 if cita[0].cita_fijada == '':
@@ -249,8 +249,8 @@ class CitasView(View):
         else:
             self.template = 'perfil/perfil.html'
             self.tipo_mensaje = 'warning'
-            self.mensaje = u'Debe tener toda la información '
-            self.mensaje += u'curricular completa. Por favor, revísela.'
+            self.mensaje = u'Debe tener toda la información \
+                            curricular completa. Por favor, revísela.'
         self.diccionario.update({'persona': usuario.profile.persona})
         self.diccionario.update({'nueva': nueva})
         self.diccionario.update({'mensaje': self.mensaje})
@@ -272,8 +272,8 @@ class CitasView(View):
         if not requisitos:
             self.template = 'perfil/perfil.html'
             self.tipo_mensaje = 'warning'
-            self.mensaje = u'Debe tener toda la información '
-            self.mensaje += u'curricular completa. Por favor, revísela.'
+            self.mensaje = u'Debe tener toda la información \
+                            curricular completa. Por favor, revísela.'
         else:
             self.diccionario.update(csrf(request))
             self.citas_form = self.citas_form(request.POST)

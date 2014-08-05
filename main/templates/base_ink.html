@@ -19,10 +19,39 @@
 
 
         {% block extra_css %}{% endblock extra_css %}
+          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+          <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+          <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
+          <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.js"></script>
+          <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.css" />
+          <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/lib/site.js"></script>
+          <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/lib/site.css" />
+
+            <script>
+            $(function() {
+                $('.timepicker').timepicker({
+                    'timeFormat': 'H:i',
+                    'disableTimeRanges': [
+                        ['12pm', '2pm'],
+                                        ],
+                    'minTime': '9:00am',
+                    'maxTime': '3:00pm',
+                });
+            });
+            </script>
+
+        <!--
         <script src="{% static "jquery-timepicker/jquery.timepicker.js" %} "></script>
-        <script src="{% static "jquery-timepicker/jquery.timepicker.js" %} "></script>
-        <script src="{% static "jquery-timepicker/GruntFile.js" %} "></script>
         <link rel="stylesheet" type="text/css" href="{% static "jquery-timepicker/jquery.timepicker.css" %}" >
+
+        <script src="{% static "jquery-timepicker/GruntFile.js" %} "></script>
+
+        <script src="{% static "jquery-timepicker/lib/bootstrap-datepicker.js" %} "></script>
+        <link rel="stylesheet" type="text/css" href="{% static "jquery-timepicker/lib/bootstrap-datepicker.css" %}" >
+
+        <script src="{% static "jquery-timepicker/lib/site.js" %} "></script>
+        <link rel="stylesheet" type="text/css" href="{% static "jquery-timepicker/lib/site.css" %}" >
+        -->
 
         <link href="{% static "ink/css/ink.css" %}" rel="stylesheet">
         <link href="{% static "ink/css/docs.css" %}" rel="stylesheet">
@@ -33,7 +62,6 @@
         <script src="{% static "ink/js/prettify.js" %} "></script>
         <script src="{% static "ink/js/autoload.js" %} "></script>
         <script src="{% static "js/jquery.min.js" %} "></script>
-
     <script type="text/javascript">
         setTimeout(function(){ document.getElementById('cerrar').click(); }, 5000); // 5 segundos
     </script>

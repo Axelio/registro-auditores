@@ -48,13 +48,21 @@ class CitasForm(forms.Form):
     '''
     Formulario para la selección de fechas tentativas para la cita
     '''
-    fecha = forms.DateField(widget=forms.TextInput(attrs={'class':'vDateField'}))
-    hora = forms.TimeField(widget=forms.TextInput(attrs={'class':'vTimeField'}))
+    fecha = forms.DateField(widget=forms.TextInput(attrs={'class':'ink-datepicker', 'data-position':'bottom'}))
+    hora = forms.TimeField(widget=forms.TextInput(attrs={'class':'timepicker'}))
 
-    def __init__(self, *args, **kwargs):
-        super(CitasForm, self).__init__(*args, **kwargs)
-        self.fields['fecha'].widget.attrs['class'] = 'ink-datepicker'
-        self.fields['hora'].widget.attrs['class'] = 'ink-timepicker'
+    '''
+    class Meta:
+        widgets = {
+            'hora': TextInput(
+                attrs={
+                    'type': 'text',
+                    'class': 'time ui-timepicker-input',
+                    'id': 'timepicker',
+                    'autocomplete': 'off',
+                    }),
+        }
+    '''
 
     def clean(self):
         '''
