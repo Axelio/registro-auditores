@@ -278,31 +278,38 @@ class CitasView(View):
             self.diccionario.update(csrf(request))
             self.citas_form = self.citas_form(request.POST)
             usuario = request.user
-            nueva = True
-            fecha = datetime.datetime.strptime(
-                    request.POST['fecha'],
-                    "%d/%m/%Y").strftime("%Y-%m-%d")
+            '''
+            '''
 
             if self.citas_form.is_valid():
-                if nueva:
-                    cita = Cita.objects.filter(usuario=usuario.profile)
-                    if cita.exists():
-                        cita = cita[0]
-                        cita.fecha = fecha
-                        cita.save()
-                    else:
-                        cita = Cita.objects.create(usuario=usuario.profile,
-                                fecha=fecha)
+                cita = Cita.objects.filter(usuario=usuario.profile)
+                if cita.exists():
+                    cita = cita[0]
+                    cita.fecha = fecha
+                    cita.save()
+                else:
+                    hora = ''
+                    fecha = ''
+                    for i in range(1, self.citas_form.extra):
+                        hora = request.POST['form-%d-hora' % (i)]
+                        fecha = request.POST['form-%d-fecha' % (i)]
+                        '''
+                        Revisar:
+                        import time
 
-                    self.mensaje = "Las fechas para cita ha sido cargada con \
-                                    éxito. Se ha enviado su información a \
-                                    los administradores"
-                    self.tipo_mensaje = 'success'
-                    self.template = 'perfil/perfil.html'
-            else:
-                if self.citas_form.errors:
-                    self.mensaje = self.citas_form.errors['__all__'][0]
-                    self.tipo_mensaje = 'error'
+                        struct_time = time.strptime("30 Nov 00", "%d %b %y")
+                        print "returned tuple: %s " % struct_time
+                        '''
+                        fecha = datetime.datetime.strptime(
+                                request.POST['fecha'],
+                                "%d/%m/%Y").strftime("%Y-%m-%d")
+
+
+                self.mensaje = "Las fechas para cita ha sido cargada con \
+                                éxito. Se ha enviado su información a \
+                                los administradores"
+                self.tipo_mensaje = 'success'
+                self.template = 'perfil/perfil.html'
 
         self.diccionario.update({'persona': usuario.profile.persona})
         self.diccionario.update({'nueva': nueva})

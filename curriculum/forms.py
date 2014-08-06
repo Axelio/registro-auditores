@@ -48,21 +48,14 @@ class CitasForm(forms.Form):
     '''
     Formulario para la selección de fechas tentativas para la cita
     '''
-    fecha = forms.DateField(widget=forms.TextInput(attrs={'class':'ink-datepicker', 'data-position':'bottom'}))
+    fecha = forms.DateField(widget=forms.TextInput(
+        attrs={
+            'class':'ink-datepicker',
+            'data-format': 'dd/mm/yyyy',
+            'data-position':'bottom'
+            }
+        ))
     hora = forms.TimeField(widget=forms.TextInput(attrs={'class':'timepicker'}))
-
-    '''
-    class Meta:
-        widgets = {
-            'hora': TextInput(
-                attrs={
-                    'type': 'text',
-                    'class': 'time ui-timepicker-input',
-                    'id': 'timepicker',
-                    'autocomplete': 'off',
-                    }),
-        }
-    '''
 
     def clean(self):
         '''
@@ -78,7 +71,7 @@ class CitasForm(forms.Form):
                                         no puede ser menor a la actual')
 
         # Si fecha es pasada (función en lib/funciones.py)
-        if fecha_pasada(primera_fecha):
+        if fecha_pasada(fecha):
             error = u'La fecha no puede ser \
                     menor ni igual al día de hoy'
             raise forms.ValidationError(error)

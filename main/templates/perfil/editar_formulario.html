@@ -40,6 +40,7 @@
                             </div>
                         {% endif %}
                         <form class="ink-form" method="POST" onsubmit="return Ink.UI.FormValidator_1.validate(this);">{% csrf_token %}
+                            {{ formulario.management_form }}
                             <fieldset class="column-group">
                                 {% ifequal titulo 'educacion' %}
                                     <div class="ink-alert basic info">
@@ -78,20 +79,22 @@
                                     {% endfor %}
                                 {% else %}
                                     {% for form in formulario %}
-                                        {% if form.errors %}
-                                            {% for error in form.errors %}
+                                        <div class="control-group required validation">
+                                            <div class="control">
+
+                                            {% if form.errors %}
                                                 <div class="ink-alert basic error">
                                                     <button class="ink-dismiss">&times;</button>
-                                                        <p>{{ error }}</p>
+                                                        <p>{{ form.errors }}</p>
                                                 </div>
-                                            {% endfor %}
-                                        {% endif %}
-                                        <div class="control-group required validation">
-                                            {% if form.field.required %}*{% endif %}
+                                            {% endif %}
+                                            {% if form.field.required %}<span color="Red">*</span>{% endif %}
                                                 {{ form.label }}
-                                        <div class="control">
-                                            {{ form }}
-                                        </div>
+                                                {% for field in form %}
+                                                    {{ field.label_tag }}
+                                                    {{ field  }}
+                                                {% endfor %}
+                                            </div>
                                             <p class="tip">{{ form.help_text }}</p>
                                         </div>
                                         <hr>
