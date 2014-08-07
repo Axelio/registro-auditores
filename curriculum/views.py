@@ -183,7 +183,7 @@ def revisar_entrevista(usuario):
     for competencia in competencias:
         puntajes += float(competencia.puntaje)
 
-    if puntajes >= float(aprobaciones.entrevista_aprobatoria):
+    if puntajes >= float(aprobaciones.puntaje_aprobatorio):
         return True
     else:
         return False
