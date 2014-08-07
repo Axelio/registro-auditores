@@ -31,7 +31,7 @@
             </div>
         {% else %}
             {% if cita %}
-                {% ifequal cita.cita_fijada '' %}
+                {% ifequal cita.cita_fijada False %}
                     <div class="ink-alert basic warning">
                         <button class="ink-dismiss" id="cerrar">&times;</button>
                         <p>Pronto se le fijará una fecha definitiva para su cita. Si desea, puede <a href="{% url 'citas' %}">cambiarla</a> antes que sea definida.</p>
