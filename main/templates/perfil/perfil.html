@@ -34,23 +34,13 @@
                 {% ifequal cita.cita_fijada False %}
                     <div class="ink-alert basic warning">
                         <button class="ink-dismiss" id="cerrar">&times;</button>
-                        <p>Pronto se le fijará una fecha definitiva para su cita. Si desea, puede <a href="{% url 'citas' %}">cambiarla</a> antes que sea definida.</p>
+                        <p>Pronto se le fijará una fecha definitiva para su cita.</p>
                     </div>
                 {% else %}
                     <div class="ink-alert basic warning">
-                        <button class="ink-dismiss" id="cerrar">&times;</button>
+                        <button class="ink-dismiss">&times;</button>
                         <p>Se le ha fijado una fecha definitiva para su cita. La cita se estableció para el
-                            <b>
-                                {% ifequal cita.cita_fijada 'primera_fecha' %}
-                                    {{ cita.primera_fecha|date:"DATE_FORMAT" }}
-                                {% endifequal %}
-                                {% ifequal cita.cita_fijada 'segunda_fecha' %}
-                                    {{ cita.segunda_fecha|date:"DATE_FORMAT" }}
-                                {% endifequal %}
-                                {% ifequal cita.cita_fijada 'tercera_fecha' %}
-                                    {{ cita.tercera_fecha|date:"DATE_FORMAT" }}
-                                {% endifequal %}
-                            </b>
+                            <b>{{ cita.fecha|date:"DATETIME_FORMAT" }}</b>
                         </p>
                     </div>
                 {% endifequal %}

@@ -15,6 +15,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.forms.formsets import formset_factory
+from django.forms.models import modelformset_factory
 from django.utils import formats
 
 from curriculum.models import *
@@ -146,7 +147,7 @@ def lista_filtros(usuario):
     '''
     listado = aptitudes(usuario)
     requisitos = revisar_requisitos(listado)
-    cita = Cita.objects.filter(usuario=usuario.profile)
+    cita = Cita.objects.filter(usuario=usuario.profile, fecha__gte=datetime.datetime.today())
 
     listado = {'laborales': listado[0],
                 'educaciones': listado[1],
@@ -159,7 +160,11 @@ def lista_filtros(usuario):
                 }
 
     if cita.exists():
-        listado.update({'cita': cita[0]})
+        fijada = cita.filter(cita_fijada = True)
+        if fijada.exists():
+            listado.update({'cita': fijada[0]})
+        else:
+            listado.update({'cita': cita[0]})
 
     return listado
 
@@ -218,7 +223,7 @@ class CitasView(View):
     Clase para la renderización de las citas
     '''
     template = 'perfil/editar_formulario.html'
-    citas_form = formset_factory(CitasForm, extra=3)
+    citas_form = modelformset_factory(Cita, form = CitasForm, extra=3)
     mensaje = ''
     tipo_mensaje = ''
     titulo = 'citas'
@@ -231,28 +236,21 @@ class CitasView(View):
     def get(self, request, *args, **kwargs):
         listado = aptitudes(request.user)
         requisitos = revisar_requisitos(listado)
-        usuario = request.user
         self.diccionario.update(csrf(request))
         nueva = True
         if requisitos:
-            self.tipo_mensaje = 'info'
-            self.mensaje = 'Debe seleccionar tres fechas/horas tentativas en las \
-                            que desearía tener una cita con nosotros.'
-            cita = Cita.objects.filter(usuario=usuario.profile)
-            if cita.exists():
-                if cita[0].cita_fijada == '':
-                    # Si la fecha fijada está en blanco (no ha sido fijada)
-                    # Se le permite al usuario la edición de la misma
-                    self.citas_form = self.citas_form(instance=cita[0])
-                else:
-                    # Sino, debe redireccionarle al perfil de nuevo
-                    return redirect('perfil')
+            if Cita.objects.filter(usuario=request.user.profile).exists():
+                return redirect('perfil')
+            else:
+                self.tipo_mensaje = 'info'
+                self.mensaje = 'Debe seleccionar tres fechas/horas tentativas en las \
+                                que desearía tener una cita con nosotros.'
         else:
             self.template = 'perfil/perfil.html'
             self.tipo_mensaje = 'warning'
             self.mensaje = u'Debe tener toda la información \
                             curricular completa. Por favor, revísela.'
-        self.diccionario.update({'persona': usuario.profile.persona})
+        self.diccionario.update({'persona': request.user.profile.persona})
         self.diccionario.update({'nueva': nueva})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
