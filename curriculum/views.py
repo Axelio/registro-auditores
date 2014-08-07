@@ -282,9 +282,13 @@ class CitasView(View):
             if self.citas_form.is_valid():
                 cita = Cita.objects.filter(usuario=request.user.profile)
                 if cita.exists():
-                    cita = cita[0]
-                    cita.fecha = fecha
-                    cita.save()
+                    for i in range(0, self.citas_form.extra):
+                        tiempo = request.POST['form-%d-hora' % (i)]
+                        fecha = request.POST['form-%d-fecha' % (i)]
+                        tiempo_fecha = "%s %s" % (fecha, tiempo)
+                        tiempo_fecha = datetime.datetime.strptime(tiempo_fecha, "%d/%m/%Y %H:%M").strftime("%Y-%m-%d %H:%M")
+                        cita[i].fecha = tiempo_fecha
+                        cita[i].save()
                 else:
                     hora = ''
                     fecha = ''
