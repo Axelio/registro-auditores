@@ -72,18 +72,7 @@ def post_save_cita(sender, **kwargs):
 
     destinatarios = []
 
-    if cita.cita_fijada == False:
-        # Si no hay una fecha fijada aún,
-        # se envía un mail a los admin
-        asunto = u'Nueva propuesta de cita de %s' % (cita.usuario)
-        from curriculum.views import get_operadores
-        for operador in get_operadores():
-            destinatarios.append(operador.get_profile().persona.email)
-        emisor = settings.EMAIL_HOST_USER
-        mensaje = Mensaje.objects.get(caso='Propuesta de cita')
-        mensaje = mensaje.mensaje.replace('<LINK>','%s/fijar_cita/%s/.' % (settings.HOST, cita.usuario.id))
-
-    else:
+    if cita.cita_fijada == True:
         # Si hay una fecha fijada, se envía un mail
         # al usuario indicándole la fecha definitiva
         asunto = u'%sFijada fecha para cita' % (settings.EMAIL_SUBJECT_PREFIX)
@@ -100,7 +89,7 @@ def post_save_cita(sender, **kwargs):
         # Sustitución de variables clave y usuario
         mensaje = mensaje.mensaje.replace('<fecha>','%s'%(fecha_fijada))
 
-    send_mail(subject=asunto, message=mensaje,
+        send_mail(subject=asunto, message=mensaje,
                 from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
 
 

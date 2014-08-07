@@ -24,6 +24,7 @@ from personas.forms import *
 from auth.models import *
 
 import datetime
+import time
 
 def notificar_entrevista_evaluacion(usuario):
     evaluacion = Evaluacion.objects.filter(usuario=usuario)
@@ -277,12 +278,9 @@ class CitasView(View):
         else:
             self.diccionario.update(csrf(request))
             self.citas_form = self.citas_form(request.POST)
-            usuario = request.user
-            '''
-            '''
 
             if self.citas_form.is_valid():
-                cita = Cita.objects.filter(usuario=usuario.profile)
+                cita = Cita.objects.filter(usuario=request.user.profile)
                 if cita.exists():
                     cita = cita[0]
                     cita.fecha = fecha
@@ -290,28 +288,38 @@ class CitasView(View):
                 else:
                     hora = ''
                     fecha = ''
-                    for i in range(1, self.citas_form.extra):
-                        hora = request.POST['form-%d-hora' % (i)]
+                    for i in range(0, self.citas_form.extra):
+                        tiempo = request.POST['form-%d-hora' % (i)]
                         fecha = request.POST['form-%d-fecha' % (i)]
-                        '''
-                        Revisar:
-                        import time
+                        tiempo_fecha = "%s %s" % (fecha, tiempo)
+                        tiempo_fecha = datetime.datetime.strptime(tiempo_fecha, "%d/%m/%Y %H:%M").strftime("%Y-%m-%d %H:%M")
+                        cita = Cita.objects.create(
+                            usuario = request.user.profile,
+                            fecha = tiempo_fecha)
 
-                        struct_time = time.strptime("30 Nov 00", "%d %b %y")
-                        print "returned tuple: %s " % struct_time
-                        '''
-                        fecha = datetime.datetime.strptime(
-                                request.POST['fecha'],
-                                "%d/%m/%Y").strftime("%Y-%m-%d")
+                    # Si no hay una fecha fijada aún,
+                    # se envía un mail a los admin
+                    asunto = u'Nueva propuesta de cita de %s' % (cita.usuario)
 
+                    destinatarios = []
+
+                    for operador in get_operadores():
+                        destinatarios.append(operador.get_profile().persona.email)
+
+                    emisor = settings.EMAIL_HOST_USER
+                    mensaje = Mensaje.objects.get(caso='Propuesta de cita')
+                    mensaje = mensaje.mensaje.replace('<LINK>','%s/fijar_cita/%s/.' % (settings.HOST, cita.usuario.id))
+
+                    send_mail(subject=asunto, message=mensaje,
+                        from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
 
                 self.mensaje = "Las fechas para cita ha sido cargada con \
                                 éxito. Se ha enviado su información a \
-                                los administradores"
+                                los operadores"
                 self.tipo_mensaje = 'success'
                 self.template = 'perfil/perfil.html'
 
-        self.diccionario.update({'persona': usuario.profile.persona})
+        self.diccionario.update({'persona': request.user.profile.persona})
         self.diccionario.update({'nueva': nueva})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
