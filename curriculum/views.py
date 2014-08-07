@@ -15,7 +15,6 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.forms.formsets import formset_factory
-from django.forms.models import modelformset_factory
 from django.utils import formats
 
 from curriculum.models import *
@@ -223,7 +222,7 @@ class CitasView(View):
     Clase para la renderización de las citas
     '''
     template = 'perfil/editar_formulario.html'
-    citas_form = modelformset_factory(Cita, form = CitasForm, extra=3)
+    citas_form = formset_factory(CitasForm, extra=3)
     mensaje = ''
     tipo_mensaje = ''
     titulo = 'citas'
