@@ -36,7 +36,7 @@ def notificar_entrevista_evaluacion(usuario):
         # independiente y se llama una función de notificación según los puntajes
         evaluacion = evaluacion.latest('fecha')
         asunto = u'%sNotificación de inscripción' % (settings.EMAIL_SUBJECT_PREFIX)
-        destinatarios = (usuario.persona.email,)
+        destinatarios = (usuario.profile.persona.email,)
         emisor = settings.EMAIL_HOST_USER
         if revisar_entrevista(usuario) and revisar_evaluacion(usuario):
             mensaje = Mensaje.objects.get(caso=u'Aprobación como auditor')
@@ -485,7 +485,8 @@ class CrearAspirante(View):
             usuario.is_active = True
             usuario.save()
 
-            usuario_perfil = UserProfile.objects.create(user=usuario)
+            if not UserProfile.objects.filter(user=usuario).exists():
+                usuario_perfil = UserProfile.objects.create(user=usuario)
 
             # Envío de mail
             asunto = u'%sCreación de cuenta exitosa' % (settings.EMAIL_SUBJECT_PREFIX)
@@ -574,17 +575,10 @@ class CurriculumView(View):
                                              tlf_oficina = request.POST['tlf_oficina'],
                                              tlf_contacto = request.POST['tlf_contacto'],
                                              estado_civil = request.POST['estado_civil'],
-                                             email = request.POST['email'],
+                                             email = request.user.email,
                                              )
 
-            # Se crea el usuario con el correo electrónico por defecto y se crea una contraseña aleatoria para el usuario
-            clave = User.objects.make_random_password()
-            usuario = User.objects.create_user(username = request.POST['email'],
-                                              email = request.POST['email'], 
-                                              first_name = request.POST['primer_nombre'],
-                                              last_name = request.POST['segundo_nombre'],
-                                              password = clave, 
-                                             )
+            usuario = request.user
 
             usuario.is_active = True
             usuario.first_name = request.POST['primer_nombre']
@@ -593,20 +587,7 @@ class CurriculumView(View):
 
             usuario_perfil = UserProfile.objects.create(persona=persona, user=usuario)
 
-            # Envío de mail
-            asunto = u'%sCreación de cuenta exitosa' % (settings.EMAIL_SUBJECT_PREFIX)
-            mensaje = Mensaje.objects.get(caso='Creación de usuario (email)')
-            emisor = settings.EMAIL_HOST_USER
-            destinatarios = (request.POST['email'],)
-
-            # Sustitución de variables clave y usuario
-            mensaje = mensaje.mensaje.replace('<clave>','%s'%(clave)).replace('<cuenta>','%s'%(request.POST['email']))
-            send_mail(subject=asunto, message=mensaje, from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
-
-        self.template = 'curriculum/aprobados.html'
-        mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')
-        mensaje = mensaje.mensaje
-        self.diccionario.update({'mensaje':mensaje})
+        self.template = 'perfil/perfil.html'
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
