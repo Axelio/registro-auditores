@@ -6,7 +6,6 @@ from django.contrib.auth import login, authenticate, logout
 from django.utils.decorators import method_decorator
 from django.contrib.auth.views import password_change, login
 from django.core.urlresolvers import reverse
-from axes.decorators import watch_login
 from auth.forms import AuthenticationForm
 from django.core.context_processors import csrf
 import datetime # Importar funciones para cálculo del tiempo

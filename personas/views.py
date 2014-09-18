@@ -1,7 +1,7 @@
 # -*- coding: UTF8 -*-
 from django.views.generic.base import View
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 
@@ -85,7 +85,7 @@ class EditarPersonaView(View):
         request.user.email = persona.email
         request.user.save()
 
-        return reverse('perfil')
+        return redirect(reverse('perfil'))
 
 
 class CrearPersonaView(View):
