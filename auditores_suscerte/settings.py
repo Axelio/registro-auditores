@@ -75,7 +75,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = (
-    'suit',
+    #'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -84,11 +84,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.sites',
-    'debug_toolbar',
+    #'debug_toolbar',
     'captcha',
-    'axes',
+    #'axes',
     'passwords',
-    'compressor',
+    #'compressor',
     'curriculum',
     'lugares',
     'auth',
@@ -157,13 +157,13 @@ STATICFILES_FINDERS = (
     # Don't forget to use absolute paths, not relative paths.
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    'compressor.finders.CompressorFinder',
+    #'compressor.finders.CompressorFinder',
 )
 #compresor
 
-COMPRESS_ENABLED = True
+#COMPRESS_ENABLED = True
 
-COMPRESS_OFFLINE = True
+#COMPRESS_OFFLINE = True
 
 # Customizing Axes
 AXES_LOGIN_FAILURE_LIMIT = 6
