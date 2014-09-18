@@ -3,7 +3,7 @@
         <li class=><a href="{% url 'inicio' %}"><img height="30" src="/main/static/images/logo_suscerte.png"></a> </li>
         <div class="push-right">
             {% if user.is_authenticated %}
-            <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}">Perfil</a></li>
                 {% ifequal user.groups.all.0.name 'Operador' %}
                 <li><a class="scrollableLink" href="#">Acciones<i class="icon-caret-down"></i></a>
                     <ul class="submenu">
@@ -60,7 +60,7 @@
     <ul class="menu vertical flat gray hide-all" id="topbar_menu">
     <div class="push-right">
         {% if user.is_authenticated %}
-            <li><a class="scrollableLink" href="{% url 'info_personal' %}">Perfil</a></li>
+            <li><a class="scrollableLink" href="{% url 'perfil' %}">Perfil</a></li>
             {% ifnotequal user.groups.all.0.name 'Operador' %}
             <li><a class="scrollableLink" href="{% url 'cambiar_clave' %}">Currículum <i class="icon-caret-down"></i></a>
                 <ul class="submenu">

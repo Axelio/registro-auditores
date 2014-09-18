@@ -6,7 +6,7 @@
 <div class="box">
     <div class="content-center">
         <img src='{{ directorio }}images/avatar.png'>
-        <h3><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><a href="{% url 'info_personal' %}" class="ink-button blue" style="padding:0px 12px"><span class="icon-pencil"></span></a></span>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
+        <h3><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><a href="{% url 'editar_persona' %}" class="ink-button blue" style="padding:0px 12px"><span class="icon-pencil"></span></a></span>{{ persona.primer_nombre }} {{ persona.primer_apellido }}</h3>
     </div>
     C.I.: {{ persona.cedula|intcomma }} <br />
     Género: 

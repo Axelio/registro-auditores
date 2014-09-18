@@ -3,13 +3,11 @@
 	<head>
         {% load i18n %}
         {% load static %}
-        {% load compress %}
-		{% get_static_prefix as directorio %}
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="robots" content="index, follow" />
 		<meta name="keywords" content="Suscerte,seguridad,vencert,cenif,superintendencia,seguridad web,certificacion,auditores" />
 		<meta name="description" content="Suscerte" />
-        <link href="{{ directorio }}images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="{{ static }}images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<title>{% block title %}.::SUSCERTE::.{% endblock %}</title>
         {% load admin_static %}{% load url from future %}
 
@@ -20,12 +18,12 @@
 
         {% block extra_css %}{% endblock extra_css %}
           <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-          <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
-          <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css" />
-          <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.js"></script>
-          <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/lib/bootstrap-datepicker.css" />
-          <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/lib/site.js"></script>
-          <link rel="stylesheet" type="text/css" href="http://jonthornton.github.io/jquery-timepicker/lib/site.css" />
+          <script type="text/javascript" src="{% static "jquery-timepicker/jquery.timepicker.js" %}"></script>
+          <link rel="stylesheet" type="text/css" href="{% static "jquery-timepicker/jquery.timepicker.css" %} " />
+          <script type="text/javascript" src="{% static "jquery-timepicker/lib/bootstrap-datepicker.js" %} "></script>
+          <link rel="stylesheet" type="text/css" href="{% static "jquery-timepicker/lib/bootstrap-datepicker.css" %} " />
+          <script type="text/javascript" src="{% static "jquery-timepicker/lib/site.js" %} "></script>
+          <link rel="stylesheet" type="text/css" href="{% static "jquery-timepicker/lib/site.css" %} " />
 
             <script>
             $(function() {
