@@ -253,10 +253,6 @@ class PersonalesView(View):
             usuario.email = request.POST['email']
             usuario.save()
 
-            # Se asocia la persona con el usuario
-            if not UserProfile.objects.filter(user=usuario, persona=persona).exists():
-               usuario_perfil = UserProfile.objects.create(user=usuario, persona=persona)
-
             # Envío de mail
             asunto = u'%sCreación de cuenta exitosa' % (settings.EMAIL_SUBJECT_PREFIX)
             mensaje = Mensaje.objects.get(caso='Creación de usuario (email)')
