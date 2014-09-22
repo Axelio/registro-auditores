@@ -381,6 +381,14 @@
     }
 },
 {
+    "pk": "0gql6bd2949mpi03ydew3ayfsrd96s0d", 
+    "model": "sessions.session", 
+    "fields": {
+        "expire_date": "2014-10-06T15:09:48.376Z", 
+        "session_data": "MDU1MDdmMWExMWQ3MjlmMThmMDI0MjViNDNkZGE4YWRhYzE4YjUzNzqAAn1xAShVCmxhc3RfdG91Y2hjZGF0ZXRpbWUKZGF0ZXRpbWUKcQJVCgfeCRYKJzAFnfSFUnEDVQ1fYXV0aF91c2VyX2lkSwFVEl9hdXRoX3VzZXJfYmFja2VuZFUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmR1Lg=="
+    }
+},
+{
     "pk": "nuvv5bpiqbtzhkzlw6544cssirm9xq3x", 
     "model": "sessions.session", 
     "fields": {
@@ -394,6 +402,14 @@
     "fields": {
         "expire_date": "2014-06-30T14:42:12.400Z", 
         "session_data": "NjE0MzE5NDIzMGUwYWY2ZTY5MTUyNTk5NWI2MTVlZTY4YTE0ZmM2ZjqAAn1xAShVCmxhc3RfdG91Y2hjZGF0ZXRpbWUKZGF0ZXRpbWUKcQJVCgfeBhAKDAwGB1GFUnEDVRJfYXV0aF91c2VyX2JhY2tlbmRVKWRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kVQ1fYXV0aF91c2VyX2lkSwF1Lg=="
+    }
+},
+{
+    "pk": "ut7k8buquizby7w8ytymyk14z083llth", 
+    "model": "sessions.session", 
+    "fields": {
+        "expire_date": "2014-10-06T15:04:34.627Z", 
+        "session_data": "MTQ2NjlhZDU5Y2U4NjcwYmYzMTdhYWQ3MjhhMDhjZDMxNzc3ZDE1MjqAAn1xAShVCmxhc3RfdG91Y2hjZGF0ZXRpbWUKZGF0ZXRpbWUKcQJVCgfeCRYKIiIJf5WFUnEDVRJfYXV0aF91c2VyX2JhY2tlbmRVKWRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kVQ1fYXV0aF91c2VyX2lkSwR1Lg=="
     }
 },
 {
@@ -560,7 +576,7 @@
     "fields": {
         "nombre": "Redes, telecomunicaciones ", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 2
     }
@@ -571,7 +587,7 @@
     "fields": {
         "nombre": "Equipamiento TIC, instalaci\u00f3n, configuraci\u00f3n y mantenimiento de equipos TIC ", 
         "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 2
     }
@@ -582,7 +598,7 @@
     "fields": {
         "nombre": "Desarrollo, mantenimiento, instalaci\u00f3n y configuraci\u00f3n de sistemas y aplicaciones", 
         "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 2
     }
@@ -593,7 +609,7 @@
     "fields": {
         "nombre": "Riesgo, seguridad de la informaci\u00f3n, control y auditor\u00eda TIC", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 2
     }
@@ -604,7 +620,7 @@
     "fields": {
         "nombre": "Infraestructura de clave p\u00fablica", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 2
     }
@@ -615,7 +631,7 @@
     "fields": {
         "nombre": "Organizaci\u00f3n y sistemas, procesos, normas y procedimientos", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 2
     }
@@ -626,7 +642,7 @@
     "fields": {
         "nombre": "TSU", 
         "puntaje_maximo": 8.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -637,7 +653,7 @@
     "fields": {
         "nombre": "Profesional universitario", 
         "puntaje_maximo": 8.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -648,7 +664,7 @@
     "fields": {
         "nombre": "Especialidad", 
         "puntaje_maximo": 8.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -659,7 +675,7 @@
     "fields": {
         "nombre": "Maestr\u00eda", 
         "puntaje_maximo": 8.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -670,7 +686,7 @@
     "fields": {
         "nombre": "Doctorado", 
         "puntaje_maximo": 8.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 1
     }
@@ -681,7 +697,7 @@
     "fields": {
         "nombre": "Bases de datos y administraci\u00f3n de datos", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -692,7 +708,7 @@
     "fields": {
         "nombre": "Planificaci\u00f3n de la gesti\u00f3n de \u00e1reas TIC", 
         "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -703,7 +719,7 @@
     "fields": {
         "nombre": "Gesti\u00f3n de proyectos TIC", 
         "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -714,7 +730,7 @@
     "fields": {
         "nombre": "Calidad de la infraestructura y componentes TIC, calidad de gesti\u00f3n en TIC, niveles de   servicios con uso de las TIC", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -725,7 +741,7 @@
     "fields": {
         "nombre": "Administraci\u00f3n y configuraci\u00f3n de ambientes y de los sistemas operativos", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -736,7 +752,7 @@
     "fields": {
         "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en auditor\u00eda TIC", 
         "puntaje_maximo": 3.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -747,7 +763,7 @@
     "fields": {
         "nombre": "Marco legal y normativo que rige las TIC y SCDFE en la RBV", 
         "puntaje_maximo": 3.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -758,7 +774,7 @@
     "fields": {
         "nombre": "Participaci\u00f3n como asistente o ponente en conferencias o seminarios en \u00e1reas inherentes    a: Sistemas, inform\u00e1tica, computaci\u00f3n o afines a las TIC", 
         "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 3
     }
@@ -769,7 +785,7 @@
     "fields": {
         "nombre": "Certificaciones nacionales en TIC", 
         "puntaje_maximo": 10.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -780,7 +796,7 @@
     "fields": {
         "nombre": "Certificaciones internacionales en TIC", 
         "puntaje_maximo": 10.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -791,7 +807,7 @@
     "fields": {
         "nombre": "Certificaciones nacionales como auditores TIC", 
         "puntaje_maximo": 10.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -802,7 +818,7 @@
     "fields": {
         "nombre": "Certificaciones internacionales como auditores TIC", 
         "puntaje_maximo": 10.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -813,7 +829,7 @@
     "fields": {
         "nombre": "Certificaciones nacionales en seguridad TIC", 
         "puntaje_maximo": 10.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -824,7 +840,7 @@
     "fields": {
         "nombre": "Certificaciones internacionales en seguridad TIC", 
         "puntaje_maximo": 10.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -835,7 +851,7 @@
     "fields": {
         "nombre": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en TIC, certificaci\u00f3n de datos y firmas electr\u00f3nicas", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 2
     }
@@ -846,7 +862,7 @@
     "fields": {
         "nombre": "Experiencia en auditor\u00eda en TIC", 
         "puntaje_maximo": 2.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -857,7 +873,7 @@
     "fields": {
         "nombre": "Experiencia en auditor\u00edas especializadas en seguridad de la informaci\u00f3n", 
         "puntaje_maximo": 3.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -868,7 +884,7 @@
     "fields": {
         "nombre": "Experiencia en auditor\u00eda en infraestructura de clave p\u00fablica", 
         "puntaje_maximo": 4.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -879,7 +895,7 @@
     "fields": {
         "nombre": "Experiencias en otros auditor\u00eda", 
         "puntaje_maximo": 1.0, 
-        "tipo_puntaje": "int", 
+        "tipo_puntaje": "float", 
         "puntaje_minimo": 0.0, 
         "tipo": 4
     }
@@ -938,7 +954,7 @@
     "pk": 1, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Examen",
+        "nombre": "Examen", 
         "ambito": 1
     }
 },
@@ -946,7 +962,7 @@
     "pk": 2, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Examen individual",
+        "nombre": "Examen individual", 
         "ambito": 1
     }
 },
@@ -954,7 +970,7 @@
     "pk": 3, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Conocimientos requeridos",
+        "nombre": "Conocimientos requeridos", 
         "ambito": 2
     }
 },
@@ -962,7 +978,7 @@
     "pk": 4, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Herramienta de evaluaci\u00f3n",
+        "nombre": "Herramienta de evaluaci\u00f3n", 
         "ambito": 2
     }
 },
@@ -970,7 +986,7 @@
     "pk": 5, 
     "model": "curriculum.instrumento", 
     "fields": {
-        "nombre": "Evaluaci\u00f3n de los PSC",
+        "nombre": "Evaluaci\u00f3n de los PSC", 
         "ambito": 2
     }
 },
@@ -4423,7 +4439,7 @@
         "is_active": true, 
         "is_superuser": true, 
         "is_staff": true, 
-        "last_login": "2014-06-16T14:30:30Z", 
+        "last_login": "2014-09-22T14:51:52.133Z", 
         "groups": [], 
         "user_permissions": [], 
         "password": "pbkdf2_sha256$12000$niLSmHztoDOK$kX8yRcK33/52+8NmIDZMN1Fpl7XvAPl4bwba0fdDvNI=", 
@@ -4441,7 +4457,7 @@
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": false, 
-        "last_login": "2014-06-16T14:40:18Z", 
+        "last_login": "2014-09-22T14:52:45.981Z", 
         "groups": [
             1
         ], 
@@ -4449,6 +4465,42 @@
         "password": "pbkdf2_sha256$12000$qrkII6PHCbCn$LbdzvwR3MgfsiY6+JRp1gmPFCyCERIxYJReIdsjsOtk=", 
         "email": "", 
         "date_joined": "2014-06-16T14:32:15Z"
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "pedro_pablo_castillo@hotmail.com", 
+        "first_name": "PEDRO", 
+        "last_name": "CASTILLO", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-09-22T14:53:25.173Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$gjgL0jnghWPi$t0aIKV99YDJ4sxcOsF+jO1JrojXYOLqdbSxUvtQrCVI=", 
+        "email": "pedro_pablo_castillo@hotmail.com", 
+        "date_joined": "2014-09-22T14:52:56.004Z"
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "superuser", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2014-09-22T14:59:05.461Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$H27JHtOuVCOR$zJXKE9kgpU6X2kKqk9S6pVbp6FU9PGIs/c+nmxpD/sA=", 
+        "email": "", 
+        "date_joined": "2014-09-22T14:58:57Z"
     }
 },
 {
@@ -4465,6 +4517,22 @@
     "fields": {
         "persona": 2, 
         "user": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": null, 
+        "user": 3
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": 3, 
+        "user": 3
     }
 },
 {
@@ -4614,6 +4682,27 @@
     }
 },
 {
+    "pk": 3, 
+    "model": "personas.persona", 
+    "fields": {
+        "reside": 1, 
+        "fecha_nacimiento": "2014-04-15", 
+        "tlf_contacto": "movil", 
+        "genero": 1, 
+        "tlf_reside": "0212558874", 
+        "tlf_movil": "04125858555", 
+        "tlf_oficina": "021255888", 
+        "direccion": "PETARE", 
+        "email": "pedro_pablo_castillo@hotmail.com", 
+        "segundo_apellido": "CACERES", 
+        "segundo_nombre": "PABLO", 
+        "primer_apellido": "CASTILLO", 
+        "primer_nombre": "PEDRO", 
+        "estado_civil": "s", 
+        "cedula": "144665652"
+    }
+},
+{
     "pk": 1, 
     "model": "auth.userprofile", 
     "fields": {
@@ -4630,6 +4719,22 @@
     }
 },
 {
+    "pk": 3, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": null, 
+        "user": 3
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.userprofile", 
+    "fields": {
+        "persona": 3, 
+        "user": 3
+    }
+},
+{
     "pk": 1, 
     "model": "auth.user", 
     "fields": {
@@ -4639,7 +4744,7 @@
         "is_active": true, 
         "is_superuser": true, 
         "is_staff": true, 
-        "last_login": "2014-06-16T14:30:30Z", 
+        "last_login": "2014-09-22T14:51:52.133Z", 
         "groups": [], 
         "user_permissions": [], 
         "password": "pbkdf2_sha256$12000$niLSmHztoDOK$kX8yRcK33/52+8NmIDZMN1Fpl7XvAPl4bwba0fdDvNI=", 
@@ -4657,7 +4762,7 @@
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": false, 
-        "last_login": "2014-06-16T14:40:18Z", 
+        "last_login": "2014-09-22T14:52:45.981Z", 
         "groups": [
             1
         ], 
@@ -4665,6 +4770,42 @@
         "password": "pbkdf2_sha256$12000$qrkII6PHCbCn$LbdzvwR3MgfsiY6+JRp1gmPFCyCERIxYJReIdsjsOtk=", 
         "email": "", 
         "date_joined": "2014-06-16T14:32:15Z"
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "pedro_pablo_castillo@hotmail.com", 
+        "first_name": "PEDRO", 
+        "last_name": "CASTILLO", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-09-22T14:53:25.173Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$gjgL0jnghWPi$t0aIKV99YDJ4sxcOsF+jO1JrojXYOLqdbSxUvtQrCVI=", 
+        "email": "pedro_pablo_castillo@hotmail.com", 
+        "date_joined": "2014-09-22T14:52:56.004Z"
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "superuser", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2014-09-22T14:59:05.461Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$H27JHtOuVCOR$zJXKE9kgpU6X2kKqk9S6pVbp6FU9PGIs/c+nmxpD/sA=", 
+        "email": "", 
+        "date_joined": "2014-09-22T14:58:57Z"
     }
 },
 {
@@ -5878,6 +6019,435 @@
         "change_message": "Modificado/a groups.", 
         "user": 1, 
         "content_type": 4
+    }
+},
+{
+    "pk": 14, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 1, 
+        "action_time": "2014-09-22T14:58:57.626Z", 
+        "object_repr": "superuser", 
+        "object_id": "4", 
+        "change_message": "", 
+        "user": 1, 
+        "content_type": 4
+    }
+},
+{
+    "pk": 15, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T14:59:04.062Z", 
+        "object_repr": "superuser", 
+        "object_id": "4", 
+        "change_message": "Modificado/a is_staff y is_superuser.", 
+        "user": 1, 
+        "content_type": 4
+    }
+},
+{
+    "pk": 16, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:00:38.002Z", 
+        "object_repr": "TSU", 
+        "object_id": "7", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 17, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:00:56.917Z", 
+        "object_repr": "Profesional universitario", 
+        "object_id": "8", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 18, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:07.364Z", 
+        "object_repr": "Especialidad", 
+        "object_id": "9", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 19, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:16.386Z", 
+        "object_repr": "Maestr\u00eda", 
+        "object_id": "10", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 20, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:23.517Z", 
+        "object_repr": "Doctorado", 
+        "object_id": "11", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 21, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:28.980Z", 
+        "object_repr": "Redes, telecomunicaciones ", 
+        "object_id": "1", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 22, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:35.107Z", 
+        "object_repr": "Equipamiento TIC, instalaci\u00f3n, configuraci\u00f3n y mantenimiento de equipos TIC ", 
+        "object_id": "2", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 23, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:41.005Z", 
+        "object_repr": "Desarrollo, mantenimiento, instalaci\u00f3n y configuraci\u00f3n de sistemas y aplicaciones", 
+        "object_id": "3", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 24, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:47.549Z", 
+        "object_repr": "Riesgo, seguridad de la informaci\u00f3n, control y auditor\u00eda TIC", 
+        "object_id": "4", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 25, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:01:53.789Z", 
+        "object_repr": "Infraestructura de clave p\u00fablica", 
+        "object_id": "5", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 26, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:02:01.809Z", 
+        "object_repr": "Organizaci\u00f3n y sistemas, procesos, normas y procedimientos", 
+        "object_id": "6", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 27, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:02:13.487Z", 
+        "object_repr": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en TIC, certificaci\u00f3n de datos y firmas electr\u00f3nicas", 
+        "object_id": "26", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 28, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:02:25.153Z", 
+        "object_repr": "Bases de datos y administraci\u00f3n de datos", 
+        "object_id": "12", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 29, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:02:33.504Z", 
+        "object_repr": "Planificaci\u00f3n de la gesti\u00f3n de \u00e1reas TIC", 
+        "object_id": "13", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 30, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:02:39.776Z", 
+        "object_repr": "Gesti\u00f3n de proyectos TIC", 
+        "object_id": "14", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 31, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:02:46.833Z", 
+        "object_repr": "Calidad de la infraestructura y componentes TIC, calidad de gesti\u00f3n en TIC, niveles de   servicios con uso de las TIC", 
+        "object_id": "15", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 32, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:02:54.048Z", 
+        "object_repr": "Administraci\u00f3n y configuraci\u00f3n de ambientes y de los sistemas operativos", 
+        "object_id": "16", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 33, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:00.936Z", 
+        "object_repr": "Normas, est\u00e1ndares y mejores pr\u00e1cticas en auditor\u00eda TIC", 
+        "object_id": "17", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 34, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:07.468Z", 
+        "object_repr": "Marco legal y normativo que rige las TIC y SCDFE en la RBV", 
+        "object_id": "18", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 35, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:13.201Z", 
+        "object_repr": "Participaci\u00f3n como asistente o ponente en conferencias o seminarios en \u00e1reas inherentes    a: Sistemas, inform\u00e1tica, computaci\u00f3n o afines a las TIC", 
+        "object_id": "19", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 36, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:19.170Z", 
+        "object_repr": "Certificaciones nacionales en TIC", 
+        "object_id": "20", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 37, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:28.091Z", 
+        "object_repr": "Certificaciones internacionales en TIC", 
+        "object_id": "21", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 38, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:37.781Z", 
+        "object_repr": "Certificaciones nacionales como auditores TIC", 
+        "object_id": "22", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 39, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:47.331Z", 
+        "object_repr": "Certificaciones nacionales en TIC", 
+        "object_id": "20", 
+        "change_message": "No ha cambiado ning\u00fan campo.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 40, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:03:54.196Z", 
+        "object_repr": "Certificaciones internacionales como auditores TIC", 
+        "object_id": "23", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 41, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:04:00.766Z", 
+        "object_repr": "Experiencias en otros auditor\u00eda", 
+        "object_id": "30", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 42, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:04:07.070Z", 
+        "object_repr": "Experiencia en auditor\u00eda en infraestructura de clave p\u00fablica", 
+        "object_id": "29", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 43, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:04:13.940Z", 
+        "object_repr": "Experiencia en auditor\u00edas especializadas en seguridad de la informaci\u00f3n", 
+        "object_id": "28", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 44, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:04:21.212Z", 
+        "object_repr": "Experiencia en auditor\u00eda en TIC", 
+        "object_id": "27", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 45, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:04:28.262Z", 
+        "object_repr": "Certificaciones internacionales en seguridad TIC", 
+        "object_id": "25", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
+    }
+},
+{
+    "pk": 46, 
+    "model": "admin.logentry", 
+    "fields": {
+        "action_flag": 2, 
+        "action_time": "2014-09-22T15:04:34.454Z", 
+        "object_repr": "Certificaciones nacionales en seguridad TIC", 
+        "object_id": "24", 
+        "change_message": "Modificado/a tipo_puntaje.", 
+        "user": 4, 
+        "content_type": 20
     }
 }
 ]
