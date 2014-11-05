@@ -7,7 +7,7 @@ from django.forms.extras.widgets import SelectDateWidget
 from django.shortcuts import render_to_response
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib.admin import widgets
-from auth.models import User
+from authentication.models import User
 from curriculum.models import (
         Certificacion, Conocimiento, Competencia,
         ListaCompetencia, Educacion, Laboral,
@@ -140,6 +140,7 @@ class ConocimientoAdminForm(forms.ModelForm):
     class Meta:
         # Se determina cuál es el modelo al que va a referirse el formulario
         model = Conocimiento
+        fields = ['usuario', 'otros_conocimientos']
 
 
 class CursoForm(forms.ModelForm):

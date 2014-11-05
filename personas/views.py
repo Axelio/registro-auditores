@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 
 from curriculum.views import lista_filtros
-from auth.models import UserProfile
+from authentication.models import UserProfile
 from lugares.models import Estado
 
 from forms import PersonaForm, EditarPersonaForm

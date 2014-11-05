@@ -21,7 +21,7 @@ from curriculum.models import *
 from curriculum.forms import *
 from personas.models import *
 from personas.forms import *
-from auth.models import *
+from authentication.models import *
 
 import datetime
 import time

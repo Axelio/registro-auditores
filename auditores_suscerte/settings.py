@@ -91,7 +91,7 @@ INSTALLED_APPS = (
     #'compressor',
     'curriculum',
     'lugares',
-    'auth',
+    'authentication',
     'personas',
 )
 
@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'auth.views.AutoLogout', 
+    'authentication.views.AutoLogout', 
     #'axes.middleware.FailedLoginMiddleware'
 )
 

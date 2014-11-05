@@ -17,8 +17,8 @@ from curriculum.views import (PerfilView,
     CitasView, CertificacionView, CursoView,
     VerAuditores, EvaluacionView, revisar_acreditaciones,
     AcreditarView, FijarCitaView, DatosView)
-from auth.views import *
-from auth.forms import (ValidatingSetPasswordForm,
+from authentication.views import *
+from authentication.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
 from django.contrib.auth.decorators import login_required
 import os

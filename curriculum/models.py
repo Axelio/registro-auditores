@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from personas.models import Persona
 from lugares.models import Estado, Institucion, Pais
-from auth.models import UserProfile, Mensaje
+from authentication.models import UserProfile, Mensaje
 from auditores_suscerte import settings
 
 # Modelos para construir el Curriculum
@@ -281,7 +281,7 @@ class Laboral(models.Model):
             help_text=u'indique la función o funciones que desempeñaba')
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField(null=True)
-    trabajo_actual = models.BooleanField()
+    trabajo_actual = models.BooleanField(default=False)
     retiro = models.CharField(max_length=60, verbose_name=u'razón de retiro')
     direccion_empresa = models.TextField(verbose_name=u'dirección de empresa')
 

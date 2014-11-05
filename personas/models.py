@@ -132,7 +132,7 @@ class Auditor(models.Model):
 
 
 class CertificadoElectronico(models.Model):
-    from auth.models import UserProfile
+    from authentication.models import UserProfile
     usuario = models.ForeignKey(UserProfile)
     certificado = models.CharField(max_length=5000)
 
