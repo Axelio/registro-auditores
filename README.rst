@@ -61,11 +61,11 @@ Instalación
 
 1) Clonación de repositorio (debe tener permisos para ello)::
 
- $ git clone git@github.org:suscerte/auditores-suscerte.git
+ $ git clone https://github.com/suscerte/registro-auditores.git
 
 2)  Ingresar en el archivo clonado::
 
- $ cd auditores-suscerte/
+ $ cd registro-auditores
 
 4)  Generar el entorno virtual dentro del directorio creado::
 
