@@ -9,12 +9,12 @@ Requerimientos
 Accesos al sistema
 ------------------
 
- - [Listo]: Registro de nuevos usuarios (Auditores, Administrador, [Pendiente]: Proveedores).
- - [Listo]: Inicio de sección para usuarios registrados.
- - [Listo]: Incorporación de Capcha.
- - [Listo]: Validación de clave fuerte.
- - [Listo]: Recuperación de clave (Validación mediante correo electrónico).
- - [Listo]: Validación de usuario.
+- [Listo]: Registro de nuevos usuarios (Auditores, Administrador, [Pendiente]: Proveedores).
+- [Listo]: Inicio de sección para usuarios registrados.
+- [Listo]: Incorporación de Capcha.
+- [Listo]: Validación de clave fuerte.
+- [Listo]: Recuperación de clave (Validación mediante correo electrónico).
+- [Listo]: Validación de usuario.
 
 Módulo de administrador
 -----------------------
