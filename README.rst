@@ -55,3 +55,51 @@ Seguridad
 - [Pendiente]: Ocultar los datos del servidor web.
 - [Listo]: Manipulación de cookies seguras.
 - [Listo]: Enmascaramiento de URL en la barra de direcciones del navegador.
+
+Instalación
+===========
+
+1) Clonación de repositorio (debe tener permisos para ello)::
+
+ $ git clone git@github.org:suscerte/auditores-suscerte.git
+
+2)  Ingresar en el archivo clonado::
+
+ $ cd auditores-suscerte/
+
+4)  Generar el entorno virtual dentro del directorio creado::
+
+ $ virtualenv virtualenv/
+
+5)  Activar el entorno virtual::
+
+ $ . virtualenv/bin/activate
+
+6)  Instalar paquetes adicionales (compresor de estáticos, barra para debug, entre otros)::
+
+ $ pip install -r requirements.txt
+
+7)  Sincronizar la base de datos con los modelos existentes::
+
+ $ python manage.py syncdb
+
+8) Migrar data necesaria::
+ $ python manage.py migrate
+
+9)  Cargar data inicial (lista de idiomas, estados, entre otros)::
+
+ $ python manage.py loaddata main/fixtures/*
+
+10)  Sincronizar los archivos estáticos::
+
+ $ python manage.py collectstatic
+
+11)  Comprimir los archivos estáticos (opcional)::
+
+ $ python manage.py compress
+
+12)  Iniciar el servidor::
+
+& python manage.py runserver
+
+13)  Abrir la aplicación en el navegador con la dirección: _http://localhost:8000/: http://localhost:8000
