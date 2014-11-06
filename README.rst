@@ -100,6 +100,6 @@ Instalación
 
 12)  Iniciar el servidor::
 
-& python manage.py runserver
+ $ python manage.py runserver
 
 13)  Abrir la aplicación en el navegador con la dirección: http://localhost:8000
