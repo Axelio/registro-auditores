@@ -102,4 +102,4 @@ Instalación
 
 & python manage.py runserver
 
-13)  Abrir la aplicación en el navegador con la dirección: _http://localhost:8000/: http://localhost:8000
+13)  Abrir la aplicación en el navegador con la dirección: http://localhost:8000
