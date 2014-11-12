@@ -4505,7 +4505,7 @@
 },
 {
     "pk": 1, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": 1, 
         "user": 1
@@ -4513,7 +4513,7 @@
 },
 {
     "pk": 2, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": 2, 
         "user": 2
@@ -4521,7 +4521,7 @@
 },
 {
     "pk": 3, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": null, 
         "user": 3
@@ -4529,7 +4529,7 @@
 },
 {
     "pk": 4, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": 3, 
         "user": 3
@@ -4704,7 +4704,7 @@
 },
 {
     "pk": 1, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": 1, 
         "user": 1
@@ -4712,7 +4712,7 @@
 },
 {
     "pk": 2, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": 2, 
         "user": 2
@@ -4720,7 +4720,7 @@
 },
 {
     "pk": 3, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": null, 
         "user": 3
@@ -4728,7 +4728,7 @@
 },
 {
     "pk": 4, 
-    "model": "auth.userprofile", 
+    "model": "authentication.userprofile", 
     "fields": {
         "persona": 3, 
         "user": 3
