@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.template import Library
 from django.utils.html import format_html
-from auth.models import User
+from authentication.models import User
 from curriculum.models import Aprobacion
 from curriculum.models import (NIVELES_COMPETENCIA,
     Competencia, ListaCompetencia, Evaluacion, Competencia,
