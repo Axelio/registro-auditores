@@ -607,8 +607,6 @@ class LaboralView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
         nueva = True
-        import pdb
-        pdb.set_trace()
 
         try:
             persona = Persona.objects.get(userprofile=usuario.profile)

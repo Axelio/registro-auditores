@@ -132,31 +132,33 @@ class CrearPersonaView(View):
         else:
             estado = Estado.objects.get(id=request.POST['reside'])
             fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            persona = Persona(cedula=request.POST['cedula'],
-                              primer_nombre = request.POST['primer_nombre'],
-                              segundo_nombre = request.POST['segundo_nombre'],
-                              primer_apellido = request.POST['primer_apellido'],
-                              segundo_apellido = request.POST['segundo_apellido'],
-                              genero = request.POST['genero'],
-                              reside = estado,
-                              direccion = request.POST['direccion'],
-                              fecha_nacimiento = fecha_nacimiento,
-                              tlf_reside = request.POST['tlf_reside'],
-                              tlf_movil = request.POST['tlf_movil'],
-                              tlf_oficina = request.POST['tlf_oficina'],
-                              tlf_contacto = request.POST['tlf_contacto'],
-                              estado_civil = request.POST['estado_civil'],
-                              email = request.user.email,
-                             )
+            persona = Persona.objects.create( cedula=request.POST['cedula'],
+                                              primer_nombre = request.POST['primer_nombre'],
+                                              segundo_nombre = request.POST['segundo_nombre'],
+                                              primer_apellido = request.POST['primer_apellido'],
+                                              segundo_apellido = request.POST['segundo_apellido'],
+                                              genero = request.POST['genero'],
+                                              reside = estado,
+                                              direccion = request.POST['direccion'],
+                                              fecha_nacimiento = fecha_nacimiento,
+                                              tlf_reside = request.POST['tlf_reside'],
+                                              tlf_movil = request.POST['tlf_movil'],
+                                              tlf_oficina = request.POST['tlf_oficina'],
+                                              tlf_contacto = request.POST['tlf_contacto'],
+                                              estado_civil = request.POST['estado_civil'],
+                                              email = request.user.email,
+                                             )
 
-            persona.save()
-
-            usuario = request.user
+            usuario = User.objects.get(username=request.user.username)
 
             usuario.is_active = True
             usuario.first_name = request.POST['primer_nombre']
             usuario.last_name = request.POST['primer_apellido']
             usuario.save()
+
+            perfil = UserProfile.objects.get(user=usuario)
+            perfil.persona = persona
+            perfil.save()
 
         self.template = 'perfil/perfil.html'
         return render(request, 
