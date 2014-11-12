@@ -485,9 +485,6 @@ class CrearAspirante(View):
             usuario.is_active = True
             usuario.save()
 
-            if not UserProfile.objects.filter(user=usuario).exists():
-                usuario_perfil = UserProfile.objects.create(user=usuario)
-
             # Envío de mail
             asunto = u'%sCreación de cuenta exitosa' % (settings.EMAIL_SUBJECT_PREFIX)
             mensaje = Mensaje.objects.get(caso='Creación de usuario (email)')
@@ -610,6 +607,8 @@ class LaboralView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
         nueva = True
+        import pdb
+        pdb.set_trace()
 
         try:
             persona = Persona.objects.get(userprofile=usuario.profile)
