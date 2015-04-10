@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load i18n %}
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Registro de Auditores - SUSCERTE</title>
+
+  <!-- CSS  -->
+  <link href="{% static "css/materialize.css"%}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+  {% block content %}{% endblock %}
+
+  <!--  Scripts-->
+  <script src="{% static "js/jquery-2.1.1.min.js"%}"></script>
+  <script src="{% static "js/materialize.js"%}"></script>
+  <script src="{% static "js/init.js"%}"></script>
+
+  </body>
+  {% block footer %}
+    {% include 'footer.html' %} 
+  {% endblock %}
+</html>
