@@ -5,7 +5,6 @@ from django.shortcuts import render_to_response
 from django.forms import ModelForm, DateInput, TextInput, Textarea, Select
 from django.forms.extras.widgets import SelectDateWidget
 from django.shortcuts import render_to_response
-from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib.admin import widgets
 from authentication.models import User
 from curriculum.models import (

@@ -15,11 +15,11 @@ from auditores_suscerte import settings # Importar configuraciones del proyecto
 def auth(request):
     diccionario = {}
     diccionario.update(csrf(request))
-    if request.user.groups.get_query_set().filter(name__iexact='operador').exists():
+    if request.user.groups.get_queryset().filter(name__iexact='operador').exists():
         return HttpResponseRedirect(reverse('perfil'))
     diccionario.update({'user':request.user})
     diccionario.update({'auth':True})
-    return login(request, authentication_form=AuthenticationForm, template_name='auth/formulario.html', extra_context=diccionario)
+    return login(request, authentication_form=AuthenticationForm, template_name='index.html', extra_context=diccionario)
 
 
 class AutoLogout: 
