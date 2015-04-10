@@ -65,9 +65,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(os.path.dirname(__file__), 'main/templates').replace('\\','/'),
-    os.path.join(os.getcwd(), 'main/templates'),
-    os.path.join(os.getcwd(), 'main/templates/admin'),
+    os.path.join(os.getcwd(), 'templates'),
 )
 
 SITE_ID = 1
@@ -138,17 +136,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-MEDIA_URL = '/main/media/'
-MEDIA_ROOT =os.path.join(os.getcwd(), 'main/media/')
-STATIC_ROOT =os.path.join(os.getcwd(), 'main/static/')
-STATIC_URL = '/main/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT =os.path.join(os.getcwd(), 'media/')
+STATIC_ROOT =os.path.join(os.getcwd(), 'static/')
+STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(os.getcwd(), 'main/static/public'), 
+    os.path.join(os.getcwd(), 'static/public'), 
 )
 
 STATICFILES_FINDERS = (
