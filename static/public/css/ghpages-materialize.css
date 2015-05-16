@@ -2152,10 +2152,11 @@ ul.staggered-list li {
   .center-on-small-only {
     text-align: center; } }
 
-div.page-footer {
+footer.page-footer {
+  margin-top: 20px;
   padding-top: 20px;
   background-color: #ee6e73; }
-  div.page-footer .footer-copyright {
+  footer.page-footer .footer-copyright {
     overflow: hidden;
     height: 50px;
     line-height: 50px;
