@@ -169,6 +169,7 @@ class CrearPerfilView(View):
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
     diccionario.update({'persona_form': persona_form})
+    diccionario.update({'titulo': titulo})
     diccionario.update({'descripcion': descripcion})
 
     def get(self, request, *args, **kwargs):
