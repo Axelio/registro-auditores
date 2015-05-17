@@ -12,12 +12,34 @@
 </head>
 <body>
 
+  {% block nav %}
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo black-text">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+  </nav>
+  {% endblock %}
+
   {% block content %}{% endblock %}
 
   <!--  Scripts-->
   <script src="{% static "js/jquery-2.1.1.min.js"%}"></script>
   <script src="{% static "js/materialize.js"%}"></script>
   <script src="{% static "js/init.js"%}"></script>
+  <script>
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 200,
+    });
+  </script>
 
   </body>
   {% block footer %}
