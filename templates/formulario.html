@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h3>{{ titulo }}</h3>
+        <div class="col s4">
+            <nav>
+            <div class="nav-wrapper teal">
+                <a href="#" class="brand-logo center">Información</a>
+            </div>
+            </nav>
+
+            <p class="flow-text">
+            {{ descripcion }}
+            </p>
+        </div>
+        <div class="col s8">
+            <form method="POST">
+                <div class="row">
+                {% for campo in form %}
+                    {%if forloop.counter|divisibleby:"2" %}
+                        <div class="input-field col s6">
+                            {{ campo }}
+                            <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                        </div>
+                    {% else %}
+                        <div class="input-field col s6">
+                            {{ campo }}
+                            <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
