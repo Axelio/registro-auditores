@@ -22,6 +22,7 @@ from curriculum.forms import *
 from personas.models import *
 from personas.forms import *
 from authentication.models import *
+from perfil.forms import AcreditacionForm
 
 import datetime
 import time
@@ -513,82 +514,6 @@ class CrearAspirante(View):
                        dictionary=self.diccionario,
                      )
         
-
-class PerfilView(View):
-    '''
-    Clase para la renderización del Perfil
-    '''
-    template = 'perfil/perfil.html'
-    lista_filtros = ''
-
-    # Envío de variables a la plantilla a través de diccionario
-    diccionario = {}
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, *args, **kwargs):
-        return super(PerfilView, self).dispatch(*args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        mensaje = ''
-        tipo = ''
-        self.diccionario.update(csrf(request))
-        usuario = request.user
-        if not request.session.get('ultima_sesion', False):
-            persistente = True
-            mensaje = 'Recuerde cambiar su contraseña por seguridad...'
-            tipo_mensaje = 'warning'
-            self.diccionario.update({'tipo_mensaje':tipo_mensaje})
-            self.diccionario.update({'mensaje':mensaje})
-            request.session['ultima_sesion'] = datetime.datetime.today()
-
-        try:
-            persona = Persona.objects.get(userprofile=usuario.profile)
-        except:
-            return HttpResponseRedirect(reverse('crear_persona'))
-
-        self.diccionario.update({'persona':persona})
-        self.diccionario.update({'mensaje':mensaje})
-        self.diccionario.update({'tipo':tipo})
-
-        # Revisamos si el usuario pertenece al grupo Operador
-        # Y si pertenece, le cambiamos la plantilla y los filtros
-        if usuario.groups.filter(name__iexact='operador').exists():
-            aspirantes = listaAspirantes()
-            auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
-            self.template = 'perfil/perfil_operador.html'
-
-            paginator = Paginator(auditores, settings.LIST_PER_PAGE)
-            page = request.GET.get('page')
-            try:
-                auditores = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                auditores = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                auditores = paginator.page(paginator.num_pages)
-
-            paginator = Paginator(aspirantes, settings.LIST_PER_PAGE)
-            page = request.GET.get('page')
-            try:
-                aspirantes = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                aspirantes = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                aspirantes = paginator.page(paginator.num_pages)
-
-            self.diccionario.update({'aspirantes':aspirantes})
-            self.diccionario.update({'auditores':auditores})
-
-        self.lista_filtros = lista_filtros(request.user)
-        self.diccionario.update(self.lista_filtros)
-        return render(request, 
-                       template_name=self.template,
-                       dictionary=self.diccionario,
-                     )
-
 
 class LaboralView(View):
     '''

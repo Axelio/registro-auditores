@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin, User
 from django.utils.translation import ugettext_lazy as _
 from django.utils.decorators import method_decorator
 
-# Register your models here.
+
 class UserProfileInline(admin.StackedInline):
     model=UserProfile
     can_delete=False 
