@@ -85,11 +85,10 @@ class Persona(models.Model):
     tlf_contacto = models.CharField(
             choices=TELEFONO_PUBLICO,
             max_length=10,
-            help_text=u'Seleccione el teléfono que establecerá \
-                    el cual será contactado',
+            help_text=u'tome en cuenta que \
+                    esta información será pública',
             default='fijo',
-            verbose_name=u'teléfono de contacto (tome en cuenta que \
-                    esta información será pública)')
+            verbose_name=u'teléfono de contacto')
     estado_civil = models.CharField(
             choices=ESTADO_CIVIL,
             max_length=15,
@@ -97,10 +96,10 @@ class Persona(models.Model):
             help_text='Señale su estado civil',
             default='s')
     email = models.EmailField(
-            help_text='Indique un correo electrónico válido',
+            help_text='tome en cuenta que \
+                    esta información será pública',
             unique=True,
-            verbose_name=u'Email (tome en cuenta que \
-                    esta información será pública)',
+            verbose_name=u'Email',
             validators=[MaxLengthValidator(2000)])
 
     class Meta:

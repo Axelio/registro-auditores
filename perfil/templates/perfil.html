@@ -1,0 +1,279 @@
+{% include "base_ink.html" %}
+
+
+
+{% block personales %}
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <body>
+
+{% load static %}
+{% load humanize %} 
+ 
+  <!-- Main Page Content and Sidebar -->
+  
+<div class="ink-grid">
+    {% include 'menu_perfil.html' %}
+
+    <div class="space">
+        {% if mensaje %}
+            <div class="ink-alert basic {{ tipo_mensaje }}">
+                <button class="ink-dismiss" {% if not persistente %} id="cerrar" {% endif %} >&times;</button>
+                <p>{{ mensaje }}</p>
+            </div>
+        {% endif %}
+        {% if not requisitos %}
+            <div class="ink-alert basic warning">
+                <button class="ink-dismiss" id="cerrar">&times;</button>
+                <p>Recuerde actualizar toda su información curricular para poder solicitar una cita.</p>
+            </div>
+        {% else %}
+            {% if cita %}
+                {% ifequal cita.cita_fijada False %}
+                    <div class="ink-alert basic warning">
+                        <button class="ink-dismiss" id="cerrar">&times;</button>
+                        <p>Pronto se le fijará una fecha definitiva para su cita.</p>
+                    </div>
+                {% else %}
+                    <div class="ink-alert basic warning">
+                        <button class="ink-dismiss">&times;</button>
+                        <p>Se le ha fijado una fecha definitiva para su cita. La cita se estableció para el
+                            <b>{{ cita.fecha|date:"DATETIME_FORMAT" }}</b>
+                        </p>
+                    </div>
+                {% endifequal %}
+            {% else %}
+                <div class="ink-alert basic warning">
+                    <button class="ink-dismiss" id="cerrar">&times;</button>
+                    <p>Debe <a href="{% url 'citas' %}">fijar su cita</a> para notificarle a los administradores la culminación de su carga curricular.</p>
+                </div>
+            {% endif %}
+        {% endif %}
+        <div class="column-group gutters">
+            <div class="large-30 medium-50 small-100">
+                {% include "perfil/informacion_personal.html" %}
+            </div>
+            <div class="large-70 medium-50 small-100 push-left">
+                <div class="box">
+                    <section id="educacion">
+                        <h4><div class="ink-titulo_superior"><i class="icon-file-text"></i> Currículum</div></h4>
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Educación</b><br />
+                        {% if educaciones %}
+                            {% for educacion in educaciones %}
+                                <div>
+                                    {{ educacion.titulo }} <br />
+                                    {{ educacion.institucion }}<br /> <i class="icon-calendar"></i> {{ educacion.fecha_inicio }} - {{ educacion.fecha_fin }}<br />
+                                    Nivel: {{ educacion.tipo }}
+                                </div>
+                                <input type="hidden" name="edu_id" value={{ educacion.id }}>
+                                <div class="button-group push-right">
+                                    <a href="{% url 'educacion' 'nueva' %}" class="ink-button">Añadir</a>
+                                    <a href="{% url 'educacion' 'editar' educacion.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'educacion' 'eliminar' educacion.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ educacion }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                </div>
+                                <br />
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ninguna información educativa. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'educacion' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
+                    <section id="laboral">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Información laboral</b><br />
+                        {% if laborales %}
+                            {% for laboral in laborales %}
+                                <div>
+                                    <div>{{ laboral.empresa}}</div>
+                                </div>
+                                <div>
+                                    Trabajando como <b>{{ laboral.cargo }}</b> en el sector de {{ laboral.sector }}
+                                </div>
+                                <div>
+                                    <i class="icon-calendar"></i> {{ laboral.fecha_inicio }} - {{ laboral.fecha_fin }}<br />
+                                    Función: {{ laboral.funcion }}
+                                </div>
+                                <div class="button-group push-right">
+                                    <a href="{% url 'laboral' 'nueva' %}" class="ink-button">Añadir</a>
+                                    <a href="{% url 'laboral' 'editar' laboral.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'laboral' 'eliminar' laboral.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ laboral }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ninguna información laboral. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'laboral' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
+                    <section id="curso">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Cursos</b><br />
+                        {% if cursos %}
+                            {% for curso in cursos %}
+                                <div>
+                                    {{ curso.titulo }} <br />
+                                    {{ curso.institucion }}<br /> <i class="icon-calendar"></i> en {{ curso.estado }} desde {{ curso.fecha_inicio }} hasta {{ curso.fecha_fin }}<br />
+                                    horas de duración: {{ curso.horas }}
+                                </div>
+                                <input type="hidden" name="edu_id" value={{ educacion.id }}>
+                                <div class="button-group push-right">
+                                    <a href="{% url 'curso' 'nueva' %}" class="ink-button">Añadir</a>
+                                    <a href="{% url 'curso' 'editar' curso.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'curso' 'eliminar' curso.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ curso }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                </div>
+                                <br />
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ningún curso cargado. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'curso' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
+                    <section id="certificacion">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Certificaciones</b><br />
+                        {% if certificaciones %}
+                            {% for certificacion in certificaciones %}
+                                <div>
+                                    {{ certificacion.titulo }} <br />
+                                    {{ certificacion.institucion }}<br /> <i class="icon-calendar"></i> en {{ certificacion.pais }} desde {{ certificacion.fecha_inicio }} hasta {{ certificacion.fecha_fin }}<br />
+                                    codigo de certificacion: {{ certificacin.codigo_certificacion }}
+                                    horas de duración: {{ certificacin.horas }}
+                                </div>
+                                <input type="hidden" name="edu_id" value={{ educacion.id }}>
+                                <div class="button-group push-right">
+                                    <a href="{% url 'certificacion' 'nueva' %}" class="ink-button">Añadir</a>
+                                    <a href="{% url 'certificacion' 'editar' certificacion.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'certificacion' 'eliminar' certificacion.id %}" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Eliminar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash" onclick="return confirm('Está a punto de eliminar {{ certificacion }}, ¿está seguro?')"></span></span></a>
+                                </div>
+                                <br />
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ninguna certificación. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'certificacion' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
+                    <section id="habilidades">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Conocimientos profesionales</b><br />
+                        {% if habilidades %}
+                            {% for habilidad in habilidades %}
+                                <div class="column-group">
+                                    <div class="large-50 medium-40 small-100">
+                                        {{ habilidad }}
+                                    </div>
+                                    <div class="large-50 medium-60 small-100">
+                                        <div class="button-group push-right">
+                                            <a href="{% url 'habilidad' 'nueva' %}" class="ink-button">Añadir</a>
+                                            <a href="{% url 'habilidad' 'editar' habilidad.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                            <a href="{% url 'habilidad' 'eliminar' habilidad.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ habilidad }}, ¿está seguro?')"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ninguna habilidad. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'habilidad' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
+                    <section id="otros_conocimientos">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Otros conocimientos</b><br />
+                        {% if conocimientos %}
+                            {% for conocimiento in conocimientos %}
+                                <div>{{ conocimiento.otros_conocimientos }}</div>
+                                <div class="button-group push-right">
+                                    <a href="{% url 'conocimiento' 'editar' conocimiento.id %}" class="ink-button blue"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                    <a href="{% url 'conocimiento' 'eliminar' conocimiento.id %}" onclick="return confirm('Está a punto de eliminar {{ conocimiento }}, ¿está seguro?')" class="ink-button red"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            Usted no posee ninguna información laboral. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'conocimiento' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
+                    <section id="idioma">
+                        <form class="ink-form" method="POST">{% csrf_token %}
+                        <b>Idiomas</b><br />
+                        {% if idiomas %}
+                            <table class="ink-table">
+                                <tr>
+                                    <b>
+                                        <th>
+                                            Idioma
+                                        </th>
+                                        <th>
+                                            Lectura
+                                        </th>
+                                        <th>
+                                            Escritura
+                                        </th>
+                                        <th>
+                                            Fluidez de conversación
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </b>
+                                </tr>
+                            {% for idioma in idiomas %}
+                                <tr align=center>
+                                    <td>
+                                        {{ idioma.idioma }}
+                                    </td>
+                                    <td>
+                                        {{ idioma.get_nivel_leido_display }}
+                                    </td>
+                                    <td>
+                                        {{ idioma.get_nivel_escrito_display }}
+                                    </td>
+                                    <td>
+                                        {{ idioma.get_nivel_hablado_display }}
+                                    </td>
+                                    <td>
+                                    <div class="button-group push-right">
+                                        <a href="{% url 'idioma' 'nueva' %}" class="ink-button" style="padding:1px 12px">Añadir</a>
+                                        <a href="{% url 'idioma' 'editar' idioma.id %}" class="ink-button blue" style="padding:1px 12px"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="blue"><span class="icon-pencil"></span></span></a>
+                                        <a href="{% url 'idioma' 'eliminar' idioma.id %}" class="ink-button red" onclick="return confirm('Está a punto de eliminar {{ idioma }}, ¿está seguro?')" style="padding:1px 12px"><span class="tooltip ink-label" data-tip-text="Editar" data-tip-where="mousefix" data-tip-color="red"><span class="icon-trash"></span></span></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        {% else %}
+                            Usted no posee ninguna información laboral. Por favor, registre una.
+                            <div class="push-right">
+                                <a href="{% url 'idioma' 'nueva' %}" class="ink-button blue">Añadir</a>
+                            </div>
+                        {% endif %}
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %} 
+
+  </body>
+</html>
+{% endblock %}
