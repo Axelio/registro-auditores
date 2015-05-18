@@ -23,10 +23,12 @@
             </nav>
             <form method="POST">{% csrf_token %}
                 <div class="row">
-                {{ form.non_field_errors }}
+                <b>{{ form.non_field_errors }}</b>
                 {% for campo in form %}
                     {% if campo.errors %}
-                        {{ campo.errors }}
+                        {% for error in campo.errors %}
+                            <b>{{ error }}</b>
+                        {% endfor %}
                     {% endif %}
                     {%if forloop.counter|divisibleby:"2" %}
                         <div class="input-field col s6">
