@@ -2,11 +2,14 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.core.context_processors import csrf
-from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.http import Http404, HttpResponseRedirect
+from django.contrib.auth.models import User
 
 from .forms import EditarPerfilForm
+from lugares.models import Estado
 from personas.forms import PersonaForm
+from personas.models import Persona
 
 import datetime
 
@@ -185,10 +188,6 @@ class CrearPerfilView(View):
     def post(self, request, *args, **kwargs):
         self.persona_form = PersonaForm(request.POST)
 
-        email2_error = ''
-        error_general = ''
-        error = False
-
         if not self.persona_form.is_valid():
             self.diccionario.update(csrf(request))
             self.diccionario.update({'curriculum':True})
@@ -205,22 +204,23 @@ class CrearPerfilView(View):
         else:
             estado = Estado.objects.get(id=request.POST['reside'])
             fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            persona = Persona.objects.create( cedula=request.POST['cedula'],
-                                              primer_nombre = request.POST['primer_nombre'],
-                                              segundo_nombre = request.POST['segundo_nombre'],
-                                              primer_apellido = request.POST['primer_apellido'],
-                                              segundo_apellido = request.POST['segundo_apellido'],
-                                              genero = request.POST['genero'],
-                                              reside = estado,
-                                              direccion = request.POST['direccion'],
-                                              fecha_nacimiento = fecha_nacimiento,
-                                              tlf_reside = request.POST['tlf_reside'],
-                                              tlf_movil = request.POST['tlf_movil'],
-                                              tlf_oficina = request.POST['tlf_oficina'],
-                                              tlf_contacto = request.POST['tlf_contacto'],
-                                              estado_civil = request.POST['estado_civil'],
-                                              email = request.user.email,
-                                             )
+            if not Persona.objects.filter(cedula=request.POST['cedula']).exists():
+                persona = Persona.objects.create( cedula=request.POST['cedula'],
+                                                  primer_nombre = request.POST['primer_nombre'],
+                                                  segundo_nombre = request.POST['segundo_nombre'],
+                                                  primer_apellido = request.POST['primer_apellido'],
+                                                  segundo_apellido = request.POST['segundo_apellido'],
+                                                  genero = request.POST['genero'],
+                                                  reside = estado,
+                                                  direccion = request.POST['direccion'],
+                                                  fecha_nacimiento = fecha_nacimiento,
+                                                  tlf_reside = request.POST['tlf_reside'],
+                                                  tlf_movil = request.POST['tlf_movil'],
+                                                  tlf_oficina = request.POST['tlf_oficina'],
+                                                  tlf_contacto = request.POST['tlf_contacto'],
+                                                  estado_civil = request.POST['estado_civil'],
+                                                  email = request.user.email,
+                                                 )
 
             usuario = User.objects.get(username=request.user.username)
 
