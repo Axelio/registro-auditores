@@ -28,18 +28,18 @@ class PersonaForm(forms.ModelForm):
                     'required': 'required',
                     'class': 'validate',
                     }),
+            'segundo_nombre': TextInput(
+                attrs={
+                    'type': 'text',
+                    'class': 'validate',
+                    'id': 'second_name',
+                    }),
             'primer_nombre': TextInput(
                 attrs={
                     'type': 'text',
                     'required': 'required',
                     'class': 'validate',
                     'id': 'first_name',
-                    }),
-            'segundo_nombre': TextInput(
-                attrs={
-                    'type': 'text',
-                    'class': 'validate',
-                    'id': 'second_name',
                     }),
             'primer_apellido': TextInput(
                 attrs={
