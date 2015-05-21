@@ -11,7 +11,7 @@
         <div class="row center">
           <!-- Modal Trigger -->
             {% if not user.is_authenticated %}
-            <a class="waves-effect waves-light btn-large modal-trigger teal lighten-1" href="#modal1">Iniciar sesión</a>
+            <a class="waves-effect waves-light btn-large modal-trigger teal lighten-1" href="{% url 'login' %}">Iniciar sesión</a>
 
               <!-- Modal Structure -->
                 <div id="modal1" class="modal">

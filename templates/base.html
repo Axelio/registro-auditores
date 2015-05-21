@@ -8,14 +8,16 @@
   <title>Registro de Auditores - SUSCERTE</title>
 
   <!-- CSS  -->
+  <link href="{% static "css/styles.css"%}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{% static "css/materialize.css"%}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
   {% block nav %}
+  <header>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo black-text">Logo</a>
+      <a id="logo-container" href="{% url 'inicio' %}" class="brand-logo black-text"><img height=60px src="{% static "images/logo_suscerte.png" %}"></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#">Navbar Link</a></li>
       </ul>
@@ -26,9 +28,10 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
   </nav>
+  </header>
   {% endblock %}
 
-  {% block content %}{% endblock %}
+  <main>{% block content %}{% endblock %}</main>
 
   <!--  Scripts-->
   <script src="{% static "js/jquery-2.1.1.min.js"%}"></script>
