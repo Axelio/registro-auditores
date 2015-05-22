@@ -5752,8 +5752,7 @@ ul.tabs li.tab {
     left: 0;
     right: 0;
     text-align: center;
-    position: absolute;
-    bottom: 64px; }
+    position: absolute; }
     .fixed-action-btn ul li {
       margin-bottom: 15px; }
     .fixed-action-btn ul a.btn-floating {
