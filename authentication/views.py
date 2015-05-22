@@ -13,13 +13,23 @@ from auditores_suscerte import settings # Importar configuraciones del proyecto
 
 # Create your views here.
 def auth(request):
+    template='formulario.html'
+    titulo = u'Inicia sesión'
+    descripcion = 'Ingresa, inicia sesión y actualiza tu información \
+        laboral. Las empresas querrían tener un auditor como tú.'
+
     diccionario = {}
     diccionario.update(csrf(request))
-    if request.user.groups.get_queryset().filter(name__iexact='operador').exists():
+    diccionario.update({'titulo': titulo})
+    diccionario.update({'descripcion': descripcion})
+
+    if request.user.groups.get_queryset().filter(
+        name__iexact='operador').exists():
         return HttpResponseRedirect(reverse('perfil'))
     diccionario.update({'user':request.user})
     diccionario.update({'auth':True})
-    return login(request, authentication_form=AuthenticationForm, template_name='index.html', extra_context=diccionario)
+    return login(request, authentication_form=AuthenticationForm,
+        template_name=template, extra_context=diccionario)
 
 
 class AutoLogout: 
