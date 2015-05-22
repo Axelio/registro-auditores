@@ -68,7 +68,7 @@ urlpatterns = patterns('',
 
     url(r'login/',
         auth,
-        name='auth'),
+        name='login'),
 
     url(r'cambiar_clave/',
         login_required(password_change),
@@ -107,7 +107,8 @@ urlpatterns = patterns('',
         name='acreditar'),
 
     url(r'^$',
-        auth, name='inicio'),
+        TemplateView.as_view(template_name='index.html'),
+        name='inicio'),
 
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
