@@ -60,6 +60,7 @@ urlpatterns = patterns('',
         name='editar_perfil'),
 
     url(r'^$',
-        login_required(PerfilView.as_view())),
+        login_required(PerfilView.as_view()),
+        name='perfil'),
 
 )

@@ -13,7 +13,7 @@ class PersonaForm(forms.ModelForm):
     Formulario general para el ingreso de personas
     '''
 
-    captcha = ReCaptchaField()
+    #captcha = ReCaptchaField()
 
     class Meta:
         # Se determina cuál es el modelo al que va a utilizar

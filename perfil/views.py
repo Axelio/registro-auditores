@@ -7,6 +7,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth.models import User
 
 from .forms import EditarPerfilForm
+from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
 from personas.models import Persona
@@ -29,6 +30,7 @@ class PerfilView(View):
         tipo = ''
         self.diccionario.update(csrf(request))
         usuario = request.user
+        '''
         if not request.session.get('ultima_sesion', False):
             persistente = True
             mensaje = 'Recuerde cambiar su contraseña por seguridad...'
@@ -80,6 +82,7 @@ class PerfilView(View):
 
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
+        '''
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -176,14 +179,17 @@ class CrearPerfilView(View):
     diccionario.update({'descripcion': descripcion})
 
     def get(self, request, *args, **kwargs):
-        self.diccionario.update(csrf(request))
-        self.diccionario.update({'curriculum':True})
-        self.diccionario.update({'mensaje_error':''})
-        self.diccionario.update({'form':self.persona_form()})
-        return render(request, 
-                       template_name=self.template,
-                       dictionary=self.diccionario,
-                     )
+        if UserProfile.objects.filter(user=request.user).exists():
+            return HttpResponseRedirect(reverse('perfil'))
+        else:
+            self.diccionario.update(csrf(request))
+            self.diccionario.update({'curriculum': True})
+            self.diccionario.update({'mensaje_error': ''})
+            self.diccionario.update({'form': self.persona_form()})
+            return render(request, 
+                           template_name=self.template,
+                           dictionary=self.diccionario,
+                         )
 
     def post(self, request, *args, **kwargs):
         self.persona_form = PersonaForm(request.POST)
