@@ -3,119 +3,202 @@
 {% block content %}
 <div class="container">
     <div class="row">
-
-        <div class="col s12 m4 z-depth-1">
-            <div class="row">
-                <div class="col s12 ">
-                  <h5 class="grey-text darken-1">Información personal</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m1 center">
-                    <div class=" image-container">
-                        <img src="imgs/Suscerte-logo.png">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <ul class="collection">
-                        <li class="collection-item"><h5>Nombres</h5> Axel</li>
-                        <li class="collection-item"><h5>Apellidos</h5> Díaz</li>
-                        <li class="collection-item"><h5>Teléfonos</h5> 12391823</li>
-                        <li class="collection-item">Alvin</li>
-                        <li class="collection-item">Alvin</li>
-                    </ul>         
-                </div>
-            </div>
-        </div>
-
         <div class="col s12 m4">
             <ul class="collection z-depth-1">
-                <li class="collection-item avatar">
-                    <i class="mdi-action-wallet-travel circle green"></i>
-                    <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#modal3">Información laboral</a></b></span>
-
-                    <div id="modal3" class="modal bottom-sheet">
-                      <div class="modal-content">
-                        <h4>Modal Header</h4>
-                        <ul class="collection">
-                          <li class="collection-item avatar">
-                            <img src="images/yuna.jpg" alt="" class="circle">
-                            <span class="title">Title</span>
-                            <p>First Line <br>
-                               Second Line
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-                          </li>
-                          <li class="collection-item avatar">
-                            <i class="mdi-file-folder circle"></i>
-                            <span class="title">Title</span>
-                            <p>First Line <br>
-                               Second Line
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-                          </li>
-                          <li class="collection-item avatar">
-                            <i class="mdi-action-assessment circle green"></i>
-                            <span class="title">Title</span>
-                            <p>First Line <br>
-                               Second Line
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-                          </li>
-                          <li class="collection-item avatar">
-                            <i class="mdi-av-play-arrow circle red"></i>
-                            <span class="title">Title</span>
-                            <p>First Line <br>
-                               Second Line
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <p>Has trabajado en...<br></p>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col s12 m4">
-            <ul class="collection z-depth-1">
-                <li class="collection-item avatar">
-                    <i class="mdi-action-home circle green"></i>
-                    <span class="title">Título</span>
-                    <p>Primera línea<br>
-                    Segunda línea
-
-                    </p>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="mdi-file-folder circle"></i>
-                    <span class="title">Título</span>
-                    <p>Primera línea<br>
-                    Segunda línea
-
-                    </p>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="mdi-action-assessment circle green"></i>
-                    <span class="title">Título</span>
-                    <p>Primera línea<br>
-                    Segunda línea
-
-                    </p>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="mdi-av-play-arrow circle red"></i>
-                    <span class="title">Título</span>
-                    <p>Primera línea<br>
-                    Segunda línea
-
+                <li class="collection-item">
+                    <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#">Información personal</a></b></span>
+                    <p>
+                        <b>Axel Díaz</b><br />
+                        Nacido el <b>DD/MM/AAAA</b><br />
+                        Residenciado en <b>No sé dónde</b><br />
+                        Cuyo contacto se hace posible a través del número <b>01230123123</b> o por el correo electrónico <b><a href="#">correo en gmail</a></b>
                     </p>
                 </li>
             </ul>
         </div>
+        <div class="col s12 m8">
+            <div class="col s12 m6">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar">
+                        <i class="mdi-action-wallet-travel circle yellow darken-1"></i>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#laboral">Información laboral</a></b></span>
+
+                        <div id="laboral" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            <h4>Usted ha trabajado en...</h4>
+                            <ul class="collection">
+                              <li class="collection-item avatar">
+                                <div class="col s11">
+                                    <i class="mdi-file-folder circle green"></i>
+                                    <span class="title"><b>Nombre de empresa</b></span>
+                                    <p>Desde FECHA, hasta FECHA<br>
+                                       como CARGO en el área de AREA
+                                    </p>
+                                </div>
+                                <div class="col s1 right-align">
+                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <p>Has trabajado en...<br></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m6">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar">
+                        <i class="large mdi-social-school circle green"></i>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#formacion">Formación educativa</a></b></span>
+
+                        <div id="formacion" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            <h4>Usted se ha formado en...</h4>
+                            <ul class="collection">
+                              <li class="collection-item avatar">
+                                <div class="col s11">
+                                    <i class="mdi-file-folder circle green"></i>
+                                    <span class="title"><b>Nombre de institución</b></span>
+                                    <p>Desde FECHA, hasta FECHA<br>
+                                       como CARGO en el área de AREA
+                                    </p>
+                                </div>
+                                <div class="col s1 right-align">
+                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <p>Usted se formó en...<br></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m6">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar">
+                        <i class="large mdi-social-school circle  blue darken-4"></i>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#certificaciones">Certificaciones</a></b></span>
+
+                        <div id="certificaciones" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            <h4>Usted se ha certificado en...</h4>
+                            <ul class="collection">
+                              <li class="collection-item avatar">
+                                <div class="col s11">
+                                    <i class="mdi-file-folder circle green"></i>
+                                    <span class="title"><b>Nombre de institución</b></span>
+                                    <p>Desde FECHA, hasta FECHA<br>
+                                       como CARGO en el área de AREA
+                                    </p>
+                                </div>
+                                <div class="col s1 right-align">
+                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <p>Sus certificaciones son...<br></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m6">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar">
+                        <i class="large mdi-social-school circle cyan"></i>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#habilidades">Habilidades</a></b></span>
+
+                        <div id="habilidades" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            <h4>Sus habilidades son...</h4>
+                            <ul class="collection">
+                              <li class="collection-item avatar">
+                                <div class="col s11">
+                                    <i class="mdi-file-folder circle green"></i>
+                                    <span class="title"><b>Nombre de institución</b></span>
+                                    <p>Desde FECHA, hasta FECHA<br>
+                                       como CARGO en el área de AREA
+                                    </p>
+                                </div>
+                                <div class="col s1 right-align">
+                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <p>Sus habilidades son...<br></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m6">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar">
+                        <i class="large mdi-social-school circle red"></i>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#conocimientos">Conocimientos</a></b></span>
+
+                        <div id="conocimientos" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            <h4>Sus conocimientos fuertes son...</h4>
+                            <ul class="collection">
+                              <li class="collection-item avatar">
+                                <div class="col s11">
+                                    <i class="mdi-file-folder circle green"></i>
+                                    <span class="title"><b>Nombre de institución</b></span>
+                                    <p>Desde FECHA, hasta FECHA<br>
+                                       como CARGO en el área de AREA
+                                    </p>
+                                </div>
+                                <div class="col s1 right-align">
+                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <p>Sus conocimientos fuertes son...<br></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m6">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar">
+                        <i class="large mdi-social-school circle teal darken-4"></i>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#idiomas">Idiomas</a></b></span>
+
+                        <div id="idiomas" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            <h4>Sabe sobre los siguientes idiomas...</h4>
+                            <ul class="collection">
+                              <li class="collection-item avatar">
+                                <div class="col s11">
+                                    <i class="mdi-file-folder circle green"></i>
+                                    <span class="title"><b>Nombre de institución</b></span>
+                                    <p>Desde FECHA, hasta FECHA<br>
+                                       como CARGO en el área de AREA
+                                    </p>
+                                </div>
+                                <div class="col s1 right-align">
+                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <p>Sabe sobre los siguientes idiomas...<br></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 </div>
 <div class="fixed-action-btn" style="top: 70px; right: 24px;">
@@ -155,4 +238,5 @@
         </li>
     </ul>
 </div>
+
 {% endblock %}
