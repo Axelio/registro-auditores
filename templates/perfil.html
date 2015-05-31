@@ -1,26 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load perfil %}
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col s12 m4">
+        <div class="col s12 m4 l6">
             <ul class="collection z-depth-1">
                 <li class="collection-item">
-                    <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#">Información personal</a></b></span>
+                    <div class="center-align"><b><a href=#>{{ request.user.first_name }} {{ request.user.last_name}}</a></b></div><br />
                     <p>
-                        <b>Axel Díaz</b><br />
-                        Nacido el <b>DD/MM/AAAA</b><br />
-                        Residenciado en <b>No sé dónde</b><br />
-                        Cuyo contacto se hace posible a través del número <b>01230123123</b> o por el correo electrónico <b><a href="#">correo en gmail</a></b>
+                        Nacido el <b>{{ request.user.profile.persona.fecha_nacimiento }}</b><br />
+                        Residenciado en <b>{{ request.user.profile.persona.direccion }}, {{ request.user.profile.persona.reside }}</b><br />
+                        Cuyo contacto se hace posible a través del número <b>{{ request.user.profile.persona.tlf_reside }}</b> o por el correo electrónico <b><a href="#">{{ request.user.profile.persona.email|mail_antispam }}</a></b>
                     </p>
+                    <div class="center-align">
+                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Editar perfil">
+                        <i class="mdi-editor-mode-edit large"></i>
+                    </a>
                 </li>
             </ul>
         </div>
-        <div class="col s12 m8">
-            <div class="col s12 m6">
+        <div class="col s12 m8 l6">
+            <div class="col s12 m6 l12">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
-                        <i class="mdi-action-wallet-travel circle yellow darken-1"></i>
+                        <i class="large mdi-action-assignment circle yellow darken-1"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#laboral">Información laboral</a></b></span>
 
                         <div id="laboral" class="modal bottom-sheet">
@@ -47,7 +51,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 l12">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
                         <i class="large mdi-social-school circle green"></i>
@@ -77,10 +81,40 @@
                     </li>
                 </ul>
             </div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 l12">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
-                        <i class="large mdi-social-school circle  blue darken-4"></i>
+                        <i class="large mdi-av-my-library-books circle deep-orange"></i>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#cursos">Cursos</a></b></span>
+
+                        <div id="cursos" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            <h4>Ud ha asistido a los siguientes cursos...</h4>
+                            <ul class="collection">
+                              <li class="collection-item avatar">
+                                <div class="col s11">
+                                    <i class="mdi-file-folder circle green"></i>
+                                    <span class="title"><b>Nombre de institución</b></span>
+                                    <p>Desde FECHA, hasta FECHA<br>
+                                       como CARGO en el área de AREA
+                                    </p>
+                                </div>
+                                <div class="col s1 right-align">
+                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <p>Usted se formó en...<br></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m6 l12">
+                <ul class="collection z-depth-1">
+                    <li class="collection-item avatar">
+                        <i class="large mdi-maps-beenhere circle blue darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#certificaciones">Certificaciones</a></b></span>
 
                         <div id="certificaciones" class="modal bottom-sheet">
@@ -103,14 +137,14 @@
                             </ul>
                           </div>
                         </div>
-                        <p>Sus certificaciones son...<br></p>
+                        <p>Ud ha asistido a los siguientes cursos...</p>
                     </li>
                 </ul>
             </div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 l12">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
-                        <i class="large mdi-social-school circle cyan"></i>
+                        <i class="large mdi-action-settings circle cyan"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#habilidades">Habilidades</a></b></span>
 
                         <div id="habilidades" class="modal bottom-sheet">
@@ -137,10 +171,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 l12">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
-                        <i class="large mdi-social-school circle red"></i>
+                        <i class="large mdi-maps-local-library circle red darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#conocimientos">Conocimientos</a></b></span>
 
                         <div id="conocimientos" class="modal bottom-sheet">
@@ -167,10 +201,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 l12">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
-                        <i class="large mdi-social-school circle teal darken-4"></i>
+                        <i class="large mdi-action-language circle teal darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#idiomas">Idiomas</a></b></span>
 
                         <div id="idiomas" class="modal bottom-sheet">
@@ -207,33 +241,38 @@
     </a>
     <ul>
         <li>
-            <a class="btn-floating tooltipped yellow darken-1" data-position="left" data-delay="50" data-tooltip="Laboral" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-action-wallet-travel"></i>
+            <a class="btn-floating tooltipped yellow darken-1" data-position="left" data-delay="50" data-tooltip="Laboral" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;" href="{% url 'laboral' 'nueva' %}">
+                <i class="large mdi-action-assignment"></i>
             </a>
         </li>
         <li>
-            <a class="btn-floating tooltipped green" data-position="left" data-delay="50" data-tooltip="Curso" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
+            <a class="btn-floating tooltipped green" data-position="left" data-delay="50" data-tooltip="Educación" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;" href="{% url 'educacion' 'nueva' %}">
                 <i class="large mdi-social-school"></i>
+            </a>
+        </li>
+        <li>
+            <a class="btn-floating tooltipped deep-orange" data-position="left" data-delay="50" data-tooltip="Curso" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
+                <i class="large mdi-av-my-library-books"></i>
             </a>
         </li>
         <li>
             <a class="btn-floating tooltipped blue darken-4" data-position="left" data-delay="50" data-tooltip="Certificación" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-social-school"></i>
+                <i class="large mdi-maps-beenhere"></i>
             </a>
         </li>
         <li>
             <a class="btn-floating tooltipped cyan" data-position="left" data-delay="50" data-tooltip="Habilidad" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-social-school"></i>
+                <i class="large mdi-action-settings"></i>
             </a>
         </li>
         <li>
-            <a class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="Otro conocimiento" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-social-school"></i>
+            <a class="btn-floating tooltipped red darken-4" data-position="left" data-delay="50" data-tooltip="Otro conocimiento" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
+                <i class="large mdi-maps-local-library"></i>
             </a>
         </li>
         <li>
-            <a class="btn-floating tooltipped teal darken-4" data-position="left" data-delay="50" data-tooltip="Idioma" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-social-school"></i>
+            <a class="btn-floating tooltipped teal darken-4" data-position="left" data-delay="50" data-tooltip="Idiomas" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
+                <i class="large mdi-action-language"></i>
             </a>
         </li>
     </ul>
