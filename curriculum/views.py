@@ -340,8 +340,8 @@ class EducacionView(View):
     Clase para la renderización de los datos educativos
     '''
 
-    template = 'perfil/editar_formulario.html'
-    educacion_form = EducacionForm
+    template = 'formulario.html'
+    form = EducacionForm
     mensaje = ''
     tipo_mensaje = ''
     titulo = u'educación'
@@ -361,7 +361,7 @@ class EducacionView(View):
         except:
             raise Http404
 
-        self.diccionario.update({'formulario': self.educacion_form()})
+        self.diccionario.update({'formulario': self.form()})
         if kwargs.has_key('educacion_id') and kwargs['educacion_id'] != None:
             nueva = False
             try:
@@ -370,7 +370,7 @@ class EducacionView(View):
                 raise Http404
 
             if educacion.persona == usuario.userprofile_set.get_query_set()[0].persona:
-                self.educacion_form = self.educacion_form(instance=educacion)
+                self.form = self.form(instance=educacion)
             else:
                 raise PermissionDenied
 
@@ -388,7 +388,7 @@ class EducacionView(View):
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'formulario':self.educacion_form})
+        self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -519,8 +519,8 @@ class LaboralView(View):
     '''
     Clase para la renderización de los datos laborales
     '''
-    template='perfil/editar_formulario.html'
-    laboral_form = LaboralForm 
+    template='formulario.html'
+    form = LaboralForm 
     titulo = 'laboral'
     mensaje = ''
     tipo_mensaje = ''
@@ -538,7 +538,7 @@ class LaboralView(View):
         except:
             raise Http404
 
-        self.diccionario.update({'formulario':self.laboral_form()})
+        self.diccionario.update({'formulario':self.form()})
 
         # Si se elimina una Educación
         if kwargs.has_key('laboral_id') and not kwargs['laboral_id'] == None:
@@ -550,7 +550,7 @@ class LaboralView(View):
 
             # Si el usuario de laboral no es el mismo al loggeado, retornar permisos denegados
             if laboral.usuario == usuario.profile:
-                self.laboral_form = self.laboral_form(instance=laboral)
+                self.form = self.form(instance=laboral)
             else:
                 raise PermissionDenied
         else:
@@ -569,7 +569,7 @@ class LaboralView(View):
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
-        self.diccionario.update({'formulario':self.laboral_form})
+        self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
