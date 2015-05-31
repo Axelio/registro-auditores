@@ -30,6 +30,9 @@ class PerfilView(View):
         tipo = ''
         self.diccionario.update(csrf(request))
         usuario = request.user
+
+        if request.user.profile.persona == None:
+            return HttpResponseRedirect(reverse('crear_perfil'))
         '''
         if not request.session.get('ultima_sesion', False):
             persistente = True
@@ -43,10 +46,6 @@ class PerfilView(View):
             persona = Persona.objects.get(userprofile=usuario.profile)
         except:
             return HttpResponseRedirect(reverse('crear_perfil'))
-
-        self.diccionario.update({'persona':persona})
-        self.diccionario.update({'mensaje':mensaje})
-        self.diccionario.update({'tipo':tipo})
 
         # Revisamos si el usuario pertenece al grupo Operador
         # Y si pertenece, le cambiamos la plantilla y los filtros
@@ -108,7 +107,7 @@ class EditarPerfilView(View):
         try:
             request.user.get_profile()
         except:
-            url = reverse('crear_persona')
+            url = reverse('crear_perfil')
 
         self.diccionario.update(csrf(request))
         usuario = request.user
@@ -179,7 +178,7 @@ class CrearPerfilView(View):
     diccionario.update({'descripcion': descripcion})
 
     def get(self, request, *args, **kwargs):
-        if UserProfile.objects.filter(user=request.user).exists():
+        if not request.user.profile.persona == None:
             return HttpResponseRedirect(reverse('perfil'))
         else:
             self.diccionario.update(csrf(request))
@@ -239,7 +238,7 @@ class CrearPerfilView(View):
             perfil.persona = persona
             perfil.save()
 
-        self.template = 'perfil/perfil.html'
+        self.template = 'perfil.html'
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
