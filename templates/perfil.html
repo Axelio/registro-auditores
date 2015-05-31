@@ -14,7 +14,7 @@
                         Cuyo contacto se hace posible a través del número <b>{{ request.user.profile.persona.tlf_reside }}</b> o por el correo electrónico <b><a href="#">{{ request.user.profile.persona.email|mail_antispam }}</a></b>
                     </p>
                     <div class="center-align">
-                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Editar perfil">
+                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Editar perfil" href="{% url 'editar_perfil' %}">
                         <i class="mdi-editor-mode-edit large"></i>
                     </a>
                 </li>
@@ -40,7 +40,7 @@
                                     </p>
                                 </div>
                                 <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium green" href="{% url 'laboral' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
                                 </div>
                               </li>
@@ -70,7 +70,7 @@
                                     </p>
                                 </div>
                                 <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium green" href="{% url 'educacion' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
                                 </div>
                               </li>
@@ -100,7 +100,7 @@
                                     </p>
                                 </div>
                                 <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium green" href="{% url 'curso' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
                                 </div>
                               </li>
@@ -130,7 +130,7 @@
                                     </p>
                                 </div>
                                 <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium green" href="{% url 'certificacion' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
                                 </div>
                               </li>
@@ -160,7 +160,7 @@
                                     </p>
                                 </div>
                                 <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium green" href="{% url 'habilidad' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
                                 </div>
                               </li>
@@ -190,7 +190,7 @@
                                     </p>
                                 </div>
                                 <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium green" href="{% url 'conocimiento' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
                                 </div>
                               </li>
@@ -220,7 +220,7 @@
                                     </p>
                                 </div>
                                 <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green"><i class="mdi-editor-mode-edit small"></i></a>
+                                    <a class="btn-floating btn-medium green" href="{% url 'idioma' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red"><i class="mdi-action-delete small"></i></a>
                                 </div>
                               </li>
