@@ -358,59 +358,19 @@ class LaboralForm(forms.ModelForm):
         model = Laboral
         exclude = ('usuario', 'trabajo_actual')
         widgets = {
-            'empresa': TextInput(
-                attrs={
-                    'type': 'text',
-                    'required': 'required',
-                    'placeholder': 'Empresa en la que laboró'}),
-
-            'sector': TextInput(
-                attrs={
-                    'type': 'text',
-                    'placeholder': 'Sector desempeñado'}),
-
-            'telefono': TextInput(
-                attrs={
-                    'type': 'text',
-                    'placeholder': 'Número telefónico de trabajo'}),
-
-            'cargo': TextInput(
-                attrs={
-                    'type': 'text',
-                    'placeholder': 'Cargo trabajado'}),
-
-            'funcion': Textarea(
-                attrs={
-                    'type': 'text',
-                    'placeholder': 'Funciones desempeñadas'}),
-
             'fecha_inicio': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'placeholder': 'Fecha de inicio',
-                    'data-position': 'bottom'}),
+                    'class': 'datepicker',
+                    }),
 
             'fecha_fin': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'placeholder': 'Fecha de culminación',
-                    'data-position': 'bottom'}),
-
-            'retiro': TextInput(
-                attrs={
-                    'type': 'text',
-                    'placeholder': 'Razón de retiro'}),
-
-            'direccion_empresa': Textarea(
-                attrs={
-                    'type': 'text',
-                    'placeholder': 'Dirección de la empresa'}),
+                    'class': 'datepicker',
+                    }),
         }
 
     def clean_fecha_inicio(self):
