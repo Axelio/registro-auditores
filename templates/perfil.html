@@ -22,40 +22,63 @@
         </div>
         <div class="col s12 m8 l6">
             <div class="col s12 m6 l12">
+                <div class="col11">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
                         <i class="large mdi-action-assignment circle yellow darken-1"></i>
-                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#laboral">Información laboral</a></b></span>
-
-                        <div id="laboral" class="modal bottom-sheet">
-                          <div class="modal-content">
-                            <h4>Usted ha trabajado en...</h4>
-                            <ul class="collection">
-                              <li class="collection-item avatar">
-                                <div class="col s11">
-                                    <i class="mdi-file-folder circle green"></i>
-                                    <span class="title"><b>Nombre de empresa</b></span>
-                                    <p>Desde FECHA, hasta FECHA<br>
-                                       como CARGO en el área de AREA
-                                    </p>
-                                </div>
-                                <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green" href="{% url 'laboral' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
-                                    <a class="btn-floating btn-medium red" href="{% url 'laboral' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
+                        <span class="title"><b>
+                            {% if laborales %}
+                                <a class="waves-effect waves-light modal-trigger" href="#laboral">
+                            {% else %}
+                                <a class="waves-effect waves-light" href="#">
+                            {% endif %}
+                                Información laboral
+                            </a>
+                        </b></span>
+                        <div class="col s1 align right">
+                            <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'laboral' 'nueva' %}">
+                                <i class="large mdi-content-add"></i>
+                            </a>
                         </div>
-                        <p>Has trabajado en...<br></p>
+                        {% if laborales %}
+                            <div id="laboral" class="modal bottom-sheet">
+                              <div class="modal-content">
+                                <h4>Usted ha trabajado en...</h4>
+                                {% for laboral in laborales %}
+                                    <ul class="collection">
+                                      <li class="collection-item avatar">
+                                        <div class="col s11">
+                                            <i class="mdi-file-folder circle green"></i>
+                                            <span class="title"><b>{{ laboral.empresa }}</b></span>
+                                            <p>Desde {{ laboral.fecha_inicio }}, hasta {{ laboral.fecha_fin }}<br>
+                                               como {{ laboral.cargo }} en el sector {{ laboral.sector }}
+                                            </p>
+                                        </div>
+                                        <div class="col s1 right-align">
+                                            <a class="btn-floating btn-medium green" href="{% url 'laboral' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
+                                            <a class="btn-floating btn-medium red" href="{% url 'laboral' 'eliminar' laboral.id %}"><i class="mdi-action-delete small"></i></a>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                {% endfor %}
+                              </div>
+                            </div>
+                            <p>Has trabajado en...<br></p>
+                        {% endif %}
                     </li>
                 </ul>
+                </div>
             </div>
             <div class="col s12 m6 l12">
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
                         <i class="large mdi-social-school circle green"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#formacion">Formación educativa</a></b></span>
+                            <div class="col s1 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                    <i class="large mdi-content-add"></i>
+                                </a>
+                            </div>
 
                         <div id="formacion" class="modal bottom-sheet">
                           <div class="modal-content">
@@ -86,6 +109,11 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-av-my-library-books circle deep-orange"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#cursos">Cursos</a></b></span>
+                            <div class="col s1 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                    <i class="large mdi-content-add"></i>
+                                </a>
+                            </div>
 
                         <div id="cursos" class="modal bottom-sheet">
                           <div class="modal-content">
@@ -116,6 +144,11 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-maps-beenhere circle blue darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#certificaciones">Certificaciones</a></b></span>
+                            <div class="col s1 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                    <i class="large mdi-content-add"></i>
+                                </a>
+                            </div>
 
                         <div id="certificaciones" class="modal bottom-sheet">
                           <div class="modal-content">
@@ -146,6 +179,11 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-action-settings circle cyan"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#habilidades">Habilidades</a></b></span>
+                            <div class="col s1 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                    <i class="large mdi-content-add"></i>
+                                </a>
+                            </div>
 
                         <div id="habilidades" class="modal bottom-sheet">
                           <div class="modal-content">
@@ -176,6 +214,11 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-maps-local-library circle red darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#conocimientos">Conocimientos</a></b></span>
+                            <div class="col s1 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                    <i class="large mdi-content-add"></i>
+                                </a>
+                            </div>
 
                         <div id="conocimientos" class="modal bottom-sheet">
                           <div class="modal-content">
@@ -206,6 +249,11 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-action-language circle teal darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#idiomas">Idiomas</a></b></span>
+                            <div class="col s1 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                    <i class="large mdi-content-add"></i>
+                                </a>
+                            </div>
 
                         <div id="idiomas" class="modal bottom-sheet">
                           <div class="modal-content">
@@ -235,47 +283,4 @@
 
     </div>
 </div>
-<div class="fixed-action-btn" style="top: 70px; right: 24px;">
-    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
-        <i class="large mdi-content-add"></i>
-    </a>
-    <ul>
-        <li>
-            <a class="btn-floating tooltipped yellow darken-1" data-position="left" data-delay="50" data-tooltip="Laboral" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;" href="{% url 'laboral' 'nueva' %}">
-                <i class="large mdi-action-assignment"></i>
-            </a>
-        </li>
-        <li>
-            <a class="btn-floating tooltipped green" data-position="left" data-delay="50" data-tooltip="Educación" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;" href="{% url 'educacion' 'nueva' %}">
-                <i class="large mdi-social-school"></i>
-            </a>
-        </li>
-        <li>
-            <a class="btn-floating tooltipped deep-orange" data-position="left" data-delay="50" data-tooltip="Curso" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-av-my-library-books"></i>
-            </a>
-        </li>
-        <li>
-            <a class="btn-floating tooltipped blue darken-4" data-position="left" data-delay="50" data-tooltip="Certificación" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-maps-beenhere"></i>
-            </a>
-        </li>
-        <li>
-            <a class="btn-floating tooltipped cyan" data-position="left" data-delay="50" data-tooltip="Habilidad" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-action-settings"></i>
-            </a>
-        </li>
-        <li>
-            <a class="btn-floating tooltipped red darken-4" data-position="left" data-delay="50" data-tooltip="Otro conocimiento" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-maps-local-library"></i>
-            </a>
-        </li>
-        <li>
-            <a class="btn-floating tooltipped teal darken-4" data-position="left" data-delay="50" data-tooltip="Idiomas" style="transform: scaleY(0.4) scaleX(0.4) translateY(30px); opacity: 0;">
-                <i class="large mdi-action-language"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
 {% endblock %}

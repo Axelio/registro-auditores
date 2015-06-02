@@ -46,6 +46,19 @@
     });
   </script>
 
+  <script>
+    $(document).ready(function (){
+        $("#notificacion").click();
+    });
+  </script>
+
+
+  {% if messages %}
+      {% for message in messages %}
+          <a id="notificacion" onclick="Materialize.toast('{{ message }}', 4000, 'rounded')">Toast!</a>
+      {% endfor %}
+  {% endif %}
+
   </body>
   {% block footer %}
     {% include 'footer.html' %} 
