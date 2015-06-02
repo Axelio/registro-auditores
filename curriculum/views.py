@@ -1,6 +1,7 @@
 # -*- coding: UTF8 -*-
 from django.shortcuts import render
 from django.views.generic.base import View
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
@@ -246,7 +247,7 @@ class CitasView(View):
                 self.mensaje = 'Debe seleccionar tres fechas/horas tentativas en las \
                                 que desearía tener una cita con nosotros.'
         else:
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
             self.tipo_mensaje = 'warning'
             self.mensaje = u'Debe tener toda la información \
                             curricular completa. Por favor, revísela.'
@@ -269,7 +270,7 @@ class CitasView(View):
         self.diccionario.update(csrf(request))
         nueva = True
         if not requisitos:
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
             self.tipo_mensaje = 'warning'
             self.mensaje = u'Debe tener toda la información \
                             curricular completa. Por favor, revísela.'
@@ -319,7 +320,7 @@ class CitasView(View):
                                 éxito. Se ha enviado su información a \
                                 los operadores"
                 self.tipo_mensaje = 'success'
-                self.template = 'perfil/perfil.html'
+                self.template = 'perfil.html'
 
         self.diccionario.update({'persona': request.user.profile.persona})
         self.diccionario.update({'nueva': nueva})
@@ -382,7 +383,7 @@ class EducacionView(View):
             self.mensaje = u'Información educacional ha sido eliminada exitosamente'
             self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
@@ -432,7 +433,7 @@ class EducacionView(View):
                     self.mensaje = u'Información educacional ha sido creada exitosamente'
                     self.tipo_mensaje = u'success'
 
-                self.template = 'perfil/perfil.html'
+                self.template = 'perfil.html'
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
@@ -521,13 +522,13 @@ class LaboralView(View):
     '''
     template='formulario.html'
     form = LaboralForm 
-    titulo = 'laboral'
+    titulo = 'Información laboral'
     mensaje = ''
     tipo_mensaje = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
-    diccionario.update({'titulo':titulo})
+    diccionario.update({'titulo': titulo})
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
         usuario = request.user
@@ -560,10 +561,10 @@ class LaboralView(View):
             educacion = Laboral.objects.get(id=int(kwargs['laboral_id']))
             educacion.delete()
 
-            self.mensaje = u'Información laboral ha sido eliminada exitosamente'
-            self.tipo_mensaje = u'success'
+            messages.add_message(request, messages.SUCCESS,
+                u'Información laboral ha sido eliminada exitosamente')
 
-            self.template = 'perfil/perfil.html'
+            return HttpResponseRedirect(reverse('perfil'))
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -579,11 +580,11 @@ class LaboralView(View):
 
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        self.laboral_form = self.laboral_form(request.POST)
+        self.form = self.form(request.POST)
         usuario = request.user
         guardado = False
 
-        if self.laboral_form.is_valid():
+        if self.form.is_valid():
 
             usuario = usuario.profile
             empresa = request.POST['empresa']
@@ -618,22 +619,20 @@ class LaboralView(View):
                     laboral.save()
 
                     self.mensaje = u'Información laboral ha sido editada exitosamente'
-                    self.tipo_mensaje = u'success'
 
                 else:
                     # Si se crea información laboral 
                     laboral = Laboral.objects.create(usuario = usuario, empresa=empresa, sector=sector, estado=estado, telefono=telefono, cargo=cargo, funcion=funcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, retiro=retiro, direccion_empresa=direccion_empresa, trabajo_actual=trabajo_actual)
                     self.mensaje = u'Información laboral ha sido creada exitosamente'
-                    self.tipo_mensaje = u'success'
 
+                messages.add_message(request, messages.SUCCESS, self.mensaje)
 
-
-            self.template = 'perfil/perfil.html'
+            return HttpResponseRedirect(reverse('perfil'))
 
         else:
-            if self.laboral_form.errors.has_key('__all__'):
+            if self.form.errors.has_key('__all__'):
                 self.tipo_mensaje = 'error'
-                self.mensaje = self.laboral_form.errors['__all__'][0]
+                self.mensaje = self.form.errors['__all__'][0]
                 laboral = laboral.objects.get(id=kwargs['laboral_id'])
                 laboral.empresa = empresa
                 laboral.sector = sector
@@ -648,13 +647,13 @@ class LaboralView(View):
                 laboral.trabajo_actual = trabajo_actual
 
                 laboral.save(commit=False)
-                self.laboral_form(instance=laboral)
+                self.form(instance=laboral)
 
         persona = request.user.profile.persona
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'persona':persona})
-        self.diccionario.update({'formulario':self.laboral_form})
+        self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
 
@@ -814,7 +813,7 @@ class HabilidadView(View):
             self.mensaje = u'Habilidad eliminada exitosamente'
             self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
@@ -852,7 +851,7 @@ class HabilidadView(View):
                 self.mensaje = u'Habilidad creada exitosamente'
                 self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -907,7 +906,7 @@ class ConocimientoView(View):
             if Conocimiento.objects.filter(usuario=persona.userprofile).exists():
                 self.mensaje = u'Usted ya tiene conocimiento en base de datos, por favor edítela si es necesario'
                 self.tipo_mensaje = u'error'
-                self.template = 'perfil/perfil.html'
+                self.template = 'perfil.html'
 
         # Si se elimina una Habilidad
         if kwargs['palabra'] == 'eliminar':
@@ -917,7 +916,7 @@ class ConocimientoView(View):
             self.mensaje = u'Conocimiento eliminado exitosamente'
             self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
@@ -955,7 +954,7 @@ class ConocimientoView(View):
                     self.mensaje = u'Otros conocimientos creados exitosamente'
                     self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -1016,7 +1015,7 @@ class IdiomaView(View):
             self.mensaje = u'Idioma eliminado exitosamente'
             self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'persona':persona})
         self.diccionario.update({'nueva':nueva})
@@ -1064,7 +1063,7 @@ class IdiomaView(View):
                     self.mensaje = u'Idioma creado exitosamente'
                     self.tipo_mensaje = u'success'
 
-                self.template = 'perfil/perfil.html'
+                self.template = 'perfil.html'
 
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
@@ -1123,7 +1122,7 @@ class CertificacionView(View):
             self.mensaje = u'Certificación eliminada exitosamente'
             self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'persona': persona})
         self.diccionario.update({'nueva': nueva})
@@ -1176,7 +1175,7 @@ class CertificacionView(View):
                 self.mensaje = u'Certificación creada exitosamente'
                 self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'mensaje': self.mensaje})
@@ -1236,7 +1235,7 @@ class CursoView(View):
             self.mensaje = u'Curso eliminado exitosamente'
             self.tipo_mensaje = u'success'
 
-            self.template = 'perfil/perfil.html'
+            self.template = 'perfil.html'
 
         self.diccionario.update({'persona': persona})
         self.diccionario.update({'nueva': nueva})
@@ -1292,7 +1291,7 @@ class CursoView(View):
                     self.mensaje = u'Curso cargado exitosamente'
                     self.tipo_mensaje = u'success'
 
-                self.template = 'perfil/perfil.html'
+                self.template = 'perfil.html'
         else:
             if self.curso_form.errors.has_key('__all__'):
                 self.mensaje = self.evaluacion_form.errors['__all__'][0]
