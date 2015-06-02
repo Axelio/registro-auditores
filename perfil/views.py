@@ -11,6 +11,7 @@ from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
 from personas.models import Persona
+from curriculum.views import lista_filtros
 
 import datetime
 
@@ -46,6 +47,7 @@ class PerfilView(View):
             persona = Persona.objects.get(userprofile=usuario.profile)
         except:
             return HttpResponseRedirect(reverse('crear_perfil'))
+        '''
 
         # Revisamos si el usuario pertenece al grupo Operador
         # Y si pertenece, le cambiamos la plantilla y los filtros
@@ -54,34 +56,11 @@ class PerfilView(View):
             auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
             self.template = 'perfil/perfil_operador.html'
 
-            paginator = Paginator(auditores, settings.LIST_PER_PAGE)
-            page = request.GET.get('page')
-            try:
-                auditores = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                auditores = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                auditores = paginator.page(paginator.num_pages)
-
-            paginator = Paginator(aspirantes, settings.LIST_PER_PAGE)
-            page = request.GET.get('page')
-            try:
-                aspirantes = paginator.page(page)
-            except PageNotAnInteger:
-                # If page is not an integer, deliver first page.
-                aspirantes = paginator.page(1)
-            except EmptyPage:
-                # If page is out of range (e.g. 9999), deliver last page of results.
-                aspirantes = paginator.page(paginator.num_pages)
-
             self.diccionario.update({'aspirantes':aspirantes})
             self.diccionario.update({'auditores':auditores})
 
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        '''
         return render(request, 
                        template_name=self.template,
                        dictionary=self.diccionario,
@@ -92,8 +71,8 @@ class EditarPerfilView(View):
     '''
     Clase para la edición de datos de información de la persona
     '''
-    template='perfil/editar_formulario.html'
-    persona_form = EditarPerfilForm
+    template='formulario.html'
+    form = EditarPerfilForm
     titulo = 'información personal'
     mensaje = ''
     tipo_mensaje = ''
@@ -114,13 +93,13 @@ class EditarPerfilView(View):
         nueva = False
 
         persona = Persona.objects.get(userprofile=usuario.profile)
-        self.persona_form = self.persona_form(instance=persona)
+        self.form = self.form(instance=persona)
         self.diccionario.update({'persona':persona})
 
         self.diccionario.update({'nueva':nueva})
         self.diccionario.update({'mensaje':self.mensaje})
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'formulario':self.persona_form})
+        self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -129,10 +108,10 @@ class EditarPerfilView(View):
                      )
 
     def post(self, request, *args, **kwargs):
-        self.persona_form = PersonaForm(request.POST)
+        self.form = PersonaForm(request.POST)
 
         self.diccionario.update(csrf(request))
-        self.diccionario.update({'persona_form':self.persona_form})
+        self.diccionario.update({'form':self.form})
         persona = request.user.get_profile().persona
 
         estado = Estado.objects.get(id=request.POST['reside'])
