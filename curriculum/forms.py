@@ -117,7 +117,15 @@ class ConocimientoForm(forms.ModelForm):
     class Meta:
         # Se determina cuál es el modelo al que va a referirse el formulario
         model = Conocimiento
-        exclude = ('usuario',)
+        fields = ('otros_conocimientos',)
+        widgets = {
+            'otros_conocimientos': Textarea(
+                attrs={
+                    'id': 'textarea',
+                    'required': 'required',
+                    'class': 'materialize-textarea',
+                    }),
+        }
 
 
 class IdiomaForm(forms.ModelForm):
@@ -159,19 +167,17 @@ class CursoForm(forms.ModelForm):
                     'min': 0}),
             'fecha_inicio': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'data-position': 'bottom'}),
+                    'class': 'datepicker',
+                    }),
+
             'fecha_fin': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'data-position': 'bottom'}),
-
+                    'class': 'datepicker',
+                    }),
         }
 
     def clean_fecha_inicio(self):
@@ -217,18 +223,17 @@ class CertificacionForm(forms.ModelForm):
         widgets = {
             'fecha_inicio': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'data-position': 'bottom'}),
+                    'class': 'datepicker',
+                    }),
+
             'fecha_fin': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'data-position': 'bottom'}),
+                    'class': 'datepicker',
+                    }),
         }
 
     def clean_fecha_inicio(self):
@@ -285,20 +290,17 @@ class EducacionForm(forms.ModelForm):
                     'placeholder': 'Carrera estudiada'}),
             'fecha_inicio': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'placeholder': 'Fecha de inicio',
-                    'data-position': 'bottom'}),
+                    'class': 'datepicker',
+                    }),
+
             'fecha_fin': TextInput(
                 attrs={
-                    'type': 'text',
+                    'type': 'date',
                     'required': 'required',
-                    'class': 'ink-datepicker',
-                    'data-format': 'dd/mm/yyyy',
-                    'placeholder': 'Fecha de culminación',
-                    'data-position': 'bottom'}),
+                    'class': 'datepicker',
+                    }),
         }
 
     def clean_fecha_inicio(self):

@@ -771,8 +771,8 @@ class HabilidadView(View):
     '''
     Clase para la renderización de los datos de habilidad
     '''
-    template='perfil/editar_formulario.html'
-    habilidad_form = HabilidadForm
+    template='formulario.html'
+    form = HabilidadForm
     mensaje = ''
     tipo_mensaje = ''
     titulo = 'habilidad'
@@ -780,7 +780,7 @@ class HabilidadView(View):
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
-    diccionario.update({'titulo':titulo})
+    diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -792,7 +792,7 @@ class HabilidadView(View):
         except:
             raise Http404
 
-        self.diccionario.update({'formulario':self.habilidad_form()})
+        self.diccionario.update({'form':self.form()})
         if kwargs.has_key('habilidad_id') and not kwargs['habilidad_id'] == None:
             nueva = False
             try:
@@ -801,7 +801,7 @@ class HabilidadView(View):
                 raise Http404
 
             if habilidad.usuario == persona.userprofile:
-                self.habilidad_form = self.habilidad_form(instance=habilidad)
+                self.form = self.form(instance=habilidad)
             else:
                 raise PermissionDenied
 
@@ -810,16 +810,12 @@ class HabilidadView(View):
             habilidad = Habilidad.objects.get(id=int(kwargs['habilidad_id']))
             habilidad.delete()
 
-            self.mensaje = u'Habilidad eliminada exitosamente'
-            self.tipo_mensaje = u'success'
+            messages.add_message(request, messages.SUCCESS,
+                u'La habilidad ha sido eliminada exitosamente')
 
-            self.template = 'perfil.html'
+            return HttpResponseRedirect(reverse('perfil'))
 
-        self.diccionario.update({'persona':persona})
-        self.diccionario.update({'nueva':nueva})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'formulario':self.habilidad_form})
+        self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -836,26 +832,26 @@ class HabilidadView(View):
             habilidad = request.POST['habilidad']
 
             if kwargs['palabra'] == 'editar':
-                # Si se edita una Educación
+                # Si se edita una Habilidad
                 # Búsqueda de variables con los IDs enviados por POST
                 habilidad_obj = Habilidad.objects.get(id=int(kwargs['habilidad_id']))
                 habilidad_obj.habilidad = campo_habilidad
 
                 habilidad_obj.save()
 
-                self.mensaje = u'Habilidad editada exitosamente'
-                self.tipo_mensaje = u'success'
+                messages.add_message(request, messages.SUCCESS,
+                    u'La habilidad ha sido editada exitosamente')
             else:
-                # Si se crea una Educación
-                habilidad_obj = Habilidad.objects.create(usuario=persona.userprofile, habilidad=habilidad)
-                self.mensaje = u'Habilidad creada exitosamente'
-                self.tipo_mensaje = u'success'
+                # Si se crea una Habilidad
+                habilidad_obj = Habilidad.objects.create(
+                    usuario=persona.userprofile, habilidad=habilidad)
 
-            self.template = 'perfil.html'
+                messages.add_message(request, messages.SUCCESS,
+                    u'La habilidad ha sido creada exitosamente')
 
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'formulario':self.habilidad_form})
+            return HttpResponseRedirect(reverse('perfil'))
+
+        self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -867,62 +863,55 @@ class ConocimientoView(View):
     '''
     Clase para la renderización de los datos de habilidad
     '''
-    template='perfil/editar_formulario.html'
-    conocimiento_form = ConocimientoForm 
+    template='formulario.html'
+    form = ConocimientoForm 
     titulo = 'conocimiento'
-    mensaje = ''
-    tipo_mensaje = ''
     lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
-    diccionario.update({'titulo':titulo})
+    diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        usuario = request.user
         nueva = False
 
         try:
-            persona = Persona.objects.get(userprofile=usuario.profile)
+            persona = Persona.objects.get(userprofile=request.user.profile)
         except:
             raise Http404
 
-        self.diccionario.update({'formulario':self.conocimiento_form()})
-        if kwargs.has_key('conocimiento_id') and not kwargs['conocimiento_id'] == None:
-            try:
-                conocimiento = Conocimiento.objects.get(id=int(kwargs['conocimiento_id']))
-            except:
-                raise Http404
+        self.diccionario.update({'form': self.form()})
+        try:
+            conocimiento = Conocimiento.objects.get(usuario=request.user.profile)
+        except:
+            raise Http404
 
-            if conocimiento.usuario == persona.userprofile:
-                self.conocimiento_form = self.conocimiento_form(instance=conocimiento)
-            else:
-                raise PermissionDenied
+        if conocimiento.usuario == request.user.profile:
+            self.form = self.form(instance=conocimiento)
+        else:
+            raise PermissionDenied
 
         # Si se elimina una Habilidad
         if kwargs['palabra'] == 'nueva':
             nueva = True
-            if Conocimiento.objects.filter(usuario=persona.userprofile).exists():
-                self.mensaje = u'Usted ya tiene conocimiento en base de datos, por favor edítela si es necesario'
-                self.tipo_mensaje = u'error'
-                self.template = 'perfil.html'
+            if Conocimiento.objects.filter(usuario=request.user.profile).exists():
+                messages.add_message(request, messages.ERROR,
+                    u'Usted ya tiene conocimiento en base de datos, por favor edítela si es necesario')
+
+                return HttpResponseRedirect(reverse('perfil'))
 
         # Si se elimina una Habilidad
         if kwargs['palabra'] == 'eliminar':
             conocimiento = Conocimiento.objects.get(id=int(kwargs['conocimiento_id']))
             conocimiento.delete()
 
-            self.mensaje = u'Conocimiento eliminado exitosamente'
-            self.tipo_mensaje = u'success'
+            messages.add_message(request, messages.SUCCESS,
+                u'Conocimiento eliminado exitosamente')
 
-            self.template = 'perfil.html'
+            return HttpResponseRedirect(reverse('perfil'))
 
-        self.diccionario.update({'persona':persona})
-        self.diccionario.update({'nueva':nueva})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'formulario':self.conocimiento_form})
+        self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -932,33 +921,31 @@ class ConocimientoView(View):
 
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        usuario = request.user
 
-        persona = request.user.profile.persona
         if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
             conocimiento = request.POST['otros_conocimientos']
 
             if kwargs['palabra'] == 'editar':
-                conocimiento = Conocimiento.objects.get(id=kwargs['conocimiento_id'])
+                conocimiento = Conocimiento.objects.get(usuario=request.user.profile)
                 conocimiento.otros_conocimientos = request.POST['otros_conocimientos']
                 conocimiento.save()
 
-                self.mensaje = u'Conocimientos editados exitosamente'
-                self.tipo_mensaje = u'success'
+                messages.add_message(request, messages.SUCCESS,
+                    u'Conocimiento editado exitosamente')
+
             else:
-                if Conocimiento.objects.filter(usuario=persona.userprofile).exists():
-                    self.mensaje = u'Usted ya tiene conocimientos guardados, por favor edítela si es necesario'
-                    self.tipo_mensaje = u'error'
+                if Conocimiento.objects.filter(usuario=request.user.profile).exists():
+                    messages.add_message(request, messages.error,
+                        u'Usted ya tiene conocimientos guardados, por favor edítela si es necesario')
                 else:
-                    conocimiento = Conocimiento.objects.create(usuario=persona.userprofile, otros_conocimientos=conocimiento)
-                    self.mensaje = u'Otros conocimientos creados exitosamente'
-                    self.tipo_mensaje = u'success'
+                    conocimiento = Conocimiento.objects.create(usuario=request.user.profile,
+                        otros_conocimientos=conocimiento)
+                    messages.add_message(request, messages.SUCCESS,
+                        u'Otros conocimientos editados exitosamente')
 
-            self.template = 'perfil.html'
+            return HttpResponseRedirect(reverse('perfil'))
 
-        self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
-        self.diccionario.update({'mensaje':self.mensaje})
-        self.diccionario.update({'formulario':self.conocimiento_form})
+        self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -983,11 +970,10 @@ class IdiomaView(View):
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        usuario = request.user
         nueva = True
 
         try:
-            persona = Persona.objects.get(userprofile=usuario.profile)
+            persona = Persona.objects.get(userprofile=request.user.profile)
         except:
             raise Http404
 
@@ -1080,10 +1066,8 @@ class CertificacionView(View):
     '''
     Clase para la renderización de los datos de habilidad
     '''
-    template='perfil/editar_formulario.html'
-    certificacion_form = CertificacionForm
-    mensaje = ''
-    tipo_mensaje = ''
+    template='formulario.html'
+    form = CertificacionForm
     titulo = u'certificación'
     lista_filtros = ''
 
@@ -1101,7 +1085,7 @@ class CertificacionView(View):
         except:
             raise Http404
 
-        self.diccionario.update({'formulario':self.certificacion_form()})
+        self.diccionario.update({'form': self.form()})
         if kwargs.has_key('certificacion_id') and not kwargs['certificacion_id'] == None:
             nueva = False
             try:
@@ -1110,25 +1094,21 @@ class CertificacionView(View):
                 raise Http404
 
             if certificacion.persona == persona:
-                self.certificacion_form = self.certificacion_form(instance=certificacion)
+                self.form = self.form(instance=certificacion)
             else:
                 raise PermissionDenied
 
-        # Si se elimina una Habilidad
+        # Si se elimina una Certificación
         if kwargs['palabra'] == 'eliminar':
             certificacion = Certificacion.objects.get(id=int(kwargs['certificacion_id']))
             certificacion.delete()
 
-            self.mensaje = u'Certificación eliminada exitosamente'
-            self.tipo_mensaje = u'success'
+            messages.add_message(request, messages.SUCCESS,
+                u'La certificación ha sido eliminada exitosamente')
 
-            self.template = 'perfil.html'
+            return HttpResponseRedirect(reverse('perfil'))
 
-        self.diccionario.update({'persona': persona})
-        self.diccionario.update({'nueva': nueva})
-        self.diccionario.update({'mensaje':self. mensaje})
-        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
-        self.diccionario.update({'formulario': self.certificacion_form})
+        self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -1145,8 +1125,8 @@ class CertificacionView(View):
 
             pais = Pais.objects.get(id=request.POST['pais'])
             institucion = Institucion.objects.get(id=request.POST['institucion'])
-            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            fecha_inicio = request.POST['fecha_inicio']
+            fecha_fin = request.POST['fecha_fin']
 
             if kwargs['palabra'] == 'editar':
                 # Si se edita una Certificación
@@ -1161,8 +1141,9 @@ class CertificacionView(View):
 
                 certificacion.save()
 
-                self.mensaje = u'Habilidad editada exitosamente'
-                self.tipo_mensaje = u'success'
+                messages.add_message(request, messages.SUCCESS,
+                    u'La certificación ha sido editada exitosamente')
+
             else:
                 # Si se crea una Certificacion
                 certificacion = Certificacion.objects.create(persona = persona,
@@ -1172,14 +1153,14 @@ class CertificacionView(View):
                         titulo = request.POST['titulo'],
                         fecha_inicio = fecha_inicio,
                         fecha_fin = fecha_fin)
-                self.mensaje = u'Certificación creada exitosamente'
-                self.tipo_mensaje = u'success'
 
-            self.template = 'perfil.html'
+                messages.add_message(request, messages.SUCCESS,
+                    u'La certificación ha sido creada exitosamente')
 
-        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
-        self.diccionario.update({'mensaje': self.mensaje})
-        self.diccionario.update({'formulario': self.certificacion_form})
+            return HttpResponseRedirect(reverse('perfil'))
+
+
+        self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -1193,16 +1174,16 @@ class CursoView(View):
     '''
     Clase para la renderización de los datos de habilidad
     '''
-    template='perfil/editar_formulario.html'
-    curso_form = CursoForm
+    template='formulario.html'
+    form = CursoForm
     mensaje = ''
     tipo_mensaje = ''
-    titulo = u'curso'
+    titulo = u'Cursos'
     lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
-    diccionario.update({'titulo':titulo})
+    diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
@@ -1214,7 +1195,7 @@ class CursoView(View):
         except:
             raise Http404
 
-        self.diccionario.update({'formulario':self.curso_form()})
+        self.diccionario.update({'formulario': self.form()})
         if kwargs.has_key('curso_id') and not kwargs['curso_id'] == None:
             nueva = False
             try:
@@ -1223,25 +1204,21 @@ class CursoView(View):
                 raise Http404
 
             if curso.usuario == usuario.profile:
-                self.curso_form = self.curso_form(instance=curso)
+                self.form = self.form(instance=curso)
             else:
                 raise PermissionDenied
 
-        # Si se elimina una Habilidad
+        # Si se elimina un Curso
         if kwargs['palabra'] == 'eliminar':
             certificacion = Curso.objects.get(id=int(kwargs['curso_id']))
             certificacion.delete()
 
-            self.mensaje = u'Curso eliminado exitosamente'
-            self.tipo_mensaje = u'success'
+            messages.add_message(request, messages.SUCCESS,
+                u'Curso eliminado exitosamente')
 
-            self.template = 'perfil.html'
+            return HttpResponseRedirect(reverse('perfil'))
 
-        self.diccionario.update({'persona': persona})
-        self.diccionario.update({'nueva': nueva})
-        self.diccionario.update({'mensaje':self. mensaje})
-        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
-        self.diccionario.update({'formulario': self.curso_form})
+        self.diccionario.update({'form': self.form })
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
@@ -1253,10 +1230,10 @@ class CursoView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
-        self.curso_form = self.curso_form(request.POST)
+        self.form = self.form(request.POST)
 
         persona = request.user.profile.persona
-        if self.curso_form.is_valid():
+        if self.form.is_valid():
             if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
 
                 estado = Estado.objects.get(id=request.POST['estado'])
@@ -1277,8 +1254,8 @@ class CursoView(View):
 
                     curso.save()
 
-                    self.mensaje = u'Curso editado exitosamente'
-                    self.tipo_mensaje = u'success'
+                    messages.add_message(request, messages.SUCCESS,
+                        u'Curso editado exitosamente')
                 else:
                     # Si se crea un Curso
                     curso = Curso.objects.create(usuario = usuario.profile,
@@ -1288,18 +1265,13 @@ class CursoView(View):
                             fecha_inicio = fecha_inicio,
                             fecha_fin = fecha_fin,
                             horas = request.POST['horas'])
-                    self.mensaje = u'Curso cargado exitosamente'
-                    self.tipo_mensaje = u'success'
 
-                self.template = 'perfil.html'
-        else:
-            if self.curso_form.errors.has_key('__all__'):
-                self.mensaje = self.evaluacion_form.errors['__all__'][0]
-                self.tipo_mensaje = 'error'
+                    messages.add_message(request, messages.SUCCESS,
+                        u'Curso cargado exitosamente')
 
-        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
-        self.diccionario.update({'mensaje': self.mensaje})
-        self.diccionario.update({'formulario': self.curso_form})
+                return HttpResponseRedirect(reverse('perfil'))
+
+        self.diccionario.update({'form': self.form })
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
