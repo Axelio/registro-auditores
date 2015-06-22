@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User)
     persona = models.OneToOneField(Persona, null=True,
             help_text=u'Por favor, ingrese nombre, \
                     apellido o cédula de la persona')
