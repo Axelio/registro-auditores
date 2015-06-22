@@ -35,7 +35,7 @@
                                 Información laboral
                             </a>
                         </b></span>
-                        <div class="col s1 align right">
+                        <div class="col s2 align right">
                             <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'laboral' 'nueva' %}">
                                 <i class="large mdi-content-add"></i>
                             </a>
@@ -74,7 +74,7 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-social-school circle green"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#formacion">Formación educativa</a></b></span>
-                            <div class="col s1 align right">
+                            <div class="col s2 align right">
                                 <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
                                     <i class="large mdi-content-add"></i>
                                 </a>
@@ -92,7 +92,7 @@
                                        como CARGO en el área de AREA
                                     </p>
                                 </div>
-                                <div class="col s1 right-align">
+                                <div class="col s2 right-align">
                                     <a class="btn-floating btn-medium green" href="{% url 'educacion' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red" href="{% url 'educacion' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
                                 </div>
@@ -109,30 +109,36 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-av-my-library-books circle deep-orange"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#cursos">Cursos</a></b></span>
-                            <div class="col s1 align right">
-                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                            <div class="col s2 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'curso' 'nueva' %}">
                                     <i class="large mdi-content-add"></i>
                                 </a>
                             </div>
 
                         <div id="cursos" class="modal bottom-sheet">
                           <div class="modal-content">
-                            <h4>Ud ha asistido a los siguientes cursos...</h4>
-                            <ul class="collection">
-                              <li class="collection-item avatar">
-                                <div class="col s11">
-                                    <i class="mdi-file-folder circle green"></i>
-                                    <span class="title"><b>Nombre de institución</b></span>
-                                    <p>Desde FECHA, hasta FECHA<br>
-                                       como CARGO en el área de AREA
-                                    </p>
-                                </div>
-                                <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green" href="{% url 'curso' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
-                                    <a class="btn-floating btn-medium red" href="{% url 'curso' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
-                                </div>
-                              </li>
-                            </ul>
+                            {% if cursos %}
+                                <h4>Ud ha asistido a los siguientes cursos...</h4>
+                            {% else %}
+                                <h4>Ud no tiene registro sobre cursos...</h4>
+                            {% endif %}
+                            {% for curso in cursos %}
+                                <ul class="collection">
+                                  <li class="collection-item avatar">
+                                    <div class="col s11">
+                                        <i class="mdi-file-folder circle green"></i>
+                                        <span class="title"><b>{{ curso.titulo }}</b></span>
+                                        <p>En {{ curso.institucion }}, desde {{ curso.fecha_inicio }} hasta {{ curso.fecha_fin }}<br>
+                                        con una duración de {{ horas }} horas.
+                                        </p>
+                                    </div>
+                                    <div class="col s1 right-align">
+                                        <a class="btn-floating btn-medium green" href="{% url 'curso' 'editar' curso.id %}"><i class="mdi-editor-mode-edit small"></i></a>
+                                        <a class="btn-floating btn-medium red" href="{% url 'curso' 'eliminar' curso.id %}"><i class="mdi-action-delete small"></i></a>
+                                    </div>
+                                  </li>
+                                </ul>
+                            {% endfor %}
                           </div>
                         </div>
                         <p>Usted se formó en...<br></p>
@@ -144,33 +150,36 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-maps-beenhere circle blue darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#certificaciones">Certificaciones</a></b></span>
-                            <div class="col s1 align right">
-                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                            <div class="col s2 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'certificacion' 'nueva' %}">
                                     <i class="large mdi-content-add"></i>
                                 </a>
                             </div>
 
                         <div id="certificaciones" class="modal bottom-sheet">
                           <div class="modal-content">
-                            <h4>Usted se ha certificado en...</h4>
-                            <ul class="collection">
-                              <li class="collection-item avatar">
-                                <div class="col s11">
-                                    <i class="mdi-file-folder circle green"></i>
-                                    <span class="title"><b>Nombre de institución</b></span>
-                                    <p>Desde FECHA, hasta FECHA<br>
-                                       como CARGO en el área de AREA
-                                    </p>
-                                </div>
-                                <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green" href="{% url 'certificacion' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
-                                    <a class="btn-floating btn-medium red" href="{% url 'certificacion' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
-                                </div>
-                              </li>
-                            </ul>
+                            {% if certificaciones %}
+                                <h4>Ud se ha certificado en...</h4>
+                            {% else %}
+                                <h4>Ud no tiene registro sobre certificaciones...</h4>
+                            {% endif %}
+                            {% for certificacion in certificaciones %}
+                                <ul class="collection">
+                                  <li class="collection-item avatar">
+                                    <div class="col s11">
+                                        <i class="mdi-file-folder circle green"></i>
+                                        <span class="title"><b>{{ certificacion }}</b></span>
+                                    </div>
+                                    <div class="col s1 right-align">
+                                        <a class="btn-floating btn-medium green" href="{% url 'certificacion' 'editar' certificacion.id %}"><i class="mdi-editor-mode-edit small"></i></a>
+                                        <a class="btn-floating btn-medium red" href="{% url 'certificacion' 'eliminar' certificacion.id %}"><i class="mdi-action-delete small"></i></a>
+                                    </div>
+                                  </li>
+                                </ul>
+                            {% endfor %}
                           </div>
                         </div>
-                        <p>Ud ha asistido a los siguientes cursos...</p>
+                        <p>Ud ha obtenido las siguientes certificaciones...</p>
                     </li>
                 </ul>
             </div>
@@ -179,33 +188,36 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-action-settings circle cyan"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#habilidades">Habilidades</a></b></span>
-                            <div class="col s1 align right">
-                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                            <div class="col s2 align right">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'habilidad' 'nueva' %}">
                                     <i class="large mdi-content-add"></i>
                                 </a>
                             </div>
 
                         <div id="habilidades" class="modal bottom-sheet">
                           <div class="modal-content">
-                            <h4>Sus habilidades son...</h4>
-                            <ul class="collection">
-                              <li class="collection-item avatar">
-                                <div class="col s11">
-                                    <i class="mdi-file-folder circle green"></i>
-                                    <span class="title"><b>Nombre de institución</b></span>
-                                    <p>Desde FECHA, hasta FECHA<br>
-                                       como CARGO en el área de AREA
-                                    </p>
-                                </div>
-                                <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green" href="{% url 'habilidad' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
-                                    <a class="btn-floating btn-medium red" href="{% url 'habilidad' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
-                                </div>
-                              </li>
-                            </ul>
+                            {% if habilidades %}
+                                <h4>Sus habilidades son...</h4>
+                            {% else %}
+                                <h4>Ud no tiene registro sobre alguna habilidad...</h4>
+                            {% endif %}
+                            {% for habilidad in habilidades %}
+                                <ul class="collection">
+                                  <li class="collection-item avatar">
+                                    <div class="col s11">
+                                        <i class="mdi-file-folder circle green"></i>
+                                        <span class="title"><b>{{ habilidad }}</b></span>
+                                    </div>
+                                    <div class="col s1 right-align">
+                                        <a class="btn-floating btn-medium green" href="{% url 'habilidad' 'editar' habilidad.id %}"><i class="mdi-editor-mode-edit small"></i></a>
+                                        <a class="btn-floating btn-medium red" href="{% url 'habilidad' 'eliminar' habilidad.id %}"><i class="mdi-action-delete small"></i></a>
+                                    </div>
+                                  </li>
+                                </ul>
+                            {% endfor %}
                           </div>
                         </div>
-                        <p>Sus habilidades son...<br></p>
+                        <p>Ud ha registrado las siguientes habilidades...</p>
                     </li>
                 </ul>
             </div>
@@ -214,33 +226,41 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-maps-local-library circle red darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#conocimientos">Conocimientos</a></b></span>
-                            <div class="col s1 align right">
-                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                            <div class="col s2 align right">
+                                {% if not conocimientos %}
+                                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href='{% url 'conocimiento' 'nueva' %}'>
                                     <i class="large mdi-content-add"></i>
+                                {% else %}
+                                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Editar" href='{% url 'conocimiento' 'editar' %}'>
+                                    <i class="large mdi-editor-mode-edit"></i>
+                                {% endif %}
                                 </a>
                             </div>
 
                         <div id="conocimientos" class="modal bottom-sheet">
                           <div class="modal-content">
-                            <h4>Sus conocimientos fuertes son...</h4>
-                            <ul class="collection">
-                              <li class="collection-item avatar">
-                                <div class="col s11">
-                                    <i class="mdi-file-folder circle green"></i>
-                                    <span class="title"><b>Nombre de institución</b></span>
-                                    <p>Desde FECHA, hasta FECHA<br>
-                                       como CARGO en el área de AREA
-                                    </p>
-                                </div>
-                                <div class="col s1 right-align">
-                                    <a class="btn-floating btn-medium green" href="{% url 'conocimiento' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
-                                    <a class="btn-floating btn-medium red" href="{% url 'conocimiento' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
-                                </div>
-                              </li>
-                            </ul>
+                            {% if conocimientos %}
+                                <h4>Ud tiene conocimientos extras en...</h4>
+                            {% else %}
+                                <h4>Ud no tiene registro sobre algún conocimiento extra...</h4>
+                            {% endif %}
+                            {% for conocimiento in conocimientos %}
+                                <ul class="collection">
+                                  <li class="collection-item avatar">
+                                    <div class="col s11">
+                                        <i class="mdi-file-folder circle green"></i>
+                                        <span class="title"><b>{{ conocimiento}}</b></span>
+                                    </div>
+                                    <div class="col s1 right-align">
+                                        <a class="btn-floating btn-medium green" href="{% url 'conocimiento' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
+                                        <a class="btn-floating btn-medium red" href="{% url 'conocimiento' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
+                                    </div>
+                                  </li>
+                                </ul>
+                            {% endfor %}
                           </div>
                         </div>
-                        <p>Sus conocimientos fuertes son...<br></p>
+                        <p>Ud ha registrado las siguientes habilidades extras...</p>
                     </li>
                 </ul>
             </div>
@@ -249,7 +269,7 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-action-language circle teal darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#idiomas">Idiomas</a></b></span>
-                            <div class="col s1 align right">
+                            <div class="col s2 align right">
                                 <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
                                     <i class="large mdi-content-add"></i>
                                 </a>
@@ -267,7 +287,7 @@
                                        como CARGO en el área de AREA
                                     </p>
                                 </div>
-                                <div class="col s1 right-align">
+                                <div class="col s2 right-align">
                                     <a class="btn-floating btn-medium green" href="{% url 'idioma' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
                                     <a class="btn-floating btn-medium red" href="{% url 'idioma' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
                                 </div>
