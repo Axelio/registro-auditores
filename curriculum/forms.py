@@ -282,12 +282,12 @@ class EducacionForm(forms.ModelForm):
                     'type': 'text',
                     'required': 'required',
                     'class': 'form-control',
-                    'placeholder': 'Título obtenido'}),
+                    }),
             'carrera': TextInput(
                 attrs={
                     'type': 'text',
                     'class': 'form-control',
-                    'placeholder': 'Carrera estudiada'}),
+                    }),
             'fecha_inicio': TextInput(
                 attrs={
                     'type': 'date',

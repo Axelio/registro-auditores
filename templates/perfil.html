@@ -73,31 +73,37 @@
                 <ul class="collection z-depth-1">
                     <li class="collection-item avatar">
                         <i class="large mdi-social-school circle green"></i>
-                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#formacion">Formación educativa</a></b></span>
+                        <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#educacion">Formación educativa</a></b></span>
                             <div class="col s2 align right">
-                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'educacion' 'nueva' %}">
                                     <i class="large mdi-content-add"></i>
                                 </a>
                             </div>
 
-                        <div id="formacion" class="modal bottom-sheet">
+                        <div id="educacion" class="modal bottom-sheet">
                           <div class="modal-content">
-                            <h4>Usted se ha formado en...</h4>
-                            <ul class="collection">
-                              <li class="collection-item avatar">
-                                <div class="col s11">
-                                    <i class="mdi-file-folder circle green"></i>
-                                    <span class="title"><b>Nombre de institución</b></span>
-                                    <p>Desde FECHA, hasta FECHA<br>
-                                       como CARGO en el área de AREA
-                                    </p>
-                                </div>
-                                <div class="col s2 right-align">
-                                    <a class="btn-floating btn-medium green" href="{% url 'educacion' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
-                                    <a class="btn-floating btn-medium red" href="{% url 'educacion' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
-                                </div>
-                              </li>
-                            </ul>
+                            {% if educaciones %}
+                                <h4>Ud se ha formado en...</h4>
+                            {% else %}
+                                <h4>Ud no tiene registros educativo...</h4>
+                            {% endif %}
+                            {% for educacion in educaciones %}
+                                <ul class="collection">
+                                  <li class="collection-item avatar">
+                                    <div class="col s11">
+                                        <i class="mdi-file-folder circle green"></i>
+                                        <span class="title"><b>{{ educacion.titulo }}</b></span>
+                                        <p>En {{ educacion.institucion }}, desde {{ educacion.fecha_inicio }} hasta {{ educacion.fecha_fin }}<br>
+                                        con nivel academico de {{ educacion.tipo}} horas.
+                                        </p>
+                                    </div>
+                                    <div class="col s1 right-align">
+                                        <a class="btn-floating btn-medium green" href="{% url 'educacion' 'editar' educacion.id %}"><i class="mdi-editor-mode-edit small"></i></a>
+                                        <a class="btn-floating btn-medium red" href="{% url 'educacion' 'eliminar' educacion.id %}"><i class="mdi-action-delete small"></i></a>
+                                    </div>
+                                  </li>
+                                </ul>
+                            {% endfor %}
                           </div>
                         </div>
                         <p>Usted se formó en...<br></p>
@@ -270,29 +276,34 @@
                         <i class="large mdi-action-language circle teal darken-4"></i>
                         <span class="title"><b><a class="waves-effect waves-light modal-trigger" href="#idiomas">Idiomas</a></b></span>
                             <div class="col s2 align right">
-                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir">
+                                <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'idioma' 'nueva' %}">
                                     <i class="large mdi-content-add"></i>
                                 </a>
                             </div>
 
                         <div id="idiomas" class="modal bottom-sheet">
                           <div class="modal-content">
-                            <h4>Sabe sobre los siguientes idiomas...</h4>
-                            <ul class="collection">
-                              <li class="collection-item avatar">
-                                <div class="col s11">
-                                    <i class="mdi-file-folder circle green"></i>
-                                    <span class="title"><b>Nombre de institución</b></span>
-                                    <p>Desde FECHA, hasta FECHA<br>
-                                       como CARGO en el área de AREA
-                                    </p>
-                                </div>
-                                <div class="col s2 right-align">
-                                    <a class="btn-floating btn-medium green" href="{% url 'idioma' 'editar' %}"><i class="mdi-editor-mode-edit small"></i></a>
-                                    <a class="btn-floating btn-medium red" href="{% url 'idioma' 'eliminar' %}"><i class="mdi-action-delete small"></i></a>
-                                </div>
-                              </li>
-                            </ul>
+                            {% if idiomas %}
+                                <h4>Ud se ha formado en...</h4>
+                            {% else %}
+                                <h4>Ud no tiene registros educativo...</h4>
+                            {% endif %}
+                            {% for idioma in idiomas %}
+                                <ul class="collection">
+                                  <li class="collection-item avatar">
+                                    <div class="col s11">
+                                        <i class="mdi-file-folder circle green"></i>
+                                        <span class="title"><b>{{ idioma.idioma }}</b></span>
+                                        <p>Ud posee un {{ idioma.nivel_leido|obtener_idioma|lower }} nivel de lectura, {{ idioma.nivel_escrito|obtener_idioma|lower }} nivel de escritura y {{ idioma.nivel_hablado|obtener_idioma|lower }} nivel de conversación<br>
+                                        </p>
+                                    </div>
+                                    <div class="col s1 right-align">
+                                        <a class="btn-floating btn-medium green" href="{% url 'idioma' 'editar' idioma.id %}"><i class="mdi-editor-mode-edit small"></i></a>
+                                        <a class="btn-floating btn-medium red" href="{% url 'idioma' 'eliminar' idioma.id %}"><i class="mdi-action-delete small"></i></a>
+                                    </div>
+                                  </li>
+                                </ul>
+                            {% endfor %}
                           </div>
                         </div>
                         <p>Sabe sobre los siguientes idiomas...<br></p>

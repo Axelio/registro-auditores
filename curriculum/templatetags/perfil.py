@@ -3,6 +3,7 @@ from django.template import Library
 from django.utils.html import format_html
 from authentication.models import User
 from curriculum.models import Aprobacion
+from curriculum.models import NIVEL_IDIOMA
 from curriculum.models import (NIVELES_COMPETENCIA,
     Competencia, ListaCompetencia, Evaluacion, Competencia,
     Cita)
@@ -112,3 +113,11 @@ def aprobado(usuario_id):
         else:
             return False
 register.filter(aprobado)
+
+
+@register.filter(name="obtener_idioma", is_safe=True)
+def obtener_idioma(key):
+    for nivel in NIVEL_IDIOMA:
+        if nivel[0] == key:
+            return nivel[1]
+register.filter(obtener_idioma)
