@@ -14,7 +14,7 @@
                         Cuyo contacto se hace posible a través del número <b>{{ request.user.profile.persona.tlf_reside }}</b> o por el correo electrónico <b><a href="#">{{ request.user.profile.persona.email|mail_antispam }}</a></b>
                     </p>
                     <div class="center-align">
-                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Editar perfil" href="{% url 'editar_perfil' %}">
+                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Editar perfil" href="{% url 'detalles_perfil' %}">
                         <i class="mdi-editor-mode-edit large"></i>
                     </a>
                 </li>

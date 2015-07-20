@@ -6,7 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from curriculum.views import (CitasView, EducacionView, LaboralView,
     ConocimientoView, EvaluacionView, CompetenciaView, HabilidadView,
     IdiomaView, CursoView, CertificacionView)
-from .views import PerfilView, CrearPerfilView, EditarPerfilView
+from .views import PerfilView, DetallesPerfilView
 
 admin.autodiscover()
 
@@ -51,13 +51,9 @@ urlpatterns = patterns('',
         login_required(CertificacionView.as_view()),
         name='certificacion'),
 
-    url(r'^crear/',
-        login_required(CrearPerfilView.as_view()),
-        name='crear_perfil'),
-
-    url(r'^editar/',
-        login_required(EditarPerfilView.as_view()),
-        name='editar_perfil'),
+    url(r'^detalles/',
+        login_required(DetallesPerfilView.as_view()),
+        name='detalles_perfil'),
 
     url(r'^$',
         login_required(PerfilView.as_view()),

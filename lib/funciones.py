@@ -45,3 +45,10 @@ def fechas_superiores(fecha_inicio, fecha_fin):
         return False
 
 
+def convertir_fecha(fecha):
+    try:
+        fecha = datetime.datetime.strptime(fecha, "%d/%m/%Y").strftime("%Y-%m-%d")
+    except:
+        fecha = datetime.datetime.strptime(fecha, "%Y-%m-%d")
+
+    return fecha

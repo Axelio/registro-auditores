@@ -316,16 +316,14 @@ class CitasView(View):
                     send_mail(subject=asunto, message=mensaje,
                         from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
 
-                self.mensaje = "Las fechas para cita ha sido cargada con \
-                                éxito. Se ha enviado su información a \
-                                los operadores"
-                self.tipo_mensaje = 'success'
-                self.template = 'perfil.html'
 
-        self.diccionario.update({'persona': request.user.profile.persona})
-        self.diccionario.update({'nueva': nueva})
-        self.diccionario.update({'mensaje': self.mensaje})
-        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
+                messages.add_message(request, messages.SUCCESS,
+                    'Las fechas para cita ha sido cargada con \
+                     éxito. Se ha enviado su información a \
+                     los operadores')
+
+                return HttpResponseRedirect(reverse('perfil'))
+
         self.diccionario.update({'formulario': self.citas_form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
@@ -404,8 +402,10 @@ class EducacionView(View):
             if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
                 institucion = Institucion.objects.get(id=request.POST['institucion'])
                 tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
-                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%Y-%m-%d") 
-                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%Y-%m-%d") 
+                import pdb
+                pdb.set_trace()
+                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
                 titulo = request.POST['titulo']
 
                 if kwargs['palabra'] == 'editar':

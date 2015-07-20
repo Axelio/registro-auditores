@@ -1,105 +1,278 @@
+<!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <div id="index-banner" class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <h1 class="header center teal-text lighten-5">SUSCERTE</h1>
-        <div class="row center">
-          <h5 class="header col s12 light white-text">Sé un auditor acreditado por SUSCERTE y súmate a nuestro <a href=#>listado de profesionales</a></h5>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <link rel="shortcut icon" href="static/images/favicon.ico" />
+  <title>Registro de Auditores - SUSCERTE</title>
+
+  <!-- CSS  -->
+  <link href="static/css/styles.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="static/font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+  <main>
+    <div class="parallax-container valign-wrapper">
+        <div class="container">
+          <h2 class="header center white-text">SUSCERTE</h2>
+          <div class="row center">
+            <h5 class="header col s12 light white-text">Sé un auditor acreditado por SUSCERTE y súmate a nuestro <b><u><a class="white-text" href=#>listado de profesionales</a></u></b></h5>
+          </div>
         </div>
-        <div class="row center">
-          <!-- Modal Trigger -->
-            {% if not user.is_authenticated %}
-            <a class="waves-effect waves-light btn-large modal-trigger teal lighten-1" href="{% url 'login' %}">Iniciar sesión</a>
+      <div class="parallax blue"></div>
+    </div>
 
-              <!-- Modal Structure -->
-                <div id="modal1" class="modal">
-                    <form class="col s12" method="POST">{% csrf_token %}
-                        <div class="modal-content">
-                            <h4>Iniciar sesión</h4>
-                            <p>Ingrese usuario y contraseña</p>
-                            <div class="row">
-                                {% if formulario.errors%}
-                                    <div class="ink-alert block error">
-                                        <h4>Vaya, parece que hay un error</h4>
-                                        <p>{{ formulario.errors }}</p>
-                                    </div>
-                                {% endif %}
+    <div class="container">
+      <div class="section scrollspy" id="como_registrarse">
+        <br />
+        <h2 class="center blue-text">Cómo registrarse</h2>
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+              <h1 class="center blue-text"><i class="mdi-maps-local-post-office"></i></h1>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Solicita el registro <i class="mdi-navigation-more-vert right"></i></span>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Solicita el registro <i class="mdi-navigation-close right"></i></span>
+                <p class="light">Envíanos un correo solicitándonos ser Auditor acreditado por SUSCERTE al correo <img src="static/images/correo_ra.png"> con tu Currículum Vitae adjunto en formato PDF.</p>
+              </div>
+            </div>
+          </div>
 
-                                <div class="input-field col s6">
-                                    <input  id="id_username" type="text" class="validate">
-                                    <label for="{{ form.username.label }}">{{ form.username.label }}</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="id_password" type="password" class="validate">
-                                    <label for="{{ form.password.label }}">{{ form.password.label }}</label>
-                                </div>
-                            </div>
-                        </div>
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+              <h1 class="center blue-text"><i class="mdi-social-person-add"></i></h1>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Nuevo usuario <i class="mdi-navigation-more-vert right"></i></span>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Nuevo usuario <i class="mdi-navigation-close right"></i></span>
+                <p class="light">SUSCERTE te creará un usuario para que puedas <a href="index.html">ingresar</a>. Al crearse el usuario automáticamente se te enviará un mail con los datos de ingreso.</p>
+              </div>
+            </div>
+          </div>
 
-                        <div class="modal-footer">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Ingresar</button>
-                            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-                        </div>
-                    </form>
-                </div>
-                {% endif %}
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <h1 class="center blue-text"><i class="mdi-action-book"></i></h1>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Cargar currículum <i class="mdi-navigation-more-vert right"></i></span>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Cargar currículum <i class="mdi-navigation-close right"></i></span>
+                <p class="light">Deberás cargar tu currículum a través del sistema una vez te hayas autenticado.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+              <h1 class="center blue-text"><i class="mdi-notification-event-available"></i></h1>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Fijación de cita <i class="mdi-navigation-more-vert right"></i></span>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Fijación de cita<i class="mdi-navigation-close right"></i></span>
+                <p class="light">Te citaremos a una entrevista con un panel de especialistas del área de seguridad de la información, la auditoría, y la certificación electrónica y criptografía.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+              <h1 class="center blue-text"><i class="mdi-editor-border-color"></i></h1>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Evaluación <i class="mdi-navigation-more-vert right"></i></span>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Evaluación <i class="mdi-navigation-close right"></i></span>
+                <p class="light">Presentarás una evaluación sobre una gama de administración de claves públicas, auditorías y estándares de seguridad.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+              <h1 class="center blue-text"><i class="mdi-action-verified-user"></i></h1>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Registro <i class="mdi-navigation-more-vert right"></i></span>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Registro <i class="mdi-navigation-close right"></i></span>
+                <p class="light">Una vez acreditado podrás consultarte en la lista de <a href="{% url 'listado_auditores' %}">auditores acreditados</a>.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="{% static "images/edocument.jpg" %}" alt="SUSCERTE"></div>
-  </div>
+
+    <div class="parallax-container">
+      <div class="section no-pad-bot">
+        <div class="parallax"><img src="static/images/caracas.jpg" alt="Contáctanos"></div>
+      </div>
+    </div>
 
 
+    <div class="container">
+        <div class="section scrollspy" id="auditores">
+          <br />
+          <h2 class="center blue-text">Auditores registrados</h2>
+          <!--   Icon Section   -->
+          <div class="row">
+            <table class="bordered responsive-table hoverable">
+              <thead>
+                <tr>
+                    <th data-field="id">Nº Registro</th>
+                    <th data-field="name">Nombre y apellido</th>
+                    <th data-field="phone">Teléfonos</th>
+                    <th data-field="email">Correos</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>0001</td>
+                  <td>Milthon Chávez</td>
+                  <td>0416 123 45 67</td>
+                  <td>correo@example.com</td>
+                </tr>
+                <tr>
+                  <td>0005</td>
+                  <td>Mariclen Villegas</td>
+                  <td>0416 123 45 67</td>
+                  <td>correo@example.com</td>
+                </tr>
+                <tr>
+                  <td>0006</td>
+                  <td>Alexander Osorio</td>
+                  <td>0416 123 45 67</td>
+                  <td>correo@example.com</td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  
+  </main>
+
+  </body>
+<footer class="blue section scrollspy" id="contacto">
   <div class="container">
-    <div class="section">
+    <br /><br />
+    <h2 class="center white-text lighten-5">Contáctanos</h2>
+    <div class="row center">
+      <div class="col l6 s12">
 
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center teal-text"><i class="mdi-image-filter-1"></i></h2>
-            <h5 class="center">Solicita el registro</h5>
+          <form class="col s12" action="#">
+              <div class="row">
+                  <div class="input-field col s6">
+                      <i class="mdi-action-account-circle prefix white-text"></i>
+                      <input id="icon_prefix" type="text" class="validate white-text">
+                      <label for="icon_prefix" class="white-text">Nombres</label>
+                  </div>
+                  <div class="input-field col s6">
+                      <i class="mdi-communication-email prefix white-text"></i>
+                      <input id="icon_email" type="email" class="validate white-text">
+                      <label for="icon_email" class="white-text">Email</label>
+                  </div>
 
-            <p class="light">Envíanos un correo solicitándonos ser Auditor acreditado por SUSCERTE al correo <img src="/main/static/images/correo_ra.png"> con tu Currículum Vitae adjunto en formato PDF.</p>
-          </div>
-        </div>
+                  <div class="input-field col s12">
+                      <i class="mdi-editor-mode-edit prefix white-text"></i>
+                      <textarea id="icon_prefix2" class="materialize-textarea white-text"></textarea>
+                      <label for="icon_prefix2" class="white-text">Mensaje</label>
+                  </div>
 
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center teal-text"><i class="mdi-image-filter-2"></i></h2>
-            <h5 class="center">Creación de usuario</h5>
+                  <div class="file-field input field col s3">
+                    <div class="btn blue">
+                      <span>Currículum</span>
+                      <input type="file">
+                    </div>
+                  </div>
 
-            <p class="light">SUSCERTE te creará un usuario para que puedas <a href="{% url 'inicio' %}">ingresar</a>. Al crearse el usuario automáticamente se te enviará un mail con los datos de ingreso.</p>
-          </div>
-        </div>
+                  <div class="file-field input-field  col s9">
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text">
+                    </div>
+                  </div>
 
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center teal-text"><i class="mdi-image-filter-3"></i></h2>
-            <h5 class="center">Carga tus datos</h5>
-
-            <p class="light">Deberás cargar tu currículum a través del sistema una vez autenticado, luego se te citará a una entrevista y una evaluación para acreditarte. Una vez acreditado podrás consultarte en la lista de <a href="{% url 'listado_auditores' %}">auditores acreditados</a>.</p>
-          </div>
-        </div>
+                  <div class="col s12">
+                      <button class="btn waves-effect waves-light red darken-1" type="submit" name="action">Enviar
+                          <i class="mdi-content-send right white-text"></i>
+                      </button>
+                  </div>
+              </div>
+          </form>
       </div>
-
+      <div class="col l3 s12">
+          <h5 class="white-text"><a class="white-text" href="http://suscerte.gob.ve">suscerte.gob.ve</a></h5>
+          <p class="white-text">Av. Andrés Bello. Edificio BFC. Piso 13. VenCERT. Caracas. Distrito Capital. Venezuela</p>
+      </div>
+      <div class="col l3 s12 left-align">
+          <h5 class="white-text">Social</h5>
+          <ul>
+              <li>
+                  <a class="white-text" href="https://www.facebook.com/suscerte">
+                      <i class="small fa fa-facebook-square white-text"></i> Facebook
+                  </a>
+              </li>
+              <li>
+                  <a class="white-text" href="https://www.youtube.com/user/TeamVenCERT">
+                      <i class="small fa fa-youtube white-text"></i> Youtube
+                  </a>
+              </li>
+              <li>
+                  <a class="white-text" href="https://twitter.com/suscerte">
+                      <i class="small fa fa-twitter-square white-text"></i> Twitter
+                  </a>
+              </li>
+          </ul>
+      </div>
     </div>
   </div>
 
+  <!--  Scripts-->
+  <script src="static/js/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.js"></script>
+  <script src="static/js/init.js"></script>
+  <script>
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 200,
+    format: 'dd/mm/yyyy',
+    });
+  </script>
 
-  <div id="index-contact-us" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br /><br />
-        <h1 class="center teal-text lighten-5">Contáctanos</h1>
-        <div class="row center">
-          <h5 class="header col s12 light white-text">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="{% static "images/caracas.jpg" %}" alt="Contáctanos"></div>
-  </div>
+  <script>
+  $(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();
+  });
+  </script>
 
+</footer>
+</html>
+  
 {% endblock %}
