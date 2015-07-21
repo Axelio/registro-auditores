@@ -402,8 +402,6 @@ class EducacionView(View):
             if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
                 institucion = Institucion.objects.get(id=request.POST['institucion'])
                 tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
-                import pdb
-                pdb.set_trace()
                 fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
                 fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
                 titulo = request.POST['titulo']
@@ -972,7 +970,6 @@ class IdiomaView(View):
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        nueva = True
 
         try:
             persona = Persona.objects.get(userprofile=request.user.profile)
@@ -991,10 +988,10 @@ class IdiomaView(View):
             else:
                 raise PermissionDenied
 
-        idioma = Idioma.objects.get(id=int(kwargs['idioma_id']))
 
         # Si se elimina una Habilidad
         if kwargs['palabra'] == 'eliminar':
+            idioma = Idioma.objects.get(id=int(kwargs['idioma_id']))
             idioma.delete()
 
             messages.add_message(request, messages.SUCCESS,
