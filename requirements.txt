@@ -10,3 +10,4 @@ psycopg2#==2.5.2 # Permite el soporte a PostgreSQL con python correctamente
 # Develpment
 #django-debug-toolbar==1.2 # Manejador debug para django. Sólo para ambiente de desarrollo
 dj_database_url
+dj-static
