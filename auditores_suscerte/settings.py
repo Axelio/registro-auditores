@@ -92,6 +92,7 @@ INSTALLED_APPS = (
     'authentication',
     'personas',
     'dj_database_url',
+    'dj_static',
 )
 
 MIDDLEWARE_CLASSES = (
