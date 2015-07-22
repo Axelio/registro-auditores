@@ -14,14 +14,11 @@ from auditores_suscerte import settings # Importar configuraciones del proyecto
 # Create your views here.
 def auth(request):
     template='formulario.html'
-    titulo = u'Inicia sesión'
-    descripcion = 'Ingresa, inicia sesión y actualiza tu información \
-        laboral. Las empresas querrían tener un auditor como tú.'
+    titulo = u'Iniciar sesión'
 
     diccionario = {}
     diccionario.update(csrf(request))
     diccionario.update({'titulo': titulo})
-    diccionario.update({'descripcion': descripcion})
 
     if request.user.groups.get_queryset().filter(
         name__iexact='operador').exists():

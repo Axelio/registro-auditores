@@ -19,8 +19,9 @@
     <div class="mobile-icollapse navbar-fixed">
       <nav class="blue">
         <div class="nav-wrapper container">
+          
           <a id="logo-container" href="{% url 'inicio' %}" class="brand-logo black-text"><img class="hide-on-small-only" height="60px" src="{% static "images/logo_suscerte.png" %}"></a>
-          {% if user.is_authenticated %}
+          {% if not user.is_authenticated %}
               <ul class="right hide-on-med-and-down section">
                 <li><a href="#como_registrarse">Cómo registrarse</a></li>
                 <li><a href="#auditores">Auditores registrados</a></li>
@@ -33,6 +34,14 @@
                 <li><a class="white-text"href="#auditores">Auditores registrados</a></li>
                 <li><a class="white-text"href="#contacto">Contáctanos</a></li>
                 <li><a class="white-text" href="#"><b>Iniciar sesión</b></a></li>
+              </ul>
+            {% else %}
+              <ul class="right hide-on-med-and-down section">
+                <li><a href="{% url 'salir' %}">Cerrar sesión</a></li>
+              </ul>
+
+              <ul id="nav-mobile" class="side-nav blue darken-1">
+                <li><a href="{% url 'salir' %}">Cerrar sesión</a></li>
               </ul>
             {% endif %}
           <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
