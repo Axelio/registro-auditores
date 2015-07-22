@@ -5,7 +5,7 @@ Django==1.8.2 # Framework de desarrollo web con python
 django-recaptcha#==1 # Paquete para manipular los captchas en los formularios # NOTA: requeire de python2.7-dev y python-setuptools por aptitude
 # sphinx==1.2.2 # Permite la adecuada documentación del proyecto
 # django-suit#==0.2.8 # Permite mejor visualización y configuración del panel administrativo
-# psycopg2#==2.5.2 # Permite el soporte a PostgreSQL con python correctamente
+psycopg2#==2.5.2 # Permite el soporte a PostgreSQL con python correctamente
 
 # Develpment
 #django-debug-toolbar==1.2 # Manejador debug para django. Sólo para ambiente de desarrollo
