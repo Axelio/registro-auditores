@@ -6151,7 +6151,7 @@ label {
     -ms-transition: color 0.2s;
     transition: color 0.2s; }
     .input-field .prefix.active {
-      color: #26a69a; }
+      color: #1e88e5; }
   .input-field .prefix ~ input, .input-field .prefix ~ textarea {
     margin-left: 3rem;
     width: 92%;
@@ -6199,10 +6199,10 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
   transition: 0.3s; }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=url]:focus, input[type=date]:focus, input[type=tel]:focus, input[type=number]:focus, input[type=search]:focus, textarea:focus.materialize-textarea {
-  border-bottom: 1px solid #26a69a;
-  -webkit-box-shadow: 0 1px 0 0 #26a69a;
-  -moz-box-shadow: 0 1px 0 0 #26a69a;
-  box-shadow: 0 1px 0 0 #26a69a; }
+  border-bottom: 1px solid #1e88e5;
+  -webkit-box-shadow: 0 1px 0 0 #1e88e5;
+  -moz-box-shadow: 0 1px 0 0 #1e88e5;
+  box-shadow: 0 1px 0 0 #1e88e5; }
 
 textarea.materialize-textarea {
   overflow-y: hidden;
@@ -6288,8 +6288,8 @@ textarea.materialize-textarea {
 
 [type="radio"]:checked + label:after {
   border-radius: 50%;
-  border: 2px solid #26a69a;
-  background-color: #26a69a;
+  border: 2px solid #1e88e5;
+  background-color: #1e88e5;
   z-index: 0;
   -webkit-transform: scale(1.02);
   -moz-transform: scale(1.02);
@@ -7826,7 +7826,7 @@ ul.side-nav .collapsible-body li.active, ul.side-nav.fixed .collapsible-body li.
   -ms-transform: scale(0.9);
   -o-transform: scale(0.9);
   transform: scale(0.9);
-  background-color: #26a69a;
+  background-color: #1e88e5;
   color: #ffffff; }
   .picker__day--selected.picker__day--outfocus, .picker__day--selected:hover.picker__day--outfocus, .picker--focused .picker__day--selected.picker__day--outfocus {
     background-color: #a1ded8; }
@@ -7838,7 +7838,7 @@ ul.side-nav .collapsible-body li.active, ul.side-nav.fixed .collapsible-body li.
 .picker__close, .picker__today {
   font-size: 1.1rem;
   padding: 0 1rem;
-  color: #26a69a; }
+  color: #1e88e5; }
 
 .picker__nav--prev:before, .picker__nav--next:before {
   content: " ";
