@@ -3572,7 +3572,7 @@ Vel = $ ? $.Velocity : Velocity,
                             a(this).hasClass("disabled") || (d.find("option").eq(c).prop("selected", !0), d.trigger("change"), d.siblings("input.select-dropdown").val(a(this).text()), "undefined" != typeof b && b())
                         })
                     }), $select.wrap(e);
-                    var i = a('<span class="caret">&#9660;</span>');
+                    var i = a('');
                     $select.is(":disabled") && i.addClass("disabled");
                     var j = a('<input type="text" class="select-dropdown" readonly="true" ' + ($select.is(":disabled") ? "disabled" : "") + ' data-activates="select-options-' + d + '" value="' + f.html() + '"/>');
                     $select.before(j), j.before(i), a("body").append(g), $select.is(":disabled") || j.dropdown({
