@@ -7761,7 +7761,7 @@ ul.side-nav .collapsible-body li.active, ul.side-nav.fixed .collapsible-body li.
 
 .picker__date-display {
   text-align: center;
-  background-color: #26a69a;
+  background-color: #2196F3;
   color: #fff;
   padding-bottom: 15px;
   font-weight: 300; }
@@ -7772,7 +7772,7 @@ ul.side-nav .collapsible-body li.active, ul.side-nav.fixed .collapsible-body li.
   background: #a1ded8; }
 
 .picker__weekday-display {
-  background-color: #1f897f;
+  background-color: #1e88e5;
   padding: 10px;
   font-weight: 200;
   letter-spacing: 0.5;
