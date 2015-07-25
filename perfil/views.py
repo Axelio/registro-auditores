@@ -13,7 +13,7 @@ from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
 from personas.models import Persona
-from curriculum.views import lista_filtros
+from curriculum.views import lista_filtros, aptitudes, revisar_requisitos
 
 import datetime
 
@@ -59,6 +59,11 @@ class PerfilView(View):
             self.diccionario.update({'aspirantes':aspirantes})
             self.diccionario.update({'auditores':auditores})
 
+        fijar_cita = False
+        if revisar_requisitos(aptitudes(request.user)) == True:
+            fijar_cita = True
+
+        self.diccionario.update({'fijar_cita': fijar_cita})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request, 
