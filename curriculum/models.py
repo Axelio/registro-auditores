@@ -46,9 +46,16 @@ class Certificacion(models.Model):
         return u'%s - %s' % (self.persona, self.titulo)
 
 
-class Cita(models.Model):
+class Tiempo(models.Model):
+    dia = models.DateField(default=1)
+    hora = models.TimeField(default=1)
+
+    class Meta:
+        abstract = True
+
+
+class Cita(Tiempo):
     usuario = models.ForeignKey(UserProfile)
-    fecha = models.DateTimeField(verbose_name = 'fijar fecha y hora')
     cita_fijada = models.BooleanField(default=False)
 
     class Meta:

@@ -45,20 +45,21 @@ class FijarCitaForm(forms.ModelForm):
 
 class CitasForm(forms.Form):
     '''
-    Formulario para la selección de fechas tentativas para la cita
+    Formulario para la seleccion de fechas tentativas para la cita
     '''
     fecha = forms.DateField(widget=forms.TextInput(
         attrs={
-            'class':'ink-datepicker',
-            'data-format': 'dd/mm/yyyy',
-            'data-position':'bottom'
+            'type': 'date',
+            'required': 'required',
+            'class': 'datepicker',
             }
         ))
-    hora = forms.TimeField(widget=forms.TextInput(attrs={'class':'timepicker'}))
+
+    hora = forms.TimeField(widget=forms.TextInput(attrs={'class':'text'}))
 
     def clean(self):
         '''
-        Función para validaciones generales del modelo Cita
+        Funcion para validaciones generales del modelo Cita
         '''
 
         fecha = self.cleaned_data['fecha']

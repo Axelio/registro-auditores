@@ -19,18 +19,20 @@
                     </a>
                 </li>
             </ul>
-            <ul class="collection z-depth-1">
-                <li class="collection-item">
-                    <div class="center-align"><b><a href=#>Fijación de cita</a></b></div><br />
-                    <p>
-                        ¡Excelente! Ahora puedes fijar una cita para que te entrevisten nuestros especialistas.
-                    </p>
-                    <div class="center-align">
-                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Postular cita" href="{% url 'postular_cita' %}">
-                        <i class="mdi-action-today large"></i>
-                    </a>
-                </li>
-            </ul>
+            {% if fijar_cita %}
+                <ul class="collection z-depth-1">
+                    <li class="collection-item">
+                        <div class="center-align"><b><a href=#>Fijación de cita</a></b></div><br />
+                        <p>
+                            ¡Excelente! Ahora puedes fijar una cita para que te entrevisten nuestros especialistas.
+                        </p>
+                        <div class="center-align">
+                        <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Postular cita" href="{% url 'citas' %}">
+                            <i class="mdi-action-today large"></i>
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
         <div class="col s12 m8 l6">
             <div class="col s12 m6 l12">

@@ -20,6 +20,7 @@ from authentication.views import *
 from authentication.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
 from django.contrib.auth.decorators import login_required
+
 import os
 
 
@@ -104,7 +105,7 @@ urlpatterns = patterns('',
 
     url(r'^fijar_cita/(?P<usuario_id>[\d]+)*$',
         login_required(FijarCitaView.as_view()),
-        name='acreditar'),
+        name='postular_cita'),
 
     url(r'^$',
         TemplateView.as_view(template_name='index.html'),

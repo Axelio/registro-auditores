@@ -126,7 +126,7 @@ def aptitudes(usuario):
             usuario=usuario.profile)
     idiomas = Idioma.objects.filter(
             persona=usuario.profile.persona)
-    certifcaciones = Certificacion.objects.filter(
+    certificaciones = Certificacion.objects.filter(
             persona=usuario.profile.persona).order_by('-fecha_fin')
     cursos = Curso.objects.filter(
             usuario=usuario.profile).order_by('-fecha_fin')
@@ -136,7 +136,7 @@ def aptitudes(usuario):
     listado.append(conocimientos)
     listado.append(habilidades)
     listado.append(idiomas)
-    listado.append(certifcaciones)
+    listado.append(certificaciones)
     listado.append(cursos)
 
     return listado
@@ -221,14 +221,11 @@ def revisar_requisitos(listado):
 
 class CitasView(View):
     '''
-    Clase para la renderización de las citas
+    Clase para la renderizacion de las citas
     '''
-    template = 'perfil/editar_formulario.html'
-    citas_form = formset_factory(CitasForm, extra=3)
-    mensaje = ''
-    tipo_mensaje = ''
+    template = 'formulario.html'
+    form = formset_factory(CitasForm, extra=1)
     titulo = 'citas'
-    lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -238,7 +235,6 @@ class CitasView(View):
         listado = aptitudes(request.user)
         requisitos = revisar_requisitos(listado)
         self.diccionario.update(csrf(request))
-        nueva = True
         if requisitos:
             if Cita.objects.filter(usuario=request.user.profile).exists():
                 return redirect('perfil')
@@ -246,16 +242,15 @@ class CitasView(View):
                 self.tipo_mensaje = 'info'
                 self.mensaje = 'Debe seleccionar tres fechas/horas tentativas en las \
                                 que desearía tener una cita con nosotros.'
+
         else:
-            self.template = 'perfil.html'
-            self.tipo_mensaje = 'warning'
-            self.mensaje = u'Debe tener toda la información \
-                            curricular completa. Por favor, revísela.'
-        self.diccionario.update({'persona': request.user.profile.persona})
-        self.diccionario.update({'nueva': nueva})
+            messages.add_message(request, messages.WARNING,
+                u'Debe tener toda la información curricular completa.')
+
+            return HttpResponseRedirect(reverse('perfil'))
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
-        self.diccionario.update({'formulario': self.citas_form})
+        self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request,
@@ -1469,12 +1464,10 @@ class FijarCitaView(View):
     '''
     Clase para la edición de datos de información de la persona
     '''
-    template='auditores/fijar_cita.html'
+    #template='auditores/fijar_cita.html'
+    template='formulario.html'
     cita_form = FijarCitaForm
     titulo = 'fijar cita'
-    mensaje = ''
-    tipo_mensaje = ''
-    lista_filtros = ''
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
