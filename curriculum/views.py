@@ -148,7 +148,7 @@ def lista_filtros(usuario):
     '''
     listado = aptitudes(usuario)
     requisitos = revisar_requisitos(listado)
-    cita = Cita.objects.filter(usuario=usuario.profile, fecha__gte=datetime.datetime.today())
+    cita = Cita.objects.filter(usuario=usuario.profile, dia__gte=datetime.datetime.today())
 
     listado = {'laborales': listado[0],
                 'educaciones': listado[1],
