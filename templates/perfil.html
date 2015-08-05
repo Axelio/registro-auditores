@@ -41,23 +41,17 @@
                     <li class="collection-item avatar">
                         <i class="large mdi-action-assignment circle yellow darken-1"></i>
                         <span class="title"><b>
-                            {% if laborales %}
-                                <a class="waves-effect waves-light modal-trigger" href="#laboral">
-                            {% else %}
-                                <a class="waves-effect waves-light" href="#">
-                            {% endif %}
-                                Información laboral
-                            </a>
+                            <a class="waves-effect waves-light modal-trigger" href="#laboral">Información laboral</a>
                         </b></span>
                         <div class="col s2 align right">
                             <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Añadir" href="{% url 'laboral' 'nueva' %}">
                                 <i class="large mdi-content-add"></i>
                             </a>
                         </div>
-                        {% if laborales %}
-                            <div id="laboral" class="modal bottom-sheet">
-                              <div class="modal-content">
-                                <h4>Usted ha trabajado en...</h4>
+                        <div id="laboral" class="modal bottom-sheet">
+                          <div class="modal-content">
+                            {% if laborales %}
+                                <h4>Ud ha trabajado en...</h4>
                                 {% for laboral in laborales %}
                                     <ul class="collection">
                                       <li class="collection-item avatar">
@@ -75,10 +69,12 @@
                                       </li>
                                     </ul>
                                 {% endfor %}
-                              </div>
-                            </div>
-                            <p>Has trabajado en...<br></p>
-                        {% endif %}
+                            {% else %}
+                                <h4>Ud no tiene registros laborales...</h4>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <p>Has trabajado en...<br></p>
                     </li>
                 </ul>
                 </div>
