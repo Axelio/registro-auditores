@@ -1,0 +1,20 @@
+[
+{
+    "fields": {
+        "sector": "asdasd",
+        "cargo": "asdasd",
+        "empresa": "Asdasd",
+        "retiro": "asdasdasd",
+        "usuario": 1,
+        "estado": 2,
+        "fecha_fin": "2015-08-04",
+        "direccion_empresa": "asdasdasd",
+        "trabajo_actual": false,
+        "fecha_inicio": "2015-08-02",
+        "telefono": "asdasd",
+        "funcion": "aasdasd"
+    },
+    "model": "curriculum.laboral",
+    "pk": 1
+}
+]
