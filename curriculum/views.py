@@ -1225,8 +1225,8 @@ class CursoView(View):
 
                 estado = Estado.objects.get(id=request.POST['estado'])
                 institucion = Institucion.objects.get(id=request.POST['institucion'])
-                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%Y-%m-%d") 
-                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%Y-%m-%d") 
+                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
 
                 if kwargs['palabra'] == 'editar':
                     # Si se edita un Curso
