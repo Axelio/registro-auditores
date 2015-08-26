@@ -38,10 +38,16 @@
               </ul>
             {% else %}
               <ul class="right hide-on-med-and-down section">
+                {% if request.path == '/' %}
+                    <li><a href="{% url 'perfil' %}">Perfil</a></li>
+                {% endif %}
                 <li><a href="{% url 'salir' %}">Cerrar sesión</a></li>
               </ul>
 
               <ul id="nav-mobile" class="side-nav blue darken-1">
+                {% if request.path == '/' %}
+                    <li><a href="{% url 'perfil' %}">Perfil</a></li>
+                {% endif %}
                 <li><a href="{% url 'salir' %}">Cerrar sesión</a></li>
               </ul>
             {% endif %}
