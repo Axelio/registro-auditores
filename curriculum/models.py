@@ -74,7 +74,8 @@ def post_save_cita(sender, **kwargs):
 
     citas = Cita.objects.filter(
             usuario=cita.usuario,
-            fecha=cita.fecha,
+            dia=cita.dia,
+            hora=cita.hora,
             )
 
     destinatarios = []
@@ -88,7 +89,7 @@ def post_save_cita(sender, **kwargs):
 
         # Búsqueda de fecha definitiva:
         fecha_fijada = ''
-        fecha_fijada = cita.fecha
+        fecha_fijada = '%s a las %s' % (cita.dia, cita.hora)
 
         # Envío de mail
         mensaje = Mensaje.objects.get(caso='Postulación de cita')

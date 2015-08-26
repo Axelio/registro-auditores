@@ -14,6 +14,7 @@ from lugares.models import Estado
 from personas.forms import PersonaForm
 from personas.models import Persona
 from curriculum.views import lista_filtros, aptitudes, revisar_requisitos
+from curriculum.models import Cita
 
 import datetime
 
@@ -56,12 +57,20 @@ class PerfilView(View):
             auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
             self.template = 'perfil/perfil_operador.html'
 
-            self.diccionario.update({'aspirantes':aspirantes})
-            self.diccionario.update({'auditores':auditores})
+            self.diccionario.update({'aspirantes': aspirantes})
+            self.diccionario.update({'auditores': auditores})
 
         fijar_cita = False
         if revisar_requisitos(aptitudes(request.user)) == True:
             fijar_cita = True
+
+        if fijar_cita:
+            cita = Cita.objects.filter(usuario=request.user.profile, dia__gte=datetime.datetime.today().date())
+            if cita.exists():
+                self.diccionario.update({'citas': cita})
+            if cita.filter(cita_fijada=True).exists():
+                cita_fijada = cita.get(cita_fijada=True)
+                self.diccionario.update({'cita_fijada': cita_fijada})
 
         self.diccionario.update({'fijar_cita': fijar_cita})
         self.lista_filtros = lista_filtros(request.user)

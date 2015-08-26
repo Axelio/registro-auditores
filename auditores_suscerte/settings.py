@@ -115,7 +115,7 @@ WSGI_APPLICATION = 'auditores_suscerte.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'es-ve'
+LANGUAGE_CODE = 'es-VE'
 
 TIME_ZONE = 'America/Caracas'
 
