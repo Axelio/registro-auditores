@@ -6,10 +6,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.models import LogEntry, ADDITION, DELETION, CHANGE
 from django.contrib import messages
 from django.core.mail import send_mail
+
 from personas.models import Persona
 from lugares.models import Estado, Institucion, Pais
 from authentication.models import UserProfile, Mensaje
 from auditores_suscerte import settings
+
+import datetime
 
 # Modelos para construir el Curriculum
 
@@ -47,8 +50,8 @@ class Certificacion(models.Model):
 
 
 class Tiempo(models.Model):
-    dia = models.DateField(default=1)
-    hora = models.TimeField(default=1)
+    dia = models.DateField()
+    hora = models.TimeField()
 
     class Meta:
         abstract = True
