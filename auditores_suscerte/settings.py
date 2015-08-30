@@ -115,7 +115,7 @@ WSGI_APPLICATION = 'auditores_suscerte.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'es-VE'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'America/Caracas'
 
@@ -202,3 +202,6 @@ except:
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
+
+# Activacion de notificaciones por correo
+NOTIFY = False
