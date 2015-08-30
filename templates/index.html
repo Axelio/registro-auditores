@@ -21,7 +21,7 @@
         <div class="container">
           <h2 class="header center white-text">SUSCERTE</h2>
           <div class="row center">
-            <h5 class="header col s12 light white-text">Sé un auditor acreditado por SUSCERTE y súmate a nuestro <b><u><a class="white-text" href=#>listado de profesionales</a></u></b></h5>
+            <h5 class="header col s12 light white-text">Sé un auditor acreditado por SUSCERTE y súmate a nuestro <b><u><a class="white-text" href=#auditores>listado de profesionales</a></u></b></h5>
           </div>
         </div>
       <div class="parallax blue"></div>
@@ -140,6 +140,7 @@
           <h2 class="center blue-text">Auditores registrados</h2>
           <!--   Icon Section   -->
           <div class="row">
+            {% if auditores_list %}
             <table class="bordered responsive-table hoverable">
               <thead>
                 <tr>
@@ -151,26 +152,29 @@
               </thead>
 
               <tbody>
+                {% for auditor in auditores_list %}
                 <tr>
-                  <td>0001</td>
-                  <td>Milthon Chávez</td>
-                  <td>0416 123 45 67</td>
-                  <td>correo@example.com</td>
+                  <td>{{ auditor.id|stringformat:"04d" }}</td>
+                  <td>{{ auditor.persona.primer_nombre }} {{ auditor.persona.primer_apellido }}</td>
+                  <td>
+                    {% ifequal auditor.persona.tlf_contacto 'fijo' %}
+                        {{ auditor.persona.tlf_reside }}
+                    {% endifequal %}
+                    {% ifequal auditor.persona.tlf_contacto 'oficina' %}
+                        {{ auditor.persona.oficina }}
+                    {% endifequal %}
+                    {% ifequal auditor.persona.tlf_contacto 'movil' %}
+                        {{ auditor.persona.movil }}
+                    {% endifequal %}
+                  </td>
+                  <td>{{ auditor.persona.email }}</td>
                 </tr>
-                <tr>
-                  <td>0005</td>
-                  <td>Mariclen Villegas</td>
-                  <td>0416 123 45 67</td>
-                  <td>correo@example.com</td>
-                </tr>
-                <tr>
-                  <td>0006</td>
-                  <td>Alexander Osorio</td>
-                  <td>0416 123 45 67</td>
-                  <td>correo@example.com</td>
-                </tr>
+                {% endfor %}
               </tbody>
           </table>
+          {% else %}
+            <b>No hay ningún auditor registrado hasta ahora.</b>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -229,7 +233,7 @@
       </div>
       <div class="col l3 s12">
           <h5 class="white-text"><a class="white-text" href="http://suscerte.gob.ve">suscerte.gob.ve</a></h5>
-          <p class="white-text">Av. Andrés Bello. Edificio BFC. Piso 13. VenCERT. Caracas. Distrito Capital. Venezuela</p>
+          <p class="white-text">Av. Andrés Bello. Edificio BFC. Piso 13. SUSCERTE. Caracas. Distrito Capital. Venezuela</p>
       </div>
       <div class="col l3 s12 left-align">
           <h5 class="white-text">Social</h5>
@@ -240,7 +244,7 @@
                   </a>
               </li>
               <li>
-                  <a class="white-text" href="https://www.youtube.com/user/TeamVenCERT">
+                  <a class="white-text" href="https://www.youtube.com/channel/UCtn3YdzcknqfB-EkjMVy75Q">
                       <i class="small fa fa-youtube white-text"></i> Youtube
                   </a>
               </li>
