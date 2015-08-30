@@ -7,13 +7,14 @@ from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.db.models import Q
 
 from .forms import EditarPerfilForm
 from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
-from personas.models import Persona
-from curriculum.views import lista_filtros, aptitudes, revisar_requisitos
+from personas.models import Persona, Auditor
+from curriculum.views import lista_filtros, listaAspirantes, aptitudes, revisar_requisitos
 from curriculum.models import Cita
 
 import datetime
@@ -55,7 +56,7 @@ class PerfilView(View):
         if usuario.groups.filter(name__iexact='operador').exists():
             aspirantes = listaAspirantes()
             auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
-            self.template = 'perfil/perfil_operador.html'
+            self.template = 'perfil.html'
 
             self.diccionario.update({'aspirantes': aspirantes})
             self.diccionario.update({'auditores': auditores})
