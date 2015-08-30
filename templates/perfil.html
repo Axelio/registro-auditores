@@ -22,20 +22,41 @@
             {% if fijar_cita %}
                 <ul class="collection z-depth-1">
                     <li class="collection-item">
-                        <div class="center-align"><b><a href=#>Fijación de cita</a></b></div><br />
                         {% if cita_fijada %}
-                                {{ cita_fijada }}
+                            <div class="center-align"><b><a href=#>Cita fijada</a></b></div><br />
+                            Tiene una cita fijada para
+                                <b>{{ cita_fijada.dia }}</b> a las <b>{{ cita_fijada.hora }}</b>.
                         {% else %}
+                            <div class="center-align"><b><a href=#>Postulación de cita</a></b></div><br />
                             {% if citas %}
-                                {% for cita in citas %}
-                                    {{ cita }}
-                                {% endfor %}
+                                Tiene las siguientes fechas postuladas.
+
+                                <table class="hoverable">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="dia">Día</th>
+                                            <th data-field="hora">Hora</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for cita in citas %}
+                                        <tr>
+                                            <td>{{ cita.dia }}</td>
+                                            <td>{{ cita.hora }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <small>Los operadores aprobarán en concenso el día y hora en la que debe asistir a la entrevista.</small>
+                            {% else %}
+                                <div class="center-align">
+                                    <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Postular cita" href="{% url 'citas' %}">
+                                        <i class="mdi-action-today large"></i>
+                                    </a>
+                                </div>
                             {% endif %}
                         {% endif %}
-                        <div class="center-align">
-                        <a class="btn-floating btn-medium tooltipped blue" data-position="left" data-delay="50" data-tooltip="Postular cita" href="{% url 'citas' %}">
-                            <i class="mdi-action-today large"></i>
-                        </a>
                     </li>
                 </ul>
             {% endif %}
