@@ -308,8 +308,9 @@ class CitasView(View):
                     mensaje = Mensaje.objects.get(caso='Propuesta de cita')
                     mensaje = mensaje.mensaje.replace('<LINK>','%s/fijar_cita/%s/.' % (settings.HOST, cita.usuario.id))
 
-                    send_mail(subject=asunto, message=mensaje,
-                        from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
+                    if settings.NOTIFY:
+                        send_mail(subject=asunto, message=mensaje,
+                            from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
 
 
                 messages.add_message(request, messages.SUCCESS,
