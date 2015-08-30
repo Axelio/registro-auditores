@@ -15,7 +15,7 @@ from django.core.paginator import (Paginator, EmptyPage,
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.humanize.templatetags.humanize import intcomma
-from django.forms.formsets import formset_factory
+from django.forms.models import modelformset_factory
 from django.utils import formats
 
 from curriculum.models import *
@@ -224,7 +224,10 @@ class CitasView(View):
     Clase para la renderizacion de las citas
     '''
     template = 'formulario.html'
-    form = formset_factory(CitasForm, extra=1)
+    form = modelformset_factory(Cita,
+        extra=3,
+        fields=('dia', 'hora'),
+        form=CitasForm)
     titulo = 'citas'
 
     # Envío de variables a la plantilla a través de diccionario
@@ -304,11 +307,11 @@ class CitasView(View):
                     for operador in get_operadores():
                         destinatarios.append(operador.get_profile().persona.email)
 
-                    emisor = settings.EMAIL_HOST_USER
-                    mensaje = Mensaje.objects.get(caso='Propuesta de cita')
-                    mensaje = mensaje.mensaje.replace('<LINK>','%s/fijar_cita/%s/.' % (settings.HOST, cita.usuario.id))
-
                     if settings.NOTIFY:
+                        emisor = settings.EMAIL_HOST_USER
+                        mensaje = Mensaje.objects.get(caso='Propuesta de cita')
+                        mensaje = mensaje.mensaje.replace('<LINK>','%s/fijar_cita/%s/.' % (settings.HOST, cita.usuario.id))
+
                         send_mail(subject=asunto, message=mensaje,
                             from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=destinatarios)
 
