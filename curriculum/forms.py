@@ -43,19 +43,22 @@ class FijarCitaForm(forms.ModelForm):
             }
 
 
-class CitasForm(forms.Form):
-    '''
-    Formulario para la seleccion de fechas tentativas para la cita
-    '''
-    fecha = forms.DateField(widget=forms.TextInput(
-        attrs={
-            'type': 'date',
-            'required': 'required',
-            'class': 'datepicker',
-            }
-        ))
+class CitasForm(forms.ModelForm):
 
-    hora = forms.TimeField(widget=forms.TextInput(attrs={'class':'text'}))
+    class Meta:
+
+        model = Cita
+        fields = ('dia', 'hora')
+
+        widgets = {
+            'dia': forms.DateInput(
+                attrs={
+                    'required': 'required',
+                    'class': 'datepicker',
+                   }
+                )
+            }
+
 
     def clean(self):
         '''
