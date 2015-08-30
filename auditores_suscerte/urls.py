@@ -9,8 +9,12 @@ from django.contrib.auth.views import (password_reset,
         password_reset_complete, password_change,
         password_change_done)
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import TemplateView
+from django.db.models import Q
+from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
+
 from personas.views import PersonalesView
+from personas.models import Auditor
 from curriculum.views import (EducacionView, LaboralView, CompetenciaView,
     HabilidadView, ConocimientoView, IdiomaView,
     CitasView, CertificacionView, CursoView,
@@ -19,7 +23,6 @@ from curriculum.views import (EducacionView, LaboralView, CompetenciaView,
 from authentication.views import *
 from authentication.forms import (ValidatingSetPasswordForm,
     ValidatingPasswordChangeForm)
-from django.contrib.auth.decorators import login_required
 
 import os
 
@@ -108,7 +111,11 @@ urlpatterns = patterns('',
         name='postular_cita'),
 
     url(r'^$',
-        TemplateView.as_view(template_name='index.html'),
+        ListView.as_view(
+            queryset=Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito')),
+            template_name='index.html',
+            context_object_name="auditores_list",
+            ),
         name='inicio'),
 
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
