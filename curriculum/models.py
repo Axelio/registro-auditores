@@ -80,7 +80,7 @@ def post_save_cita(sender, **kwargs):
 
     destinatarios = []
 
-    if cita.cita_fijada == True:
+    if cita.cita_fijada == True and settings.NOTIFY == True:
         # Si hay una fecha fijada, se envía un mail
         # al usuario indicándole la fecha definitiva
         asunto = u'%sFijada fecha para cita' % (settings.EMAIL_SUBJECT_PREFIX)
