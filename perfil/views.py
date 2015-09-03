@@ -15,7 +15,7 @@ from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
 from personas.models import Persona, Auditor
-from curriculum.views import ilista_filtros, listaAspirantes, aptitudes, \
+from curriculum.views import lista_filtros, listaAspirantes, aptitudes, \
     revisar_requisitos
 from curriculum.models import Cita
 
@@ -136,7 +136,6 @@ class DetallesPerfilView(View):
         tlf_movil = request.POST['tlf_movil']
         tlf_contacto = request.POST['tlf_contacto']
         estado_civil = request.POST['estado_civil']
-        = request.POST['']
 
         if request.user.profile.persona is None:
             persona = Persona.objects.create(cedula=request.POST['cedula'],
