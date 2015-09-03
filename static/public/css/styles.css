@@ -9,5 +9,5 @@ main {
 }
 
 .card.extra-large {
-    height: 700px !important;
+    height: auto !important;
 }
