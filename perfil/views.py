@@ -6,8 +6,9 @@ from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.db.models import Q
+from django.core.exceptions import PermissionDenied
 
 from .forms import EditarPerfilForm
 from authentication.models import UserProfile
@@ -35,7 +36,7 @@ class PerfilView(View):
         usuario = request.user
 
         if request.user.profile.persona == None:
-            return HttpResponseRedirect(reverse('detalles_perfil'))
+            return HttpResponseRedirect(reverse('detalles_perfil',  kwargs={'pk': request.user.profile.persona.id}))
         '''
         if not request.session.get('ultima_sesion', False):
             persistente = True
@@ -76,7 +77,7 @@ class PerfilView(View):
         self.diccionario.update({'fijar_cita': fijar_cita})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -88,9 +89,6 @@ class DetallesPerfilView(View):
     '''
     template='formulario.html'
     titulo = 'información personal'
-    mensaje = ''
-    tipo_mensaje = ''
-    lista_filtros = ''
     form = PersonaForm
 
     # Envío de variables a la plantilla a través de diccionario
@@ -98,18 +96,16 @@ class DetallesPerfilView(View):
     diccionario.update({'titulo':titulo})
 
     def get(self, request, *args, **kwargs):
+        persona = get_object_or_404(Persona, pk=kwargs['pk'])
+        if not request.user.profile.persona == persona:
+            raise PermissionDenied
+
         self.diccionario.update(csrf(request))
-        self.lista_filtros = lista_filtros(request.user)
-        self.diccionario.update(self.lista_filtros)
 
-        if not request.user.profile.persona == None:
-            # Si hay un perfil creado, se instancia el objeto para su edición
-            self.form = self.form(instance=request.user.profile.persona)
+        self.form = self.form(instance=persona)
+        self.diccionario.update({'form': self.form})
 
-        else:
-            self.diccionario.update({'form': self.form()})
-
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -122,7 +118,7 @@ class DetallesPerfilView(View):
         self.diccionario.update({'form': self.form})
 
         estado = Estado.objects.get(id=request.POST['reside'])
-        fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+        fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d")
 
         if request.user.profile.persona == None:
             persona = Persona.objects.create(cedula=request.POST['cedula'],

@@ -51,7 +51,7 @@ urlpatterns = patterns('',
         login_required(CertificacionView.as_view()),
         name='certificacion'),
 
-    url(r'^detalles/',
+    url(r'^(?P<pk>[0-9]+)/$',
         login_required(DetallesPerfilView.as_view()),
         name='detalles_perfil'),
 
