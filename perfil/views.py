@@ -15,7 +15,8 @@ from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
 from personas.models import Persona, Auditor
-from curriculum.views import lista_filtros, listaAspirantes, aptitudes, revisar_requisitos
+from curriculum.views import ilista_filtros, listaAspirantes, aptitudes, \
+    revisar_requisitos
 from curriculum.models import Cita
 
 import datetime
@@ -35,8 +36,12 @@ class PerfilView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
-        if request.user.profile.persona == None:
-            return HttpResponseRedirect(reverse('detalles_perfil',  kwargs={'pk': request.user.profile.persona.id}))
+        if request.user.profile.persona is None:
+            return HttpResponseRedirect(
+                    reverse('detalles_perfil',
+                            kwargs={'pk': request.user.profile.persona.id}
+                            )
+                    )
         '''
         if not request.session.get('ultima_sesion', False):
             persistente = True
@@ -56,7 +61,8 @@ class PerfilView(View):
         # Y si pertenece, le cambiamos la plantilla y los filtros
         if usuario.groups.filter(name__iexact='operador').exists():
             aspirantes = listaAspirantes()
-            auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado')|Q(estatus__nombre='Inscrito'))
+            auditores = Auditor.objects.filter(Q(estatus__nombre='Renovado') |
+                                               Q(estatus__nombre='Inscrito'))
             self.template = 'perfil.html'
 
             self.diccionario.update({'aspirantes': aspirantes})
@@ -67,7 +73,8 @@ class PerfilView(View):
             fijar_cita = True
 
         if fijar_cita:
-            cita = Cita.objects.filter(usuario=request.user.profile, dia__gte=datetime.datetime.today().date())
+            cita = Cita.objects.filter(usuario=request.user.profile)
+            cita = cita.filter(dia__gte=datetime.datetime.today().date())
             if cita.exists():
                 self.diccionario.update({'citas': cita})
             if cita.filter(cita_fijada=True).exists():
@@ -78,22 +85,21 @@ class PerfilView(View):
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
         return render(request,
-                       template_name=self.template,
-                       dictionary=self.diccionario,
-                     )
+                      template_name=self.template,
+                      dictionary=self.diccionario,)
 
 
 class DetallesPerfilView(View):
     '''
     Clase para la edición de datos de información de la persona
     '''
-    template='formulario.html'
+    template = 'formulario.html'
     titulo = 'información personal'
     form = PersonaForm
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
-    diccionario.update({'titulo':titulo})
+    diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
         persona = get_object_or_404(Persona, pk=kwargs['pk'])
@@ -106,10 +112,8 @@ class DetallesPerfilView(View):
         self.diccionario.update({'form': self.form})
 
         return render(request,
-                       template_name=self.template,
-                       dictionary=self.diccionario,
-                     )
-
+                      template_name=self.template,
+                      dictionary=self.diccionario,)
 
     def post(self, request, *args, **kwargs):
         self.form = self.form(request.POST)
@@ -117,29 +121,42 @@ class DetallesPerfilView(View):
         self.diccionario.update(csrf(request))
         self.diccionario.update({'form': self.form})
 
+        cedula = request.user.profile.persona.cedula
+        primer_nombre = request.POST['primer_nombre']
+        segundo_nombre = request.POST['segundo_nombre']
+        primer_apellido = request.POST['primer_apellido']
+        segundo_apellido = request.POST['segundo_apellido']
+        genero = request.POST['genero']
         estado = Estado.objects.get(id=request.POST['reside'])
-        fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d")
+        direccion = request.POST['direccion']
+        fecha_nacimiento = datetime.datetime.strptime(
+                request.POST['fecha_nacimiento'],
+                "%d/%m/%Y").strftime("%Y-%m-%d")
+        tlf_reside = request.POST['tlf_reside']
+        tlf_movil = request.POST['tlf_movil']
+        tlf_contacto = request.POST['tlf_contacto']
+        estado_civil = request.POST['estado_civil']
+        = request.POST['']
 
-        if request.user.profile.persona == None:
+        if request.user.profile.persona is None:
             persona = Persona.objects.create(cedula=request.POST['cedula'],
-                                             primer_nombre = request.POST['primer_nombre'],
-                                             segundo_nombre = request.POST['segundo_nombre'],
-                                             primer_apellido = request.POST['primer_apellido'],
-                                             segundo_apellido = request.POST['segundo_apellido'],
-                                             genero = request.POST['genero'],
-                                             reside = estado,
-                                             direccion = request.POST['direccion'],
-                                             fecha_nacimiento = fecha_nacimiento,
-                                             tlf_reside = request.POST['tlf_reside'],
-                                             tlf_movil = request.POST['tlf_movil'],
-                                             tlf_oficina = request.POST['tlf_oficina'],
-                                             tlf_contacto = request.POST['tlf_contacto'],
-                                             estado_civil = request.POST['estado_civil'],
-                                             email = request.user.email,
-                                             )
+                                             primer_nombre=primer_nombre,
+                                             segundo_nombre=segundo_nombre,
+                                             primer_apellido=primer_apellido,
+                                             segundo_apellido=segundo_apellido,
+                                             genero=genero,
+                                             reside=estado,
+                                             direccion=direccion,
+                                             fecha_nacimiento=fecha_nacimiento,
+                                             tlf_reside=tlf_reside,
+                                             tlf_movil=tlf_movil,
+                                             tlf_oficina=tlf_oficina,
+                                             tlf_contacto=tlf_contacto,
+                                             estado_civil=estado_civil,
+                                             email=request.user.email)
 
         else:
-            persona = Persona.objects.get(cedula=request.user.profile.persona.cedula)
+            persona = Persona.objects.get(cedula=cedula)
             persona.cedula = request.POST['cedula']
             persona.primer_nombre = request.POST['primer_nombre']
             persona.segundo_nombre = request.POST['segundo_nombre']
@@ -166,7 +183,7 @@ class DetallesPerfilView(View):
         perfil.save()
 
         messages.add_message(request, messages.SUCCESS,
-             'Los datos de su perfil se han guardado exitosamente')
-
+                             'Los datos de su perfil se \
+                              han guardado exitosamente')
 
         return redirect(reverse('perfil'))
