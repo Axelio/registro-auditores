@@ -105,3 +105,23 @@ class EducacionTest(TestCase):
 
         # Se comprueba que haya una nueva Educacion
         self.assertEquals(Educacion.objects.count(), 2)
+
+    def test_delete(self):
+        # Se logea al usuario
+        self.client.login(username='batman', password='robin')
+
+        # Se imprimen las educaciones antes del test
+        self.assertEquals(Educacion.objects.count(), 1)
+
+        # Se busca el primer object Educacion
+        self.educacion = Educacion.objects.first()
+
+        # Se envian los datos a la vista para eliminar la Educacion
+        resolve = self.client.get(
+                reverse('educacion',
+                        kwargs={
+                            'palabra': 'eliminar',
+                            'educacion_id': self.educacion.id}))
+
+        # Se comprueba que no haya ninguna  Educacion
+        self.assertEquals(Educacion.objects.count(), 0)
