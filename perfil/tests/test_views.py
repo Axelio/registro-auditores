@@ -84,13 +84,11 @@ class EducacionTest(TestCase):
                                                   fecha_fin=self.f_fin)
 
     def test_create(self):
-        self.client.logout()
-        # Se imprimen las educaciones antes del test
-        self.assertEquals(Educacion.objects.count(), 1)
-        print "Antes: {0}".format(Educacion.objects.count())
-
         # Se logea al usuario
         self.client.login(username='batman', password='robin')
+
+        # Se imprimen las educaciones antes del test
+        self.assertEquals(Educacion.objects.count(), 1)
 
         # Se preparan los datos para enviarlos a la vista
         self.f_inicio = self.f_inicio.strftime('%d/%m/%Y')
@@ -107,4 +105,3 @@ class EducacionTest(TestCase):
 
         # Se comprueba que haya una nueva Educacion
         self.assertEquals(Educacion.objects.count(), 2)
-        print "Despues: {0}".format(Educacion.objects.count())
