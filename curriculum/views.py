@@ -103,7 +103,7 @@ def listaAspirantes():
     aspirantes = User.objects.filter(userprofile__persona__auditor=None)
     aspirantes = aspirantes.exclude(groups__name__iexact='operador')
     lista_aspirantes = []
-    
+
     for aspirante in aspirantes:
         if revisar_requisitos(aptitudes(aspirante)):
             lista_aspirantes.append(aspirante)
@@ -384,7 +384,7 @@ class EducacionView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -401,8 +401,8 @@ class EducacionView(View):
             if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
                 institucion = Institucion.objects.get(id=request.POST['institucion'])
                 tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
-                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d")
+                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d")
                 titulo = request.POST['titulo']
 
                 if kwargs['palabra'] == 'editar':
@@ -441,7 +441,7 @@ class EducacionView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -467,7 +467,7 @@ class CrearAspirante(View):
         self.diccionario.update({'curriculum':False})
         self.diccionario.update({'mensaje_error':''})
         self.diccionario.update({'formulario':self.email_form()})
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -479,8 +479,8 @@ class CrearAspirante(View):
             # Se crea el usuario con el correo electrónico por defecto y se crea una contraseña aleatoria para el usuario
             clave = User.objects.make_random_password()
             usuario = User.objects.create_user(username = request.POST['email'],
-                                              email = request.POST['email'], 
-                                              password = clave, 
+                                              email = request.POST['email'],
+                                              password = clave,
                                              )
 
             usuario.is_active = True
@@ -509,18 +509,18 @@ class CrearAspirante(View):
         self.diccionario.update({'tipo_mensaje':self.tipo_mensaje})
         self.diccionario.update({'mensaje':self.mensaje})
 
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
-        
+
 
 class LaboralView(View):
     '''
     Clase para la renderización de los datos laborales
     '''
     template='formulario.html'
-    form = LaboralForm 
+    form = LaboralForm
     titulo = 'Información laboral'
     mensaje = ''
     tipo_mensaje = ''
@@ -572,7 +572,7 @@ class LaboralView(View):
         self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -592,16 +592,16 @@ class LaboralView(View):
             telefono = request.POST['telefono']
             cargo = request.POST['cargo']
             funcion = request.POST['funcion']
-            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d")
+            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d")
             retiro = request.POST['retiro']
             direccion_empresa = request.POST['direccion_empresa']
             trabajo_actual = False
             if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
                 if kwargs['palabra'] == 'editar':
-                    # Si se edita información laboral 
+                    # Si se edita información laboral
                     # Búsqueda de variables con los IDs enviados por POST
-                    
+
                     laboral = Laboral.objects.get(id=kwargs['laboral_id'])
                     laboral.empresa = empresa
                     laboral.sector = sector
@@ -620,7 +620,7 @@ class LaboralView(View):
                     self.mensaje = u'Información laboral ha sido editada exitosamente'
 
                 else:
-                    # Si se crea información laboral 
+                    # Si se crea información laboral
                     laboral = Laboral.objects.create(usuario = usuario, empresa=empresa, sector=sector, estado=estado, telefono=telefono, cargo=cargo, funcion=funcion, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, retiro=retiro, direccion_empresa=direccion_empresa, trabajo_actual=trabajo_actual)
                     self.mensaje = u'Información laboral ha sido creada exitosamente'
 
@@ -656,7 +656,7 @@ class LaboralView(View):
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
 
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -681,7 +681,7 @@ class CompetenciaView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
         nueva = True
-        error = False 
+        error = False
 
         # Obtener la persona para renderizarla en la plantilla
         try:
@@ -700,7 +700,7 @@ class CompetenciaView(View):
         self.diccionario.update({'formulario':self.competencia_form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -722,7 +722,7 @@ class CompetenciaView(View):
 
                 usuario = request.path_info.split('/')[3]
                 usuario = UserProfile.objects.get(user__id=usuario)
-                
+
                 competencia = Competencia.objects.filter(usuario=usuario, tipo=lista_competencia.tipo)
                 if competencia.exists():
                     competencia = competencia[0]
@@ -760,7 +760,7 @@ class CompetenciaView(View):
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
 
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -817,7 +817,7 @@ class HabilidadView(View):
         self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -853,7 +853,7 @@ class HabilidadView(View):
         self.diccionario.update({'form':self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -863,7 +863,7 @@ class ConocimientoView(View):
     Clase para la renderización de los datos de habilidad
     '''
     template='formulario.html'
-    form = ConocimientoForm 
+    form = ConocimientoForm
     titulo = 'conocimiento'
     lista_filtros = ''
 
@@ -912,7 +912,7 @@ class ConocimientoView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -947,7 +947,7 @@ class ConocimientoView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -957,7 +957,7 @@ class IdiomaView(View):
     Clase para la renderización de los datos de habilidad
     '''
     template='formulario.html'
-    form = IdiomaForm 
+    form = IdiomaForm
     titulo = 'idioma'
     mensaje = ''
     tipo_mensaje = ''
@@ -1001,7 +1001,7 @@ class IdiomaView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1046,7 +1046,7 @@ class IdiomaView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1101,7 +1101,7 @@ class CertificacionView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1115,8 +1115,8 @@ class CertificacionView(View):
 
             pais = Pais.objects.get(id=request.POST['pais'])
             institucion = Institucion.objects.get(id=request.POST['institucion'])
-            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d")
+            fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d")
 
             if kwargs['palabra'] == 'editar':
                 # Si se edita una Certificación
@@ -1127,7 +1127,7 @@ class CertificacionView(View):
                 certificacion.institucion = institucion
                 certificacion.fecha_inicio = fecha_inicio
                 certificacion.fecha_fin = fecha_fin
-                certificacion.lugar = pais 
+                certificacion.lugar = pais
 
                 certificacion.save()
 
@@ -1154,7 +1154,7 @@ class CertificacionView(View):
         self.diccionario.update({'form': self.form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1212,7 +1212,7 @@ class CursoView(View):
         self.diccionario.update({'form': self.form })
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1229,8 +1229,8 @@ class CursoView(View):
 
                 estado = Estado.objects.get(id=request.POST['estado'])
                 institucion = Institucion.objects.get(id=request.POST['institucion'])
-                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d") 
-                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+                fecha_inicio = datetime.datetime.strptime(request.POST['fecha_inicio'], "%d/%m/%Y").strftime("%Y-%m-%d")
+                fecha_fin = datetime.datetime.strptime(request.POST['fecha_fin'], "%d/%m/%Y").strftime("%Y-%m-%d")
 
                 if kwargs['palabra'] == 'editar':
                     # Si se edita un Curso
@@ -1265,7 +1265,7 @@ class CursoView(View):
         self.diccionario.update({'form': self.form })
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1297,7 +1297,7 @@ class VerAuditores(View):
             auditores = paginator.page(paginator.num_pages)
 
         self.diccionario.update({'auditores':auditores})
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1336,7 +1336,7 @@ class EvaluacionView(View):
         self.diccionario.update({'formulario': self.evaluacion_form})
         self.lista_filtros = lista_filtros(request.user)
         self.diccionario.update(self.lista_filtros)
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1387,7 +1387,7 @@ class EvaluacionView(View):
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'formulario': self.evaluacion_form})
 
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1427,7 +1427,7 @@ class AcreditarView(View):
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'form': self.acreditacion_form})
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1444,7 +1444,7 @@ class AcreditarView(View):
                     fecha_actual.year + settings.PERIODO_VENC_ACREDITACION,
                     fecha_actual.month,
                     fecha_actual.day)
-            
+
             persona = Persona.objects.get(userprofile__user__id=kwargs['usuario_id'])
             estado = Estatus.objects.get(nombre='Inscrito')
             auditor = Auditor.objects.create(persona=persona,
@@ -1458,7 +1458,7 @@ class AcreditarView(View):
             self.diccionario.update({'mensaje': self.mensaje})
             self.diccionario.update({'form': self.acreditacion_form})
 
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1498,7 +1498,7 @@ class FijarCitaView(View):
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
         self.diccionario.update({'form': self.cita_form })
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1513,7 +1513,7 @@ class FijarCitaView(View):
             cita = Cita.objects.get(usuario__user__id=kwargs['usuario_id'])
             cita.cita_fijada = request.POST['cita_fijada']
             cita.save()
-            
+
             return HttpResponseRedirect(reverse('inicio'))
         else:
             self.diccionario.update({'usuario': usuario})
@@ -1521,7 +1521,7 @@ class FijarCitaView(View):
             self.diccionario.update({'mensaje': self.mensaje})
             self.diccionario.update({'form': self.cita_form})
 
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -1559,7 +1559,7 @@ class DatosView(View):
         self.diccionario.update({'usuario': usuario})
         self.diccionario.update({'mensaje': self.mensaje})
         self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
