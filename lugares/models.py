@@ -7,11 +7,11 @@ class Pais(models.Model):
     '''
     nombre = models.CharField(max_length=50)
     class Meta:
-    	db_table = u'país'
-    	verbose_name = u'país'
-    	verbose_name_plural = u'países'
+        db_table = u'país'
+        verbose_name = u'país'
+        verbose_name_plural = u'países'
     def __unicode__(self):
-    	return "%s" % (self.nombre)
+        return "%s" % (self.nombre)
 
 class Estado(models.Model):
     '''
