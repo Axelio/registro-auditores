@@ -220,37 +220,3 @@ class LaboralTest(TestCase):
 
         # Se comprueban los codigos de estado del intento de ingreso
         self.assertEqual(resolver.status_code, 200)
-
-'''
-        resolver = self.client.get(reverse('laboral'))
-        # self.assertEqual(resolver.status_code, 302)
-
-
-    def test_conocimiento(self):
-        resolver = self.client.get(reverse('conocimiento'))
-        self.assertEqual(resolver.status_code, 302)
-
-    def test_evaluacion(self):
-        resolver = self.client.get(reverse('evaluacion'))
-        self.assertEqual(resolver.status_code, 302)
-
-    def test_competencia(self):
-        resolver = self.client.get(reverse('competencia'))
-        self.assertEqual(resolver.status_code, 302)
-
-    def test_habilidad(self):
-        resolver = self.client.get(reverse('habilidad'))
-        self.assertEqual(resolver.status_code, 302)
-
-    def test_idioma(self):
-        resolver = self.client.get(reverse('idioma'))
-        self.assertEqual(resolver.status_code, 302)
-
-    def test_curso(self):
-        resolver = self.client.get(reverse('curso'))
-        self.assertEqual(resolver.status_code, 302)
-
-    def test_certificacion(self):
-        resolver = self.client.get(reverse('certificacion'))
-        self.assertEqual(resolver.status_code, 302)
-'''
