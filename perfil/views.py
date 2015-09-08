@@ -39,7 +39,7 @@ class PerfilView(View):
         if request.user.profile.persona is None:
             return HttpResponseRedirect(
                     reverse('detalles_perfil',
-                            kwargs={'pk': request.user.profile.persona.id}
+                            kwargs={'pk': request.user.id}
                             )
                     )
         '''
