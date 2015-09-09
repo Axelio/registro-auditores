@@ -521,7 +521,7 @@ class CrearAspirante(View):
 
             # Envío de mail
             asunto = u'{0}Creación de cuenta exitosa'.format(
-                    settins.EMAIL_SUBJECT_PREFIX)
+                    settings.EMAIL_SUBJECT_PREFIX)
             mensaje = Mensaje.objects.get(
                     caso='Creación de usuario (email)')
             emisor = settings.EMAIL_HOST_USER
@@ -544,7 +544,7 @@ class CrearAspirante(View):
 
             return HttpResponseRedirect(reverse('perfil'))
 
-        self.diccionario.update({'form': self.email_form})
+        self.diccionario.update({'form': self.form})
 
         return render(request,
                       template_name=self.template,
