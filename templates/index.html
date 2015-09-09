@@ -183,7 +183,7 @@
   
   </main>
 
-  </body>
+
 <footer class="blue section scrollspy" id="contacto">
   <div class="container">
     <br /><br />
@@ -231,6 +231,7 @@
               </div>
           </form>
       </div>
+
       <div class="col l3 s12">
           <h5 class="white-text"><a class="white-text" href="http://suscerte.gob.ve">suscerte.gob.ve</a></h5>
           <p class="white-text">Av. Andrés Bello. Edificio BFC. Piso 13. SUSCERTE. Caracas. Distrito Capital. Venezuela</p>
@@ -270,6 +271,19 @@
     });
   </script>
 
+<script type="text/javascript">
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 10.505029, lng: -66.897519},
+        zoom: 18
+        });
+    }
+</script>
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoklHqzjuOTLDx14BM4mBq1bRf1vFd0Ts&callback=initMap">
+</script>
+
   <script>
   $(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter();
@@ -277,6 +291,9 @@
   </script>
 
 </footer>
+      <div id="map" class="container"></div>
+
+  </body>
 </html>
   
 {% endblock %}
