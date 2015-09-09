@@ -386,7 +386,7 @@ class EducacionView(View):
             raise Http404
 
         self.diccionario.update({'form': self.form()})
-        if kwargs.has_key('educacion_id') and kwargs['educacion_id'] != None:
+        if 'educacion_id' in kwargs and kwargs['educacion_id'] != None:
             nueva = False
             try:
                 educacion = Educacion.objects.get(
@@ -427,7 +427,7 @@ class EducacionView(View):
         self.form = self.form(request.POST)
 
         if self.form.is_valid():
-            if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            if 'palabra' in kwargs and not kwargs['palabra'] == None:
                 institucion = Institucion.objects.get(
                         id=request.POST['institucion'])
                 tipo = TipoEducacion.objects.get(id=request.POST['tipo'])
@@ -579,7 +579,7 @@ class LaboralView(View):
         self.diccionario.update({'formulario': self.form()})
 
         # Si se elimina una Educación
-        if kwargs.has_key('laboral_id') and not kwargs['laboral_id'] == None:
+        if 'laboral_id' in kwargs and not kwargs['laboral_id'] == None:
             nueva = False
             try:
                 laboral = Laboral.objects.get(id=int(kwargs['laboral_id']))
@@ -644,7 +644,7 @@ class LaboralView(View):
             retiro = request.POST['retiro']
             direccion_empresa = request.POST['direccion_empresa']
             trabajo_actual = False
-            if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+            if 'palabra' in kwargs and not kwargs['palabra'] == None:
                 if kwargs['palabra'] == 'editar':
                     # Si se edita información laboral
                     # Búsqueda de variables con los IDs enviados por POST
@@ -684,7 +684,7 @@ class LaboralView(View):
             return HttpResponseRedirect(reverse('perfil'))
 
         else:
-            if self.form.errors.has_key('__all__'):
+            if '__all__' in self.form.errors:
                 self.tipo_mensaje = 'error'
                 self.mensaje = self.form.errors['__all__'][0]
                 laboral = laboral.objects.get(id=kwargs['laboral_id'])
@@ -850,8 +850,7 @@ class HabilidadView(View):
             raise Http404
 
         self.diccionario.update({'form': self.form()})
-        if kwargs.has_key('habilidad_id') and \
-                not kwargs['habilidad_id'] == None:
+        if 'habilidad_id' kwargs and not kwargs['habilidad_id'] == None:
             nueva = False
             try:
                 habilidad = Habilidad.objects.get(
@@ -888,7 +887,7 @@ class HabilidadView(View):
         usuario = request.user
 
         persona = request.user.profile.persona
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+        if 'palabra' in kwargs and not kwargs['palabra'] == None:
             habilidad = request.POST['habilidad']
 
             if kwargs['palabra'] == 'editar':
@@ -990,7 +989,7 @@ class ConocimientoView(View):
     def post(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
 
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+        if 'palabra' in kwargs and not kwargs['palabra'] == None:
             conocimiento = request.POST['otros_conocimientos']
 
             if kwargs['palabra'] == 'editar':
@@ -1054,7 +1053,7 @@ class IdiomaView(View):
             raise Http404
 
         self.diccionario.update({'form': self.form()})
-        if kwargs.has_key('idioma_id') and not kwargs['idioma_id'] == None:
+        if 'idioma_id' in kwargs and not kwargs['idioma_id'] == None:
             try:
                 idioma = Idioma.objects.get(id=int(kwargs['idioma_id']))
             except:
@@ -1088,7 +1087,7 @@ class IdiomaView(View):
         self.diccionario.update(csrf(request))
 
         persona = request.user.profile.persona
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
+        if 'palabra' in kwargs and not kwargs['palabra'] == None:
             l_idioma = ListaIdiomas.objects.get(id=request.POST['idioma'])
             nivel_escrito = request.POST['nivel_escrito']
             nivel_leido = request.POST['nivel_leido']
@@ -1164,7 +1163,7 @@ class CertificacionView(View):
             raise Http404
 
         self.diccionario.update({'form': self.form()})
-        if kwargs.has_key('certificacion_id') and \
+        if 'certificacion_id' in kwargs and \
                 not kwargs['certificacion_id'] == None:
             nueva = False
             try:
@@ -1203,8 +1202,7 @@ class CertificacionView(View):
         usuario = request.user
 
         persona = request.user.profile.persona
-        if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-
+        if 'palabra' in kwargs and not kwargs['palabra'] == None:
             pais = Pais.objects.get(id=request.POST['pais'])
             institucion = Institucion.objects.get(
                     id=request.POST['institucion'])
@@ -1284,7 +1282,7 @@ class CursoView(View):
             raise Http404
 
         self.diccionario.update({'formulario': self.form()})
-        if kwargs.has_key('curso_id') and not kwargs['curso_id'] == None:
+        if 'curso_id' in kwargs and not kwargs['curso_id'] == None:
             nueva = False
             try:
                 curso = Curso.objects.get(id=int(kwargs['curso_id']))
@@ -1322,8 +1320,7 @@ class CursoView(View):
 
         persona = request.user.profile.persona
         if self.form.is_valid():
-            if kwargs.has_key('palabra') and not kwargs['palabra'] == None:
-
+            if 'palabra' in kwargs and not kwargs['palabra'] == None:
                 estado = Estado.objects.get(id=request.POST['estado'])
                 institucion = Institucion.objects.get(
                         id=request.POST['institucion'])
@@ -1482,7 +1479,7 @@ class EvaluacionView(View):
 
             else:
                 if self.evaluacion_form.errors:
-                    if self.evaluacion_form.errors.has_key('__all__'):
+                    if '__all__' in self.evaluacion_form.errors:
                         self.mensaje = self.evaluacion_form.errors[
                                 '__all__'][0]
                         self.tipo_mensaje = 'error'
