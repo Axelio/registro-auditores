@@ -36,12 +36,8 @@ class PerfilView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
-        if request.user.profile.persona is not None:
-            return HttpResponseRedirect(
-                    reverse('detalles_perfil',
-                            kwargs={'pk': request.user.id}
-                            )
-                    )
+        if request.user.profile.persona is None:
+            return HttpResponseRedirect(reverse('detalles_perfil'))
         '''
         if not request.session.get('ultima_sesion', False):
             persistente = True
@@ -102,11 +98,14 @@ class DetallesPerfilView(View):
     diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
-        persona = Persona.objects.filter(id=kwargs['pk'])
-        if persona.exists():
-            self.form = self.form(instance=persona)
-        else:
+        if request.user.profile.persona is None:
             self.form = self.form()
+        elif 'pk' in kwargs:
+            persona = Persona.objects.get(id=kwargs['pk'])
+            self.form = self.form(instance=persona)
+        elif not request.user.profile.persona is None:
+            persona = Persona.objects.get(id=request.user.profile.persona.id)
+            self.form = self.form(instance=persona)
 
         self.diccionario.update(csrf(request))
         self.diccionario.update({'form': self.form})
@@ -120,8 +119,8 @@ class DetallesPerfilView(View):
 
         self.diccionario.update(csrf(request))
         self.diccionario.update({'form': self.form})
-
-        cedula = request.user.profile.persona.cedula
+        if 'cedula' in request.POST:
+            cedula = request.POST['cedula']
         primer_nombre = request.POST['primer_nombre']
         segundo_nombre = request.POST['segundo_nombre']
         primer_apellido = request.POST['primer_apellido']
@@ -135,6 +134,7 @@ class DetallesPerfilView(View):
         tlf_reside = request.POST['tlf_reside']
         tlf_movil = request.POST['tlf_movil']
         tlf_contacto = request.POST['tlf_contacto']
+        tlf_oficina = request.POST['tlf_oficina']
         estado_civil = request.POST['estado_civil']
 
         if request.user.profile.persona is None:
