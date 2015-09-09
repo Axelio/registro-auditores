@@ -36,7 +36,7 @@ class PerfilView(View):
         self.diccionario.update(csrf(request))
         usuario = request.user
 
-        if request.user.profile.persona is None:
+        if request.user.profile.persona is not None:
             return HttpResponseRedirect(
                     reverse('detalles_perfil',
                             kwargs={'pk': request.user.id}
@@ -102,13 +102,13 @@ class DetallesPerfilView(View):
     diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
-        persona = get_object_or_404(Persona, pk=kwargs['pk'])
-        if not request.user.profile.persona == persona:
-            raise PermissionDenied
+        persona = Persona.objects.filter(id=kwargs['pk'])
+        if persona.exists():
+            self.form = self.form(instance=persona)
+        else:
+            self.form = self.form()
 
         self.diccionario.update(csrf(request))
-
-        self.form = self.form(instance=persona)
         self.diccionario.update({'form': self.form})
 
         return render(request,
