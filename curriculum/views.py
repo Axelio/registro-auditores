@@ -850,7 +850,7 @@ class HabilidadView(View):
             raise Http404
 
         self.diccionario.update({'form': self.form()})
-        if 'habilidad_id' kwargs and not kwargs['habilidad_id'] == None:
+        if 'habilidad_id' in kwargs and not kwargs['habilidad_id'] == None:
             nueva = False
             try:
                 habilidad = Habilidad.objects.get(
