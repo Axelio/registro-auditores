@@ -450,7 +450,7 @@ class CrearAspirante(View):
     '''
     Clase para la creación de un nuevo aspirante
     '''
-    template='perfil/editar_formulario.html'
+    template='formulario.html'
     email_form = EmailForm
     tipo_mensaje = ''
     mensaje = ''

@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from personas.views import PersonalesView
 from personas.models import Auditor
 from curriculum.views import (EducacionView, LaboralView, CompetenciaView,
-    HabilidadView, ConocimientoView, IdiomaView,
+    HabilidadView, ConocimientoView, IdiomaView, CrearAspirante,
     CitasView, CertificacionView, CursoView,
     VerAuditores, EvaluacionView, revisar_acreditaciones,
     AcreditarView, FijarCitaView, DatosView)
@@ -62,9 +62,6 @@ urlpatterns = patterns('',
     url(r'^admin/',
         include(admin.site.urls)),
 
-    url(r'^curriculum/',
-        include('curriculum.urls')),
-
     url(r'logout/',
         deslogeo,
         {'next_page': '/'},
@@ -109,6 +106,9 @@ urlpatterns = patterns('',
     url(r'^fijar_cita/(?P<usuario_id>[\d]+)*$',
         login_required(FijarCitaView.as_view()),
         name='postular_cita'),
+
+    url(r'^nuevo_aspirante/$', login_required(
+            CrearAspirante.as_view()), name='nuevo_aspirante'),
 
     url(r'^$',
         ListView.as_view(

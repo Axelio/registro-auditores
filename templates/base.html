@@ -38,15 +38,25 @@
               </ul>
             {% else %}
               <ul class="right hide-on-med-and-down section">
-                {% if request.path == '/' %}
+                {% if not request.path == '/perfil/' %}
                     <li><a href="{% url 'perfil' %}">Perfil</a></li>
+                {% else %}
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                    {% ifequal request.user.groups.all.0.name 'Operador' %}
+                        <li><a href="{% url 'nuevo_aspirante' %}">Nuevo aspirante</a></li>
+                    {% endifequal %}
                 {% endif %}
                 <li><a href="{% url 'salir' %}">Cerrar sesión</a></li>
               </ul>
 
               <ul id="nav-mobile" class="side-nav blue darken-1">
-                {% if request.path == '/' %}
+                {% if not request.path == '/perfil/' %}
                     <li><a href="{% url 'perfil' %}">Perfil</a></li>
+                {% else %}
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                    {% ifequal request.user.groups.all.0.name 'Operador' %}
+                        <li><a href="{% url 'nuevo_aspirante' %}">Nuevo aspirante</a></li>
+                    {% endifequal %}
                 {% endif %}
                 <li><a href="{% url 'salir' %}">Cerrar sesión</a></li>
               </ul>
