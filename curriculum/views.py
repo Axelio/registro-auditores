@@ -487,31 +487,27 @@ class CrearAspirante(View):
     Clase para la creación de un nuevo aspirante
     '''
     template = 'formulario.html'
-    email_form = EmailForm
-    tipo_mensaje = ''
-    mensaje = ''
+    form = EmailForm
     titulo = 'nuevo aspirante'
 
     diccionario = {}
-    diccionario.update({'formulario': email_form})
+    diccionario.update({'form': form})
     diccionario.update({'titulo': titulo})
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
         if not request.user.groups.filter(name__iexact='operador').exists():
             raise PermissionDenied
-        self.diccionario.update({'curriculum': False})
-        self.diccionario.update({'mensaje_error': ''})
-        self.diccionario.update({'formulario': self.email_form()})
+        self.diccionario.update({'form': self.form()})
         return render(request,
                       template_name=self.template,
                       dictionary=self.diccionario,
                       )
 
     def post(self, request, *args, **kwargs):
-        self.email_form = EmailForm(request.POST)
+        self.form = EmailForm(request.POST)
 
-        if self.email_form.is_valid():
+        if self.form.is_valid():
             # Se crea el usuario con el correo electrónico por defecto
             # y se crea una contraseña aleatoria para el usuario
             clave = User.objects.make_random_password()
@@ -524,12 +520,12 @@ class CrearAspirante(View):
             usuario.save()
 
             # Envío de mail
-            asunto = u'%sCreación de cuenta exitosa' % (
-                    settings.EMAIL_SUBJECT_PREFIX)
+            asunto = u'{0}Creación de cuenta exitosa'.format(
+                    settins.EMAIL_SUBJECT_PREFIX)
             mensaje = Mensaje.objects.get(
                     caso='Creación de usuario (email)')
             emisor = settings.EMAIL_HOST_USER
-            destinatarios = (request.POST['email'],)
+            destinatarios = [request.POST['email']]
 
             # Sustitución de variables clave y usuario
             mensaje = mensaje.mensaje.replace(
@@ -541,18 +537,14 @@ class CrearAspirante(View):
                       from_email=settings.DEFAULT_FROM_EMAIL,
                       recipient_list=destinatarios)
 
-            self.template = 'curriculum/aprobados.html'
             mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')
             self.mensaje = mensaje.mensaje
-            self.diccionario.update({'mensaje': self.mensaje})
-        else:
-            if self.email_form.errors.has_key('__all__'):
-                self.tipo_mensaje = 'error'
-                self.mensaje = self.email_form.errors['__all__'][0]
 
-        self.diccionario.update({'formulario': self.email_form})
-        self.diccionario.update({'tipo_mensaje': self.tipo_mensaje})
-        self.diccionario.update({'mensaje': self.mensaje})
+            messages.add_message(request, messages.SUCCESS, self.mensaje)
+
+            return HttpResponseRedirect(reverse('perfil'))
+
+        self.diccionario.update({'form': self.email_form})
 
         return render(request,
                       template_name=self.template,
@@ -610,7 +602,7 @@ class LaboralView(View):
 
             messages.add_message(request, messages.SUCCESS,
                                  u'Información laboral ha \
-                                         sido eliminada exitosamente')
+                                 sido eliminada exitosamente')
 
             return HttpResponseRedirect(reverse('perfil'))
 
