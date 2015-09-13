@@ -62,6 +62,9 @@ urlpatterns = patterns('',
     url(r'^admin/',
         include(admin.site.urls)),
 
+    url(r'^mapa/',
+        include('geomap.urls')),
+
     url(r'logout/',
         deslogeo,
         {'next_page': '/'},
