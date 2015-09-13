@@ -14,6 +14,11 @@ class PersonaForm(forms.ModelForm):
     '''
 
     #captcha = ReCaptchaField()
+    lat = forms.CharField(max_length=20, widget=forms.TextInput(
+        attrs={'id': 'lat'}))
+    lng = forms.CharField(max_length=20, widget=forms.TextInput(
+        attrs={'id': 'lng'}))
+
 
     class Meta:
         # Se determina cuál es el modelo al que va a utilizar
@@ -89,7 +94,7 @@ class PersonaForm(forms.ModelForm):
     def clean(self):
         cedula = self.cleaned_data['cedula']
 
-        # Revisar si la cédula coincide con alguna otra en la base de datos 
+        # Revisar si la cédula coincide con alguna otra en la base de datos
         if Persona.objects.filter(cedula=cedula).exists():
             raise forms.ValidationError(u'Esta persona ya se encuentra \
                                         registrada con esa cédula.')

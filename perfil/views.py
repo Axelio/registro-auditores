@@ -14,7 +14,7 @@ from .forms import EditarPerfilForm
 from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
-from personas.models import Persona, Auditor
+from personas.models import Persona, Auditor, Ubicacion
 from curriculum.views import lista_filtros, listaAspirantes, aptitudes, \
     revisar_requisitos
 from curriculum.models import Cita
@@ -176,6 +176,13 @@ class DetallesPerfilView(View):
         request.user.last_name = request.POST['primer_apellido']
         request.user.email = persona.email
         request.user.save()
+
+        # Se almacenan los datos de la ubicacion
+        if 'lng' in request.POST and 'lat' in request.POST:
+            latitude = request.POST['lat']
+            longitude = request.POST['lng']
+            ubicacion = Ubicacion.objects.create(
+                    persona=persona, lat=latitude, lng=longitude)
 
         perfil = UserProfile.objects.get(user=request.user)
         perfil.persona = persona

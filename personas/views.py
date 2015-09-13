@@ -10,7 +10,7 @@ from authentication.models import UserProfile
 from lugares.models import Estado
 
 from .forms import PersonaForm
-from .models import Persona
+from .models import Persona, Ubicacion
 
 import datetime
 
@@ -20,7 +20,7 @@ class PersonalesView(View):
     Clase para guardado del perfil de la persona
     '''
     template='perfil/personales.html'
-    persona_form = PersonaForm() 
+    persona_form = PersonaForm()
 
     # Envío de variables a la plantilla a través de diccionario
     diccionario = {}
@@ -28,7 +28,7 @@ class PersonalesView(View):
 
     def get(self, request, *args, **kwargs):
         self.diccionario.update(csrf(request))
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
@@ -68,13 +68,13 @@ class PersonalesView(View):
 
         # Si hay algún error, se renderiza de nuevo la plantilla con los errores encontrados
         if error:
-            return render(request, 
+            return render(request,
                            template_name=self.template,
                            dictionary=self.diccionario,
                          )
         else:
             estado = Estado.objects.get(id=request.POST['reside'])
-            fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d") 
+            fecha_nacimiento = datetime.datetime.strptime(request.POST['fecha_nacimiento'], "%d/%m/%Y").strftime("%Y-%m-%d")
             persona = Persona.objects.create(cedula=request.POST['cedula'],
                                              primer_nombre = request.POST['primer_nombre'],
                                              segundo_nombre = request.POST['segundo_nombre'],
@@ -94,7 +94,7 @@ class PersonalesView(View):
             # Se crea el usuario con el correo electrónico por defecto y se crea una contraseña aleatoria para el usuario
             clave = User.objects.make_random_password()
             usuario = User.objects.create_user(username = request.POST['email'],
-                                              password = clave, 
+                                              password = clave,
                                              )
 
             usuario.is_active = True
@@ -102,6 +102,13 @@ class PersonalesView(View):
             usuario.last_name = request.POST['primer_apellido']
             usuario.email = request.POST['email']
             usuario.save()
+
+            # Se almacenan los datos de la ubicacion
+            if 'lng' in request.POST and 'lat' in request.POST:
+                latitude = request.POST['lat']
+                longitude = request.POST['lng']
+                ubicacion = Ubicacion.objects.create(
+                        persona=persona, lat=latitude, lng=longitude)
 
             # Envío de mail
             asunto = u'%sCreación de cuenta exitosa' % (settings.EMAIL_SUBJECT_PREFIX)
@@ -117,7 +124,7 @@ class PersonalesView(View):
         mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')
         mensaje = mensaje.mensaje
         self.diccionario.update({'mensaje':mensaje})
-        return render(request, 
+        return render(request,
                        template_name=self.template,
                        dictionary=self.diccionario,
                      )
