@@ -10,7 +10,8 @@ from authentication.models import UserProfile
 from lugares.models import Estado
 
 from .forms import PersonaForm
-from .models import Persona, Ubicacion
+from .models import Persona
+from geomap.models import Ubicacion
 
 import datetime
 

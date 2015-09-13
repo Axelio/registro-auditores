@@ -15,9 +15,9 @@ class PersonaForm(forms.ModelForm):
 
     #captcha = ReCaptchaField()
     lat = forms.CharField(max_length=20, widget=forms.TextInput(
-        attrs={'id': 'lat'}))
+        attrs={'id': 'lat', 'type': 'hidden'}))
     lng = forms.CharField(max_length=20, widget=forms.TextInput(
-        attrs={'id': 'lng'}))
+        attrs={'id': 'lng', 'type': 'hidden'}))
 
 
     class Meta:
