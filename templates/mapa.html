@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+	  #map {
+       min-height: 700px;
+       width: 100%;
+       border: 6px solid #dedede;
+       margin: 0em auto;
+     }
+     .restaurant, .bar, .food, .store {
+       color: orange;
+     }
+</style>
+<div id="map"></div>
+<div id="results"></div>
+<div id="food"></div>
+{% endblock %}
