@@ -14,7 +14,8 @@ from .forms import EditarPerfilForm
 from authentication.models import UserProfile
 from lugares.models import Estado
 from personas.forms import PersonaForm
-from personas.models import Persona, Auditor, Ubicacion
+from personas.models import Persona, Auditor
+from geomap.models import Ubicacion
 from curriculum.views import lista_filtros, listaAspirantes, aptitudes, \
     revisar_requisitos
 from curriculum.models import Cita

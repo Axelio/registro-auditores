@@ -532,10 +532,10 @@ class CrearAspirante(View):
                     '<clave>', '%s' % (clave)).replace(
                             '<cuenta>', '%s' % (request.POST['email']))
 
-            send_mail(subject=asunto,
-                      message=mensaje,
-                      from_email=settings.DEFAULT_FROM_EMAIL,
-                      recipient_list=destinatarios)
+            #send_mail(subject=asunto,
+            #          message=mensaje,
+            #          from_email=settings.DEFAULT_FROM_EMAIL,
+            #          recipient_list=destinatarios)
 
             mensaje = Mensaje.objects.get(caso='Creación de usuario (web)')
             self.mensaje = mensaje.mensaje
