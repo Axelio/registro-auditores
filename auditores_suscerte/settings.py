@@ -82,6 +82,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.sites',
+    'django.contrib.gis',
+    'dj_database_url',
+    'dj_static',
     #'debug_toolbar',
     'captcha',
     #'axes',
@@ -91,8 +94,7 @@ INSTALLED_APPS = (
     'lugares',
     'authentication',
     'personas',
-    'dj_database_url',
-    'dj_static',
+    'geomap',
 )
 
 SITE_ID=1
@@ -104,7 +106,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'authentication.views.AutoLogout', 
+    'authentication.views.AutoLogout',
     #'axes.middleware.FailedLoginMiddleware'
 )
 
@@ -139,7 +141,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(os.getcwd(), 'static/public'), 
+    os.path.join(os.getcwd(), 'static/public'),
 )
 
 STATICFILES_FINDERS = (
@@ -183,21 +185,6 @@ SUIT_CONFIG = {
 # misc
 'LIST_PER_PAGE': 15
 }
-
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-try:
-    DATABASES['default'] =  dj_database_url.config()
-except:
-    # Database
-    # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
