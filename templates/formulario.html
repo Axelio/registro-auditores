@@ -26,10 +26,14 @@
                                 {% endif %}
                                 {% if forloop.counter|divisibleby:"2" %}
                                         {{ campo }}
-                                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                        {% if not "Lng" in campo.label and not "Lat" in campo.label %}
+                                            <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                        {% endif %}
                                 {% else %}
                                     {{ campo }}
-                                    <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                    {% if not "Lng" in campo.label and not "Lat" in campo.label %}
+                                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                    {% endif %}
                                 {% endif %}
                                 </div>
                             {% endfor %}
@@ -44,10 +48,14 @@
                             {% endif %}
                             {% if forloop.counter|divisibleby:"2" %}
                                     {{ campo }}
-                                    <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                    {% if not "Lng" in campo.label and not "Lat" in campo.label %}
+                                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                    {% endif %}
                             {% else %}
                                 {{ campo }}
-                                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                    {% if not "Lng" in campo.label and not "Lat" in campo.label %}
+                                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                    {% endif %}
                             {% endif %}
                             </div>
                         {% endfor %}

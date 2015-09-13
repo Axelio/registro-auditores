@@ -28,6 +28,9 @@
           <a id="logo-container" href="{% url 'inicio' %}" class="brand-logo black-text"><img class="hide-on-small-only" height="60px" src="{% static "images/logo_suscerte.png" %}"></a>
           {% if not user.is_authenticated %}
               <ul class="right hide-on-med-and-down section">
+                {% if not request.path == '/' %}
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                {% endif %}
                 <li><a href="#como_registrarse">Cómo registrarse</a></li>
                 <li><a href="#auditores">Auditores registrados</a></li>
                 <li><a href="#contacto">Contáctanos</a></li>
@@ -35,6 +38,9 @@
               </ul>
 
               <ul id="nav-mobile" class="side-nav blue darken-1">
+                {% if not request.path == '/' %}
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                {% endif %}
                 <li><a class="white-text"href="#como_registrarse">Cómo registrarse</a></li>
                 <li><a class="white-text"href="#auditores">Auditores registrados</a></li>
                 <li><a class="white-text"href="#contacto">Contáctanos</a></li>
@@ -78,7 +84,7 @@
   <script src="{% static "js/jquery-2.1.1.min.js"%}"></script>
   <script src="{% static "js/materialize.js"%}"></script>
   <script src="{% static "js/init.js"%}"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
   <script>
     $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
@@ -103,6 +109,84 @@
     navigator.geolocation.getCurrentPosition(successHandler); 
   }
   </script>
+
+
+
+<script>
+    var map;
+    var infowindow;
+
+    function initialize() {
+
+      var caracas = new google.maps.LatLng(10.505029, -66.897519);
+      var turmero = new google.maps.LatLng(10.221396, -67.471481);
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: turmero,
+        zoom: 6,
+      });
+        
+      marker = new google.maps.Marker({
+        map: map,
+        position: turmero
+      });
+      marker = new google.maps.Marker({
+        map: map,
+        position: caracas
+      });
+
+      var restaurant_turmero = {
+        location: turmero,
+        radius: 500,
+        types: ['restaurant', 'food']
+      };
+      var restaurant_caracas = {
+        location: caracas,
+        radius: 500,
+        types: ['restaurant', 'food']
+      };
+      infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+      service.nearbySearch(restaurant_turmero, callback);
+      service.nearbySearch(restaurant_caracas, callback);
+    }
+
+    function callback(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+      }
+    }
+
+    function createMarker(place) {
+      var specific_icon;
+      var food_icon = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
+
+      switch (true) {
+        case (place.types.indexOf('restaurant') != -1):
+          specific_icon = food_icon;
+          break;
+        case (place.types.indexOf('food') != -1):
+          specific_icon = food_icon;
+          break;
+      }
+
+      var placeLoc = place.geometry.location;
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: specific_icon
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
+      });
+    }
+
+    initialize();
+</script>
 
   {% if messages %}
       {% for message in messages %}

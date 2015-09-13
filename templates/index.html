@@ -139,8 +139,9 @@
           <br />
           <h2 class="center blue-text">Auditores registrados</h2>
           <!--   Icon Section   -->
+          {% if auditores_list %}
+          <p class="center"><a href="{% url 'mapa' %}">Encuéntralos</a></p>
           <div class="row">
-            {% if auditores_list %}
             <table class="bordered responsive-table hoverable">
               <thead>
                 <tr>
@@ -172,10 +173,10 @@
                 {% endfor %}
               </tbody>
           </table>
-          {% else %}
-            <b>No hay ningún auditor registrado hasta ahora.</b>
-          {% endif %}
         </div>
+        {% else %}
+          <b>No hay ningún auditor registrado hasta ahora.</b>
+        {% endif %}
       </div>
     </div>
 
