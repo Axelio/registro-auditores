@@ -191,3 +191,19 @@ ALLOWED_HOSTS = ['*']
 
 # Activacion de notificaciones por correo
 NOTIFY = False
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+try:
+    DATABASES['default'] =  dj_database_url.config()
+except:
+    # Database
+    # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+
