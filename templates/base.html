@@ -194,9 +194,15 @@
       {% endfor %}
   {% endif %}
 
-  </body>
   {% block footer %}
     {% include 'footer.html' %} 
   {% endblock %}
+
+
+{% block js %}
+  {# En este bloque, cargará el javascript particular de cada página #}
+{% endblock %}
+
+  </body>
 
 </html>
