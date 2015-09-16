@@ -35,8 +35,17 @@ $.load(function(){
 {% block js %}
 
 <script type="text/javascript">
+    var variable="543";
+    $.ajax({
+    type: 'GET',
+    url: '/mapa/mimapa/',
+    success: function(data) {
 
-    alert("HOLA");
+    console.log(data);
+    alert(data);
+    },
+
+});
 
 </script>
 

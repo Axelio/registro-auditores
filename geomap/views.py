@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.base import View, TemplateView
 from django.core import serializers
 from django.http import Http404, HttpResponse
 
@@ -43,3 +44,27 @@ def MapaJson(address, **geo_args):
 
     consulta = simplejson.dumps(geometry, indent=2)
     return HttpResponse(consulta, content_type="application/json")
+
+
+
+
+
+
+class PosicioMapsView(TemplateView):
+    template = '../templates/mapa.html'
+    diccionario = {}
+    def get(self, request, *args, **kwargs):
+
+
+        if request.is_ajax():
+            if request.GET:
+
+
+                # Hago el filtro que necesito y lo meto en una variable "loquesea"
+
+                data = serializers.serialize('json', loquesea)
+                return HttpResponse(json.dumps(data), content_type='application/json')
+        return render(request,
+            template_name=self.template,
+            dictionary=self.diccionario,
+        )
