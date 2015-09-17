@@ -7,11 +7,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    url(r'mimapa/',PosicioMapsView.as_view()),
+    url(r'json/', MapaJson),
 
     url(r'^$',
         MapaListView.as_view(),
         name='mapa'),
-    
 
 )
