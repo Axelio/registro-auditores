@@ -46,7 +46,6 @@ $.load(function(){
 
 
 			var caracas = new google.maps.LatLng(10.505029, -66.897519);
-			var turmero = new google.maps.LatLng(10.221396, -67.471481);
 
 			map = new google.maps.Map(document.getElementById('map'), {
 				center: caracas,
@@ -58,19 +57,27 @@ $.load(function(){
 			for (var i = 0; i < data.length; i++) {
 				var posicion = data[i]
 				for (var j = 0; j < data[i].length; j++){
-					console.log(data[0][0].geometry);
+
+					// Busquedas cercanas
 					service.nearbySearch({
-					location: new google.maps.LatLng(posicion[j].geometry.location.lat, posicion[j].geometry.location.lng),
-					radius: 500,
-					types: ['restaurant']
+						location: new google.maps.LatLng(posicion[j].geometry.location.lat, posicion[j].geometry.location.lng),
+						radius: 500,
+						types: ['restaurant']
 					}, callback);
 				}
 			}
 
-			marker = new google.maps.Marker({
-			map: map,
-			position: caracas
-			});
+			for (var i = 0; i < data.length; i++) {
+				var posicion = data[i]
+				for (var j = 0; j < data[i].length; j++){
+					console.log(posicion[j])
+					marker = new google.maps.Marker({
+						map: map,
+						position: new google.maps.LatLng(posicion[j].epi_lat, posicion[j].epi_lng)
+					});
+				}
+			}
+
 
 
 	    },
