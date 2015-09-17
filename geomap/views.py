@@ -25,7 +25,7 @@ GEOCODE_BASE_URL = \
         'https://maps.googleapis.com/maps/api/place/radarsearch/json'
 
 
-def MapaJson(address, **geo_args):
+def MapaJson(**geo_args):
 
     geometry = []
     epicentro = {}
