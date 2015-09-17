@@ -11,7 +11,26 @@
        color: orange;
      }
 </style>
-<div id="map"></div>
+<!--<div id="map"></div>
 <div id="results"></div>
 <div id="food"></div>
+<script type="text/javascript">
+$.load(function(){
+	$.ajax({
+		dataType: "json",
+		url: "http://www.tutorialspoint.com/jquery/result.json",
+		data: data,
+		success: function(data) {
+			alert(data);
+		}
+	});
+});
+</script>-->
+
+<script type="text/javascript">
+$(function(){
+	alert("HOLA");
+});
+</script>
+
 {% endblock %}

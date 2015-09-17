@@ -98,7 +98,7 @@
         $("#notificacion").click();
     });
   </script>
-
+<!--
   <script>
     var successHandler = function(position)  {
       document.getElementById('lat').value=position.coords.latitude; 
@@ -187,7 +187,7 @@
 
     initialize();
 </script>
-
+-->
   {% if messages %}
       {% for message in messages %}
           <a id="notificacion" onclick="Materialize.toast('{{ message }}', 4000, 'rounded')"></a>
