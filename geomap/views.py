@@ -25,10 +25,11 @@ GEOCODE_BASE_URL = \
         'https://maps.googleapis.com/maps/api/place/radarsearch/json'
 
 
-def MapaJson(**geo_args):
+def MapaJson(request):
 
     geometry = []
     epicentro = {}
+    geo_args = {}
     for ubicacion in Ubicacion.objects.all():
         geo_args.update({
             'location': '{0},{1}'.format(ubicacion.lat, ubicacion.lng),
