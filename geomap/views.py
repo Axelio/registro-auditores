@@ -23,24 +23,25 @@ class MapaListView(ListView):
 
 #GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
 GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/place/radarsearch/json'
+#GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/place/radarsearch/json?types=food|cafe|restaurant&radius=500&location=10.221396,-67.471481&key=AIzaSyDoklHqzjuOTLDx14BM4mBq1bRf1vFd0Ts'
 
 def MapaJson(address, **geo_args):
-    lat = 10.221396
-    lng = -67.471481
 
-    geo_args.update({
-        'location': '%f,%f' % (lat, lng),
-        'radius': 500,
-        'types': 'food|restaurant',
-        'key': 'AIzaSyDoklHqzjuOTLDx14BM4mBq1bRf1vFd0Ts'
-    })
-    #https://maps.googleapis.com/maps/api/place/radarsearch/json?location=51.503186,-0.126446&radius=5000&types=museum&key=AIzaSyDoklHqzjuOTLDx14BM4mBq1bRf1vFd0Ts
-    url = GEOCODE_BASE_URL + '?' + urllib.urlencode(geo_args)
-    url = urllib.url2pathname(url)
-    result = simplejson.load(urllib.urlopen(url))
+    geometry = []
+    for ubicacion in Ubicacion.objects.all():
+        diccionario = {
+            'location': '{0},{1}'.format(ubicacion.lat, ubicacion.lng),
+            'radius': 500,
+            'types': 'restaurant',#|cafe|food',
+            'key': 'AIzaSyDoklHqzjuOTLDx14BM4mBq1bRf1vFd0Ts'
+                }
+        geo_args.update(diccionario)
+        #https://maps.googleapis.com/maps/api/place/radarsearch/json?location=51.503186,-0.126446&radius=5000&types=museum&key=AIzaSyDoklHqzjuOTLDx14BM4mBq1bRf1vFd0Ts
+        url = GEOCODE_BASE_URL + '?' + urllib.urlencode(geo_args)
+        url = urllib.url2pathname(url)
+        result = simplejson.load(urllib.urlopen(url))
 
-    data = []
-    geometry = [s['geometry'] for s in result['results']]
+        geometry.append([s for s in result['results']])
 
     consulta = simplejson.dumps(geometry, indent=2)
     return HttpResponse(consulta, content_type="application/json")

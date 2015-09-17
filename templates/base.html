@@ -84,7 +84,7 @@
   <script src="{% static "js/jquery-2.1.1.min.js"%}"></script>
   <script src="{% static "js/materialize.js"%}"></script>
   <script src="{% static "js/init.js"%}"></script>
-  <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>-->
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
   <script>
     $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
@@ -98,11 +98,12 @@
         $("#notificacion").click();
     });
   </script>
-<!--
   <script>
     var successHandler = function(position)  {
-      document.getElementById('lat').value=position.coords.latitude; 
-      document.getElementById('lng').value=position.coords.longitude; 
+      if (document.getElementById('lat') !=null) {
+        document.getElementById('lat').value=position.coords.latitude; 
+        document.getElementById('lng').value=position.coords.longitude; 
+      }
   }
 
   if (navigator.geolocation) {
@@ -111,6 +112,7 @@
   </script>
 
 
+<!--
 
 <script>
     var map;
