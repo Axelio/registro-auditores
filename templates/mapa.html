@@ -14,19 +14,6 @@
 <div id="map"></div>
 <div id="results"></div>
 <div id="food"></div>
-<!--
-<script type="text/javascript">
-$.load(function(){
-	$.ajax({
-		dataType: "json",
-		url: "http://www.tutorialspoint.com/jquery/result.json",
-		data: data,
-		success: function(data) {
-			alert(data);
-		}
-	});
-});
-</script>-->
 
 {% endblock %}
 
@@ -36,88 +23,90 @@ $.load(function(){
 {% block js %}
 
 <script type="text/javascript">
-
-	var map;
-    var infowindow;
-    $.ajax({
-	    type: 'GET',
-	    url: '/mapa/json/',
-	    success: function(data) {
-
-
-			var caracas = new google.maps.LatLng(10.505029, -66.897519);
-
-			map = new google.maps.Map(document.getElementById('map'), {
-				center: caracas,
-				zoom: 6,
-				});
-			infowindow = new google.maps.InfoWindow();
-			var service = new google.maps.places.PlacesService(map);
-
-			for (var i = 0; i < data.length; i++) {
-				var posicion = data[i]
-				for (var j = 0; j < data[i].length; j++){
-
-					// Busquedas cercanas
-					service.nearbySearch({
-						location: new google.maps.LatLng(posicion[j].geometry.location.lat, posicion[j].geometry.location.lng),
-						radius: 500,
-						types: ['restaurant']
-					}, callback);
-				}
-			}
-
-			for (var i = 0; i < data.length; i++) {
-				var posicion = data[i]
-				for (var j = 0; j < data[i].length; j++){
-					console.log(posicion[j])
-					marker = new google.maps.Marker({
-						map: map,
-						position: new google.maps.LatLng(posicion[j].epi_lat, posicion[j].epi_lng)
-					});
-				}
-			}
+var map;
+var infowindow;
+$.ajax({
+    type: 'GET',
+    url: '/mapa/json/',
+    success: function(data) {
 
 
+        var caracas = new google.maps.LatLng(10.505029, -66.897519);
 
-	    },
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: caracas,
+            zoom: 6,
+        });
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
 
-	});
+        for (var i = 0; i < data.length; i++) {
+            var posicion = data[i]
+            for (var j = 0; j < data[i].length; j++) {
 
-
-    function callback(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-          createMarker(results[i]);
+                // Busquedas cercanas
+                service.nearbySearch({
+                    location: new google.maps.LatLng(posicion[j].geometry.location.lat, posicion[j].geometry.location.lng),
+                    radius: 500,
+                    types: ['restaurant']
+                }, callback);
+            }
         }
-      }
+
+        for (var i = 0; i < data.length; i++) {
+            var posicion = data[i]
+            for (var j = 0; j < data[i].length; j++) {
+                console.log(posicion[j])
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(posicion[j].epi_lat, posicion[j].epi_lng)
+                });
+            }
+        }
+
+
+
+    },
+
+});
+
+
+function callback(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+        }
+    }
+}
+
+function createMarker(place) {
+    var specific_icon;
+    var food_icon = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
+
+    switch (true) {
+        case (place.types.indexOf('restaurant') != -1):
+            specific_icon = food_icon;
+            break;
+        case (place.types.indexOf('food') != -1):
+            specific_icon = food_icon;
+            break;
+        case (place.types.indexOf('cafe') != -1):
+            specific_icon = food_icon;
+            break;
     }
 
-    function createMarker(place) {
-      var specific_icon;
-      var food_icon = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png';
-
-      switch (true) {
-        case (place.types.indexOf('restaurant') != -1):
-          specific_icon = food_icon;
-          break;
-        case (place.types.indexOf('food') != -1):
-          specific_icon = food_icon;
-          break;
-      }
-
-      var placeLoc = place.geometry.location;
-      var marker = new google.maps.Marker({
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
         icon: specific_icon
-      });
+    });
 
-      google.maps.event.addListener(marker, 'click', function () {
+    google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(place.name);
         infowindow.open(map, this);
-      });
-    }
+    });
+}
 
 </script>
 
