@@ -242,10 +242,10 @@ class CitasView(View):
     '''
     Clase para la renderizacion de las citas
     '''
-    template = 'formulario.html'
+    template = 'formulario_citas.html'
     form = modelformset_factory(Cita,
                                 extra=3,
-                                fields=('dia', 'hora'),
+                                fields=('dia',),
                                 form=CitasForm)
     titulo = 'citas'
 
@@ -1352,7 +1352,7 @@ class CursoView(View):
                             usuario=usuario.profile, institucion=institucion,
                             estado=estado, titulo=request.POST['titulo'],
                             fecha_inicio=fecha_inicio, fecha_fin=fecha_fin,
-                            horas=equest.POST['horas'])
+                            horas=request.POST['horas'])
 
                     messages.add_message(request, messages.SUCCESS,
                                          u'Curso cargado exitosamente')
