@@ -40,9 +40,9 @@ admin.site.register(ListaCompetencia, ListaCompetenciaAdmin)
 
 
 class CitaAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'cita_fijada', 'dia', 'hora')
+    list_display = ('usuario', 'cita_fijada', 'dia',)
     list_filter = ('dia',)
-    ordering = ('dia', 'hora')
+    ordering = ('dia',)
 admin.site.register(Cita, CitaAdmin)
 
 

@@ -57,8 +57,9 @@ class Tiempo(models.Model):
         abstract = True
 
 
-class Cita(Tiempo):
+class Cita(models.Model):
     usuario = models.ForeignKey(UserProfile)
+    dia = models.DateTimeField()
     cita_fijada = models.BooleanField(default=False)
 
     class Meta:

@@ -48,7 +48,7 @@ class CitasForm(forms.ModelForm):
     class Meta:
 
         model = Cita
-        fields = ('dia', 'hora')
+        fields = ('dia',)
 
         widgets = {
             'dia': forms.DateInput(
