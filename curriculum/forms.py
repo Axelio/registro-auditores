@@ -54,10 +54,13 @@ class CitasForm(forms.ModelForm):
             'dia': forms.DateInput(
                 attrs={
                     'required': 'required',
-                    'class': 'datepicker',
+                    'class': 'gui-input',
+                    'class': 'datetime_picker',
+
                    }
                 )
             }
+
 
 
     def clean(self):

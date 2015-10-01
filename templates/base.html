@@ -13,9 +13,23 @@
   <link href="{% static "css/materialize.css"%}" type="text/css" rel="stylesheet" media="screen,projection"/>
   {#<link href="{% static "css/ghpages-materialize.css"%}" type="text/css" rel="stylesheet" media="screen,projection"/>#}
   
-        <style type="text/css">
-          #map { height: 300px; width: auto}
-        </style>
+    <!-- Fomulario -->
+
+    <link rel="stylesheet" type="text/css"  href="{% static "css/smart-forms.css"%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+
+<style type="text/css">
+#map { height: 300px; width: auto}
+.ui-datepicker .ui-datepicker-header { background: #2196F3 none repeat scroll 0% 0%;}
+.ui-datepicker {border: 5px solid #2196F3;}
+.ui-datepicker::before {border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #2196f3;}
+.smart-forms .ui-slider .ui-slider-handle {border: 3px solid #2196F3;}
+.smart-forms .ui-slider .ui-slider-handle::before {background-color: #2196f3;}
+.ui-datepicker-today a, .ui-datepicker-today a:hover, .ui-datepicker .ui-state-highlight {background: #2196f3 none repeat scroll 0% 0% !important;}
+</style>
+
 </head>
 <body>
 
@@ -84,7 +98,17 @@
   <script src="{% static "js/jquery-2.1.1.min.js"%}"></script>
   <script src="{% static "js/materialize.js"%}"></script>
   <script src="{% static "js/init.js"%}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>  
+
+
+
+  <!-- Formulario -->
+  <script type="text/javascript" src="{% static "js/jquery-ui-custom.min.js"%}"></script>
+  <script type="text/javascript" src="{% static "js/jquery-ui-timepicker.min.js"%}"></script>
+
+
+
+
   <script>
     $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month

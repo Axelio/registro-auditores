@@ -2,76 +2,78 @@
 {% load static %}
 
 {% block content %}
-  
+
 <div class="container">
     <div class="row">
         <div class="card extra-large">
             <div class="col s12">
-                <h3>{{ titulo|title }}</h3>
+            <h3>{{ titulo|title }}</h3>
                 <form method="POST">{% csrf_token %}
                     {% if form.forms %}
-                    {{ form.management_form }}
+                        {{ form.management_form }}
                     {% endif %}
                     <div class="row">
-                    <b>{{ form.non_field_errors }}</b>
-
-                    {% if form.forms %}
-                        {% for camposet in form %}
-                            {% for campo in camposet.visible_fields %}
+                        <b>{{ form.non_field_errors }}</b>
+                        {% if form.forms %}
+                            {% for camposet in form %}
+                                {% for campo in camposet.visible_fields %}
+                                    <div class="input-field col s6" style="padding-right: 4em;">
+                                        {% if campo.errors %}
+                                            {% for error in campo.errors %}
+                                                <b>{{ error }}</b>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if forloop.counter|divisibleby:"2" %}
+                                            <div class="smart-forms">
+                                                <label for="dtimepicker1" class="field prepend-icon ">
+                                                    {{ campo }}
+                                                    <span class="field-icon"><i class="fa fa-calendar"></i></span>
+                                                </label>
+                                            </div><!-- end .smart-wrap section -->
+                                        {% else %}
+                                            <div class="smart-forms">
+                                                <label for="dtimepicker1" class="field prepend-icon ">
+                                                    {{ campo }}
+                                                    <span class="field-icon"><i class="fa fa-calendar"></i></span>
+                                                </label>
+                                            </div><!-- end .smart-wrap section -->
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            {% for campo in form %}
                                 <div class="input-field col s6">
-                                {% if campo.errors %}
-                                    {% for error in campo.errors %}
-                                        <b>{{ error }}</b>
-                                    {% endfor %}
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:"2" %}
+                                    {% if campo.errors %}
+                                        {% for error in campo.errors %}
+                                            <b>{{ error }}</b>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if forloop.counter|divisibleby:"2" %}
                                         {{ campo }}
                                         {% if not "Lng" in campo.label and not "Lat" in campo.label %}
                                             <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
                                         {% endif %}
-                                {% else %}
-                                    {{ campo }}
-                                    {% if not "Lng" in campo.label and not "Lat" in campo.label %}
-                                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                    {% else %}
+                                        {{ campo }}
+                                        {% if not "Lng" in campo.label and not "Lat" in campo.label %}
+                                            <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
                                 </div>
                             {% endfor %}
-                        {% endfor %}
-                    {% else %}
-                        {% for campo in form %}
-                            <div class="input-field col s6">
-                            {% if campo.errors %}
-                                {% for error in campo.errors %}
-                                    <b>{{ error }}</b>
-                                {% endfor %}
-                            {% endif %}
-                            {% if forloop.counter|divisibleby:"2" %}
-                                    {{ campo }}
-                                    {% if not "Lng" in campo.label and not "Lat" in campo.label %}
-                                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
-                                    {% endif %}
-                            {% else %}
-                                {{ campo }}
-                                    {% if not "Lng" in campo.label and not "Lat" in campo.label %}
-                                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
-                                    {% endif %}
-                            {% endif %}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+                        {% endif %}
                     </div>
-                      <div class="card-content">
+                    <div class="card-content">
                         <span class="right card-title activator grey-text text-darken-4">
                             <button class="btn waves-effect waves-light blue" type="submit" name="action">
-                                {% if request.path == "/login/" %}
-                                    Ingresar
-                                {% else %}
-                                    Guardar
-                                {% endif %}
+                            {% if request.path == "/login/" %}
+                                Ingresar
+                            {% else %}
+                                Guardar
+                            {% endif %}
                             </button>
                         </span>
-                      </div>
                     </div>
                 </form>
             </div>
@@ -79,5 +81,28 @@
     </div>
 </div>
 
-  
+
+{% endblock %}
+
+
+{% block js %}
+
+<script type="text/javascript">
+        /* @date time picker
+    ------------------------------------------------------------------ */
+    $('.datetime_picker').datetimepicker({
+        prevText: '<i class="fa fa-chevron-left"></i>',
+        nextText: '<i class="fa fa-chevron-right"></i>',
+        beforeShow: function(input, inst) {
+                var newclass = 'smart-forms';
+                var smartpikr = inst.dpDiv.parent();
+                if (!smartpikr.hasClass('smart-forms')){
+                    inst.dpDiv.wrap('<div class="'+newclass+'"></div>');
+                }
+        }
+
+    });
+
+</script>
+
 {% endblock %}
